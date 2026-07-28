@@ -1,0 +1,757 @@
+KNOWLEDGE NEST — PHASE 10 DEPLOYMENT READINESS CONTEXT
+Generated: 2026-07-27 14:10:16
+Project: C:\Users\A C\Downloads\knowledge-nest
+
+============================================================
+FILE: package.json
+============================================================
+    1: {
+    2:   "name": "knowledge-nest",
+    3:   "version": "0.1.0",
+    4:   "private": true,
+    5:   "scripts": {
+    6:     "dev": "next dev",
+    7:     "build": "next build",
+    8:     "start": "next start",
+    9:     "lint": "eslint",
+   10:     "typecheck": "tsc --noEmit",
+   11:     "format": "prettier --write .",
+   12:     "format:check": "prettier --check .",
+   13:     "db:generate": "drizzle-kit generate",
+   14:     "db:migrate": "drizzle-kit migrate",
+   15:     "db:push": "drizzle-kit push",
+   16:     "db:studio": "drizzle-kit studio"
+   17:   },
+   18:   "dependencies": {
+   19:     "better-auth": "^1.6.24",
+   20:     "class-variance-authority": "^0.7.1",
+   21:     "clsx": "^2.1.1",
+   22:     "date-fns": "^4.4.0",
+   23:     "dotenv": "^17.4.2",
+   24:     "drizzle-orm": "^0.45.2",
+   25:     "lucide-react": "^1.26.0",
+   26:     "next": "16.2.11",
+   27:     "postgres": "^3.4.9",
+   28:     "react": "19.2.4",
+   29:     "react-dom": "19.2.4",
+   30:     "tailwind-merge": "^3.6.0",
+   31:     "zod": "^4.4.3"
+   32:   },
+   33:   "devDependencies": {
+   34:     "@tailwindcss/postcss": "^4",
+   35:     "@types/node": "^20.19.43",
+   36:     "@types/react": "^19",
+   37:     "@types/react-dom": "^19",
+   38:     "drizzle-kit": "^0.31.10",
+   39:     "eslint": "^9",
+   40:     "eslint-config-next": "16.2.11",
+   41:     "prettier": "^3.9.6",
+   42:     "prettier-plugin-tailwindcss": "^0.8.1",
+   43:     "tailwindcss": "^4",
+   44:     "typescript": "^5"
+   45:   }
+   46: }
+
+============================================================
+FILE: next.config.ts
+============================================================
+    1: import type { NextConfig } from "next";
+    2: 
+    3: const nextConfig: NextConfig = {/* config options here */};
+    4: 
+    5: export default nextConfig;
+
+============================================================
+FILE: next.config.js
+============================================================
+[FILE MISSING]
+
+============================================================
+FILE: next.config.mjs
+============================================================
+[FILE MISSING]
+
+============================================================
+FILE: middleware.ts
+============================================================
+[FILE MISSING]
+
+============================================================
+FILE: src\middleware.ts
+============================================================
+[FILE MISSING]
+
+============================================================
+FILE: .env.example
+============================================================
+    1: NEXT_PUBLIC_SITE_NAME="Knowledge Nest"
+    2: NEXT_PUBLIC_SITE_URL="http://localhost:3000"
+    3: DATABASE_URL="postgresql://username:password@localhost:5432/knowledge_nest"
+    4: BETTER_AUTH_SECRET=""
+    5: BETTER_AUTH_URL="http://localhost:3000"
+    6: OPENAI_API_KEY=""
+    7: SEARCH_API_KEY=""
+    8: NEWS_API_KEY=""
+
+============================================================
+FILE: drizzle.config.ts
+============================================================
+    1: import { config } from "dotenv";
+    2: import { defineConfig } from "drizzle-kit";
+    3: config({ path: ".env.local" });
+    4: export default defineConfig({
+    5:   dialect: "postgresql",
+    6:   schema: "./src/db/schema/*",
+    7:   out: "./drizzle",
+    8:   dbCredentials: {
+    9:     url:
+   10:       process.env.DATABASE_URL ||
+   11:       "postgresql://username:password@localhost:5432/knowledge_nest",
+   12:   },
+   13:   verbose: true,
+   14:   strict: true,
+   15: });
+
+============================================================
+FILE: src\db\index.ts
+============================================================
+    1: import postgres from "postgres";
+    2: import { drizzle } from "drizzle-orm/postgres-js";
+    3: type Database = ReturnType<typeof drizzle>;
+    4: let database: Database | null = null;
+    5: function getDatabase(): Database {
+    6:   if (database) {
+    7:     return database;
+    8:   }
+    9:   const connectionString = process.env.DATABASE_URL?.trim();
+   10:   if (!connectionString) {
+   11:     throw new Error(
+   12:       "DATABASE_URL is missing. Add a valid PostgreSQL connection string to .env.local.",
+   13:     );
+   14:   }
+   15:   const client = postgres(connectionString, {
+   16:     prepare: false,
+   17:   });
+   18:   database = drizzle(client);
+   19:   return database;
+   20: }
+   21: export const db = new Proxy({} as Database, {
+   22:   get(_target, property, receiver) {
+   23:     const activeDatabase = getDatabase();
+   24:     const value = Reflect.get(activeDatabase, property, receiver);
+   25:     return typeof value === "function" ? value.bind(activeDatabase) : value;
+   26:   },
+   27: });
+
+============================================================
+FILE: src\lib\site-url.ts
+============================================================
+    1: const DEFAULT_SITE_URL = "http://localhost:3000";
+    2: export function getSiteUrl() {
+    3:   const configuredUrl = process.env.NEXT_PUBLIC_SITE_URL?.trim();
+    4:   if (!configuredUrl) {
+    5:     return DEFAULT_SITE_URL;
+    6:   }
+    7:   return configuredUrl.replace(/\/+$/, "");
+    8: }
+
+============================================================
+FILE: src\app\layout.tsx
+============================================================
+    1: import type { Metadata, Viewport } from "next";
+    2: import { Geist, Geist_Mono } from "next/font/google";
+    3: import { OrganizationJsonLd } from "@/components/site/seo/organization-json-ld";
+    4: import { WebsiteJsonLd } from "@/components/site/seo/website-json-ld";
+    5: import { getSiteUrl } from "@/lib/site-url";
+    6: import "./globals.css";
+    7: import { ActiveThemeStyle } from "@/components/site/active-theme-style";
+    8: const geistSans = Geist({
+    9:   variable: "--font-geist-sans",
+   10:   subsets: ["latin"],
+   11: });
+   12: const geistMono = Geist_Mono({
+   13:   variable: "--font-geist-mono",
+   14:   subsets: ["latin"],
+   15: });
+   16: const siteUrl = getSiteUrl();
+   17: const ogImage = `${siteUrl}/api/og?title=Knowledge%20Nest`;
+   18: export const metadata: Metadata = {
+   19:   metadataBase: new URL(siteUrl),
+   20:   title: {
+   21:     default: "Knowledge Nest",
+   22:     template: "%s | Knowledge Nest",
+   23:   },
+   24:   description:
+   25:     "Educational articles across finance, science, technology, health, education and other knowledge categories.",
+   26:   openGraph: {
+   27:     type: "website",
+   28:     url: "/",
+   29:     siteName: "Knowledge Nest",
+   30:     title: "Knowledge Nest",
+   31:     description:
+   32:       "Educational articles across finance, science, technology, health, education and other knowledge categories.",
+   33:     images: [
+   34:       {
+   35:         url: ogImage,
+   36:         width: 1200,
+   37:         height: 630,
+   38:       },
+   39:     ],
+   40:   },
+   41:   twitter: {
+   42:     card: "summary_large_image",
+   43:     title: "Knowledge Nest",
+   44:     description:
+   45:       "Educational articles across finance, science, technology, health, education and other knowledge categories.",
+   46:     images: [ogImage],
+   47:   },
+   48:   icons: {
+   49:     icon: "/icon.svg",
+   50:   },
+   51:   manifest: "/manifest.webmanifest",
+   52: };
+   53: export const viewport: Viewport = {
+   54:   width: "device-width",
+   55:   initialScale: 1,
+   56:   themeColor: "#ffffff",
+   57: };
+   58: export default function RootLayout({
+   59:   children,
+   60: }: Readonly<{
+   61:   children: React.ReactNode;
+   62: }>) {
+   63:   return (
+   64:     <html lang="en">
+   65:       <body className={`${geistSans.variable} ${geistMono.variable} antialiased`}>
+   66:         <ActiveThemeStyle />
+   67:         <WebsiteJsonLd />
+   68:         <OrganizationJsonLd />
+   69:         {children}
+   70:       </body>
+   71:     </html>
+   72:   );
+   73: }
+
+============================================================
+FILE: src\app\robots.ts
+============================================================
+    1: import type { MetadataRoute } from "next";
+    2: import { getSiteUrl } from "@/lib/site-url";
+    3: export default function robots(): MetadataRoute.Robots {
+    4:   const siteUrl = getSiteUrl();
+    5:   return {
+    6:     rules: [
+    7:       {
+    8:         userAgent: "*",
+    9:         allow: "/",
+   10:         disallow: ["/admin/", "/api/", "/search"],
+   11:       },
+   12:     ],
+   13:     sitemap: `${siteUrl}/sitemap.xml`,
+   14:     host: siteUrl,
+   15:   };
+   16: }
+
+============================================================
+FILE: src\app\sitemap.ts
+============================================================
+    1: import type { MetadataRoute } from "next";
+    2: import {
+    3:   getPublishedArticles,
+    4:   getPublishedCategories,
+    5: } from "@/lib/queries/article-queries";
+    6: import { getSiteUrl } from "@/lib/site-url";
+    7: export const runtime = "nodejs";
+    8: export const dynamic = "force-dynamic";
+    9: export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
+   10:   const siteUrl = getSiteUrl();
+   11:   const [categories, articles] = await Promise.all([
+   12:     getPublishedCategories(),
+   13:     getPublishedArticles(500),
+   14:   ]);
+   15:   return [
+   16:     {
+   17:       url: siteUrl,
+   18:       lastModified: new Date(),
+   19:       changeFrequency: "daily",
+   20:       priority: 1,
+   21:     },
+   22:     {
+   23:       url: `${siteUrl}/about-us`,
+   24:       lastModified: new Date(),
+   25:       changeFrequency: "monthly",
+   26:       priority: 0.6,
+   27:     },
+   28:     {
+   29:       url: `${siteUrl}/contact-us`,
+   30:       lastModified: new Date(),
+   31:       changeFrequency: "monthly",
+   32:       priority: 0.6,
+   33:     },
+   34:     {
+   35:       url: `${siteUrl}/privacy-policy`,
+   36:       lastModified: new Date(),
+   37:       changeFrequency: "yearly",
+   38:       priority: 0.5,
+   39:     },
+   40:     {
+   41:       url: `${siteUrl}/terms-and-conditions`,
+   42:       lastModified: new Date(),
+   43:       changeFrequency: "yearly",
+   44:       priority: 0.5,
+   45:     },
+   46:     {
+   47:       url: `${siteUrl}/disclaimer`,
+   48:       lastModified: new Date(),
+   49:       changeFrequency: "yearly",
+   50:       priority: 0.5,
+   51:     },
+   52:     {
+   53:       url: `${siteUrl}/sitemap-page`,
+   54:       lastModified: new Date(),
+   55:       changeFrequency: "monthly",
+   56:       priority: 0.5,
+   57:     },
+   58:     ...categories.map((category) => ({
+   59:       url: `${siteUrl}/category/${category.slug}`,
+   60:       lastModified: new Date(),
+   61:       changeFrequency: "weekly" as const,
+   62:       priority: 0.8,
+   63:     })),
+   64:     ...articles.map((article) => ({
+   65:       url: `${siteUrl}/article/${article.slug}`,
+   66:       lastModified: article.updatedAt,
+   67:       changeFrequency: "monthly" as const,
+   68:       priority: 0.9,
+   69:     })),
+   70:   ];
+   71: }
+
+============================================================
+FILE: src\app\api\health\route.ts
+============================================================
+    1: import { NextResponse } from "next/server";
+    2: export function GET() {
+    3:   return NextResponse.json({
+    4:     status: "ok",
+    5:     application: "Knowledge Nest",
+    6:     databaseConfigured: Boolean(process.env.DATABASE_URL?.trim()),
+    7:     timestamp: new Date().toISOString(),
+    8:   });
+    9: }
+
+============================================================
+FILE: src\app\manifest.ts
+============================================================
+    1: import type { MetadataRoute } from "next";
+    2: export default function manifest(): MetadataRoute.Manifest {
+    3:   return {
+    4:     name: "Knowledge Nest",
+    5:     short_name: "Knowledge Nest",
+    6:     description:
+    7:       "Educational articles across finance, science, technology, health, education and other knowledge categories.",
+    8:     start_url: "/",
+    9:     display: "standalone",
+   10:     background_color: "#ffffff",
+   11:     theme_color: "#ffffff",
+   12:     icons: [
+   13:       {
+   14:         src: "/icon.svg",
+   15:         sizes: "any",
+   16:         type: "image/svg+xml",
+   17:       },
+   18:     ],
+   19:   };
+   20: }
+
+============================================================
+FILE: src\app\manifest.webmanifest\route.ts
+============================================================
+[FILE MISSING]
+
+============================================================
+FILE: src\app\ads.txt\route.ts
+============================================================
+    1: const adsensePublisherIdPattern = /^pub-\d{16}$/;
+    2: export async function GET() {
+    3:   const publisherId = process.env.GOOGLE_ADSENSE_PUBLISHER_ID?.trim();
+    4:   if (!publisherId || !adsensePublisherIdPattern.test(publisherId)) {
+    5:     return new Response("Not Found", {
+    6:       status: 404,
+    7:       headers: {
+    8:         "Content-Type": "text/plain; charset=utf-8",
+    9:         "Cache-Control": "no-store",
+   10:         "X-Robots-Tag": "noindex, nofollow",
+   11:       },
+   12:     });
+   13:   }
+   14:   const adsTxt = `google.com, ${publisherId}, DIRECT, f08c47fec0942fa0`;
+   15:   return new Response(`${adsTxt}\n`, {
+   16:     status: 200,
+   17:     headers: {
+   18:       "Content-Type": "text/plain; charset=utf-8",
+   19:       "Cache-Control":
+   20:         "public, max-age=3600, s-maxage=3600, stale-while-revalidate=86400",
+   21:     },
+   22:   });
+   23: }
+
+============================================================
+FILE: src\app\humans.txt\route.ts
+============================================================
+    1: import { getSiteUrl } from "@/lib/site-url";
+    2: export async function GET() {
+    3:   const siteUrl = getSiteUrl();
+    4:   const humansText = [
+    5:     "/* TEAM */",
+    6:     "Website: Knowledge Nest",
+    7:     `Contact: ${siteUrl}/contact-us`,
+    8:     "",
+    9:     "/* SITE */",
+   10:     "Language: English",
+   11:     "Framework: Next.js",
+   12:     "Database: PostgreSQL",
+   13:     "ORM: Drizzle ORM",
+   14:     "CSS: Tailwind CSS",
+   15:     "",
+   16:   ].join("\n");
+   17:   return new Response(humansText, {
+   18:     status: 200,
+   19:     headers: {
+   20:       "Content-Type": "text/plain; charset=utf-8",
+   21:       "Cache-Control":
+   22:         "public, max-age=86400, s-maxage=86400, stale-while-revalidate=604800",
+   23:     },
+   24:   });
+   25: }
+
+============================================================
+FILE: src\app\.well-known\security.txt\route.ts
+============================================================
+    1: import { getSiteUrl } from "@/lib/site-url";
+    2: export async function GET() {
+    3:   const siteUrl = getSiteUrl();
+    4:   const securityText = [
+    5:     `Contact: ${siteUrl}/contact-us`,
+    6:     `Policy: ${siteUrl}/privacy-policy`,
+    7:     `Canonical: ${siteUrl}/.well-known/security.txt`,
+    8:     "Preferred-Languages: en",
+    9:     "",
+   10:   ].join("\n");
+   11:   return new Response(securityText, {
+   12:     status: 200,
+   13:     headers: {
+   14:       "Content-Type": "text/plain; charset=utf-8",
+   15:       "Cache-Control":
+   16:         "public, max-age=86400, s-maxage=86400, stale-while-revalidate=604800",
+   17:     },
+   18:   });
+   19: }
+
+============================================================
+ENVIRONMENT VARIABLE REFERENCES
+============================================================
+drizzle.config.ts:10: process.env.DATABASE_URL ||
+phase-5a-audit-copy.txt:81: process.env.DATABASE_URL ||
+phase-5a-audit-copy.txt:94: const connectionString = process.env.DATABASE_URL;
+phase-5a-audit-copy.txt:1337: databaseConfigured: Boolean(process.env.DATABASE_URL?.trim()),
+phase-5a-database-audit.txt:80: process.env.DATABASE_URL ||
+phase-5a-database-audit.txt:93: const connectionString = process.env.DATABASE_URL;
+phase-5a-system-audit.txt:81: process.env.DATABASE_URL ||
+phase-5a-system-audit.txt:94: const connectionString = process.env.DATABASE_URL;
+phase-5a-system-audit.txt:1337: databaseConfigured: Boolean(process.env.DATABASE_URL?.trim()),
+phase-7-to-12-complete-source-20260727-002742.txt:215: process.env.DATABASE_URL ||
+phase-7-to-12-complete-source-20260727-002742.txt:1504: process.env.DATABASE_URL ||
+phase-7-to-12-complete-source-20260727-002742.txt:1517: const connectionString = process.env.DATABASE_URL;
+phase-7-to-12-complete-source-20260727-002742.txt:2760: databaseConfigured: Boolean(process.env.DATABASE_URL?.trim()),
+phase-7-to-12-complete-source-20260727-002742.txt:2968: process.env.DATABASE_URL ||
+phase-7-to-12-complete-source-20260727-002742.txt:2981: const connectionString = process.env.DATABASE_URL;
+phase-7-to-12-complete-source-20260727-002742.txt:3384: process.env.DATABASE_URL ||
+phase-7-to-12-complete-source-20260727-002742.txt:3397: const connectionString = process.env.DATABASE_URL;
+phase-7-to-12-complete-source-20260727-002742.txt:4640: databaseConfigured: Boolean(process.env.DATABASE_URL?.trim()),
+phase-7-to-12-complete-source-20260727-002742.txt:11327: const publisherId = process.env.GOOGLE_ADSENSE_PUBLISHER_ID?.trim();
+phase-7-to-12-complete-source-20260727-002742.txt:11813: databaseConfigured: Boolean(process.env.DATABASE_URL?.trim()),
+phase-7-to-12-complete-source-20260727-002742.txt:15508: const connectionString = process.env.DATABASE_URL?.trim();
+phase-7-to-12-complete-source-20260727-002742.txt:16031: const configuredUrl = process.env.NEXT_PUBLIC_SITE_URL?.trim();
+PHASE-9-REQUIRED-FILES.txt:174: 10:       process.env.DATABASE_URL ||
+PHASE-9-REQUIRED-FILES.txt:192: 9:   const connectionString = process.env.DATABASE_URL?.trim();
+PHASE-9-REQUIRED-FILES.txt:227: 3:   const configuredUrl = process.env.NEXT_PUBLIC_SITE_URL?.trim();
+PHASE-9-REQUIRED-FILES.txt:242: 6:     databaseConfigured: Boolean(process.env.DATABASE_URL?.trim()),
+src\app\ads.txt\route.ts:3: const publisherId = process.env.GOOGLE_ADSENSE_PUBLISHER_ID?.trim();
+src\app\api\health\route.ts:6: databaseConfigured: Boolean(process.env.DATABASE_URL?.trim()),
+src\db\index.ts:9: const connectionString = process.env.DATABASE_URL?.trim();
+src\lib\site-url.ts:3: const configuredUrl = process.env.NEXT_PUBLIC_SITE_URL?.trim();
+
+============================================================
+DEPLOYMENT AND SECURITY REFERENCES
+============================================================
+src\app\layout.tsx:25: "Educational articles across finance, science, technology, health, education and other knowledge categories.",
+src\app\layout.tsx:32: "Educational articles across finance, science, technology, health, education and other knowledge categories.",
+src\app\layout.tsx:45: "Educational articles across finance, science, technology, health, education and other knowledge categories.",
+src\app\manifest.ts:7: "Educational articles across finance, science, technology, health, education and other knowledge categories.",
+src\app\page.tsx:2: import { DynamicHomepage } from "@/components/site/dynamic-homepage";
+src\app\page.tsx:4: export const dynamic = "force-dynamic";
+src\app\page.tsx:13: return <DynamicHomepage />;
+src\app\robots.ts:3: export default function robots(): MetadataRoute.Robots {
+src\app\robots.ts:13: sitemap: `${siteUrl}/sitemap.xml`,
+src\app\sitemap.ts:7: export const runtime = "nodejs";
+src\app\sitemap.ts:8: export const dynamic = "force-dynamic";
+src\app\sitemap.ts:9: export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
+src\app\sitemap.ts:53: url: `${siteUrl}/sitemap-page`,
+src\app\.well-known\security.txt\route.ts:4: const securityText = [
+src\app\.well-known\security.txt\route.ts:7: `Canonical: ${siteUrl}/.well-known/security.txt`,
+src\app\.well-known\security.txt\route.ts:11: return new Response(securityText, {
+src\app\.well-known\security.txt\route.ts:15: "Cache-Control":
+src\app\.well-known\security.txt\route.ts:16: "public, max-age=86400, s-maxage=86400, stale-while-revalidate=604800",
+src\app\about-us\page.tsx:17: "Knowledge Nest is an educational information website covering finance, science, technology, artificial intelligence, health, education, business, history, environment, space, psychology and general knowledge.",
+src\app\admin\articles\page.tsx:6: export const dynamic = "force-dynamic";
+src\app\admin\categories\page.tsx:33: name: "Health",
+src\app\admin\categories\page.tsx:34: slug: "health",
+src\app\admin\categories\page.tsx:35: description: "General health education and wellness information.",
+src\app\ads.txt\route.ts:9: "Cache-Control": "no-store",
+src\app\ads.txt\route.ts:10: "X-Robots-Tag": "noindex, nofollow",
+src\app\ads.txt\route.ts:19: "Cache-Control":
+src\app\ads.txt\route.ts:20: "public, max-age=3600, s-maxage=3600, stale-while-revalidate=86400",
+src\app\api\admin\articles\route.ts:6: export const runtime = "nodejs";
+src\app\api\admin\articles\route.ts:7: export const dynamic = "force-dynamic";
+src\app\api\admin\articles\[id]\route.ts:7: export const runtime = "nodejs";
+src\app\api\admin\articles\[id]\route.ts:8: export const dynamic = "force-dynamic";
+src\app\api\admin\media\route.ts:3: export const runtime = "nodejs";
+src\app\api\admin\media\route.ts:4: export const dynamic = "force-dynamic";
+src\app\api\admin\media\delete\route.ts:3: export const runtime = "nodejs";
+src\app\api\admin\media\upload\route.ts:3: export const runtime = "nodejs";
+src\app\api\admin\themes\route.ts:12: export const runtime = "nodejs";
+src\app\api\admin\themes\route.ts:13: export const dynamic = "force-dynamic";
+src\app\api\admin\themes\generate\route.ts:5: export const runtime = "nodejs";
+src\app\api\admin\themes\generate\route.ts:6: export const dynamic = "force-dynamic";
+src\app\api\health\route.ts:6: databaseConfigured: Boolean(process.env.DATABASE_URL?.trim()),
+src\app\api\og\route.tsx:2: export const runtime = "edge";
+src\app\api\og\route.tsx:44: Finance • Science • Technology • Health • Education
+src\app\api\search\route.ts:6: export const runtime = "nodejs";
+src\app\api\search\route.ts:7: export const dynamic = "force-dynamic";
+src\app\article\[slug]\page.tsx:20: export const dynamic = "force-dynamic";
+src\app\category\[slug]\page.tsx:16: export const dynamic = "force-dynamic";
+src\app\disclaimer\page.tsx:25: "Finance, health, legal, business and other specialist topics may involve individual risks and circumstances.",
+src\app\feed\page.tsx:4: export const dynamic = "force-dynamic";
+src\app\humans.txt\route.ts:21: "Cache-Control":
+src\app\humans.txt\route.ts:22: "public, max-age=86400, s-maxage=86400, stale-while-revalidate=604800",
+src\app\privacy-policy\page.tsx:25: "Collected information may be used to operate the website, understand usage patterns, improve content, maintain security and respond to messages.",
+src\app\privacy-policy\page.tsx:46: "Articles may contain links to external websites. Knowledge Nest is not responsible for the privacy practices, security or content of external websites.",
+src\app\rss.xml\route.ts:4: export const runtime = "nodejs";
+src\app\rss.xml\route.ts:5: export const dynamic = "force-dynamic";
+src\app\rss.xml\route.ts:57: "Cache-Control":
+src\app\rss.xml\route.ts:58: "public, max-age=3600, s-maxage=3600, stale-while-revalidate=86400",
+src\app\search\page.tsx:12: export const dynamic = "force-dynamic";
+src\app\search\page.tsx:16: robots: {
+src\app\sitemap-page\page.tsx:4: import { SitemapLinks } from "@/components/site/sitemap/sitemap-links";
+src\app\sitemap-page\page.tsx:6: title: "HTML Sitemap | Knowledge Nest",
+src\app\sitemap-page\page.tsx:9: export default function SitemapPage() {
+src\app\sitemap-page\page.tsx:16: <h1 className="text-4xl font-bold">HTML Sitemap</h1>
+src\app\sitemap-page\page.tsx:23: <SitemapLinks />
+src\app\terms-and-conditions\page.tsx:47: "The availability, security, accuracy and policies of those services remain the responsibility of their respective operators.",
+src\components\admin\articles\article-editor.tsx:44: "Health",
+src\components\admin\themes\theme-studio.tsx:49: { value: "health", label: "Health" },
+src\components\admin\themes\theme-studio.tsx:863: Dynamic content designed for the {selectedTheme.niche} niche
+src\components\admin\themes\theme-studio.tsx:952: Dynamic footer for {selectedTheme.name}
+src\components\site\dynamic-homepage.tsx:409: export async function DynamicHomepage() {
+src\components\site\dynamic-homepage.tsx:475: export default DynamicHomepage;
+src\components\site\site-footer.tsx:35: A dynamic {theme.niche} publication powered by the Knowledge Nest universal
+src\components\site\seo\website-json-ld.tsx:13: "Educational articles across finance, science, technology, health, education and other knowledge categories.",
+src\components\site\sitemap\sitemap-links.tsx:6: export async function SitemapLinks() {
+src\data\public-content.ts:21: { name: "Health", slug: "health" },
+src\data\public-content.ts:41: "Responsible debt management includes understanding interest rates, payment deadlines and the total cost of borrowing. Paying obligations on time can also support a healthier financial record.",
+src\data\public-content.ts:60: "Human review remains important when artificial intelligence is used for education, health, finance, legal matters or other areas where accuracy has serious consequences.",
+src\data\public-content.ts:98: "Software updates often include security fixes. Keeping operating systems, browsers and applications updated can protect devices from known vulnerabilities.",
+src\data\public-content.ts:108: title: "How Sleep Supports Physical and Mental Health",
+src\data\public-content.ts:109: slug: "how-sleep-supports-physical-and-mental-health",
+src\data\public-content.ts:116: "A consistent sleep schedule, reduced evening screen use and a comfortable sleeping environment may support healthier sleep habits.",
+src\data\public-content.ts:117: "Health needs differ between individuals. Persistent fatigue, breathing problems during sleep or severe insomnia should be discussed with a qualified healthcare professional.",
+src\data\public-content.ts:119: category: { name: "Health", slug: "health" },
+src\db\index.ts:9: const connectionString = process.env.DATABASE_URL?.trim();
+src\db\index.ts:12: "DATABASE_URL is missing. Add a valid PostgreSQL connection string to .env.local.",
+src\lib\site-url.ts:3: const configuredUrl = process.env.NEXT_PUBLIC_SITE_URL?.trim();
+src\lib\queries\article-queries.ts:82: fitness: ["fitness", "health", "wellness"],
+src\lib\queries\article-queries.ts:86: health: ["health", "wellness", "fitness"],
+src\lib\queries\article-queries.ts:87: lifestyle: ["lifestyle", "health", "fashion"],
+src\lib\theme\ai-generator.ts:99: input.includes("health")
+src\lib\theme\presets.ts:105: health: {
+src\lib\theme\presets.ts:246: technology: ["Technology", "AI", "Software", "Hardware", "Cybersecurity"],
+src\lib\theme\presets.ts:250: health: ["Health", "Fitness", "Nutrition", "Wellness", "Medicine"],
+src\lib\theme\presets.ts:295: createPreset("health", "Health Journal"),
+src\lib\theme\types.ts:9: | "health"
+
+============================================================
+PROJECT FILE INVENTORY
+============================================================
+.env.example
+.env.local
+.gitignore
+.prettierignore
+.prettierrc
+data\theme-store.json
+drizzle.config.ts
+drizzle\0000_rapid_chimera.sql
+drizzle\meta\_journal.json
+drizzle\meta\0000_snapshot.json
+eslint.config.mjs
+logs\phase-6-completion-20260726-231632.log
+logs\phase-6-corrected-audit-20260726-230955.log
+logs\phase-7-completion-20260727-005649.log
+logs\phase-7-final-cleanup-20260727-130445.log
+logs\phase-7-final-permanent-fix-20260727-010543.log
+logs\phase-7-foundation-20260727-003727.log
+logs\phase-7-foundation-fix-20260727-004111.log
+logs\phase-7-permanent-typescript-fix-20260727-010311.log
+logs\phase-7-preparation-20260727-002742.log
+logs\phase-7-sidebar-fix-20260727-005947.log
+logs\phase-7-sidebar-full-rebuild-20260727-125517.log
+logs\phase-7-sidebar-import-repair-20260727-011106.log
+logs\phase-7-sidebar-import-repair-20260727-125216.log
+logs\phase-7-unused-props-fix-20260727-125824.log
+logs\phase-7-unused-types-fix-20260727-130144.log
+logs\phase-7-unused-types-fix-20260727-130158.log
+logs\phase-8-discovery-20260727-130929\phase-8-discovery-report.txt
+logs\phase-8-ui-ux-20260727-132056.log
+logs\phase-9-discovery-20260727-132655.log
+next.config.ts
+next-env.d.ts
+package.json
+phase-5a-audit-copy.txt
+PHASE-5A-COMPLETE.txt
+phase-5a-completion-report.txt
+phase-5a-database-audit.txt
+phase-5a-database-migration.log
+phase-5a-system-audit.txt
+PHASE-5B-COMPLETE.txt
+phase-5b-completion-report.txt
+phase-5b-implementation.txt
+PHASE-6-AUDIT-COMPLETE.txt
+phase-6-audit-report.txt
+PHASE-6-COMPLETE.txt
+phase-6-completion-report.txt
+phase-6-implementation.txt
+phase-6-required-information.txt
+PHASE-7-COMPLETE.txt
+phase-7-completion-report.txt
+phase-7-dynamic-public-ui-source-20260727-004325.txt
+phase-7-foundation-report.txt
+phase-7-required-information.txt
+PHASE-7-STARTED.txt
+phase-7-to-12-complete-source-20260727-002742.txt
+phase-7-to-12-file-manifest-20260727-002742.txt
+phase-7-to-12-roadmap.txt
+phase-7-verification-report.txt
+PHASE-8-COMPLETE.txt
+phase-8-completion-report.txt
+PHASE-8-REQUIRED-FILES.txt
+PHASE-9A-NICHE-HOMEPAGE-COMPLETE.txt
+PHASE-9B-PUBLIC-CONTENT-CONTEXT.txt
+PHASE-9-COMPLETE.txt
+PHASE-9-IMPLEMENTATION-CONTEXT.txt
+PHASE-9-NICHE-CONTENT-FILES.txt
+PHASE-9-REQUIRED-FILES.txt
+PHASE-9-STARTED.txt
+pnpm-lock.yaml
+pnpm-workspace.yaml
+postcss.config.mjs
+public\file.svg
+public\globe.svg
+public\icon.svg
+public\next.svg
+public\uploads\.gitkeep
+public\vercel.svg
+public\window.svg
+README.md
+src\app\.well-known\security.txt\route.ts
+src\app\about-us\page.tsx
+src\app\admin\articles\[id]\edit\page.tsx
+src\app\admin\articles\new\page.tsx
+src\app\admin\articles\page.tsx
+src\app\admin\categories\page.tsx
+src\app\admin\layout.tsx
+src\app\admin\media\page.tsx
+src\app\admin\page.tsx
+src\app\admin\pages\new\page.tsx
+src\app\admin\pages\page.tsx
+src\app\admin\settings\page.tsx
+src\app\admin\tags\page.tsx
+src\app\admin\themes\page.tsx
+src\app\ads.txt\route.ts
+src\app\api\admin\articles\[id]\route.ts
+src\app\api\admin\articles\route.ts
+src\app\api\admin\media\delete\route.ts
+src\app\api\admin\media\route.ts
+src\app\api\admin\media\upload\route.ts
+src\app\api\admin\themes\generate\route.ts
+src\app\api\admin\themes\route.ts
+src\app\api\health\route.ts
+src\app\api\og\route.tsx
+src\app\api\search\route.ts
+src\app\article\[slug]\page.tsx
+src\app\browserconfig.ts
+src\app\category\[slug]\page.tsx
+src\app\contact-us\page.tsx
+src\app\disclaimer\page.tsx
+src\app\favicon.ico
+src\app\feed\page.tsx
+src\app\globals.css
+src\app\humans.txt\route.ts
+src\app\layout.tsx
+src\app\manifest.ts
+src\app\not-found.tsx
+src\app\page.tsx
+src\app\privacy-policy\page.tsx
+src\app\robots.ts
+src\app\rss.xml\route.ts
+src\app\search\page.tsx
+src\app\sitemap.ts
+src\app\sitemap-page\page.tsx
+src\app\terms-and-conditions\page.tsx
+src\components\admin\admin-header.tsx
+src\components\admin\admin-shell.tsx
+src\components\admin\admin-sidebar.tsx
+src\components\admin\articles\article-editor.tsx
+src\components\admin\media\media-library.tsx
+src\components\admin\pages\page-editor.tsx
+src\components\admin\pages\pages-manager.tsx
+src\components\admin\settings\settings-form.tsx
+src\components\admin\taxonomy\taxonomy-manager.tsx
+src\components\admin\themes\theme-studio.tsx
+src\components\site\active-theme-style.tsx
+src\components\site\article-card.tsx
+src\components\site\dynamic-homepage.tsx
+src\components\site\legal\information-page-layout.tsx
+src\components\site\legal\information-section.tsx
+src\components\site\search\site-search-form.tsx
+src\components\site\seo\article-json-ld.tsx
+src\components\site\seo\breadcrumb-json-ld.tsx
+src\components\site\seo\json-ld.tsx
+src\components\site\seo\organization-json-ld.tsx
+src\components\site\seo\website-json-ld.tsx
+src\components\site\site-footer.tsx
+src\components\site\site-header.tsx
+src\components\site\sitemap\sitemap-links.tsx
+src\data\public-content.ts
+src\db\index.ts
+src\db\schema\articles.ts
+src\db\schema\index.ts
+src\db\schema\media.ts
+src\db\schema\settings.ts
+src\db\schema\taxonomy.ts
+src\db\schema\users.ts
+src\lib\actions\article-actions.ts
+src\lib\articles\validation.ts
+src\lib\media-storage.ts
+src\lib\queries\article-queries.ts
+src\lib\repositories\article-repository.ts
+src\lib\services\article-service.ts
+src\lib\site-url.ts
+src\lib\theme\ai-generator.ts
+src\lib\theme\presets.ts
+src\lib\theme\theme-store.ts
+src\lib\theme\types.ts
+src\lib\utils.ts
+src\lib\validators\article.ts
+src\lib\xml.ts
+tsconfig.json
+tsconfig.tsbuildinfo

@@ -1,0 +1,794 @@
+KNOWLEDGE NEST — PHASE 9 REQUIRED FILES
+Generated: 2026-07-27 13:26:55
+Project: C:\Users\A C\Downloads\knowledge-nest
+
+============================================================
+PROJECT SOURCE TREE
+============================================================
+src\app\.well-known\security.txt\route.ts
+src\app\about-us\page.tsx
+src\app\admin\articles\[id]\edit\page.tsx
+src\app\admin\articles\new\page.tsx
+src\app\admin\articles\page.tsx
+src\app\admin\categories\page.tsx
+src\app\admin\layout.tsx
+src\app\admin\media\page.tsx
+src\app\admin\page.tsx
+src\app\admin\pages\new\page.tsx
+src\app\admin\pages\page.tsx
+src\app\admin\settings\page.tsx
+src\app\admin\tags\page.tsx
+src\app\admin\themes\page.tsx
+src\app\ads.txt\route.ts
+src\app\api\admin\articles\[id]\route.ts
+src\app\api\admin\articles\route.ts
+src\app\api\admin\media\delete\route.ts
+src\app\api\admin\media\route.ts
+src\app\api\admin\media\upload\route.ts
+src\app\api\admin\themes\generate\route.ts
+src\app\api\admin\themes\route.ts
+src\app\api\health\route.ts
+src\app\api\og\route.tsx
+src\app\api\search\route.ts
+src\app\article\[slug]\page.tsx
+src\app\browserconfig.ts
+src\app\category\[slug]\page.tsx
+src\app\contact-us\page.tsx
+src\app\disclaimer\page.tsx
+src\app\favicon.ico
+src\app\feed\page.tsx
+src\app\globals.css
+src\app\humans.txt\route.ts
+src\app\layout.tsx
+src\app\manifest.ts
+src\app\not-found.tsx
+src\app\page.tsx
+src\app\privacy-policy\page.tsx
+src\app\robots.ts
+src\app\rss.xml\route.ts
+src\app\search\page.tsx
+src\app\sitemap.ts
+src\app\sitemap-page\page.tsx
+src\app\terms-and-conditions\page.tsx
+src\components\admin\admin-header.tsx
+src\components\admin\admin-shell.tsx
+src\components\admin\admin-sidebar.tsx
+src\components\admin\articles\article-editor.tsx
+src\components\admin\media\media-library.tsx
+src\components\admin\pages\page-editor.tsx
+src\components\admin\pages\pages-manager.tsx
+src\components\admin\settings\settings-form.tsx
+src\components\admin\taxonomy\taxonomy-manager.tsx
+src\components\admin\themes\theme-studio.tsx
+src\components\site\active-theme-style.tsx
+src\components\site\article-card.tsx
+src\components\site\dynamic-homepage.tsx
+src\components\site\legal\information-page-layout.tsx
+src\components\site\legal\information-section.tsx
+src\components\site\search\site-search-form.tsx
+src\components\site\seo\article-json-ld.tsx
+src\components\site\seo\breadcrumb-json-ld.tsx
+src\components\site\seo\json-ld.tsx
+src\components\site\seo\organization-json-ld.tsx
+src\components\site\seo\website-json-ld.tsx
+src\components\site\site-footer.tsx
+src\components\site\site-header.tsx
+src\components\site\sitemap\sitemap-links.tsx
+src\data\public-content.ts
+src\db\index.ts
+src\db\schema\articles.ts
+src\db\schema\index.ts
+src\db\schema\media.ts
+src\db\schema\settings.ts
+src\db\schema\taxonomy.ts
+src\db\schema\users.ts
+src\lib\actions\article-actions.ts
+src\lib\articles\validation.ts
+src\lib\media-storage.ts
+src\lib\queries\article-queries.ts
+src\lib\repositories\article-repository.ts
+src\lib\services\article-service.ts
+src\lib\site-url.ts
+src\lib\theme\ai-generator.ts
+src\lib\theme\presets.ts
+src\lib\theme\theme-store.ts
+src\lib\theme\types.ts
+src\lib\utils.ts
+src\lib\validators\article.ts
+src\lib\xml.ts
+
+============================================================
+FILE: package.json
+============================================================
+    1: {
+    2:   "name": "knowledge-nest",
+    3:   "version": "0.1.0",
+    4:   "private": true,
+    5:   "scripts": {
+    6:     "dev": "next dev",
+    7:     "build": "next build",
+    8:     "start": "next start",
+    9:     "lint": "eslint",
+   10:     "typecheck": "tsc --noEmit",
+   11:     "format": "prettier --write .",
+   12:     "format:check": "prettier --check .",
+   13:     "db:generate": "drizzle-kit generate",
+   14:     "db:migrate": "drizzle-kit migrate",
+   15:     "db:push": "drizzle-kit push",
+   16:     "db:studio": "drizzle-kit studio"
+   17:   },
+   18:   "dependencies": {
+   19:     "better-auth": "^1.6.24",
+   20:     "class-variance-authority": "^0.7.1",
+   21:     "clsx": "^2.1.1",
+   22:     "date-fns": "^4.4.0",
+   23:     "dotenv": "^17.4.2",
+   24:     "drizzle-orm": "^0.45.2",
+   25:     "lucide-react": "^1.26.0",
+   26:     "next": "16.2.11",
+   27:     "postgres": "^3.4.9",
+   28:     "react": "19.2.4",
+   29:     "react-dom": "19.2.4",
+   30:     "tailwind-merge": "^3.6.0",
+   31:     "zod": "^4.4.3"
+   32:   },
+   33:   "devDependencies": {
+   34:     "@tailwindcss/postcss": "^4",
+   35:     "@types/node": "^20.19.43",
+   36:     "@types/react": "^19",
+   37:     "@types/react-dom": "^19",
+   38:     "drizzle-kit": "^0.31.10",
+   39:     "eslint": "^9",
+   40:     "eslint-config-next": "16.2.11",
+   41:     "prettier": "^3.9.6",
+   42:     "prettier-plugin-tailwindcss": "^0.8.1",
+   43:     "tailwindcss": "^4",
+   44:     "typescript": "^5"
+   45:   }
+   46: }
+
+============================================================
+FILE: .env.example
+============================================================
+    1: NEXT_PUBLIC_SITE_NAME="Knowledge Nest"
+    2: NEXT_PUBLIC_SITE_URL="http://localhost:3000"
+    3: DATABASE_URL="postgresql://username:password@localhost:5432/knowledge_nest"
+    4: BETTER_AUTH_SECRET=""
+    5: BETTER_AUTH_URL="http://localhost:3000"
+    6: OPENAI_API_KEY=""
+    7: SEARCH_API_KEY=""
+    8: NEWS_API_KEY=""
+
+============================================================
+FILE: drizzle.config.ts
+============================================================
+    1: import { config } from "dotenv";
+    2: import { defineConfig } from "drizzle-kit";
+    3: config({ path: ".env.local" });
+    4: export default defineConfig({
+    5:   dialect: "postgresql",
+    6:   schema: "./src/db/schema/*",
+    7:   out: "./drizzle",
+    8:   dbCredentials: {
+    9:     url:
+   10:       process.env.DATABASE_URL ||
+   11:       "postgresql://username:password@localhost:5432/knowledge_nest",
+   12:   },
+   13:   verbose: true,
+   14:   strict: true,
+   15: });
+
+============================================================
+FILE: src\db\index.ts
+============================================================
+    1: import postgres from "postgres";
+    2: import { drizzle } from "drizzle-orm/postgres-js";
+    3: type Database = ReturnType<typeof drizzle>;
+    4: let database: Database | null = null;
+    5: function getDatabase(): Database {
+    6:   if (database) {
+    7:     return database;
+    8:   }
+    9:   const connectionString = process.env.DATABASE_URL?.trim();
+   10:   if (!connectionString) {
+   11:     throw new Error(
+   12:       "DATABASE_URL is missing. Add a valid PostgreSQL connection string to .env.local.",
+   13:     );
+   14:   }
+   15:   const client = postgres(connectionString, {
+   16:     prepare: false,
+   17:   });
+   18:   database = drizzle(client);
+   19:   return database;
+   20: }
+   21: export const db = new Proxy({} as Database, {
+   22:   get(_target, property, receiver) {
+   23:     const activeDatabase = getDatabase();
+   24:     const value = Reflect.get(activeDatabase, property, receiver);
+   25:     return typeof value === "function" ? value.bind(activeDatabase) : value;
+   26:   },
+   27: });
+
+============================================================
+FILE: src\db\schema.ts
+============================================================
+[FILE MISSING]
+
+============================================================
+FILE: src\lib\auth.ts
+============================================================
+[FILE MISSING]
+
+============================================================
+FILE: src\lib\site-url.ts
+============================================================
+    1: const DEFAULT_SITE_URL = "http://localhost:3000";
+    2: export function getSiteUrl() {
+    3:   const configuredUrl = process.env.NEXT_PUBLIC_SITE_URL?.trim();
+    4:   if (!configuredUrl) {
+    5:     return DEFAULT_SITE_URL;
+    6:   }
+    7:   return configuredUrl.replace(/\/+$/, "");
+    8: }
+
+============================================================
+FILE: src\app\api\health\route.ts
+============================================================
+    1: import { NextResponse } from "next/server";
+    2: export function GET() {
+    3:   return NextResponse.json({
+    4:     status: "ok",
+    5:     application: "Knowledge Nest",
+    6:     databaseConfigured: Boolean(process.env.DATABASE_URL?.trim()),
+    7:     timestamp: new Date().toISOString(),
+    8:   });
+    9: }
+
+============================================================
+FILE: src\app\api\search\route.ts
+============================================================
+    1: import { NextResponse } from "next/server";
+    2: import { publicArticles } from "@/data/public-content";
+    3: export async function GET(request: Request) {
+    4:   const { searchParams } = new URL(request.url);
+    5:   const query = searchParams.get("q")?.trim().toLowerCase() ?? "";
+    6:   if (!query) {
+    7:     return NextResponse.json([]);
+    8:   }
+    9:   const results = publicArticles
+   10:     .filter((article) => {
+   11:       const text = [article.title, article.excerpt, article.category.name]
+   12:         .join(" ")
+   13:         .toLowerCase();
+   14:       return text.includes(query);
+   15:     })
+   16:     .slice(0, 10)
+   17:     .map((article) => ({
+   18:       title: article.title,
+   19:       slug: article.slug,
+   20:       excerpt: article.excerpt,
+   21:       category: article.category.name,
+   22:     }));
+   23:   return NextResponse.json(results);
+   24: }
+
+============================================================
+FILE: src\app\api\admin\articles\route.ts
+============================================================
+    1: import { desc, eq } from "drizzle-orm";
+    2: import { NextResponse } from "next/server";
+    3: import { db } from "@/db";
+    4: import { articles, categories, media } from "@/db/schema";
+    5: import { articleInputSchema } from "@/lib/articles/validation";
+    6: export const runtime = "nodejs";
+    7: export const dynamic = "force-dynamic";
+    8: export async function GET() {
+    9:   try {
+   10:     const articleRows = await db
+   11:       .select({
+   12:         id: articles.id,
+   13:         title: articles.title,
+   14:         slug: articles.slug,
+   15:         excerpt: articles.excerpt,
+   16:         status: articles.status,
+   17:         isFeatured: articles.isFeatured,
+   18:         readingTimeMinutes: articles.readingTimeMinutes,
+   19:         viewCount: articles.viewCount,
+   20:         publishedAt: articles.publishedAt,
+   21:         scheduledAt: articles.scheduledAt,
+   22:         createdAt: articles.createdAt,
+   23:         updatedAt: articles.updatedAt,
+   24:         categoryId: categories.id,
+   25:         categoryName: categories.name,
+   26:         categorySlug: categories.slug,
+   27:         featuredImageId: media.id,
+   28:         featuredImageUrl: media.url,
+   29:         featuredImageAlt: media.altText,
+   30:       })
+   31:       .from(articles)
+   32:       .leftJoin(categories, eq(articles.categoryId, categories.id))
+   33:       .leftJoin(media, eq(articles.featuredImageId, media.id))
+   34:       .orderBy(desc(articles.updatedAt));
+   35:     return NextResponse.json({
+   36:       articles: articleRows,
+   37:     });
+   38:   } catch (error) {
+   39:     return NextResponse.json(
+   40:       {
+   41:         message: error instanceof Error ? error.message : "Unable to load articles.",
+   42:       },
+   43:       {
+   44:         status: 500,
+   45:       },
+   46:     );
+   47:   }
+   48: }
+   49: export async function POST(request: Request) {
+   50:   try {
+   51:     const requestBody: unknown = await request.json();
+   52:     const parsedInput = articleInputSchema.safeParse(requestBody);
+   53:     if (!parsedInput.success) {
+   54:       return NextResponse.json(
+   55:         {
+   56:           message: "Article validation failed.",
+   57:           errors: parsedInput.error.flatten(),
+   58:         },
+   59:         {
+   60:           status: 400,
+   61:         },
+   62:       );
+   63:     }
+   64:     const input = parsedInput.data;
+   65:     const now = new Date();
+   66:     const publishedAt = input.status === "published" ? now : null;
+   67:     const [createdArticle] = await db
+   68:       .insert(articles)
+   69:       .values({
+   70:         title: input.title,
+   71:         slug: input.slug,
+   72:         excerpt: input.excerpt,
+   73:         content: input.content,
+   74:         categoryId: input.categoryId,
+   75:         featuredImageId: input.featuredImageId,
+   76:         status: input.status,
+   77:         seoTitle: input.seoTitle,
+   78:         seoDescription: input.seoDescription,
+   79:         canonicalUrl: input.canonicalUrl,
+   80:         focusKeyword: input.focusKeyword,
+   81:         readingTimeMinutes: input.readingTimeMinutes,
+   82:         isFeatured: input.isFeatured,
+   83:         scheduledAt: input.scheduledAt,
+   84:         publishedAt,
+   85:         updatedAt: now,
+   86:       })
+   87:       .returning();
+   88:     return NextResponse.json(
+   89:       {
+   90:         article: createdArticle,
+   91:         message:
+   92:           input.status === "published"
+   93:             ? "Article published successfully."
+   94:             : "Article saved successfully.",
+   95:       },
+   96:       {
+   97:         status: 201,
+   98:       },
+   99:     );
+  100:   } catch (error) {
+  101:     const message =
+  102:       error instanceof Error ? error.message : "Unable to create the article.";
+  103:     const status =
+  104:       message.toLowerCase().includes("unique") ||
+  105:       message.toLowerCase().includes("duplicate")
+  106:         ? 409
+  107:         : 500;
+  108:     return NextResponse.json(
+  109:       {
+  110:         message:
+  111:           status === 409 ? "An article with this URL slug already exists." : message,
+  112:       },
+  113:       {
+  114:         status,
+  115:       },
+  116:     );
+  117:   }
+  118: }
+
+============================================================
+FILE: src\app\api\admin\articles\[id]\route.ts
+============================================================
+    1: import { eq } from "drizzle-orm";
+    2: import { NextResponse } from "next/server";
+    3: import { z } from "zod";
+    4: import { db } from "@/db";
+    5: import { articles, categories, media } from "@/db/schema";
+    6: import { articleUpdateSchema } from "@/lib/articles/validation";
+    7: export const runtime = "nodejs";
+    8: export const dynamic = "force-dynamic";
+    9: const articleIdSchema = z.uuid();
+   10: type RouteContext = {
+   11:   params: Promise<{
+   12:     id: string;
+   13:   }>;
+   14: };
+   15: export async function GET(_request: Request, context: RouteContext) {
+   16:   try {
+   17:     const { id } = await context.params;
+   18:     const parsedId = articleIdSchema.safeParse(id);
+   19:     if (!parsedId.success) {
+   20:       return NextResponse.json(
+   21:         {
+   22:           message: "A valid article ID is required.",
+   23:         },
+   24:         {
+   25:           status: 400,
+   26:         },
+   27:       );
+   28:     }
+   29:     const [article] = await db
+   30:       .select({
+   31:         id: articles.id,
+   32:         authorId: articles.authorId,
+   33:         categoryId: articles.categoryId,
+   34:         featuredImageId: articles.featuredImageId,
+   35:         title: articles.title,
+   36:         slug: articles.slug,
+   37:         excerpt: articles.excerpt,
+   38:         content: articles.content,
+   39:         status: articles.status,
+   40:         seoTitle: articles.seoTitle,
+   41:         seoDescription: articles.seoDescription,
+   42:         canonicalUrl: articles.canonicalUrl,
+   43:         focusKeyword: articles.focusKeyword,
+   44:         readingTimeMinutes: articles.readingTimeMinutes,
+   45:         viewCount: articles.viewCount,
+   46:         isFeatured: articles.isFeatured,
+   47:         scheduledAt: articles.scheduledAt,
+   48:         publishedAt: articles.publishedAt,
+   49:         createdAt: articles.createdAt,
+   50:         updatedAt: articles.updatedAt,
+   51:         categoryName: categories.name,
+   52:         featuredImageUrl: media.url,
+   53:         featuredImageAlt: media.altText,
+   54:       })
+   55:       .from(articles)
+   56:       .leftJoin(categories, eq(articles.categoryId, categories.id))
+   57:       .leftJoin(media, eq(articles.featuredImageId, media.id))
+   58:       .where(eq(articles.id, parsedId.data))
+   59:       .limit(1);
+   60:     if (!article) {
+   61:       return NextResponse.json(
+   62:         {
+   63:           message: "Article not found.",
+   64:         },
+   65:         {
+   66:           status: 404,
+   67:         },
+   68:       );
+   69:     }
+   70:     return NextResponse.json({
+   71:       article,
+   72:     });
+   73:   } catch (error) {
+   74:     return NextResponse.json(
+   75:       {
+   76:         message: error instanceof Error ? error.message : "Unable to load the article.",
+   77:       },
+   78:       {
+   79:         status: 500,
+   80:       },
+   81:     );
+   82:   }
+   83: }
+   84: export async function PATCH(request: Request, context: RouteContext) {
+   85:   try {
+   86:     const { id } = await context.params;
+   87:     const parsedId = articleIdSchema.safeParse(id);
+   88:     if (!parsedId.success) {
+   89:       return NextResponse.json(
+   90:         {
+   91:           message: "A valid article ID is required.",
+   92:         },
+   93:         {
+   94:           status: 400,
+   95:         },
+   96:       );
+   97:     }
+   98:     const requestBody: unknown = await request.json();
+   99:     const parsedInput = articleUpdateSchema.safeParse(requestBody);
+  100:     if (!parsedInput.success) {
+  101:       return NextResponse.json(
+  102:         {
+  103:           message: "Article validation failed.",
+  104:           errors: parsedInput.error.flatten(),
+  105:         },
+  106:         {
+  107:           status: 400,
+  108:         },
+  109:       );
+  110:     }
+  111:     const existingArticles = await db
+  112:       .select({
+  113:         id: articles.id,
+  114:         status: articles.status,
+  115:         publishedAt: articles.publishedAt,
+  116:       })
+  117:       .from(articles)
+  118:       .where(eq(articles.id, parsedId.data))
+  119:       .limit(1);
+  120:     const existingArticle = existingArticles[0];
+  121:     if (!existingArticle) {
+  122:       return NextResponse.json(
+  123:         {
+  124:           message: "Article not found.",
+  125:         },
+  126:         {
+  127:           status: 404,
+  128:         },
+  129:       );
+  130:     }
+  131:     const input = parsedInput.data;
+  132:     const now = new Date();
+  133:     const publishedAt =
+  134:       input.status === "published" && !existingArticle.publishedAt
+  135:         ? now
+  136:         : input.status && input.status !== "published"
+  137:           ? null
+  138:           : existingArticle.publishedAt;
+  139:     const updateValues = {
+  140:       ...input,
+  141:       publishedAt,
+  142:       updatedAt: now,
+  143:     };
+  144:     const [updatedArticle] = await db
+  145:       .update(articles)
+  146:       .set(updateValues)
+  147:       .where(eq(articles.id, parsedId.data))
+  148:       .returning();
+  149:     return NextResponse.json({
+  150:       article: updatedArticle,
+  151:       message:
+  152:         updatedArticle.status === "published"
+  153:           ? "Article published successfully."
+  154:           : "Article updated successfully.",
+  155:     });
+  156:   } catch (error) {
+  157:     const message =
+  158:       error instanceof Error ? error.message : "Unable to update the article.";
+  159:     const status =
+  160:       message.toLowerCase().includes("unique") ||
+  161:       message.toLowerCase().includes("duplicate")
+  162:         ? 409
+  163:         : 500;
+  164:     return NextResponse.json(
+  165:       {
+  166:         message:
+  167:           status === 409 ? "An article with this URL slug already exists." : message,
+  168:       },
+  169:       {
+  170:         status,
+  171:       },
+  172:     );
+  173:   }
+  174: }
+  175: export async function DELETE(_request: Request, context: RouteContext) {
+  176:   try {
+  177:     const { id } = await context.params;
+  178:     const parsedId = articleIdSchema.safeParse(id);
+  179:     if (!parsedId.success) {
+  180:       return NextResponse.json(
+  181:         {
+  182:           message: "A valid article ID is required.",
+  183:         },
+  184:         {
+  185:           status: 400,
+  186:         },
+  187:       );
+  188:     }
+  189:     const [deletedArticle] = await db
+  190:       .delete(articles)
+  191:       .where(eq(articles.id, parsedId.data))
+  192:       .returning({
+  193:         id: articles.id,
+  194:       });
+  195:     if (!deletedArticle) {
+  196:       return NextResponse.json(
+  197:         {
+  198:           message: "Article not found.",
+  199:         },
+  200:         {
+  201:           status: 404,
+  202:         },
+  203:       );
+  204:     }
+  205:     return NextResponse.json({
+  206:       message: "Article deleted successfully.",
+  207:     });
+  208:   } catch (error) {
+  209:     return NextResponse.json(
+  210:       {
+  211:         message: error instanceof Error ? error.message : "Unable to delete the article.",
+  212:       },
+  213:       {
+  214:         status: 500,
+  215:       },
+  216:     );
+  217:   }
+  218: }
+
+============================================================
+FILE: src\app\admin\articles\page.tsx
+============================================================
+    1: import Link from "next/link";
+    2: import { desc, eq } from "drizzle-orm";
+    3: import { CalendarDays, Edit3, FileText, Plus, Star } from "lucide-react";
+    4: import { db } from "@/db";
+    5: import { articles, categories } from "@/db/schema";
+    6: export const dynamic = "force-dynamic";
+    7: export default async function ArticlesPage() {
+    8:   const articleList = await db
+    9:     .select({
+   10:       id: articles.id,
+   11:       title: articles.title,
+   12:       slug: articles.slug,
+   13:       excerpt: articles.excerpt,
+   14:       status: articles.status,
+   15:       isFeatured: articles.isFeatured,
+   16:       categoryName: categories.name,
+   17:       updatedAt: articles.updatedAt,
+   18:     })
+   19:     .from(articles)
+   20:     .leftJoin(categories, eq(articles.categoryId, categories.id))
+   21:     .orderBy(desc(articles.updatedAt));
+   22:   return (
+   23:     <div className="space-y-6">
+   24:       <div className="flex flex-col justify-between gap-4 sm:flex-row sm:items-center">
+   25:         <div>
+   26:           <h1 className="text-2xl font-bold">Articles</h1>
+   27:           <p className="text-muted-foreground mt-1 text-sm">
+   28:             Create, edit and publish website articles.
+   29:           </p>
+   30:         </div>
+   31:         <Link
+   32:           href="/admin/articles/new"
+   33:           className="bg-foreground text-background inline-flex items-center justify-center gap-2 rounded-lg px-4 py-2 text-sm font-medium"
+   34:         >
+   35:           <Plus className="h-4 w-4" />
+   36:           New Article
+   37:         </Link>
+   38:       </div>
+   39:       {articleList.length === 0 ? (
+   40:         <div className="border-border bg-background rounded-xl border p-8 text-center shadow-sm">
+   41:           <FileText className="text-muted-foreground mx-auto h-10 w-10" />
+   42:           <p className="text-muted-foreground mt-3 text-sm">No articles are available.</p>
+   43:         </div>
+   44:       ) : (
+   45:         <div className="grid gap-4">
+   46:           {articleList.map((article) => (
+   47:             <article
+   48:               key={article.id}
+   49:               className="border-border bg-background rounded-xl border p-5 shadow-sm"
+   50:             >
+   51:               <div className="flex flex-col justify-between gap-4 lg:flex-row lg:items-center">
+   52:                 <div className="min-w-0">
+   53:                   <div className="flex flex-wrap items-center gap-2">
+   54:                     <span className="bg-muted rounded-full px-2.5 py-1 text-xs font-medium capitalize">
+   55:                       {article.status}
+   56:                     </span>
+   57:                     {article.categoryName ? (
+   58:                       <span className="border-border rounded-full border px-2.5 py-1 text-xs">
+   59:                         {article.categoryName}
+   60:                       </span>
+   61:                     ) : null}
+   62:                     {article.isFeatured ? (
+   63:                       <span className="inline-flex items-center gap-1 rounded-full bg-amber-100 px-2.5 py-1 text-xs font-medium text-amber-800">
+   64:                         <Star className="h-3 w-3" />
+   65:                         Featured
+   66:                       </span>
+   67:                     ) : null}
+   68:                   </div>
+   69:                   <h2 className="mt-3 truncate text-lg font-semibold">{article.title}</h2>
+   70:                   {article.excerpt ? (
+   71:                     <p className="text-muted-foreground mt-2 line-clamp-2 text-sm">
+   72:                       {article.excerpt}
+   73:                     </p>
+   74:                   ) : null}
+   75:                   <p className="text-muted-foreground mt-3 inline-flex items-center gap-1.5 text-xs">
+   76:                     <CalendarDays className="h-3.5 w-3.5" />
+   77:                     Updated {article.updatedAt.toLocaleString()}
+   78:                   </p>
+   79:                 </div>
+   80:                 <Link
+   81:                   href={`/admin/articles/${article.id}/edit`}
+   82:                   className="border-border hover:bg-muted inline-flex shrink-0 items-center justify-center gap-2 rounded-lg border px-4 py-2 text-sm font-medium"
+   83:                 >
+   84:                   <Edit3 className="h-4 w-4" />
+   85:                   Edit
+   86:                 </Link>
+   87:               </div>
+   88:             </article>
+   89:           ))}
+   90:         </div>
+   91:       )}
+   92:     </div>
+   93:   );
+   94: }
+
+============================================================
+FILE: src\app\admin\articles\new\page.tsx
+============================================================
+    1: import { ArticleEditor } from "@/components/admin/articles/article-editor";
+    2: export default function NewArticlePage() {
+    3:   return <ArticleEditor mode="create" />;
+    4: }
+
+============================================================
+FILE: src\app\admin\articles\[id]\edit\page.tsx
+============================================================
+    1: import { ArticleEditor } from "@/components/admin/articles/article-editor";
+    2: export default async function EditArticlePage({
+    3:   params,
+    4: }: {
+    5:   params: Promise<{
+    6:     id: string;
+    7:   }>;
+    8: }) {
+    9:   const { id } = await params;
+   10:   return <ArticleEditor mode="edit" articleId={id} />;
+   11: }
+
+============================================================
+FILE: src\components\admin\articles\article-form.tsx
+============================================================
+[FILE MISSING]
+
+============================================================
+FILE: src\components\admin\articles\article-list.tsx
+============================================================
+[FILE MISSING]
+
+============================================================
+FILE: src\lib\articles.ts
+============================================================
+[FILE MISSING]
+
+============================================================
+FILE: src\lib\article-repository.ts
+============================================================
+[FILE MISSING]
+
+============================================================
+FILE: src\lib\validation\article.ts
+============================================================
+[FILE MISSING]
+
+============================================================
+DATABASE AND AUTH RELATED FILES
+============================================================
+drizzle.config.ts
+phase-5a-database-audit.txt
+phase-5a-database-migration.log
+src\components\admin\articles\article-editor.tsx
+src\components\site\article-card.tsx
+src\components\site\seo\article-json-ld.tsx
+src\db\schema\articles.ts
+src\lib\actions\article-actions.ts
+src\lib\queries\article-queries.ts
+src\lib\repositories\article-repository.ts
+src\lib\services\article-service.ts
+src\lib\validators\article.ts
+
+============================================================
+CURRENT VERIFICATION
+============================================================
+
+=== FORMAT CHECK ===
+Checking formatting...
+All matched files use Prettier code style!
+FORMAT CHECK PASSED
+
+=== TYPESCRIPT CHECK ===
+TYPESCRIPT CHECK PASSED
+
+=== ESLINT ZERO WARNINGS ===
+ESLINT ZERO WARNINGS PASSED

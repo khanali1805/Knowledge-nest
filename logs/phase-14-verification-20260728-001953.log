@@ -1,0 +1,11 @@
+﻿PASS | Production server started.
+PASS | Categories API loaded.
+PASS | Category created.
+PASS | Category updated.
+PASS | Tags API loaded.
+PASS | Tag created.
+PASS | Tag updated.
+PASS | Categories admin page uses database data.
+PASS | Tags admin page uses database data.
+PASS | Category deleted.
+PASS | Tag deleted.

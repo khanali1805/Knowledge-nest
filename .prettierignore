@@ -1,0 +1,10 @@
+﻿.next
+node_modules
+coverage
+dist
+build
+public/uploads
+pnpm-lock.yaml
+backups/
+.next/
+node_modules/

@@ -1,0 +1,17 @@
+﻿PHASE 5B IMPLEMENTATION STARTED
+GOAL:
+- Fully working Publish
+- Fully working Save Draft
+- Fully working Preview
+- Real Database CRUD
+- Featured Image Attachment
+- Article Loading
+- Article Editing
+- Article Updating
+- Article Publishing
+- Validation Layer
+- Repository Layer
+- Service Layer
+- Action Layer
+STATUS:
+READY

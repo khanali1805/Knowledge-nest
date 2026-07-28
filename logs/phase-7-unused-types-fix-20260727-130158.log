@@ -1,0 +1,5517 @@
+﻿**********************
+Windows PowerShell transcript start
+Start time: 20260727130158
+Username: GULZAR-PC\A C
+RunAs User: GULZAR-PC\A C
+Configuration Name: 
+Machine: GULZAR-PC (Microsoft Windows NT 10.0.19045.0)
+Host Application: C:\Windows\System32\WindowsPowerShell\v1.0\powershell.exe -noexit -command try { . "c:\Users\A C\AppData\Local\Programs\Microsoft VS Code\1b6a188127\resources\app\out\vs\workbench\contrib\terminal\common\scripts\shellIntegration.ps1" } catch {}
+Process ID: 8888
+PSVersion: 5.1.19041.7548
+PSEdition: Desktop
+PSCompatibleVersions: 1.0, 2.0, 3.0, 4.0, 5.0, 5.1.19041.7548
+BuildVersion: 10.0.19041.7548
+CLRVersion: 4.0.30319.42000
+WSManStackVersion: 3.0
+PSRemotingProtocolVersion: 2.3
+SerializationVersion: 1.1.0.1
+**********************
+]633;D;0]633;A]633;P;Cwd=C:\x5cUsers\x5cA C\x5cDownloads\x5cknowledge-nestPS C:\Users\A C\Downloads\knowledge-nest> ]633;B
+]633;D]633;A]633;P;Cwd=C:\x5cUsers\x5cA C\x5cDownloads\x5cknowledge-nestPS C:\Users\A C\Downloads\knowledge-nest> ]633;B
+PS>try {
+Missing closing '}' in statement block or type definition.
+>> try {
+    function Invoke-Checked {
+        param(
+            [Parameter(Mandatory)]
+            [string]$Name,
+Missing expression after ','.
+>> try {
+    function Invoke-Checked {
+        param(
+            [Parameter(Mandatory)]
+            [string]$Name,
+            [Parameter(Mandatory)]
+            [scriptblock]$Command
+        )
+Missing closing '}' in statement block or type definition.
+>> try {
+    function Invoke-Checked {
+        param(
+            [Parameter(Mandatory)]
+            [string]$Name,
+            [Parameter(Mandatory)]
+            [scriptblock]$Command
+        )
+        Write-Host ""
+        Write-Host "=== $Name ===" -ForegroundColor Cyan
+Missing closing '}' in statement block or type definition.
+>> try {
+    function Invoke-Checked {
+        param(
+            [Parameter(Mandatory)]
+            [string]$Name,
+            [Parameter(Mandatory)]
+            [scriptblock]$Command
+        )
+        Write-Host ""
+        Write-Host "=== $Name ===" -ForegroundColor Cyan
+        $global:LASTEXITCODE = 0
+        & $Command
+Missing closing '}' in statement block or type definition.
+>> try {
+    function Invoke-Checked {
+        param(
+            [Parameter(Mandatory)]
+            [string]$Name,
+            [Parameter(Mandatory)]
+            [scriptblock]$Command
+        )
+        Write-Host ""
+        Write-Host "=== $Name ===" -ForegroundColor Cyan
+        $global:LASTEXITCODE = 0
+        & $Command
+        if ($LASTEXITCODE -ne 0) {
+            throw "$Name failed with exit code $LASTEXITCODE."
+        }
+Missing closing '}' in statement block or type definition.
+>> try {
+    function Invoke-Checked {
+        param(
+            [Parameter(Mandatory)]
+            [string]$Name,
+            [Parameter(Mandatory)]
+            [scriptblock]$Command
+        )
+        Write-Host ""
+        Write-Host "=== $Name ===" -ForegroundColor Cyan
+        $global:LASTEXITCODE = 0
+        & $Command
+        if ($LASTEXITCODE -ne 0) {
+            throw "$Name failed with exit code $LASTEXITCODE."
+        }
+        Write-Host "$Name PASSED" -ForegroundColor Green
+    }
+Missing closing '}' in statement block or type definition.
+>> try {
+    function Invoke-Checked {
+        param(
+            [Parameter(Mandatory)]
+            [string]$Name,
+            [Parameter(Mandatory)]
+            [scriptblock]$Command
+        )
+        Write-Host ""
+        Write-Host "=== $Name ===" -ForegroundColor Cyan
+        $global:LASTEXITCODE = 0
+        & $Command
+        if ($LASTEXITCODE -ne 0) {
+            throw "$Name failed with exit code $LASTEXITCODE."
+        }
+        Write-Host "$Name PASSED" -ForegroundColor Green
+    }
+    foreach ($FilePath in @($HeaderPath, $FooterPath)) {
+        if (-not (Test-Path -LiteralPath $FilePath)) {
+            throw "Required file is missing: $FilePath"
+        }
+Missing closing '}' in statement block or type definition.
+>> try {
+    function Invoke-Checked {
+        param(
+            [Parameter(Mandatory)]
+            [string]$Name,
+            [Parameter(Mandatory)]
+            [scriptblock]$Command
+        )
+        Write-Host ""
+        Write-Host "=== $Name ===" -ForegroundColor Cyan
+        $global:LASTEXITCODE = 0
+        & $Command
+        if ($LASTEXITCODE -ne 0) {
+            throw "$Name failed with exit code $LASTEXITCODE."
+        }
+        Write-Host "$Name PASSED" -ForegroundColor Green
+    }
+    foreach ($FilePath in @($HeaderPath, $FooterPath)) {
+        if (-not (Test-Path -LiteralPath $FilePath)) {
+            throw "Required file is missing: $FilePath"
+        }
+        Copy-Item `
+            -LiteralPath $FilePath `
+            -Destination (Join-Path $BackupRoot (Split-Path $FilePath -Leaf)) `
+            -Force
+    }
+Missing closing '}' in statement block or type definition.
+>> try {
+    function Invoke-Checked {
+        param(
+            [Parameter(Mandatory)]
+            [string]$Name,
+            [Parameter(Mandatory)]
+            [scriptblock]$Command
+        )
+        Write-Host ""
+        Write-Host "=== $Name ===" -ForegroundColor Cyan
+        $global:LASTEXITCODE = 0
+        & $Command
+        if ($LASTEXITCODE -ne 0) {
+            throw "$Name failed with exit code $LASTEXITCODE."
+        }
+        Write-Host "$Name PASSED" -ForegroundColor Green
+    }
+    foreach ($FilePath in @($HeaderPath, $FooterPath)) {
+        if (-not (Test-Path -LiteralPath $FilePath)) {
+            throw "Required file is missing: $FilePath"
+        }
+        Copy-Item `
+            -LiteralPath $FilePath `
+            -Destination (Join-Path $BackupRoot (Split-Path $FilePath -Leaf)) `
+            -Force
+    }
+    Write-Host ""
+    Write-Host "=== REMOVE UNUSED PROP TYPES ===" -ForegroundColor Cyan
+Missing closing '}' in statement block or type definition.
+>> try {
+    function Invoke-Checked {
+        param(
+            [Parameter(Mandatory)]
+            [string]$Name,
+            [Parameter(Mandatory)]
+            [scriptblock]$Command
+        )
+        Write-Host ""
+        Write-Host "=== $Name ===" -ForegroundColor Cyan
+        $global:LASTEXITCODE = 0
+        & $Command
+        if ($LASTEXITCODE -ne 0) {
+            throw "$Name failed with exit code $LASTEXITCODE."
+        }
+        Write-Host "$Name PASSED" -ForegroundColor Green
+    }
+    foreach ($FilePath in @($HeaderPath, $FooterPath)) {
+        if (-not (Test-Path -LiteralPath $FilePath)) {
+            throw "Required file is missing: $FilePath"
+        }
+        Copy-Item `
+            -LiteralPath $FilePath `
+            -Destination (Join-Path $BackupRoot (Split-Path $FilePath -Leaf)) `
+            -Force
+    }
+    Write-Host ""
+    Write-Host "=== REMOVE UNUSED PROP TYPES ===" -ForegroundColor Cyan
+    $HeaderContent = Get-Content `
+        -LiteralPath $HeaderPath `
+        -Raw
+Missing closing '}' in statement block or type definition.
+>> try {
+    function Invoke-Checked {
+        param(
+            [Parameter(Mandatory)]
+            [string]$Name,
+            [Parameter(Mandatory)]
+            [scriptblock]$Command
+        )
+        Write-Host ""
+        Write-Host "=== $Name ===" -ForegroundColor Cyan
+        $global:LASTEXITCODE = 0
+        & $Command
+        if ($LASTEXITCODE -ne 0) {
+            throw "$Name failed with exit code $LASTEXITCODE."
+        }
+        Write-Host "$Name PASSED" -ForegroundColor Green
+    }
+    foreach ($FilePath in @($HeaderPath, $FooterPath)) {
+        if (-not (Test-Path -LiteralPath $FilePath)) {
+            throw "Required file is missing: $FilePath"
+        }
+        Copy-Item `
+            -LiteralPath $FilePath `
+            -Destination (Join-Path $BackupRoot (Split-Path $FilePath -Leaf)) `
+            -Force
+    }
+    Write-Host ""
+    Write-Host "=== REMOVE UNUSED PROP TYPES ===" -ForegroundColor Cyan
+    $HeaderContent = Get-Content `
+        -LiteralPath $HeaderPath `
+        -Raw
+    $FooterContent = Get-Content `
+        -LiteralPath $FooterPath `
+        -Raw
+Missing closing '}' in statement block or type definition.
+>> try {
+    function Invoke-Checked {
+        param(
+            [Parameter(Mandatory)]
+            [string]$Name,
+            [Parameter(Mandatory)]
+            [scriptblock]$Command
+        )
+        Write-Host ""
+        Write-Host "=== $Name ===" -ForegroundColor Cyan
+        $global:LASTEXITCODE = 0
+        & $Command
+        if ($LASTEXITCODE -ne 0) {
+            throw "$Name failed with exit code $LASTEXITCODE."
+        }
+        Write-Host "$Name PASSED" -ForegroundColor Green
+    }
+    foreach ($FilePath in @($HeaderPath, $FooterPath)) {
+        if (-not (Test-Path -LiteralPath $FilePath)) {
+            throw "Required file is missing: $FilePath"
+        }
+        Copy-Item `
+            -LiteralPath $FilePath `
+            -Destination (Join-Path $BackupRoot (Split-Path $FilePath -Leaf)) `
+            -Force
+    }
+    Write-Host ""
+    Write-Host "=== REMOVE UNUSED PROP TYPES ===" -ForegroundColor Cyan
+    $HeaderContent = Get-Content `
+        -LiteralPath $HeaderPath `
+        -Raw
+    $FooterContent = Get-Content `
+        -LiteralPath $FooterPath `
+        -Raw
+    $HeaderContent = [regex]::Replace(
+        $HeaderContent,
+        '(?ms)^\s*(?:export\s+)?type\s+SiteHeaderProps\s*=\s*\{.*?^\s*\};?\s*',
+        ''
+    )
+Missing closing '}' in statement block or type definition.
+>> try {
+    function Invoke-Checked {
+        param(
+            [Parameter(Mandatory)]
+            [string]$Name,
+            [Parameter(Mandatory)]
+            [scriptblock]$Command
+        )
+        Write-Host ""
+        Write-Host "=== $Name ===" -ForegroundColor Cyan
+        $global:LASTEXITCODE = 0
+        & $Command
+        if ($LASTEXITCODE -ne 0) {
+            throw "$Name failed with exit code $LASTEXITCODE."
+        }
+        Write-Host "$Name PASSED" -ForegroundColor Green
+    }
+    foreach ($FilePath in @($HeaderPath, $FooterPath)) {
+        if (-not (Test-Path -LiteralPath $FilePath)) {
+            throw "Required file is missing: $FilePath"
+        }
+        Copy-Item `
+            -LiteralPath $FilePath `
+            -Destination (Join-Path $BackupRoot (Split-Path $FilePath -Leaf)) `
+            -Force
+    }
+    Write-Host ""
+    Write-Host "=== REMOVE UNUSED PROP TYPES ===" -ForegroundColor Cyan
+    $HeaderContent = Get-Content `
+        -LiteralPath $HeaderPath `
+        -Raw
+    $FooterContent = Get-Content `
+        -LiteralPath $FooterPath `
+        -Raw
+    $HeaderContent = [regex]::Replace(
+        $HeaderContent,
+        '(?ms)^\s*(?:export\s+)?type\s+SiteHeaderProps\s*=\s*\{.*?^\s*\};?\s*',
+        ''
+    )
+    $HeaderContent = [regex]::Replace(
+        $HeaderContent,
+        '(?ms)^\s*(?:export\s+)?interface\s+SiteHeaderProps\s*\{.*?^\s*\}\s*',
+        ''
+    )
+Missing closing '}' in statement block or type definition.
+>> try {
+    function Invoke-Checked {
+        param(
+            [Parameter(Mandatory)]
+            [string]$Name,
+            [Parameter(Mandatory)]
+            [scriptblock]$Command
+        )
+        Write-Host ""
+        Write-Host "=== $Name ===" -ForegroundColor Cyan
+        $global:LASTEXITCODE = 0
+        & $Command
+        if ($LASTEXITCODE -ne 0) {
+            throw "$Name failed with exit code $LASTEXITCODE."
+        }
+        Write-Host "$Name PASSED" -ForegroundColor Green
+    }
+    foreach ($FilePath in @($HeaderPath, $FooterPath)) {
+        if (-not (Test-Path -LiteralPath $FilePath)) {
+            throw "Required file is missing: $FilePath"
+        }
+        Copy-Item `
+            -LiteralPath $FilePath `
+            -Destination (Join-Path $BackupRoot (Split-Path $FilePath -Leaf)) `
+            -Force
+    }
+    Write-Host ""
+    Write-Host "=== REMOVE UNUSED PROP TYPES ===" -ForegroundColor Cyan
+    $HeaderContent = Get-Content `
+        -LiteralPath $HeaderPath `
+        -Raw
+    $FooterContent = Get-Content `
+        -LiteralPath $FooterPath `
+        -Raw
+    $HeaderContent = [regex]::Replace(
+        $HeaderContent,
+        '(?ms)^\s*(?:export\s+)?type\s+SiteHeaderProps\s*=\s*\{.*?^\s*\};?\s*',
+        ''
+    )
+    $HeaderContent = [regex]::Replace(
+        $HeaderContent,
+        '(?ms)^\s*(?:export\s+)?interface\s+SiteHeaderProps\s*\{.*?^\s*\}\s*',
+        ''
+    )
+    $FooterContent = [regex]::Replace(
+        $FooterContent,
+        '(?ms)^\s*(?:export\s+)?type\s+SiteFooterProps\s*=\s*\{.*?^\s*\};?\s*',
+        ''
+    )
+Missing closing '}' in statement block or type definition.
+>> try {
+    function Invoke-Checked {
+        param(
+            [Parameter(Mandatory)]
+            [string]$Name,
+            [Parameter(Mandatory)]
+            [scriptblock]$Command
+        )
+        Write-Host ""
+        Write-Host "=== $Name ===" -ForegroundColor Cyan
+        $global:LASTEXITCODE = 0
+        & $Command
+        if ($LASTEXITCODE -ne 0) {
+            throw "$Name failed with exit code $LASTEXITCODE."
+        }
+        Write-Host "$Name PASSED" -ForegroundColor Green
+    }
+    foreach ($FilePath in @($HeaderPath, $FooterPath)) {
+        if (-not (Test-Path -LiteralPath $FilePath)) {
+            throw "Required file is missing: $FilePath"
+        }
+        Copy-Item `
+            -LiteralPath $FilePath `
+            -Destination (Join-Path $BackupRoot (Split-Path $FilePath -Leaf)) `
+            -Force
+    }
+    Write-Host ""
+    Write-Host "=== REMOVE UNUSED PROP TYPES ===" -ForegroundColor Cyan
+    $HeaderContent = Get-Content `
+        -LiteralPath $HeaderPath `
+        -Raw
+    $FooterContent = Get-Content `
+        -LiteralPath $FooterPath `
+        -Raw
+    $HeaderContent = [regex]::Replace(
+        $HeaderContent,
+        '(?ms)^\s*(?:export\s+)?type\s+SiteHeaderProps\s*=\s*\{.*?^\s*\};?\s*',
+        ''
+    )
+    $HeaderContent = [regex]::Replace(
+        $HeaderContent,
+        '(?ms)^\s*(?:export\s+)?interface\s+SiteHeaderProps\s*\{.*?^\s*\}\s*',
+        ''
+    )
+    $FooterContent = [regex]::Replace(
+        $FooterContent,
+        '(?ms)^\s*(?:export\s+)?type\s+SiteFooterProps\s*=\s*\{.*?^\s*\};?\s*',
+        ''
+    )
+    $FooterContent = [regex]::Replace(
+        $FooterContent,
+        '(?ms)^\s*(?:export\s+)?interface\s+SiteFooterProps\s*\{.*?^\s*\}\s*',
+        ''
+    )
+Missing closing '}' in statement block or type definition.
+>> try {
+    function Invoke-Checked {
+        param(
+            [Parameter(Mandatory)]
+            [string]$Name,
+            [Parameter(Mandatory)]
+            [scriptblock]$Command
+        )
+        Write-Host ""
+        Write-Host "=== $Name ===" -ForegroundColor Cyan
+        $global:LASTEXITCODE = 0
+        & $Command
+        if ($LASTEXITCODE -ne 0) {
+            throw "$Name failed with exit code $LASTEXITCODE."
+        }
+        Write-Host "$Name PASSED" -ForegroundColor Green
+    }
+    foreach ($FilePath in @($HeaderPath, $FooterPath)) {
+        if (-not (Test-Path -LiteralPath $FilePath)) {
+            throw "Required file is missing: $FilePath"
+        }
+        Copy-Item `
+            -LiteralPath $FilePath `
+            -Destination (Join-Path $BackupRoot (Split-Path $FilePath -Leaf)) `
+            -Force
+    }
+    Write-Host ""
+    Write-Host "=== REMOVE UNUSED PROP TYPES ===" -ForegroundColor Cyan
+    $HeaderContent = Get-Content `
+        -LiteralPath $HeaderPath `
+        -Raw
+    $FooterContent = Get-Content `
+        -LiteralPath $FooterPath `
+        -Raw
+    $HeaderContent = [regex]::Replace(
+        $HeaderContent,
+        '(?ms)^\s*(?:export\s+)?type\s+SiteHeaderProps\s*=\s*\{.*?^\s*\};?\s*',
+        ''
+    )
+    $HeaderContent = [regex]::Replace(
+        $HeaderContent,
+        '(?ms)^\s*(?:export\s+)?interface\s+SiteHeaderProps\s*\{.*?^\s*\}\s*',
+        ''
+    )
+    $FooterContent = [regex]::Replace(
+        $FooterContent,
+        '(?ms)^\s*(?:export\s+)?type\s+SiteFooterProps\s*=\s*\{.*?^\s*\};?\s*',
+        ''
+    )
+    $FooterContent = [regex]::Replace(
+        $FooterContent,
+        '(?ms)^\s*(?:export\s+)?interface\s+SiteFooterProps\s*\{.*?^\s*\}\s*',
+        ''
+    )
+    if ($HeaderContent -match '\bSiteHeaderProps\b') {
+        throw "SiteHeaderProps still exists in site-header.tsx."
+    }
+Missing closing '}' in statement block or type definition.
+>> try {
+    function Invoke-Checked {
+        param(
+            [Parameter(Mandatory)]
+            [string]$Name,
+            [Parameter(Mandatory)]
+            [scriptblock]$Command
+        )
+        Write-Host ""
+        Write-Host "=== $Name ===" -ForegroundColor Cyan
+        $global:LASTEXITCODE = 0
+        & $Command
+        if ($LASTEXITCODE -ne 0) {
+            throw "$Name failed with exit code $LASTEXITCODE."
+        }
+        Write-Host "$Name PASSED" -ForegroundColor Green
+    }
+    foreach ($FilePath in @($HeaderPath, $FooterPath)) {
+        if (-not (Test-Path -LiteralPath $FilePath)) {
+            throw "Required file is missing: $FilePath"
+        }
+        Copy-Item `
+            -LiteralPath $FilePath `
+            -Destination (Join-Path $BackupRoot (Split-Path $FilePath -Leaf)) `
+            -Force
+    }
+    Write-Host ""
+    Write-Host "=== REMOVE UNUSED PROP TYPES ===" -ForegroundColor Cyan
+    $HeaderContent = Get-Content `
+        -LiteralPath $HeaderPath `
+        -Raw
+    $FooterContent = Get-Content `
+        -LiteralPath $FooterPath `
+        -Raw
+    $HeaderContent = [regex]::Replace(
+        $HeaderContent,
+        '(?ms)^\s*(?:export\s+)?type\s+SiteHeaderProps\s*=\s*\{.*?^\s*\};?\s*',
+        ''
+    )
+    $HeaderContent = [regex]::Replace(
+        $HeaderContent,
+        '(?ms)^\s*(?:export\s+)?interface\s+SiteHeaderProps\s*\{.*?^\s*\}\s*',
+        ''
+    )
+    $FooterContent = [regex]::Replace(
+        $FooterContent,
+        '(?ms)^\s*(?:export\s+)?type\s+SiteFooterProps\s*=\s*\{.*?^\s*\};?\s*',
+        ''
+    )
+    $FooterContent = [regex]::Replace(
+        $FooterContent,
+        '(?ms)^\s*(?:export\s+)?interface\s+SiteFooterProps\s*\{.*?^\s*\}\s*',
+        ''
+    )
+    if ($HeaderContent -match '\bSiteHeaderProps\b') {
+        throw "SiteHeaderProps still exists in site-header.tsx."
+    }
+    if ($FooterContent -match '\bSiteFooterProps\b') {
+        throw "SiteFooterProps still exists in site-footer.tsx."
+    }
+Missing closing '}' in statement block or type definition.
+>> try {
+    function Invoke-Checked {
+        param(
+            [Parameter(Mandatory)]
+            [string]$Name,
+            [Parameter(Mandatory)]
+            [scriptblock]$Command
+        )
+        Write-Host ""
+        Write-Host "=== $Name ===" -ForegroundColor Cyan
+        $global:LASTEXITCODE = 0
+        & $Command
+        if ($LASTEXITCODE -ne 0) {
+            throw "$Name failed with exit code $LASTEXITCODE."
+        }
+        Write-Host "$Name PASSED" -ForegroundColor Green
+    }
+    foreach ($FilePath in @($HeaderPath, $FooterPath)) {
+        if (-not (Test-Path -LiteralPath $FilePath)) {
+            throw "Required file is missing: $FilePath"
+        }
+        Copy-Item `
+            -LiteralPath $FilePath `
+            -Destination (Join-Path $BackupRoot (Split-Path $FilePath -Leaf)) `
+            -Force
+    }
+    Write-Host ""
+    Write-Host "=== REMOVE UNUSED PROP TYPES ===" -ForegroundColor Cyan
+    $HeaderContent = Get-Content `
+        -LiteralPath $HeaderPath `
+        -Raw
+    $FooterContent = Get-Content `
+        -LiteralPath $FooterPath `
+        -Raw
+    $HeaderContent = [regex]::Replace(
+        $HeaderContent,
+        '(?ms)^\s*(?:export\s+)?type\s+SiteHeaderProps\s*=\s*\{.*?^\s*\};?\s*',
+        ''
+    )
+    $HeaderContent = [regex]::Replace(
+        $HeaderContent,
+        '(?ms)^\s*(?:export\s+)?interface\s+SiteHeaderProps\s*\{.*?^\s*\}\s*',
+        ''
+    )
+    $FooterContent = [regex]::Replace(
+        $FooterContent,
+        '(?ms)^\s*(?:export\s+)?type\s+SiteFooterProps\s*=\s*\{.*?^\s*\};?\s*',
+        ''
+    )
+    $FooterContent = [regex]::Replace(
+        $FooterContent,
+        '(?ms)^\s*(?:export\s+)?interface\s+SiteFooterProps\s*\{.*?^\s*\}\s*',
+        ''
+    )
+    if ($HeaderContent -match '\bSiteHeaderProps\b') {
+        throw "SiteHeaderProps still exists in site-header.tsx."
+    }
+    if ($FooterContent -match '\bSiteFooterProps\b') {
+        throw "SiteFooterProps still exists in site-footer.tsx."
+    }
+    Set-Content `
+        -LiteralPath $HeaderPath `
+        -Value $HeaderContent `
+        -Encoding UTF8
+Missing closing '}' in statement block or type definition.
+>> try {
+    function Invoke-Checked {
+        param(
+            [Parameter(Mandatory)]
+            [string]$Name,
+            [Parameter(Mandatory)]
+            [scriptblock]$Command
+        )
+        Write-Host ""
+        Write-Host "=== $Name ===" -ForegroundColor Cyan
+        $global:LASTEXITCODE = 0
+        & $Command
+        if ($LASTEXITCODE -ne 0) {
+            throw "$Name failed with exit code $LASTEXITCODE."
+        }
+        Write-Host "$Name PASSED" -ForegroundColor Green
+    }
+    foreach ($FilePath in @($HeaderPath, $FooterPath)) {
+        if (-not (Test-Path -LiteralPath $FilePath)) {
+            throw "Required file is missing: $FilePath"
+        }
+        Copy-Item `
+            -LiteralPath $FilePath `
+            -Destination (Join-Path $BackupRoot (Split-Path $FilePath -Leaf)) `
+            -Force
+    }
+    Write-Host ""
+    Write-Host "=== REMOVE UNUSED PROP TYPES ===" -ForegroundColor Cyan
+    $HeaderContent = Get-Content `
+        -LiteralPath $HeaderPath `
+        -Raw
+    $FooterContent = Get-Content `
+        -LiteralPath $FooterPath `
+        -Raw
+    $HeaderContent = [regex]::Replace(
+        $HeaderContent,
+        '(?ms)^\s*(?:export\s+)?type\s+SiteHeaderProps\s*=\s*\{.*?^\s*\};?\s*',
+        ''
+    )
+    $HeaderContent = [regex]::Replace(
+        $HeaderContent,
+        '(?ms)^\s*(?:export\s+)?interface\s+SiteHeaderProps\s*\{.*?^\s*\}\s*',
+        ''
+    )
+    $FooterContent = [regex]::Replace(
+        $FooterContent,
+        '(?ms)^\s*(?:export\s+)?type\s+SiteFooterProps\s*=\s*\{.*?^\s*\};?\s*',
+        ''
+    )
+    $FooterContent = [regex]::Replace(
+        $FooterContent,
+        '(?ms)^\s*(?:export\s+)?interface\s+SiteFooterProps\s*\{.*?^\s*\}\s*',
+        ''
+    )
+    if ($HeaderContent -match '\bSiteHeaderProps\b') {
+        throw "SiteHeaderProps still exists in site-header.tsx."
+    }
+    if ($FooterContent -match '\bSiteFooterProps\b') {
+        throw "SiteFooterProps still exists in site-footer.tsx."
+    }
+    Set-Content `
+        -LiteralPath $HeaderPath `
+        -Value $HeaderContent `
+        -Encoding UTF8
+    Set-Content `
+        -LiteralPath $FooterPath `
+        -Value $FooterContent `
+        -Encoding UTF8
+Missing closing '}' in statement block or type definition.
+>> try {
+    function Invoke-Checked {
+        param(
+            [Parameter(Mandatory)]
+            [string]$Name,
+            [Parameter(Mandatory)]
+            [scriptblock]$Command
+        )
+        Write-Host ""
+        Write-Host "=== $Name ===" -ForegroundColor Cyan
+        $global:LASTEXITCODE = 0
+        & $Command
+        if ($LASTEXITCODE -ne 0) {
+            throw "$Name failed with exit code $LASTEXITCODE."
+        }
+        Write-Host "$Name PASSED" -ForegroundColor Green
+    }
+    foreach ($FilePath in @($HeaderPath, $FooterPath)) {
+        if (-not (Test-Path -LiteralPath $FilePath)) {
+            throw "Required file is missing: $FilePath"
+        }
+        Copy-Item `
+            -LiteralPath $FilePath `
+            -Destination (Join-Path $BackupRoot (Split-Path $FilePath -Leaf)) `
+            -Force
+    }
+    Write-Host ""
+    Write-Host "=== REMOVE UNUSED PROP TYPES ===" -ForegroundColor Cyan
+    $HeaderContent = Get-Content `
+        -LiteralPath $HeaderPath `
+        -Raw
+    $FooterContent = Get-Content `
+        -LiteralPath $FooterPath `
+        -Raw
+    $HeaderContent = [regex]::Replace(
+        $HeaderContent,
+        '(?ms)^\s*(?:export\s+)?type\s+SiteHeaderProps\s*=\s*\{.*?^\s*\};?\s*',
+        ''
+    )
+    $HeaderContent = [regex]::Replace(
+        $HeaderContent,
+        '(?ms)^\s*(?:export\s+)?interface\s+SiteHeaderProps\s*\{.*?^\s*\}\s*',
+        ''
+    )
+    $FooterContent = [regex]::Replace(
+        $FooterContent,
+        '(?ms)^\s*(?:export\s+)?type\s+SiteFooterProps\s*=\s*\{.*?^\s*\};?\s*',
+        ''
+    )
+    $FooterContent = [regex]::Replace(
+        $FooterContent,
+        '(?ms)^\s*(?:export\s+)?interface\s+SiteFooterProps\s*\{.*?^\s*\}\s*',
+        ''
+    )
+    if ($HeaderContent -match '\bSiteHeaderProps\b') {
+        throw "SiteHeaderProps still exists in site-header.tsx."
+    }
+    if ($FooterContent -match '\bSiteFooterProps\b') {
+        throw "SiteFooterProps still exists in site-footer.tsx."
+    }
+    Set-Content `
+        -LiteralPath $HeaderPath `
+        -Value $HeaderContent `
+        -Encoding UTF8
+    Set-Content `
+        -LiteralPath $FooterPath `
+        -Value $FooterContent `
+        -Encoding UTF8
+    Write-Host "UNUSED PROP TYPES REMOVED" -ForegroundColor Green
+Missing closing '}' in statement block or type definition.
+>> try {
+    function Invoke-Checked {
+        param(
+            [Parameter(Mandatory)]
+            [string]$Name,
+            [Parameter(Mandatory)]
+            [scriptblock]$Command
+        )
+        Write-Host ""
+        Write-Host "=== $Name ===" -ForegroundColor Cyan
+        $global:LASTEXITCODE = 0
+        & $Command
+        if ($LASTEXITCODE -ne 0) {
+            throw "$Name failed with exit code $LASTEXITCODE."
+        }
+        Write-Host "$Name PASSED" -ForegroundColor Green
+    }
+    foreach ($FilePath in @($HeaderPath, $FooterPath)) {
+        if (-not (Test-Path -LiteralPath $FilePath)) {
+            throw "Required file is missing: $FilePath"
+        }
+        Copy-Item `
+            -LiteralPath $FilePath `
+            -Destination (Join-Path $BackupRoot (Split-Path $FilePath -Leaf)) `
+            -Force
+    }
+    Write-Host ""
+    Write-Host "=== REMOVE UNUSED PROP TYPES ===" -ForegroundColor Cyan
+    $HeaderContent = Get-Content `
+        -LiteralPath $HeaderPath `
+        -Raw
+    $FooterContent = Get-Content `
+        -LiteralPath $FooterPath `
+        -Raw
+    $HeaderContent = [regex]::Replace(
+        $HeaderContent,
+        '(?ms)^\s*(?:export\s+)?type\s+SiteHeaderProps\s*=\s*\{.*?^\s*\};?\s*',
+        ''
+    )
+    $HeaderContent = [regex]::Replace(
+        $HeaderContent,
+        '(?ms)^\s*(?:export\s+)?interface\s+SiteHeaderProps\s*\{.*?^\s*\}\s*',
+        ''
+    )
+    $FooterContent = [regex]::Replace(
+        $FooterContent,
+        '(?ms)^\s*(?:export\s+)?type\s+SiteFooterProps\s*=\s*\{.*?^\s*\};?\s*',
+        ''
+    )
+    $FooterContent = [regex]::Replace(
+        $FooterContent,
+        '(?ms)^\s*(?:export\s+)?interface\s+SiteFooterProps\s*\{.*?^\s*\}\s*',
+        ''
+    )
+    if ($HeaderContent -match '\bSiteHeaderProps\b') {
+        throw "SiteHeaderProps still exists in site-header.tsx."
+    }
+    if ($FooterContent -match '\bSiteFooterProps\b') {
+        throw "SiteFooterProps still exists in site-footer.tsx."
+    }
+    Set-Content `
+        -LiteralPath $HeaderPath `
+        -Value $HeaderContent `
+        -Encoding UTF8
+    Set-Content `
+        -LiteralPath $FooterPath `
+        -Value $FooterContent `
+        -Encoding UTF8
+    Write-Host "UNUSED PROP TYPES REMOVED" -ForegroundColor Green
+    $PackageJson = Get-Content `
+        -LiteralPath (Join-Path $ProjectRoot "package.json") `
+        -Raw |
+        ConvertFrom-Json
+Missing closing '}' in statement block or type definition.
+>> try {
+    function Invoke-Checked {
+        param(
+            [Parameter(Mandatory)]
+            [string]$Name,
+            [Parameter(Mandatory)]
+            [scriptblock]$Command
+        )
+        Write-Host ""
+        Write-Host "=== $Name ===" -ForegroundColor Cyan
+        $global:LASTEXITCODE = 0
+        & $Command
+        if ($LASTEXITCODE -ne 0) {
+            throw "$Name failed with exit code $LASTEXITCODE."
+        }
+        Write-Host "$Name PASSED" -ForegroundColor Green
+    }
+    foreach ($FilePath in @($HeaderPath, $FooterPath)) {
+        if (-not (Test-Path -LiteralPath $FilePath)) {
+            throw "Required file is missing: $FilePath"
+        }
+        Copy-Item `
+            -LiteralPath $FilePath `
+            -Destination (Join-Path $BackupRoot (Split-Path $FilePath -Leaf)) `
+            -Force
+    }
+    Write-Host ""
+    Write-Host "=== REMOVE UNUSED PROP TYPES ===" -ForegroundColor Cyan
+    $HeaderContent = Get-Content `
+        -LiteralPath $HeaderPath `
+        -Raw
+    $FooterContent = Get-Content `
+        -LiteralPath $FooterPath `
+        -Raw
+    $HeaderContent = [regex]::Replace(
+        $HeaderContent,
+        '(?ms)^\s*(?:export\s+)?type\s+SiteHeaderProps\s*=\s*\{.*?^\s*\};?\s*',
+        ''
+    )
+    $HeaderContent = [regex]::Replace(
+        $HeaderContent,
+        '(?ms)^\s*(?:export\s+)?interface\s+SiteHeaderProps\s*\{.*?^\s*\}\s*',
+        ''
+    )
+    $FooterContent = [regex]::Replace(
+        $FooterContent,
+        '(?ms)^\s*(?:export\s+)?type\s+SiteFooterProps\s*=\s*\{.*?^\s*\};?\s*',
+        ''
+    )
+    $FooterContent = [regex]::Replace(
+        $FooterContent,
+        '(?ms)^\s*(?:export\s+)?interface\s+SiteFooterProps\s*\{.*?^\s*\}\s*',
+        ''
+    )
+    if ($HeaderContent -match '\bSiteHeaderProps\b') {
+        throw "SiteHeaderProps still exists in site-header.tsx."
+    }
+    if ($FooterContent -match '\bSiteFooterProps\b') {
+        throw "SiteFooterProps still exists in site-footer.tsx."
+    }
+    Set-Content `
+        -LiteralPath $HeaderPath `
+        -Value $HeaderContent `
+        -Encoding UTF8
+    Set-Content `
+        -LiteralPath $FooterPath `
+        -Value $FooterContent `
+        -Encoding UTF8
+    Write-Host "UNUSED PROP TYPES REMOVED" -ForegroundColor Green
+    $PackageJson = Get-Content `
+        -LiteralPath (Join-Path $ProjectRoot "package.json") `
+        -Raw |
+        ConvertFrom-Json
+    $Scripts = @(
+        $PackageJson.scripts.PSObject.Properties.Name
+    )
+Missing closing '}' in statement block or type definition.
+>> try {
+    function Invoke-Checked {
+        param(
+            [Parameter(Mandatory)]
+            [string]$Name,
+            [Parameter(Mandatory)]
+            [scriptblock]$Command
+        )
+        Write-Host ""
+        Write-Host "=== $Name ===" -ForegroundColor Cyan
+        $global:LASTEXITCODE = 0
+        & $Command
+        if ($LASTEXITCODE -ne 0) {
+            throw "$Name failed with exit code $LASTEXITCODE."
+        }
+        Write-Host "$Name PASSED" -ForegroundColor Green
+    }
+    foreach ($FilePath in @($HeaderPath, $FooterPath)) {
+        if (-not (Test-Path -LiteralPath $FilePath)) {
+            throw "Required file is missing: $FilePath"
+        }
+        Copy-Item `
+            -LiteralPath $FilePath `
+            -Destination (Join-Path $BackupRoot (Split-Path $FilePath -Leaf)) `
+            -Force
+    }
+    Write-Host ""
+    Write-Host "=== REMOVE UNUSED PROP TYPES ===" -ForegroundColor Cyan
+    $HeaderContent = Get-Content `
+        -LiteralPath $HeaderPath `
+        -Raw
+    $FooterContent = Get-Content `
+        -LiteralPath $FooterPath `
+        -Raw
+    $HeaderContent = [regex]::Replace(
+        $HeaderContent,
+        '(?ms)^\s*(?:export\s+)?type\s+SiteHeaderProps\s*=\s*\{.*?^\s*\};?\s*',
+        ''
+    )
+    $HeaderContent = [regex]::Replace(
+        $HeaderContent,
+        '(?ms)^\s*(?:export\s+)?interface\s+SiteHeaderProps\s*\{.*?^\s*\}\s*',
+        ''
+    )
+    $FooterContent = [regex]::Replace(
+        $FooterContent,
+        '(?ms)^\s*(?:export\s+)?type\s+SiteFooterProps\s*=\s*\{.*?^\s*\};?\s*',
+        ''
+    )
+    $FooterContent = [regex]::Replace(
+        $FooterContent,
+        '(?ms)^\s*(?:export\s+)?interface\s+SiteFooterProps\s*\{.*?^\s*\}\s*',
+        ''
+    )
+    if ($HeaderContent -match '\bSiteHeaderProps\b') {
+        throw "SiteHeaderProps still exists in site-header.tsx."
+    }
+    if ($FooterContent -match '\bSiteFooterProps\b') {
+        throw "SiteFooterProps still exists in site-footer.tsx."
+    }
+    Set-Content `
+        -LiteralPath $HeaderPath `
+        -Value $HeaderContent `
+        -Encoding UTF8
+    Set-Content `
+        -LiteralPath $FooterPath `
+        -Value $FooterContent `
+        -Encoding UTF8
+    Write-Host "UNUSED PROP TYPES REMOVED" -ForegroundColor Green
+    $PackageJson = Get-Content `
+        -LiteralPath (Join-Path $ProjectRoot "package.json") `
+        -Raw |
+        ConvertFrom-Json
+    $Scripts = @(
+        $PackageJson.scripts.PSObject.Properties.Name
+    )
+    Invoke-Checked "HEADER AND FOOTER PARSE TEST" {
+        pnpm exec prettier `
+            --write `
+            "src/components/site/site-header.tsx" `
+            "src/components/site/site-footer.tsx"
+    }
+Missing closing '}' in statement block or type definition.
+>> try {
+    function Invoke-Checked {
+        param(
+            [Parameter(Mandatory)]
+            [string]$Name,
+            [Parameter(Mandatory)]
+            [scriptblock]$Command
+        )
+        Write-Host ""
+        Write-Host "=== $Name ===" -ForegroundColor Cyan
+        $global:LASTEXITCODE = 0
+        & $Command
+        if ($LASTEXITCODE -ne 0) {
+            throw "$Name failed with exit code $LASTEXITCODE."
+        }
+        Write-Host "$Name PASSED" -ForegroundColor Green
+    }
+    foreach ($FilePath in @($HeaderPath, $FooterPath)) {
+        if (-not (Test-Path -LiteralPath $FilePath)) {
+            throw "Required file is missing: $FilePath"
+        }
+        Copy-Item `
+            -LiteralPath $FilePath `
+            -Destination (Join-Path $BackupRoot (Split-Path $FilePath -Leaf)) `
+            -Force
+    }
+    Write-Host ""
+    Write-Host "=== REMOVE UNUSED PROP TYPES ===" -ForegroundColor Cyan
+    $HeaderContent = Get-Content `
+        -LiteralPath $HeaderPath `
+        -Raw
+    $FooterContent = Get-Content `
+        -LiteralPath $FooterPath `
+        -Raw
+    $HeaderContent = [regex]::Replace(
+        $HeaderContent,
+        '(?ms)^\s*(?:export\s+)?type\s+SiteHeaderProps\s*=\s*\{.*?^\s*\};?\s*',
+        ''
+    )
+    $HeaderContent = [regex]::Replace(
+        $HeaderContent,
+        '(?ms)^\s*(?:export\s+)?interface\s+SiteHeaderProps\s*\{.*?^\s*\}\s*',
+        ''
+    )
+    $FooterContent = [regex]::Replace(
+        $FooterContent,
+        '(?ms)^\s*(?:export\s+)?type\s+SiteFooterProps\s*=\s*\{.*?^\s*\};?\s*',
+        ''
+    )
+    $FooterContent = [regex]::Replace(
+        $FooterContent,
+        '(?ms)^\s*(?:export\s+)?interface\s+SiteFooterProps\s*\{.*?^\s*\}\s*',
+        ''
+    )
+    if ($HeaderContent -match '\bSiteHeaderProps\b') {
+        throw "SiteHeaderProps still exists in site-header.tsx."
+    }
+    if ($FooterContent -match '\bSiteFooterProps\b') {
+        throw "SiteFooterProps still exists in site-footer.tsx."
+    }
+    Set-Content `
+        -LiteralPath $HeaderPath `
+        -Value $HeaderContent `
+        -Encoding UTF8
+    Set-Content `
+        -LiteralPath $FooterPath `
+        -Value $FooterContent `
+        -Encoding UTF8
+    Write-Host "UNUSED PROP TYPES REMOVED" -ForegroundColor Green
+    $PackageJson = Get-Content `
+        -LiteralPath (Join-Path $ProjectRoot "package.json") `
+        -Raw |
+        ConvertFrom-Json
+    $Scripts = @(
+        $PackageJson.scripts.PSObject.Properties.Name
+    )
+    Invoke-Checked "HEADER AND FOOTER PARSE TEST" {
+        pnpm exec prettier `
+            --write `
+            "src/components/site/site-header.tsx" `
+            "src/components/site/site-footer.tsx"
+    }
+    Invoke-Checked "FORMAT WRITE" {
+        if ($Scripts -contains "format") {
+            pnpm run format
+        }
+        else {
+            pnpm exec prettier --write .
+        }
+    }
+Missing closing '}' in statement block or type definition.
+>> try {
+    function Invoke-Checked {
+        param(
+            [Parameter(Mandatory)]
+            [string]$Name,
+            [Parameter(Mandatory)]
+            [scriptblock]$Command
+        )
+        Write-Host ""
+        Write-Host "=== $Name ===" -ForegroundColor Cyan
+        $global:LASTEXITCODE = 0
+        & $Command
+        if ($LASTEXITCODE -ne 0) {
+            throw "$Name failed with exit code $LASTEXITCODE."
+        }
+        Write-Host "$Name PASSED" -ForegroundColor Green
+    }
+    foreach ($FilePath in @($HeaderPath, $FooterPath)) {
+        if (-not (Test-Path -LiteralPath $FilePath)) {
+            throw "Required file is missing: $FilePath"
+        }
+        Copy-Item `
+            -LiteralPath $FilePath `
+            -Destination (Join-Path $BackupRoot (Split-Path $FilePath -Leaf)) `
+            -Force
+    }
+    Write-Host ""
+    Write-Host "=== REMOVE UNUSED PROP TYPES ===" -ForegroundColor Cyan
+    $HeaderContent = Get-Content `
+        -LiteralPath $HeaderPath `
+        -Raw
+    $FooterContent = Get-Content `
+        -LiteralPath $FooterPath `
+        -Raw
+    $HeaderContent = [regex]::Replace(
+        $HeaderContent,
+        '(?ms)^\s*(?:export\s+)?type\s+SiteHeaderProps\s*=\s*\{.*?^\s*\};?\s*',
+        ''
+    )
+    $HeaderContent = [regex]::Replace(
+        $HeaderContent,
+        '(?ms)^\s*(?:export\s+)?interface\s+SiteHeaderProps\s*\{.*?^\s*\}\s*',
+        ''
+    )
+    $FooterContent = [regex]::Replace(
+        $FooterContent,
+        '(?ms)^\s*(?:export\s+)?type\s+SiteFooterProps\s*=\s*\{.*?^\s*\};?\s*',
+        ''
+    )
+    $FooterContent = [regex]::Replace(
+        $FooterContent,
+        '(?ms)^\s*(?:export\s+)?interface\s+SiteFooterProps\s*\{.*?^\s*\}\s*',
+        ''
+    )
+    if ($HeaderContent -match '\bSiteHeaderProps\b') {
+        throw "SiteHeaderProps still exists in site-header.tsx."
+    }
+    if ($FooterContent -match '\bSiteFooterProps\b') {
+        throw "SiteFooterProps still exists in site-footer.tsx."
+    }
+    Set-Content `
+        -LiteralPath $HeaderPath `
+        -Value $HeaderContent `
+        -Encoding UTF8
+    Set-Content `
+        -LiteralPath $FooterPath `
+        -Value $FooterContent `
+        -Encoding UTF8
+    Write-Host "UNUSED PROP TYPES REMOVED" -ForegroundColor Green
+    $PackageJson = Get-Content `
+        -LiteralPath (Join-Path $ProjectRoot "package.json") `
+        -Raw |
+        ConvertFrom-Json
+    $Scripts = @(
+        $PackageJson.scripts.PSObject.Properties.Name
+    )
+    Invoke-Checked "HEADER AND FOOTER PARSE TEST" {
+        pnpm exec prettier `
+            --write `
+            "src/components/site/site-header.tsx" `
+            "src/components/site/site-footer.tsx"
+    }
+    Invoke-Checked "FORMAT WRITE" {
+        if ($Scripts -contains "format") {
+            pnpm run format
+        }
+        else {
+            pnpm exec prettier --write .
+        }
+    }
+    Invoke-Checked "FORMAT CHECK" {
+        if ($Scripts -contains "format:check") {
+            pnpm run format:check
+        }
+        else {
+            pnpm exec prettier --check .
+        }
+    }
+Missing closing '}' in statement block or type definition.
+>> try {
+    function Invoke-Checked {
+        param(
+            [Parameter(Mandatory)]
+            [string]$Name,
+            [Parameter(Mandatory)]
+            [scriptblock]$Command
+        )
+        Write-Host ""
+        Write-Host "=== $Name ===" -ForegroundColor Cyan
+        $global:LASTEXITCODE = 0
+        & $Command
+        if ($LASTEXITCODE -ne 0) {
+            throw "$Name failed with exit code $LASTEXITCODE."
+        }
+        Write-Host "$Name PASSED" -ForegroundColor Green
+    }
+    foreach ($FilePath in @($HeaderPath, $FooterPath)) {
+        if (-not (Test-Path -LiteralPath $FilePath)) {
+            throw "Required file is missing: $FilePath"
+        }
+        Copy-Item `
+            -LiteralPath $FilePath `
+            -Destination (Join-Path $BackupRoot (Split-Path $FilePath -Leaf)) `
+            -Force
+    }
+    Write-Host ""
+    Write-Host "=== REMOVE UNUSED PROP TYPES ===" -ForegroundColor Cyan
+    $HeaderContent = Get-Content `
+        -LiteralPath $HeaderPath `
+        -Raw
+    $FooterContent = Get-Content `
+        -LiteralPath $FooterPath `
+        -Raw
+    $HeaderContent = [regex]::Replace(
+        $HeaderContent,
+        '(?ms)^\s*(?:export\s+)?type\s+SiteHeaderProps\s*=\s*\{.*?^\s*\};?\s*',
+        ''
+    )
+    $HeaderContent = [regex]::Replace(
+        $HeaderContent,
+        '(?ms)^\s*(?:export\s+)?interface\s+SiteHeaderProps\s*\{.*?^\s*\}\s*',
+        ''
+    )
+    $FooterContent = [regex]::Replace(
+        $FooterContent,
+        '(?ms)^\s*(?:export\s+)?type\s+SiteFooterProps\s*=\s*\{.*?^\s*\};?\s*',
+        ''
+    )
+    $FooterContent = [regex]::Replace(
+        $FooterContent,
+        '(?ms)^\s*(?:export\s+)?interface\s+SiteFooterProps\s*\{.*?^\s*\}\s*',
+        ''
+    )
+    if ($HeaderContent -match '\bSiteHeaderProps\b') {
+        throw "SiteHeaderProps still exists in site-header.tsx."
+    }
+    if ($FooterContent -match '\bSiteFooterProps\b') {
+        throw "SiteFooterProps still exists in site-footer.tsx."
+    }
+    Set-Content `
+        -LiteralPath $HeaderPath `
+        -Value $HeaderContent `
+        -Encoding UTF8
+    Set-Content `
+        -LiteralPath $FooterPath `
+        -Value $FooterContent `
+        -Encoding UTF8
+    Write-Host "UNUSED PROP TYPES REMOVED" -ForegroundColor Green
+    $PackageJson = Get-Content `
+        -LiteralPath (Join-Path $ProjectRoot "package.json") `
+        -Raw |
+        ConvertFrom-Json
+    $Scripts = @(
+        $PackageJson.scripts.PSObject.Properties.Name
+    )
+    Invoke-Checked "HEADER AND FOOTER PARSE TEST" {
+        pnpm exec prettier `
+            --write `
+            "src/components/site/site-header.tsx" `
+            "src/components/site/site-footer.tsx"
+    }
+    Invoke-Checked "FORMAT WRITE" {
+        if ($Scripts -contains "format") {
+            pnpm run format
+        }
+        else {
+            pnpm exec prettier --write .
+        }
+    }
+    Invoke-Checked "FORMAT CHECK" {
+        if ($Scripts -contains "format:check") {
+            pnpm run format:check
+        }
+        else {
+            pnpm exec prettier --check .
+        }
+    }
+    Invoke-Checked "TYPESCRIPT CHECK" {
+        if ($Scripts -contains "typecheck") {
+            pnpm run typecheck
+        }
+        else {
+            pnpm exec tsc --noEmit
+        }
+    }
+Missing closing '}' in statement block or type definition.
+>> try {
+    function Invoke-Checked {
+        param(
+            [Parameter(Mandatory)]
+            [string]$Name,
+            [Parameter(Mandatory)]
+            [scriptblock]$Command
+        )
+        Write-Host ""
+        Write-Host "=== $Name ===" -ForegroundColor Cyan
+        $global:LASTEXITCODE = 0
+        & $Command
+        if ($LASTEXITCODE -ne 0) {
+            throw "$Name failed with exit code $LASTEXITCODE."
+        }
+        Write-Host "$Name PASSED" -ForegroundColor Green
+    }
+    foreach ($FilePath in @($HeaderPath, $FooterPath)) {
+        if (-not (Test-Path -LiteralPath $FilePath)) {
+            throw "Required file is missing: $FilePath"
+        }
+        Copy-Item `
+            -LiteralPath $FilePath `
+            -Destination (Join-Path $BackupRoot (Split-Path $FilePath -Leaf)) `
+            -Force
+    }
+    Write-Host ""
+    Write-Host "=== REMOVE UNUSED PROP TYPES ===" -ForegroundColor Cyan
+    $HeaderContent = Get-Content `
+        -LiteralPath $HeaderPath `
+        -Raw
+    $FooterContent = Get-Content `
+        -LiteralPath $FooterPath `
+        -Raw
+    $HeaderContent = [regex]::Replace(
+        $HeaderContent,
+        '(?ms)^\s*(?:export\s+)?type\s+SiteHeaderProps\s*=\s*\{.*?^\s*\};?\s*',
+        ''
+    )
+    $HeaderContent = [regex]::Replace(
+        $HeaderContent,
+        '(?ms)^\s*(?:export\s+)?interface\s+SiteHeaderProps\s*\{.*?^\s*\}\s*',
+        ''
+    )
+    $FooterContent = [regex]::Replace(
+        $FooterContent,
+        '(?ms)^\s*(?:export\s+)?type\s+SiteFooterProps\s*=\s*\{.*?^\s*\};?\s*',
+        ''
+    )
+    $FooterContent = [regex]::Replace(
+        $FooterContent,
+        '(?ms)^\s*(?:export\s+)?interface\s+SiteFooterProps\s*\{.*?^\s*\}\s*',
+        ''
+    )
+    if ($HeaderContent -match '\bSiteHeaderProps\b') {
+        throw "SiteHeaderProps still exists in site-header.tsx."
+    }
+    if ($FooterContent -match '\bSiteFooterProps\b') {
+        throw "SiteFooterProps still exists in site-footer.tsx."
+    }
+    Set-Content `
+        -LiteralPath $HeaderPath `
+        -Value $HeaderContent `
+        -Encoding UTF8
+    Set-Content `
+        -LiteralPath $FooterPath `
+        -Value $FooterContent `
+        -Encoding UTF8
+    Write-Host "UNUSED PROP TYPES REMOVED" -ForegroundColor Green
+    $PackageJson = Get-Content `
+        -LiteralPath (Join-Path $ProjectRoot "package.json") `
+        -Raw |
+        ConvertFrom-Json
+    $Scripts = @(
+        $PackageJson.scripts.PSObject.Properties.Name
+    )
+    Invoke-Checked "HEADER AND FOOTER PARSE TEST" {
+        pnpm exec prettier `
+            --write `
+            "src/components/site/site-header.tsx" `
+            "src/components/site/site-footer.tsx"
+    }
+    Invoke-Checked "FORMAT WRITE" {
+        if ($Scripts -contains "format") {
+            pnpm run format
+        }
+        else {
+            pnpm exec prettier --write .
+        }
+    }
+    Invoke-Checked "FORMAT CHECK" {
+        if ($Scripts -contains "format:check") {
+            pnpm run format:check
+        }
+        else {
+            pnpm exec prettier --check .
+        }
+    }
+    Invoke-Checked "TYPESCRIPT CHECK" {
+        if ($Scripts -contains "typecheck") {
+            pnpm run typecheck
+        }
+        else {
+            pnpm exec tsc --noEmit
+        }
+    }
+    Invoke-Checked "ESLINT ZERO WARNINGS" {
+        if ($Scripts -contains "lint") {
+            pnpm run lint -- --max-warnings=0
+        }
+        else {
+            pnpm exec eslint . --max-warnings=0
+        }
+    }
+Missing closing '}' in statement block or type definition.
+>> try {
+    function Invoke-Checked {
+        param(
+            [Parameter(Mandatory)]
+            [string]$Name,
+            [Parameter(Mandatory)]
+            [scriptblock]$Command
+        )
+        Write-Host ""
+        Write-Host "=== $Name ===" -ForegroundColor Cyan
+        $global:LASTEXITCODE = 0
+        & $Command
+        if ($LASTEXITCODE -ne 0) {
+            throw "$Name failed with exit code $LASTEXITCODE."
+        }
+        Write-Host "$Name PASSED" -ForegroundColor Green
+    }
+    foreach ($FilePath in @($HeaderPath, $FooterPath)) {
+        if (-not (Test-Path -LiteralPath $FilePath)) {
+            throw "Required file is missing: $FilePath"
+        }
+        Copy-Item `
+            -LiteralPath $FilePath `
+            -Destination (Join-Path $BackupRoot (Split-Path $FilePath -Leaf)) `
+            -Force
+    }
+    Write-Host ""
+    Write-Host "=== REMOVE UNUSED PROP TYPES ===" -ForegroundColor Cyan
+    $HeaderContent = Get-Content `
+        -LiteralPath $HeaderPath `
+        -Raw
+    $FooterContent = Get-Content `
+        -LiteralPath $FooterPath `
+        -Raw
+    $HeaderContent = [regex]::Replace(
+        $HeaderContent,
+        '(?ms)^\s*(?:export\s+)?type\s+SiteHeaderProps\s*=\s*\{.*?^\s*\};?\s*',
+        ''
+    )
+    $HeaderContent = [regex]::Replace(
+        $HeaderContent,
+        '(?ms)^\s*(?:export\s+)?interface\s+SiteHeaderProps\s*\{.*?^\s*\}\s*',
+        ''
+    )
+    $FooterContent = [regex]::Replace(
+        $FooterContent,
+        '(?ms)^\s*(?:export\s+)?type\s+SiteFooterProps\s*=\s*\{.*?^\s*\};?\s*',
+        ''
+    )
+    $FooterContent = [regex]::Replace(
+        $FooterContent,
+        '(?ms)^\s*(?:export\s+)?interface\s+SiteFooterProps\s*\{.*?^\s*\}\s*',
+        ''
+    )
+    if ($HeaderContent -match '\bSiteHeaderProps\b') {
+        throw "SiteHeaderProps still exists in site-header.tsx."
+    }
+    if ($FooterContent -match '\bSiteFooterProps\b') {
+        throw "SiteFooterProps still exists in site-footer.tsx."
+    }
+    Set-Content `
+        -LiteralPath $HeaderPath `
+        -Value $HeaderContent `
+        -Encoding UTF8
+    Set-Content `
+        -LiteralPath $FooterPath `
+        -Value $FooterContent `
+        -Encoding UTF8
+    Write-Host "UNUSED PROP TYPES REMOVED" -ForegroundColor Green
+    $PackageJson = Get-Content `
+        -LiteralPath (Join-Path $ProjectRoot "package.json") `
+        -Raw |
+        ConvertFrom-Json
+    $Scripts = @(
+        $PackageJson.scripts.PSObject.Properties.Name
+    )
+    Invoke-Checked "HEADER AND FOOTER PARSE TEST" {
+        pnpm exec prettier `
+            --write `
+            "src/components/site/site-header.tsx" `
+            "src/components/site/site-footer.tsx"
+    }
+    Invoke-Checked "FORMAT WRITE" {
+        if ($Scripts -contains "format") {
+            pnpm run format
+        }
+        else {
+            pnpm exec prettier --write .
+        }
+    }
+    Invoke-Checked "FORMAT CHECK" {
+        if ($Scripts -contains "format:check") {
+            pnpm run format:check
+        }
+        else {
+            pnpm exec prettier --check .
+        }
+    }
+    Invoke-Checked "TYPESCRIPT CHECK" {
+        if ($Scripts -contains "typecheck") {
+            pnpm run typecheck
+        }
+        else {
+            pnpm exec tsc --noEmit
+        }
+    }
+    Invoke-Checked "ESLINT ZERO WARNINGS" {
+        if ($Scripts -contains "lint") {
+            pnpm run lint -- --max-warnings=0
+        }
+        else {
+            pnpm exec eslint . --max-warnings=0
+        }
+    }
+    Invoke-Checked "PRODUCTION BUILD" {
+        if ($Scripts -contains "build") {
+            pnpm run build
+        }
+        else {
+            throw "build script is missing from package.json."
+        }
+    }
+Missing closing '}' in statement block or type definition.
+>> try {
+    function Invoke-Checked {
+        param(
+            [Parameter(Mandatory)]
+            [string]$Name,
+            [Parameter(Mandatory)]
+            [scriptblock]$Command
+        )
+        Write-Host ""
+        Write-Host "=== $Name ===" -ForegroundColor Cyan
+        $global:LASTEXITCODE = 0
+        & $Command
+        if ($LASTEXITCODE -ne 0) {
+            throw "$Name failed with exit code $LASTEXITCODE."
+        }
+        Write-Host "$Name PASSED" -ForegroundColor Green
+    }
+    foreach ($FilePath in @($HeaderPath, $FooterPath)) {
+        if (-not (Test-Path -LiteralPath $FilePath)) {
+            throw "Required file is missing: $FilePath"
+        }
+        Copy-Item `
+            -LiteralPath $FilePath `
+            -Destination (Join-Path $BackupRoot (Split-Path $FilePath -Leaf)) `
+            -Force
+    }
+    Write-Host ""
+    Write-Host "=== REMOVE UNUSED PROP TYPES ===" -ForegroundColor Cyan
+    $HeaderContent = Get-Content `
+        -LiteralPath $HeaderPath `
+        -Raw
+    $FooterContent = Get-Content `
+        -LiteralPath $FooterPath `
+        -Raw
+    $HeaderContent = [regex]::Replace(
+        $HeaderContent,
+        '(?ms)^\s*(?:export\s+)?type\s+SiteHeaderProps\s*=\s*\{.*?^\s*\};?\s*',
+        ''
+    )
+    $HeaderContent = [regex]::Replace(
+        $HeaderContent,
+        '(?ms)^\s*(?:export\s+)?interface\s+SiteHeaderProps\s*\{.*?^\s*\}\s*',
+        ''
+    )
+    $FooterContent = [regex]::Replace(
+        $FooterContent,
+        '(?ms)^\s*(?:export\s+)?type\s+SiteFooterProps\s*=\s*\{.*?^\s*\};?\s*',
+        ''
+    )
+    $FooterContent = [regex]::Replace(
+        $FooterContent,
+        '(?ms)^\s*(?:export\s+)?interface\s+SiteFooterProps\s*\{.*?^\s*\}\s*',
+        ''
+    )
+    if ($HeaderContent -match '\bSiteHeaderProps\b') {
+        throw "SiteHeaderProps still exists in site-header.tsx."
+    }
+    if ($FooterContent -match '\bSiteFooterProps\b') {
+        throw "SiteFooterProps still exists in site-footer.tsx."
+    }
+    Set-Content `
+        -LiteralPath $HeaderPath `
+        -Value $HeaderContent `
+        -Encoding UTF8
+    Set-Content `
+        -LiteralPath $FooterPath `
+        -Value $FooterContent `
+        -Encoding UTF8
+    Write-Host "UNUSED PROP TYPES REMOVED" -ForegroundColor Green
+    $PackageJson = Get-Content `
+        -LiteralPath (Join-Path $ProjectRoot "package.json") `
+        -Raw |
+        ConvertFrom-Json
+    $Scripts = @(
+        $PackageJson.scripts.PSObject.Properties.Name
+    )
+    Invoke-Checked "HEADER AND FOOTER PARSE TEST" {
+        pnpm exec prettier `
+            --write `
+            "src/components/site/site-header.tsx" `
+            "src/components/site/site-footer.tsx"
+    }
+    Invoke-Checked "FORMAT WRITE" {
+        if ($Scripts -contains "format") {
+            pnpm run format
+        }
+        else {
+            pnpm exec prettier --write .
+        }
+    }
+    Invoke-Checked "FORMAT CHECK" {
+        if ($Scripts -contains "format:check") {
+            pnpm run format:check
+        }
+        else {
+            pnpm exec prettier --check .
+        }
+    }
+    Invoke-Checked "TYPESCRIPT CHECK" {
+        if ($Scripts -contains "typecheck") {
+            pnpm run typecheck
+        }
+        else {
+            pnpm exec tsc --noEmit
+        }
+    }
+    Invoke-Checked "ESLINT ZERO WARNINGS" {
+        if ($Scripts -contains "lint") {
+            pnpm run lint -- --max-warnings=0
+        }
+        else {
+            pnpm exec eslint . --max-warnings=0
+        }
+    }
+    Invoke-Checked "PRODUCTION BUILD" {
+        if ($Scripts -contains "build") {
+            pnpm run build
+        }
+        else {
+            throw "build script is missing from package.json."
+        }
+    }
+    $RequiredPhase7Files = @(
+        "src\lib\theme\types.ts",
+        "src\lib\theme\presets.ts",
+        "src\lib\theme\theme-store.ts",
+        "src\lib\theme\ai-generator.ts",
+        "src\app\api\admin\themes\route.ts",
+        "src\app\api\admin\themes\generate\route.ts",
+        "src\components\admin\themes\theme-studio.tsx",
+        "src\app\admin\themes\page.tsx",
+        "src\components\site\active-theme-style.tsx",
+        "src\components\site\dynamic-homepage.tsx",
+        "src\components\site\site-header.tsx",
+        "src\components\site\site-footer.tsx",
+        "src\components\admin\admin-sidebar.tsx",
+        "src\app\page.tsx"
+    )
+Missing closing '}' in statement block or type definition.
+>> try {
+    function Invoke-Checked {
+        param(
+            [Parameter(Mandatory)]
+            [string]$Name,
+            [Parameter(Mandatory)]
+            [scriptblock]$Command
+        )
+        Write-Host ""
+        Write-Host "=== $Name ===" -ForegroundColor Cyan
+        $global:LASTEXITCODE = 0
+        & $Command
+        if ($LASTEXITCODE -ne 0) {
+            throw "$Name failed with exit code $LASTEXITCODE."
+        }
+        Write-Host "$Name PASSED" -ForegroundColor Green
+    }
+    foreach ($FilePath in @($HeaderPath, $FooterPath)) {
+        if (-not (Test-Path -LiteralPath $FilePath)) {
+            throw "Required file is missing: $FilePath"
+        }
+        Copy-Item `
+            -LiteralPath $FilePath `
+            -Destination (Join-Path $BackupRoot (Split-Path $FilePath -Leaf)) `
+            -Force
+    }
+    Write-Host ""
+    Write-Host "=== REMOVE UNUSED PROP TYPES ===" -ForegroundColor Cyan
+    $HeaderContent = Get-Content `
+        -LiteralPath $HeaderPath `
+        -Raw
+    $FooterContent = Get-Content `
+        -LiteralPath $FooterPath `
+        -Raw
+    $HeaderContent = [regex]::Replace(
+        $HeaderContent,
+        '(?ms)^\s*(?:export\s+)?type\s+SiteHeaderProps\s*=\s*\{.*?^\s*\};?\s*',
+        ''
+    )
+    $HeaderContent = [regex]::Replace(
+        $HeaderContent,
+        '(?ms)^\s*(?:export\s+)?interface\s+SiteHeaderProps\s*\{.*?^\s*\}\s*',
+        ''
+    )
+    $FooterContent = [regex]::Replace(
+        $FooterContent,
+        '(?ms)^\s*(?:export\s+)?type\s+SiteFooterProps\s*=\s*\{.*?^\s*\};?\s*',
+        ''
+    )
+    $FooterContent = [regex]::Replace(
+        $FooterContent,
+        '(?ms)^\s*(?:export\s+)?interface\s+SiteFooterProps\s*\{.*?^\s*\}\s*',
+        ''
+    )
+    if ($HeaderContent -match '\bSiteHeaderProps\b') {
+        throw "SiteHeaderProps still exists in site-header.tsx."
+    }
+    if ($FooterContent -match '\bSiteFooterProps\b') {
+        throw "SiteFooterProps still exists in site-footer.tsx."
+    }
+    Set-Content `
+        -LiteralPath $HeaderPath `
+        -Value $HeaderContent `
+        -Encoding UTF8
+    Set-Content `
+        -LiteralPath $FooterPath `
+        -Value $FooterContent `
+        -Encoding UTF8
+    Write-Host "UNUSED PROP TYPES REMOVED" -ForegroundColor Green
+    $PackageJson = Get-Content `
+        -LiteralPath (Join-Path $ProjectRoot "package.json") `
+        -Raw |
+        ConvertFrom-Json
+    $Scripts = @(
+        $PackageJson.scripts.PSObject.Properties.Name
+    )
+    Invoke-Checked "HEADER AND FOOTER PARSE TEST" {
+        pnpm exec prettier `
+            --write `
+            "src/components/site/site-header.tsx" `
+            "src/components/site/site-footer.tsx"
+    }
+    Invoke-Checked "FORMAT WRITE" {
+        if ($Scripts -contains "format") {
+            pnpm run format
+        }
+        else {
+            pnpm exec prettier --write .
+        }
+    }
+    Invoke-Checked "FORMAT CHECK" {
+        if ($Scripts -contains "format:check") {
+            pnpm run format:check
+        }
+        else {
+            pnpm exec prettier --check .
+        }
+    }
+    Invoke-Checked "TYPESCRIPT CHECK" {
+        if ($Scripts -contains "typecheck") {
+            pnpm run typecheck
+        }
+        else {
+            pnpm exec tsc --noEmit
+        }
+    }
+    Invoke-Checked "ESLINT ZERO WARNINGS" {
+        if ($Scripts -contains "lint") {
+            pnpm run lint -- --max-warnings=0
+        }
+        else {
+            pnpm exec eslint . --max-warnings=0
+        }
+    }
+    Invoke-Checked "PRODUCTION BUILD" {
+        if ($Scripts -contains "build") {
+            pnpm run build
+        }
+        else {
+            throw "build script is missing from package.json."
+        }
+    }
+    $RequiredPhase7Files = @(
+        "src\lib\theme\types.ts",
+        "src\lib\theme\presets.ts",
+        "src\lib\theme\theme-store.ts",
+        "src\lib\theme\ai-generator.ts",
+        "src\app\api\admin\themes\route.ts",
+        "src\app\api\admin\themes\generate\route.ts",
+        "src\components\admin\themes\theme-studio.tsx",
+        "src\app\admin\themes\page.tsx",
+        "src\components\site\active-theme-style.tsx",
+        "src\components\site\dynamic-homepage.tsx",
+        "src\components\site\site-header.tsx",
+        "src\components\site\site-footer.tsx",
+        "src\components\admin\admin-sidebar.tsx",
+        "src\app\page.tsx"
+    )
+    foreach ($RequiredFile in $RequiredPhase7Files) {
+        $RequiredPath = Join-Path $ProjectRoot $RequiredFile
+Missing closing '}' in statement block or type definition.
+>> try {
+    function Invoke-Checked {
+        param(
+            [Parameter(Mandatory)]
+            [string]$Name,
+            [Parameter(Mandatory)]
+            [scriptblock]$Command
+        )
+        Write-Host ""
+        Write-Host "=== $Name ===" -ForegroundColor Cyan
+        $global:LASTEXITCODE = 0
+        & $Command
+        if ($LASTEXITCODE -ne 0) {
+            throw "$Name failed with exit code $LASTEXITCODE."
+        }
+        Write-Host "$Name PASSED" -ForegroundColor Green
+    }
+    foreach ($FilePath in @($HeaderPath, $FooterPath)) {
+        if (-not (Test-Path -LiteralPath $FilePath)) {
+            throw "Required file is missing: $FilePath"
+        }
+        Copy-Item `
+            -LiteralPath $FilePath `
+            -Destination (Join-Path $BackupRoot (Split-Path $FilePath -Leaf)) `
+            -Force
+    }
+    Write-Host ""
+    Write-Host "=== REMOVE UNUSED PROP TYPES ===" -ForegroundColor Cyan
+    $HeaderContent = Get-Content `
+        -LiteralPath $HeaderPath `
+        -Raw
+    $FooterContent = Get-Content `
+        -LiteralPath $FooterPath `
+        -Raw
+    $HeaderContent = [regex]::Replace(
+        $HeaderContent,
+        '(?ms)^\s*(?:export\s+)?type\s+SiteHeaderProps\s*=\s*\{.*?^\s*\};?\s*',
+        ''
+    )
+    $HeaderContent = [regex]::Replace(
+        $HeaderContent,
+        '(?ms)^\s*(?:export\s+)?interface\s+SiteHeaderProps\s*\{.*?^\s*\}\s*',
+        ''
+    )
+    $FooterContent = [regex]::Replace(
+        $FooterContent,
+        '(?ms)^\s*(?:export\s+)?type\s+SiteFooterProps\s*=\s*\{.*?^\s*\};?\s*',
+        ''
+    )
+    $FooterContent = [regex]::Replace(
+        $FooterContent,
+        '(?ms)^\s*(?:export\s+)?interface\s+SiteFooterProps\s*\{.*?^\s*\}\s*',
+        ''
+    )
+    if ($HeaderContent -match '\bSiteHeaderProps\b') {
+        throw "SiteHeaderProps still exists in site-header.tsx."
+    }
+    if ($FooterContent -match '\bSiteFooterProps\b') {
+        throw "SiteFooterProps still exists in site-footer.tsx."
+    }
+    Set-Content `
+        -LiteralPath $HeaderPath `
+        -Value $HeaderContent `
+        -Encoding UTF8
+    Set-Content `
+        -LiteralPath $FooterPath `
+        -Value $FooterContent `
+        -Encoding UTF8
+    Write-Host "UNUSED PROP TYPES REMOVED" -ForegroundColor Green
+    $PackageJson = Get-Content `
+        -LiteralPath (Join-Path $ProjectRoot "package.json") `
+        -Raw |
+        ConvertFrom-Json
+    $Scripts = @(
+        $PackageJson.scripts.PSObject.Properties.Name
+    )
+    Invoke-Checked "HEADER AND FOOTER PARSE TEST" {
+        pnpm exec prettier `
+            --write `
+            "src/components/site/site-header.tsx" `
+            "src/components/site/site-footer.tsx"
+    }
+    Invoke-Checked "FORMAT WRITE" {
+        if ($Scripts -contains "format") {
+            pnpm run format
+        }
+        else {
+            pnpm exec prettier --write .
+        }
+    }
+    Invoke-Checked "FORMAT CHECK" {
+        if ($Scripts -contains "format:check") {
+            pnpm run format:check
+        }
+        else {
+            pnpm exec prettier --check .
+        }
+    }
+    Invoke-Checked "TYPESCRIPT CHECK" {
+        if ($Scripts -contains "typecheck") {
+            pnpm run typecheck
+        }
+        else {
+            pnpm exec tsc --noEmit
+        }
+    }
+    Invoke-Checked "ESLINT ZERO WARNINGS" {
+        if ($Scripts -contains "lint") {
+            pnpm run lint -- --max-warnings=0
+        }
+        else {
+            pnpm exec eslint . --max-warnings=0
+        }
+    }
+    Invoke-Checked "PRODUCTION BUILD" {
+        if ($Scripts -contains "build") {
+            pnpm run build
+        }
+        else {
+            throw "build script is missing from package.json."
+        }
+    }
+    $RequiredPhase7Files = @(
+        "src\lib\theme\types.ts",
+        "src\lib\theme\presets.ts",
+        "src\lib\theme\theme-store.ts",
+        "src\lib\theme\ai-generator.ts",
+        "src\app\api\admin\themes\route.ts",
+        "src\app\api\admin\themes\generate\route.ts",
+        "src\components\admin\themes\theme-studio.tsx",
+        "src\app\admin\themes\page.tsx",
+        "src\components\site\active-theme-style.tsx",
+        "src\components\site\dynamic-homepage.tsx",
+        "src\components\site\site-header.tsx",
+        "src\components\site\site-footer.tsx",
+        "src\components\admin\admin-sidebar.tsx",
+        "src\app\page.tsx"
+    )
+    foreach ($RequiredFile in $RequiredPhase7Files) {
+        $RequiredPath = Join-Path $ProjectRoot $RequiredFile
+        if (-not (Test-Path -LiteralPath $RequiredPath)) {
+            throw "Phase 7 file is missing: $RequiredFile"
+        }
+    }
+Missing closing '}' in statement block or type definition.
+>> try {
+    function Invoke-Checked {
+        param(
+            [Parameter(Mandatory)]
+            [string]$Name,
+            [Parameter(Mandatory)]
+            [scriptblock]$Command
+        )
+        Write-Host ""
+        Write-Host "=== $Name ===" -ForegroundColor Cyan
+        $global:LASTEXITCODE = 0
+        & $Command
+        if ($LASTEXITCODE -ne 0) {
+            throw "$Name failed with exit code $LASTEXITCODE."
+        }
+        Write-Host "$Name PASSED" -ForegroundColor Green
+    }
+    foreach ($FilePath in @($HeaderPath, $FooterPath)) {
+        if (-not (Test-Path -LiteralPath $FilePath)) {
+            throw "Required file is missing: $FilePath"
+        }
+        Copy-Item `
+            -LiteralPath $FilePath `
+            -Destination (Join-Path $BackupRoot (Split-Path $FilePath -Leaf)) `
+            -Force
+    }
+    Write-Host ""
+    Write-Host "=== REMOVE UNUSED PROP TYPES ===" -ForegroundColor Cyan
+    $HeaderContent = Get-Content `
+        -LiteralPath $HeaderPath `
+        -Raw
+    $FooterContent = Get-Content `
+        -LiteralPath $FooterPath `
+        -Raw
+    $HeaderContent = [regex]::Replace(
+        $HeaderContent,
+        '(?ms)^\s*(?:export\s+)?type\s+SiteHeaderProps\s*=\s*\{.*?^\s*\};?\s*',
+        ''
+    )
+    $HeaderContent = [regex]::Replace(
+        $HeaderContent,
+        '(?ms)^\s*(?:export\s+)?interface\s+SiteHeaderProps\s*\{.*?^\s*\}\s*',
+        ''
+    )
+    $FooterContent = [regex]::Replace(
+        $FooterContent,
+        '(?ms)^\s*(?:export\s+)?type\s+SiteFooterProps\s*=\s*\{.*?^\s*\};?\s*',
+        ''
+    )
+    $FooterContent = [regex]::Replace(
+        $FooterContent,
+        '(?ms)^\s*(?:export\s+)?interface\s+SiteFooterProps\s*\{.*?^\s*\}\s*',
+        ''
+    )
+    if ($HeaderContent -match '\bSiteHeaderProps\b') {
+        throw "SiteHeaderProps still exists in site-header.tsx."
+    }
+    if ($FooterContent -match '\bSiteFooterProps\b') {
+        throw "SiteFooterProps still exists in site-footer.tsx."
+    }
+    Set-Content `
+        -LiteralPath $HeaderPath `
+        -Value $HeaderContent `
+        -Encoding UTF8
+    Set-Content `
+        -LiteralPath $FooterPath `
+        -Value $FooterContent `
+        -Encoding UTF8
+    Write-Host "UNUSED PROP TYPES REMOVED" -ForegroundColor Green
+    $PackageJson = Get-Content `
+        -LiteralPath (Join-Path $ProjectRoot "package.json") `
+        -Raw |
+        ConvertFrom-Json
+    $Scripts = @(
+        $PackageJson.scripts.PSObject.Properties.Name
+    )
+    Invoke-Checked "HEADER AND FOOTER PARSE TEST" {
+        pnpm exec prettier `
+            --write `
+            "src/components/site/site-header.tsx" `
+            "src/components/site/site-footer.tsx"
+    }
+    Invoke-Checked "FORMAT WRITE" {
+        if ($Scripts -contains "format") {
+            pnpm run format
+        }
+        else {
+            pnpm exec prettier --write .
+        }
+    }
+    Invoke-Checked "FORMAT CHECK" {
+        if ($Scripts -contains "format:check") {
+            pnpm run format:check
+        }
+        else {
+            pnpm exec prettier --check .
+        }
+    }
+    Invoke-Checked "TYPESCRIPT CHECK" {
+        if ($Scripts -contains "typecheck") {
+            pnpm run typecheck
+        }
+        else {
+            pnpm exec tsc --noEmit
+        }
+    }
+    Invoke-Checked "ESLINT ZERO WARNINGS" {
+        if ($Scripts -contains "lint") {
+            pnpm run lint -- --max-warnings=0
+        }
+        else {
+            pnpm exec eslint . --max-warnings=0
+        }
+    }
+    Invoke-Checked "PRODUCTION BUILD" {
+        if ($Scripts -contains "build") {
+            pnpm run build
+        }
+        else {
+            throw "build script is missing from package.json."
+        }
+    }
+    $RequiredPhase7Files = @(
+        "src\lib\theme\types.ts",
+        "src\lib\theme\presets.ts",
+        "src\lib\theme\theme-store.ts",
+        "src\lib\theme\ai-generator.ts",
+        "src\app\api\admin\themes\route.ts",
+        "src\app\api\admin\themes\generate\route.ts",
+        "src\components\admin\themes\theme-studio.tsx",
+        "src\app\admin\themes\page.tsx",
+        "src\components\site\active-theme-style.tsx",
+        "src\components\site\dynamic-homepage.tsx",
+        "src\components\site\site-header.tsx",
+        "src\components\site\site-footer.tsx",
+        "src\components\admin\admin-sidebar.tsx",
+        "src\app\page.tsx"
+    )
+    foreach ($RequiredFile in $RequiredPhase7Files) {
+        $RequiredPath = Join-Path $ProjectRoot $RequiredFile
+        if (-not (Test-Path -LiteralPath $RequiredPath)) {
+            throw "Phase 7 file is missing: $RequiredFile"
+        }
+    }
+    @"
+KNOWLEDGE NEST — PHASE 7 COMPLETION REPORT
+The string is missing the terminator: "@.
+>> try {
+    function Invoke-Checked {
+        param(
+            [Parameter(Mandatory)]
+            [string]$Name,
+            [Parameter(Mandatory)]
+            [scriptblock]$Command
+        )
+        Write-Host ""
+        Write-Host "=== $Name ===" -ForegroundColor Cyan
+        $global:LASTEXITCODE = 0
+        & $Command
+        if ($LASTEXITCODE -ne 0) {
+            throw "$Name failed with exit code $LASTEXITCODE."
+        }
+        Write-Host "$Name PASSED" -ForegroundColor Green
+    }
+    foreach ($FilePath in @($HeaderPath, $FooterPath)) {
+        if (-not (Test-Path -LiteralPath $FilePath)) {
+            throw "Required file is missing: $FilePath"
+        }
+        Copy-Item `
+            -LiteralPath $FilePath `
+            -Destination (Join-Path $BackupRoot (Split-Path $FilePath -Leaf)) `
+            -Force
+    }
+    Write-Host ""
+    Write-Host "=== REMOVE UNUSED PROP TYPES ===" -ForegroundColor Cyan
+    $HeaderContent = Get-Content `
+        -LiteralPath $HeaderPath `
+        -Raw
+    $FooterContent = Get-Content `
+        -LiteralPath $FooterPath `
+        -Raw
+    $HeaderContent = [regex]::Replace(
+        $HeaderContent,
+        '(?ms)^\s*(?:export\s+)?type\s+SiteHeaderProps\s*=\s*\{.*?^\s*\};?\s*',
+        ''
+    )
+    $HeaderContent = [regex]::Replace(
+        $HeaderContent,
+        '(?ms)^\s*(?:export\s+)?interface\s+SiteHeaderProps\s*\{.*?^\s*\}\s*',
+        ''
+    )
+    $FooterContent = [regex]::Replace(
+        $FooterContent,
+        '(?ms)^\s*(?:export\s+)?type\s+SiteFooterProps\s*=\s*\{.*?^\s*\};?\s*',
+        ''
+    )
+    $FooterContent = [regex]::Replace(
+        $FooterContent,
+        '(?ms)^\s*(?:export\s+)?interface\s+SiteFooterProps\s*\{.*?^\s*\}\s*',
+        ''
+    )
+    if ($HeaderContent -match '\bSiteHeaderProps\b') {
+        throw "SiteHeaderProps still exists in site-header.tsx."
+    }
+    if ($FooterContent -match '\bSiteFooterProps\b') {
+        throw "SiteFooterProps still exists in site-footer.tsx."
+    }
+    Set-Content `
+        -LiteralPath $HeaderPath `
+        -Value $HeaderContent `
+        -Encoding UTF8
+    Set-Content `
+        -LiteralPath $FooterPath `
+        -Value $FooterContent `
+        -Encoding UTF8
+    Write-Host "UNUSED PROP TYPES REMOVED" -ForegroundColor Green
+    $PackageJson = Get-Content `
+        -LiteralPath (Join-Path $ProjectRoot "package.json") `
+        -Raw |
+        ConvertFrom-Json
+    $Scripts = @(
+        $PackageJson.scripts.PSObject.Properties.Name
+    )
+    Invoke-Checked "HEADER AND FOOTER PARSE TEST" {
+        pnpm exec prettier `
+            --write `
+            "src/components/site/site-header.tsx" `
+            "src/components/site/site-footer.tsx"
+    }
+    Invoke-Checked "FORMAT WRITE" {
+        if ($Scripts -contains "format") {
+            pnpm run format
+        }
+        else {
+            pnpm exec prettier --write .
+        }
+    }
+    Invoke-Checked "FORMAT CHECK" {
+        if ($Scripts -contains "format:check") {
+            pnpm run format:check
+        }
+        else {
+            pnpm exec prettier --check .
+        }
+    }
+    Invoke-Checked "TYPESCRIPT CHECK" {
+        if ($Scripts -contains "typecheck") {
+            pnpm run typecheck
+        }
+        else {
+            pnpm exec tsc --noEmit
+        }
+    }
+    Invoke-Checked "ESLINT ZERO WARNINGS" {
+        if ($Scripts -contains "lint") {
+            pnpm run lint -- --max-warnings=0
+        }
+        else {
+            pnpm exec eslint . --max-warnings=0
+        }
+    }
+    Invoke-Checked "PRODUCTION BUILD" {
+        if ($Scripts -contains "build") {
+            pnpm run build
+        }
+        else {
+            throw "build script is missing from package.json."
+        }
+    }
+    $RequiredPhase7Files = @(
+        "src\lib\theme\types.ts",
+        "src\lib\theme\presets.ts",
+        "src\lib\theme\theme-store.ts",
+        "src\lib\theme\ai-generator.ts",
+        "src\app\api\admin\themes\route.ts",
+        "src\app\api\admin\themes\generate\route.ts",
+        "src\components\admin\themes\theme-studio.tsx",
+        "src\app\admin\themes\page.tsx",
+        "src\components\site\active-theme-style.tsx",
+        "src\components\site\dynamic-homepage.tsx",
+        "src\components\site\site-header.tsx",
+        "src\components\site\site-footer.tsx",
+        "src\components\admin\admin-sidebar.tsx",
+        "src\app\page.tsx"
+    )
+    foreach ($RequiredFile in $RequiredPhase7Files) {
+        $RequiredPath = Join-Path $ProjectRoot $RequiredFile
+        if (-not (Test-Path -LiteralPath $RequiredPath)) {
+            throw "Phase 7 file is missing: $RequiredFile"
+        }
+    }
+    @"
+KNOWLEDGE NEST — PHASE 7 COMPLETION REPORT
+Completed: $GeneratedAt
+Project: $ProjectRoot
+The string is missing the terminator: "@.
+>> try {
+    function Invoke-Checked {
+        param(
+            [Parameter(Mandatory)]
+            [string]$Name,
+            [Parameter(Mandatory)]
+            [scriptblock]$Command
+        )
+        Write-Host ""
+        Write-Host "=== $Name ===" -ForegroundColor Cyan
+        $global:LASTEXITCODE = 0
+        & $Command
+        if ($LASTEXITCODE -ne 0) {
+            throw "$Name failed with exit code $LASTEXITCODE."
+        }
+        Write-Host "$Name PASSED" -ForegroundColor Green
+    }
+    foreach ($FilePath in @($HeaderPath, $FooterPath)) {
+        if (-not (Test-Path -LiteralPath $FilePath)) {
+            throw "Required file is missing: $FilePath"
+        }
+        Copy-Item `
+            -LiteralPath $FilePath `
+            -Destination (Join-Path $BackupRoot (Split-Path $FilePath -Leaf)) `
+            -Force
+    }
+    Write-Host ""
+    Write-Host "=== REMOVE UNUSED PROP TYPES ===" -ForegroundColor Cyan
+    $HeaderContent = Get-Content `
+        -LiteralPath $HeaderPath `
+        -Raw
+    $FooterContent = Get-Content `
+        -LiteralPath $FooterPath `
+        -Raw
+    $HeaderContent = [regex]::Replace(
+        $HeaderContent,
+        '(?ms)^\s*(?:export\s+)?type\s+SiteHeaderProps\s*=\s*\{.*?^\s*\};?\s*',
+        ''
+    )
+    $HeaderContent = [regex]::Replace(
+        $HeaderContent,
+        '(?ms)^\s*(?:export\s+)?interface\s+SiteHeaderProps\s*\{.*?^\s*\}\s*',
+        ''
+    )
+    $FooterContent = [regex]::Replace(
+        $FooterContent,
+        '(?ms)^\s*(?:export\s+)?type\s+SiteFooterProps\s*=\s*\{.*?^\s*\};?\s*',
+        ''
+    )
+    $FooterContent = [regex]::Replace(
+        $FooterContent,
+        '(?ms)^\s*(?:export\s+)?interface\s+SiteFooterProps\s*\{.*?^\s*\}\s*',
+        ''
+    )
+    if ($HeaderContent -match '\bSiteHeaderProps\b') {
+        throw "SiteHeaderProps still exists in site-header.tsx."
+    }
+    if ($FooterContent -match '\bSiteFooterProps\b') {
+        throw "SiteFooterProps still exists in site-footer.tsx."
+    }
+    Set-Content `
+        -LiteralPath $HeaderPath `
+        -Value $HeaderContent `
+        -Encoding UTF8
+    Set-Content `
+        -LiteralPath $FooterPath `
+        -Value $FooterContent `
+        -Encoding UTF8
+    Write-Host "UNUSED PROP TYPES REMOVED" -ForegroundColor Green
+    $PackageJson = Get-Content `
+        -LiteralPath (Join-Path $ProjectRoot "package.json") `
+        -Raw |
+        ConvertFrom-Json
+    $Scripts = @(
+        $PackageJson.scripts.PSObject.Properties.Name
+    )
+    Invoke-Checked "HEADER AND FOOTER PARSE TEST" {
+        pnpm exec prettier `
+            --write `
+            "src/components/site/site-header.tsx" `
+            "src/components/site/site-footer.tsx"
+    }
+    Invoke-Checked "FORMAT WRITE" {
+        if ($Scripts -contains "format") {
+            pnpm run format
+        }
+        else {
+            pnpm exec prettier --write .
+        }
+    }
+    Invoke-Checked "FORMAT CHECK" {
+        if ($Scripts -contains "format:check") {
+            pnpm run format:check
+        }
+        else {
+            pnpm exec prettier --check .
+        }
+    }
+    Invoke-Checked "TYPESCRIPT CHECK" {
+        if ($Scripts -contains "typecheck") {
+            pnpm run typecheck
+        }
+        else {
+            pnpm exec tsc --noEmit
+        }
+    }
+    Invoke-Checked "ESLINT ZERO WARNINGS" {
+        if ($Scripts -contains "lint") {
+            pnpm run lint -- --max-warnings=0
+        }
+        else {
+            pnpm exec eslint . --max-warnings=0
+        }
+    }
+    Invoke-Checked "PRODUCTION BUILD" {
+        if ($Scripts -contains "build") {
+            pnpm run build
+        }
+        else {
+            throw "build script is missing from package.json."
+        }
+    }
+    $RequiredPhase7Files = @(
+        "src\lib\theme\types.ts",
+        "src\lib\theme\presets.ts",
+        "src\lib\theme\theme-store.ts",
+        "src\lib\theme\ai-generator.ts",
+        "src\app\api\admin\themes\route.ts",
+        "src\app\api\admin\themes\generate\route.ts",
+        "src\components\admin\themes\theme-studio.tsx",
+        "src\app\admin\themes\page.tsx",
+        "src\components\site\active-theme-style.tsx",
+        "src\components\site\dynamic-homepage.tsx",
+        "src\components\site\site-header.tsx",
+        "src\components\site\site-footer.tsx",
+        "src\components\admin\admin-sidebar.tsx",
+        "src\app\page.tsx"
+    )
+    foreach ($RequiredFile in $RequiredPhase7Files) {
+        $RequiredPath = Join-Path $ProjectRoot $RequiredFile
+        if (-not (Test-Path -LiteralPath $RequiredPath)) {
+            throw "Phase 7 file is missing: $RequiredFile"
+        }
+    }
+    @"
+KNOWLEDGE NEST — PHASE 7 COMPLETION REPORT
+Completed: $GeneratedAt
+Project: $ProjectRoot
+FINAL ISSUE
+The string is missing the terminator: "@.
+>> try {
+    function Invoke-Checked {
+        param(
+            [Parameter(Mandatory)]
+            [string]$Name,
+            [Parameter(Mandatory)]
+            [scriptblock]$Command
+        )
+        Write-Host ""
+        Write-Host "=== $Name ===" -ForegroundColor Cyan
+        $global:LASTEXITCODE = 0
+        & $Command
+        if ($LASTEXITCODE -ne 0) {
+            throw "$Name failed with exit code $LASTEXITCODE."
+        }
+        Write-Host "$Name PASSED" -ForegroundColor Green
+    }
+    foreach ($FilePath in @($HeaderPath, $FooterPath)) {
+        if (-not (Test-Path -LiteralPath $FilePath)) {
+            throw "Required file is missing: $FilePath"
+        }
+        Copy-Item `
+            -LiteralPath $FilePath `
+            -Destination (Join-Path $BackupRoot (Split-Path $FilePath -Leaf)) `
+            -Force
+    }
+    Write-Host ""
+    Write-Host "=== REMOVE UNUSED PROP TYPES ===" -ForegroundColor Cyan
+    $HeaderContent = Get-Content `
+        -LiteralPath $HeaderPath `
+        -Raw
+    $FooterContent = Get-Content `
+        -LiteralPath $FooterPath `
+        -Raw
+    $HeaderContent = [regex]::Replace(
+        $HeaderContent,
+        '(?ms)^\s*(?:export\s+)?type\s+SiteHeaderProps\s*=\s*\{.*?^\s*\};?\s*',
+        ''
+    )
+    $HeaderContent = [regex]::Replace(
+        $HeaderContent,
+        '(?ms)^\s*(?:export\s+)?interface\s+SiteHeaderProps\s*\{.*?^\s*\}\s*',
+        ''
+    )
+    $FooterContent = [regex]::Replace(
+        $FooterContent,
+        '(?ms)^\s*(?:export\s+)?type\s+SiteFooterProps\s*=\s*\{.*?^\s*\};?\s*',
+        ''
+    )
+    $FooterContent = [regex]::Replace(
+        $FooterContent,
+        '(?ms)^\s*(?:export\s+)?interface\s+SiteFooterProps\s*\{.*?^\s*\}\s*',
+        ''
+    )
+    if ($HeaderContent -match '\bSiteHeaderProps\b') {
+        throw "SiteHeaderProps still exists in site-header.tsx."
+    }
+    if ($FooterContent -match '\bSiteFooterProps\b') {
+        throw "SiteFooterProps still exists in site-footer.tsx."
+    }
+    Set-Content `
+        -LiteralPath $HeaderPath `
+        -Value $HeaderContent `
+        -Encoding UTF8
+    Set-Content `
+        -LiteralPath $FooterPath `
+        -Value $FooterContent `
+        -Encoding UTF8
+    Write-Host "UNUSED PROP TYPES REMOVED" -ForegroundColor Green
+    $PackageJson = Get-Content `
+        -LiteralPath (Join-Path $ProjectRoot "package.json") `
+        -Raw |
+        ConvertFrom-Json
+    $Scripts = @(
+        $PackageJson.scripts.PSObject.Properties.Name
+    )
+    Invoke-Checked "HEADER AND FOOTER PARSE TEST" {
+        pnpm exec prettier `
+            --write `
+            "src/components/site/site-header.tsx" `
+            "src/components/site/site-footer.tsx"
+    }
+    Invoke-Checked "FORMAT WRITE" {
+        if ($Scripts -contains "format") {
+            pnpm run format
+        }
+        else {
+            pnpm exec prettier --write .
+        }
+    }
+    Invoke-Checked "FORMAT CHECK" {
+        if ($Scripts -contains "format:check") {
+            pnpm run format:check
+        }
+        else {
+            pnpm exec prettier --check .
+        }
+    }
+    Invoke-Checked "TYPESCRIPT CHECK" {
+        if ($Scripts -contains "typecheck") {
+            pnpm run typecheck
+        }
+        else {
+            pnpm exec tsc --noEmit
+        }
+    }
+    Invoke-Checked "ESLINT ZERO WARNINGS" {
+        if ($Scripts -contains "lint") {
+            pnpm run lint -- --max-warnings=0
+        }
+        else {
+            pnpm exec eslint . --max-warnings=0
+        }
+    }
+    Invoke-Checked "PRODUCTION BUILD" {
+        if ($Scripts -contains "build") {
+            pnpm run build
+        }
+        else {
+            throw "build script is missing from package.json."
+        }
+    }
+    $RequiredPhase7Files = @(
+        "src\lib\theme\types.ts",
+        "src\lib\theme\presets.ts",
+        "src\lib\theme\theme-store.ts",
+        "src\lib\theme\ai-generator.ts",
+        "src\app\api\admin\themes\route.ts",
+        "src\app\api\admin\themes\generate\route.ts",
+        "src\components\admin\themes\theme-studio.tsx",
+        "src\app\admin\themes\page.tsx",
+        "src\components\site\active-theme-style.tsx",
+        "src\components\site\dynamic-homepage.tsx",
+        "src\components\site\site-header.tsx",
+        "src\components\site\site-footer.tsx",
+        "src\components\admin\admin-sidebar.tsx",
+        "src\app\page.tsx"
+    )
+    foreach ($RequiredFile in $RequiredPhase7Files) {
+        $RequiredPath = Join-Path $ProjectRoot $RequiredFile
+        if (-not (Test-Path -LiteralPath $RequiredPath)) {
+            throw "Phase 7 file is missing: $RequiredFile"
+        }
+    }
+    @"
+KNOWLEDGE NEST — PHASE 7 COMPLETION REPORT
+Completed: $GeneratedAt
+Project: $ProjectRoot
+FINAL ISSUE
+SiteHeaderProps aur SiteFooterProps type declarations
+components se props remove hone ke baad unused reh gaye thay.
+The string is missing the terminator: "@.
+>> try {
+    function Invoke-Checked {
+        param(
+            [Parameter(Mandatory)]
+            [string]$Name,
+            [Parameter(Mandatory)]
+            [scriptblock]$Command
+        )
+        Write-Host ""
+        Write-Host "=== $Name ===" -ForegroundColor Cyan
+        $global:LASTEXITCODE = 0
+        & $Command
+        if ($LASTEXITCODE -ne 0) {
+            throw "$Name failed with exit code $LASTEXITCODE."
+        }
+        Write-Host "$Name PASSED" -ForegroundColor Green
+    }
+    foreach ($FilePath in @($HeaderPath, $FooterPath)) {
+        if (-not (Test-Path -LiteralPath $FilePath)) {
+            throw "Required file is missing: $FilePath"
+        }
+        Copy-Item `
+            -LiteralPath $FilePath `
+            -Destination (Join-Path $BackupRoot (Split-Path $FilePath -Leaf)) `
+            -Force
+    }
+    Write-Host ""
+    Write-Host "=== REMOVE UNUSED PROP TYPES ===" -ForegroundColor Cyan
+    $HeaderContent = Get-Content `
+        -LiteralPath $HeaderPath `
+        -Raw
+    $FooterContent = Get-Content `
+        -LiteralPath $FooterPath `
+        -Raw
+    $HeaderContent = [regex]::Replace(
+        $HeaderContent,
+        '(?ms)^\s*(?:export\s+)?type\s+SiteHeaderProps\s*=\s*\{.*?^\s*\};?\s*',
+        ''
+    )
+    $HeaderContent = [regex]::Replace(
+        $HeaderContent,
+        '(?ms)^\s*(?:export\s+)?interface\s+SiteHeaderProps\s*\{.*?^\s*\}\s*',
+        ''
+    )
+    $FooterContent = [regex]::Replace(
+        $FooterContent,
+        '(?ms)^\s*(?:export\s+)?type\s+SiteFooterProps\s*=\s*\{.*?^\s*\};?\s*',
+        ''
+    )
+    $FooterContent = [regex]::Replace(
+        $FooterContent,
+        '(?ms)^\s*(?:export\s+)?interface\s+SiteFooterProps\s*\{.*?^\s*\}\s*',
+        ''
+    )
+    if ($HeaderContent -match '\bSiteHeaderProps\b') {
+        throw "SiteHeaderProps still exists in site-header.tsx."
+    }
+    if ($FooterContent -match '\bSiteFooterProps\b') {
+        throw "SiteFooterProps still exists in site-footer.tsx."
+    }
+    Set-Content `
+        -LiteralPath $HeaderPath `
+        -Value $HeaderContent `
+        -Encoding UTF8
+    Set-Content `
+        -LiteralPath $FooterPath `
+        -Value $FooterContent `
+        -Encoding UTF8
+    Write-Host "UNUSED PROP TYPES REMOVED" -ForegroundColor Green
+    $PackageJson = Get-Content `
+        -LiteralPath (Join-Path $ProjectRoot "package.json") `
+        -Raw |
+        ConvertFrom-Json
+    $Scripts = @(
+        $PackageJson.scripts.PSObject.Properties.Name
+    )
+    Invoke-Checked "HEADER AND FOOTER PARSE TEST" {
+        pnpm exec prettier `
+            --write `
+            "src/components/site/site-header.tsx" `
+            "src/components/site/site-footer.tsx"
+    }
+    Invoke-Checked "FORMAT WRITE" {
+        if ($Scripts -contains "format") {
+            pnpm run format
+        }
+        else {
+            pnpm exec prettier --write .
+        }
+    }
+    Invoke-Checked "FORMAT CHECK" {
+        if ($Scripts -contains "format:check") {
+            pnpm run format:check
+        }
+        else {
+            pnpm exec prettier --check .
+        }
+    }
+    Invoke-Checked "TYPESCRIPT CHECK" {
+        if ($Scripts -contains "typecheck") {
+            pnpm run typecheck
+        }
+        else {
+            pnpm exec tsc --noEmit
+        }
+    }
+    Invoke-Checked "ESLINT ZERO WARNINGS" {
+        if ($Scripts -contains "lint") {
+            pnpm run lint -- --max-warnings=0
+        }
+        else {
+            pnpm exec eslint . --max-warnings=0
+        }
+    }
+    Invoke-Checked "PRODUCTION BUILD" {
+        if ($Scripts -contains "build") {
+            pnpm run build
+        }
+        else {
+            throw "build script is missing from package.json."
+        }
+    }
+    $RequiredPhase7Files = @(
+        "src\lib\theme\types.ts",
+        "src\lib\theme\presets.ts",
+        "src\lib\theme\theme-store.ts",
+        "src\lib\theme\ai-generator.ts",
+        "src\app\api\admin\themes\route.ts",
+        "src\app\api\admin\themes\generate\route.ts",
+        "src\components\admin\themes\theme-studio.tsx",
+        "src\app\admin\themes\page.tsx",
+        "src\components\site\active-theme-style.tsx",
+        "src\components\site\dynamic-homepage.tsx",
+        "src\components\site\site-header.tsx",
+        "src\components\site\site-footer.tsx",
+        "src\components\admin\admin-sidebar.tsx",
+        "src\app\page.tsx"
+    )
+    foreach ($RequiredFile in $RequiredPhase7Files) {
+        $RequiredPath = Join-Path $ProjectRoot $RequiredFile
+        if (-not (Test-Path -LiteralPath $RequiredPath)) {
+            throw "Phase 7 file is missing: $RequiredFile"
+        }
+    }
+    @"
+KNOWLEDGE NEST — PHASE 7 COMPLETION REPORT
+Completed: $GeneratedAt
+Project: $ProjectRoot
+FINAL ISSUE
+SiteHeaderProps aur SiteFooterProps type declarations
+components se props remove hone ke baad unused reh gaye thay.
+ESLint zero-warning mode mein run ho raha tha, is liye
+unused type warnings pipeline ko rok rahi thin.
+The string is missing the terminator: "@.
+>> try {
+    function Invoke-Checked {
+        param(
+            [Parameter(Mandatory)]
+            [string]$Name,
+            [Parameter(Mandatory)]
+            [scriptblock]$Command
+        )
+        Write-Host ""
+        Write-Host "=== $Name ===" -ForegroundColor Cyan
+        $global:LASTEXITCODE = 0
+        & $Command
+        if ($LASTEXITCODE -ne 0) {
+            throw "$Name failed with exit code $LASTEXITCODE."
+        }
+        Write-Host "$Name PASSED" -ForegroundColor Green
+    }
+    foreach ($FilePath in @($HeaderPath, $FooterPath)) {
+        if (-not (Test-Path -LiteralPath $FilePath)) {
+            throw "Required file is missing: $FilePath"
+        }
+        Copy-Item `
+            -LiteralPath $FilePath `
+            -Destination (Join-Path $BackupRoot (Split-Path $FilePath -Leaf)) `
+            -Force
+    }
+    Write-Host ""
+    Write-Host "=== REMOVE UNUSED PROP TYPES ===" -ForegroundColor Cyan
+    $HeaderContent = Get-Content `
+        -LiteralPath $HeaderPath `
+        -Raw
+    $FooterContent = Get-Content `
+        -LiteralPath $FooterPath `
+        -Raw
+    $HeaderContent = [regex]::Replace(
+        $HeaderContent,
+        '(?ms)^\s*(?:export\s+)?type\s+SiteHeaderProps\s*=\s*\{.*?^\s*\};?\s*',
+        ''
+    )
+    $HeaderContent = [regex]::Replace(
+        $HeaderContent,
+        '(?ms)^\s*(?:export\s+)?interface\s+SiteHeaderProps\s*\{.*?^\s*\}\s*',
+        ''
+    )
+    $FooterContent = [regex]::Replace(
+        $FooterContent,
+        '(?ms)^\s*(?:export\s+)?type\s+SiteFooterProps\s*=\s*\{.*?^\s*\};?\s*',
+        ''
+    )
+    $FooterContent = [regex]::Replace(
+        $FooterContent,
+        '(?ms)^\s*(?:export\s+)?interface\s+SiteFooterProps\s*\{.*?^\s*\}\s*',
+        ''
+    )
+    if ($HeaderContent -match '\bSiteHeaderProps\b') {
+        throw "SiteHeaderProps still exists in site-header.tsx."
+    }
+    if ($FooterContent -match '\bSiteFooterProps\b') {
+        throw "SiteFooterProps still exists in site-footer.tsx."
+    }
+    Set-Content `
+        -LiteralPath $HeaderPath `
+        -Value $HeaderContent `
+        -Encoding UTF8
+    Set-Content `
+        -LiteralPath $FooterPath `
+        -Value $FooterContent `
+        -Encoding UTF8
+    Write-Host "UNUSED PROP TYPES REMOVED" -ForegroundColor Green
+    $PackageJson = Get-Content `
+        -LiteralPath (Join-Path $ProjectRoot "package.json") `
+        -Raw |
+        ConvertFrom-Json
+    $Scripts = @(
+        $PackageJson.scripts.PSObject.Properties.Name
+    )
+    Invoke-Checked "HEADER AND FOOTER PARSE TEST" {
+        pnpm exec prettier `
+            --write `
+            "src/components/site/site-header.tsx" `
+            "src/components/site/site-footer.tsx"
+    }
+    Invoke-Checked "FORMAT WRITE" {
+        if ($Scripts -contains "format") {
+            pnpm run format
+        }
+        else {
+            pnpm exec prettier --write .
+        }
+    }
+    Invoke-Checked "FORMAT CHECK" {
+        if ($Scripts -contains "format:check") {
+            pnpm run format:check
+        }
+        else {
+            pnpm exec prettier --check .
+        }
+    }
+    Invoke-Checked "TYPESCRIPT CHECK" {
+        if ($Scripts -contains "typecheck") {
+            pnpm run typecheck
+        }
+        else {
+            pnpm exec tsc --noEmit
+        }
+    }
+    Invoke-Checked "ESLINT ZERO WARNINGS" {
+        if ($Scripts -contains "lint") {
+            pnpm run lint -- --max-warnings=0
+        }
+        else {
+            pnpm exec eslint . --max-warnings=0
+        }
+    }
+    Invoke-Checked "PRODUCTION BUILD" {
+        if ($Scripts -contains "build") {
+            pnpm run build
+        }
+        else {
+            throw "build script is missing from package.json."
+        }
+    }
+    $RequiredPhase7Files = @(
+        "src\lib\theme\types.ts",
+        "src\lib\theme\presets.ts",
+        "src\lib\theme\theme-store.ts",
+        "src\lib\theme\ai-generator.ts",
+        "src\app\api\admin\themes\route.ts",
+        "src\app\api\admin\themes\generate\route.ts",
+        "src\components\admin\themes\theme-studio.tsx",
+        "src\app\admin\themes\page.tsx",
+        "src\components\site\active-theme-style.tsx",
+        "src\components\site\dynamic-homepage.tsx",
+        "src\components\site\site-header.tsx",
+        "src\components\site\site-footer.tsx",
+        "src\components\admin\admin-sidebar.tsx",
+        "src\app\page.tsx"
+    )
+    foreach ($RequiredFile in $RequiredPhase7Files) {
+        $RequiredPath = Join-Path $ProjectRoot $RequiredFile
+        if (-not (Test-Path -LiteralPath $RequiredPath)) {
+            throw "Phase 7 file is missing: $RequiredFile"
+        }
+    }
+    @"
+KNOWLEDGE NEST — PHASE 7 COMPLETION REPORT
+Completed: $GeneratedAt
+Project: $ProjectRoot
+FINAL ISSUE
+SiteHeaderProps aur SiteFooterProps type declarations
+components se props remove hone ke baad unused reh gaye thay.
+ESLint zero-warning mode mein run ho raha tha, is liye
+unused type warnings pipeline ko rok rahi thin.
+FIX APPLIED
+The string is missing the terminator: "@.
+>> try {
+    function Invoke-Checked {
+        param(
+            [Parameter(Mandatory)]
+            [string]$Name,
+            [Parameter(Mandatory)]
+            [scriptblock]$Command
+        )
+        Write-Host ""
+        Write-Host "=== $Name ===" -ForegroundColor Cyan
+        $global:LASTEXITCODE = 0
+        & $Command
+        if ($LASTEXITCODE -ne 0) {
+            throw "$Name failed with exit code $LASTEXITCODE."
+        }
+        Write-Host "$Name PASSED" -ForegroundColor Green
+    }
+    foreach ($FilePath in @($HeaderPath, $FooterPath)) {
+        if (-not (Test-Path -LiteralPath $FilePath)) {
+            throw "Required file is missing: $FilePath"
+        }
+        Copy-Item `
+            -LiteralPath $FilePath `
+            -Destination (Join-Path $BackupRoot (Split-Path $FilePath -Leaf)) `
+            -Force
+    }
+    Write-Host ""
+    Write-Host "=== REMOVE UNUSED PROP TYPES ===" -ForegroundColor Cyan
+    $HeaderContent = Get-Content `
+        -LiteralPath $HeaderPath `
+        -Raw
+    $FooterContent = Get-Content `
+        -LiteralPath $FooterPath `
+        -Raw
+    $HeaderContent = [regex]::Replace(
+        $HeaderContent,
+        '(?ms)^\s*(?:export\s+)?type\s+SiteHeaderProps\s*=\s*\{.*?^\s*\};?\s*',
+        ''
+    )
+    $HeaderContent = [regex]::Replace(
+        $HeaderContent,
+        '(?ms)^\s*(?:export\s+)?interface\s+SiteHeaderProps\s*\{.*?^\s*\}\s*',
+        ''
+    )
+    $FooterContent = [regex]::Replace(
+        $FooterContent,
+        '(?ms)^\s*(?:export\s+)?type\s+SiteFooterProps\s*=\s*\{.*?^\s*\};?\s*',
+        ''
+    )
+    $FooterContent = [regex]::Replace(
+        $FooterContent,
+        '(?ms)^\s*(?:export\s+)?interface\s+SiteFooterProps\s*\{.*?^\s*\}\s*',
+        ''
+    )
+    if ($HeaderContent -match '\bSiteHeaderProps\b') {
+        throw "SiteHeaderProps still exists in site-header.tsx."
+    }
+    if ($FooterContent -match '\bSiteFooterProps\b') {
+        throw "SiteFooterProps still exists in site-footer.tsx."
+    }
+    Set-Content `
+        -LiteralPath $HeaderPath `
+        -Value $HeaderContent `
+        -Encoding UTF8
+    Set-Content `
+        -LiteralPath $FooterPath `
+        -Value $FooterContent `
+        -Encoding UTF8
+    Write-Host "UNUSED PROP TYPES REMOVED" -ForegroundColor Green
+    $PackageJson = Get-Content `
+        -LiteralPath (Join-Path $ProjectRoot "package.json") `
+        -Raw |
+        ConvertFrom-Json
+    $Scripts = @(
+        $PackageJson.scripts.PSObject.Properties.Name
+    )
+    Invoke-Checked "HEADER AND FOOTER PARSE TEST" {
+        pnpm exec prettier `
+            --write `
+            "src/components/site/site-header.tsx" `
+            "src/components/site/site-footer.tsx"
+    }
+    Invoke-Checked "FORMAT WRITE" {
+        if ($Scripts -contains "format") {
+            pnpm run format
+        }
+        else {
+            pnpm exec prettier --write .
+        }
+    }
+    Invoke-Checked "FORMAT CHECK" {
+        if ($Scripts -contains "format:check") {
+            pnpm run format:check
+        }
+        else {
+            pnpm exec prettier --check .
+        }
+    }
+    Invoke-Checked "TYPESCRIPT CHECK" {
+        if ($Scripts -contains "typecheck") {
+            pnpm run typecheck
+        }
+        else {
+            pnpm exec tsc --noEmit
+        }
+    }
+    Invoke-Checked "ESLINT ZERO WARNINGS" {
+        if ($Scripts -contains "lint") {
+            pnpm run lint -- --max-warnings=0
+        }
+        else {
+            pnpm exec eslint . --max-warnings=0
+        }
+    }
+    Invoke-Checked "PRODUCTION BUILD" {
+        if ($Scripts -contains "build") {
+            pnpm run build
+        }
+        else {
+            throw "build script is missing from package.json."
+        }
+    }
+    $RequiredPhase7Files = @(
+        "src\lib\theme\types.ts",
+        "src\lib\theme\presets.ts",
+        "src\lib\theme\theme-store.ts",
+        "src\lib\theme\ai-generator.ts",
+        "src\app\api\admin\themes\route.ts",
+        "src\app\api\admin\themes\generate\route.ts",
+        "src\components\admin\themes\theme-studio.tsx",
+        "src\app\admin\themes\page.tsx",
+        "src\components\site\active-theme-style.tsx",
+        "src\components\site\dynamic-homepage.tsx",
+        "src\components\site\site-header.tsx",
+        "src\components\site\site-footer.tsx",
+        "src\components\admin\admin-sidebar.tsx",
+        "src\app\page.tsx"
+    )
+    foreach ($RequiredFile in $RequiredPhase7Files) {
+        $RequiredPath = Join-Path $ProjectRoot $RequiredFile
+        if (-not (Test-Path -LiteralPath $RequiredPath)) {
+            throw "Phase 7 file is missing: $RequiredFile"
+        }
+    }
+    @"
+KNOWLEDGE NEST — PHASE 7 COMPLETION REPORT
+Completed: $GeneratedAt
+Project: $ProjectRoot
+FINAL ISSUE
+SiteHeaderProps aur SiteFooterProps type declarations
+components se props remove hone ke baad unused reh gaye thay.
+ESLint zero-warning mode mein run ho raha tha, is liye
+unused type warnings pipeline ko rok rahi thin.
+FIX APPLIED
+- SiteHeaderProps removed
+- SiteFooterProps removed
+- Formatting passed
+- TypeScript passed
+- ESLint passed with zero warnings
+- Production build passed
+The string is missing the terminator: "@.
+>> try {
+    function Invoke-Checked {
+        param(
+            [Parameter(Mandatory)]
+            [string]$Name,
+            [Parameter(Mandatory)]
+            [scriptblock]$Command
+        )
+        Write-Host ""
+        Write-Host "=== $Name ===" -ForegroundColor Cyan
+        $global:LASTEXITCODE = 0
+        & $Command
+        if ($LASTEXITCODE -ne 0) {
+            throw "$Name failed with exit code $LASTEXITCODE."
+        }
+        Write-Host "$Name PASSED" -ForegroundColor Green
+    }
+    foreach ($FilePath in @($HeaderPath, $FooterPath)) {
+        if (-not (Test-Path -LiteralPath $FilePath)) {
+            throw "Required file is missing: $FilePath"
+        }
+        Copy-Item `
+            -LiteralPath $FilePath `
+            -Destination (Join-Path $BackupRoot (Split-Path $FilePath -Leaf)) `
+            -Force
+    }
+    Write-Host ""
+    Write-Host "=== REMOVE UNUSED PROP TYPES ===" -ForegroundColor Cyan
+    $HeaderContent = Get-Content `
+        -LiteralPath $HeaderPath `
+        -Raw
+    $FooterContent = Get-Content `
+        -LiteralPath $FooterPath `
+        -Raw
+    $HeaderContent = [regex]::Replace(
+        $HeaderContent,
+        '(?ms)^\s*(?:export\s+)?type\s+SiteHeaderProps\s*=\s*\{.*?^\s*\};?\s*',
+        ''
+    )
+    $HeaderContent = [regex]::Replace(
+        $HeaderContent,
+        '(?ms)^\s*(?:export\s+)?interface\s+SiteHeaderProps\s*\{.*?^\s*\}\s*',
+        ''
+    )
+    $FooterContent = [regex]::Replace(
+        $FooterContent,
+        '(?ms)^\s*(?:export\s+)?type\s+SiteFooterProps\s*=\s*\{.*?^\s*\};?\s*',
+        ''
+    )
+    $FooterContent = [regex]::Replace(
+        $FooterContent,
+        '(?ms)^\s*(?:export\s+)?interface\s+SiteFooterProps\s*\{.*?^\s*\}\s*',
+        ''
+    )
+    if ($HeaderContent -match '\bSiteHeaderProps\b') {
+        throw "SiteHeaderProps still exists in site-header.tsx."
+    }
+    if ($FooterContent -match '\bSiteFooterProps\b') {
+        throw "SiteFooterProps still exists in site-footer.tsx."
+    }
+    Set-Content `
+        -LiteralPath $HeaderPath `
+        -Value $HeaderContent `
+        -Encoding UTF8
+    Set-Content `
+        -LiteralPath $FooterPath `
+        -Value $FooterContent `
+        -Encoding UTF8
+    Write-Host "UNUSED PROP TYPES REMOVED" -ForegroundColor Green
+    $PackageJson = Get-Content `
+        -LiteralPath (Join-Path $ProjectRoot "package.json") `
+        -Raw |
+        ConvertFrom-Json
+    $Scripts = @(
+        $PackageJson.scripts.PSObject.Properties.Name
+    )
+    Invoke-Checked "HEADER AND FOOTER PARSE TEST" {
+        pnpm exec prettier `
+            --write `
+            "src/components/site/site-header.tsx" `
+            "src/components/site/site-footer.tsx"
+    }
+    Invoke-Checked "FORMAT WRITE" {
+        if ($Scripts -contains "format") {
+            pnpm run format
+        }
+        else {
+            pnpm exec prettier --write .
+        }
+    }
+    Invoke-Checked "FORMAT CHECK" {
+        if ($Scripts -contains "format:check") {
+            pnpm run format:check
+        }
+        else {
+            pnpm exec prettier --check .
+        }
+    }
+    Invoke-Checked "TYPESCRIPT CHECK" {
+        if ($Scripts -contains "typecheck") {
+            pnpm run typecheck
+        }
+        else {
+            pnpm exec tsc --noEmit
+        }
+    }
+    Invoke-Checked "ESLINT ZERO WARNINGS" {
+        if ($Scripts -contains "lint") {
+            pnpm run lint -- --max-warnings=0
+        }
+        else {
+            pnpm exec eslint . --max-warnings=0
+        }
+    }
+    Invoke-Checked "PRODUCTION BUILD" {
+        if ($Scripts -contains "build") {
+            pnpm run build
+        }
+        else {
+            throw "build script is missing from package.json."
+        }
+    }
+    $RequiredPhase7Files = @(
+        "src\lib\theme\types.ts",
+        "src\lib\theme\presets.ts",
+        "src\lib\theme\theme-store.ts",
+        "src\lib\theme\ai-generator.ts",
+        "src\app\api\admin\themes\route.ts",
+        "src\app\api\admin\themes\generate\route.ts",
+        "src\components\admin\themes\theme-studio.tsx",
+        "src\app\admin\themes\page.tsx",
+        "src\components\site\active-theme-style.tsx",
+        "src\components\site\dynamic-homepage.tsx",
+        "src\components\site\site-header.tsx",
+        "src\components\site\site-footer.tsx",
+        "src\components\admin\admin-sidebar.tsx",
+        "src\app\page.tsx"
+    )
+    foreach ($RequiredFile in $RequiredPhase7Files) {
+        $RequiredPath = Join-Path $ProjectRoot $RequiredFile
+        if (-not (Test-Path -LiteralPath $RequiredPath)) {
+            throw "Phase 7 file is missing: $RequiredFile"
+        }
+    }
+    @"
+KNOWLEDGE NEST — PHASE 7 COMPLETION REPORT
+Completed: $GeneratedAt
+Project: $ProjectRoot
+FINAL ISSUE
+SiteHeaderProps aur SiteFooterProps type declarations
+components se props remove hone ke baad unused reh gaye thay.
+ESLint zero-warning mode mein run ho raha tha, is liye
+unused type warnings pipeline ko rok rahi thin.
+FIX APPLIED
+- SiteHeaderProps removed
+- SiteFooterProps removed
+- Formatting passed
+- TypeScript passed
+- ESLint passed with zero warnings
+- Production build passed
+PHASE 7 STATUS
+The string is missing the terminator: "@.
+>> try {
+    function Invoke-Checked {
+        param(
+            [Parameter(Mandatory)]
+            [string]$Name,
+            [Parameter(Mandatory)]
+            [scriptblock]$Command
+        )
+        Write-Host ""
+        Write-Host "=== $Name ===" -ForegroundColor Cyan
+        $global:LASTEXITCODE = 0
+        & $Command
+        if ($LASTEXITCODE -ne 0) {
+            throw "$Name failed with exit code $LASTEXITCODE."
+        }
+        Write-Host "$Name PASSED" -ForegroundColor Green
+    }
+    foreach ($FilePath in @($HeaderPath, $FooterPath)) {
+        if (-not (Test-Path -LiteralPath $FilePath)) {
+            throw "Required file is missing: $FilePath"
+        }
+        Copy-Item `
+            -LiteralPath $FilePath `
+            -Destination (Join-Path $BackupRoot (Split-Path $FilePath -Leaf)) `
+            -Force
+    }
+    Write-Host ""
+    Write-Host "=== REMOVE UNUSED PROP TYPES ===" -ForegroundColor Cyan
+    $HeaderContent = Get-Content `
+        -LiteralPath $HeaderPath `
+        -Raw
+    $FooterContent = Get-Content `
+        -LiteralPath $FooterPath `
+        -Raw
+    $HeaderContent = [regex]::Replace(
+        $HeaderContent,
+        '(?ms)^\s*(?:export\s+)?type\s+SiteHeaderProps\s*=\s*\{.*?^\s*\};?\s*',
+        ''
+    )
+    $HeaderContent = [regex]::Replace(
+        $HeaderContent,
+        '(?ms)^\s*(?:export\s+)?interface\s+SiteHeaderProps\s*\{.*?^\s*\}\s*',
+        ''
+    )
+    $FooterContent = [regex]::Replace(
+        $FooterContent,
+        '(?ms)^\s*(?:export\s+)?type\s+SiteFooterProps\s*=\s*\{.*?^\s*\};?\s*',
+        ''
+    )
+    $FooterContent = [regex]::Replace(
+        $FooterContent,
+        '(?ms)^\s*(?:export\s+)?interface\s+SiteFooterProps\s*\{.*?^\s*\}\s*',
+        ''
+    )
+    if ($HeaderContent -match '\bSiteHeaderProps\b') {
+        throw "SiteHeaderProps still exists in site-header.tsx."
+    }
+    if ($FooterContent -match '\bSiteFooterProps\b') {
+        throw "SiteFooterProps still exists in site-footer.tsx."
+    }
+    Set-Content `
+        -LiteralPath $HeaderPath `
+        -Value $HeaderContent `
+        -Encoding UTF8
+    Set-Content `
+        -LiteralPath $FooterPath `
+        -Value $FooterContent `
+        -Encoding UTF8
+    Write-Host "UNUSED PROP TYPES REMOVED" -ForegroundColor Green
+    $PackageJson = Get-Content `
+        -LiteralPath (Join-Path $ProjectRoot "package.json") `
+        -Raw |
+        ConvertFrom-Json
+    $Scripts = @(
+        $PackageJson.scripts.PSObject.Properties.Name
+    )
+    Invoke-Checked "HEADER AND FOOTER PARSE TEST" {
+        pnpm exec prettier `
+            --write `
+            "src/components/site/site-header.tsx" `
+            "src/components/site/site-footer.tsx"
+    }
+    Invoke-Checked "FORMAT WRITE" {
+        if ($Scripts -contains "format") {
+            pnpm run format
+        }
+        else {
+            pnpm exec prettier --write .
+        }
+    }
+    Invoke-Checked "FORMAT CHECK" {
+        if ($Scripts -contains "format:check") {
+            pnpm run format:check
+        }
+        else {
+            pnpm exec prettier --check .
+        }
+    }
+    Invoke-Checked "TYPESCRIPT CHECK" {
+        if ($Scripts -contains "typecheck") {
+            pnpm run typecheck
+        }
+        else {
+            pnpm exec tsc --noEmit
+        }
+    }
+    Invoke-Checked "ESLINT ZERO WARNINGS" {
+        if ($Scripts -contains "lint") {
+            pnpm run lint -- --max-warnings=0
+        }
+        else {
+            pnpm exec eslint . --max-warnings=0
+        }
+    }
+    Invoke-Checked "PRODUCTION BUILD" {
+        if ($Scripts -contains "build") {
+            pnpm run build
+        }
+        else {
+            throw "build script is missing from package.json."
+        }
+    }
+    $RequiredPhase7Files = @(
+        "src\lib\theme\types.ts",
+        "src\lib\theme\presets.ts",
+        "src\lib\theme\theme-store.ts",
+        "src\lib\theme\ai-generator.ts",
+        "src\app\api\admin\themes\route.ts",
+        "src\app\api\admin\themes\generate\route.ts",
+        "src\components\admin\themes\theme-studio.tsx",
+        "src\app\admin\themes\page.tsx",
+        "src\components\site\active-theme-style.tsx",
+        "src\components\site\dynamic-homepage.tsx",
+        "src\components\site\site-header.tsx",
+        "src\components\site\site-footer.tsx",
+        "src\components\admin\admin-sidebar.tsx",
+        "src\app\page.tsx"
+    )
+    foreach ($RequiredFile in $RequiredPhase7Files) {
+        $RequiredPath = Join-Path $ProjectRoot $RequiredFile
+        if (-not (Test-Path -LiteralPath $RequiredPath)) {
+            throw "Phase 7 file is missing: $RequiredFile"
+        }
+    }
+    @"
+KNOWLEDGE NEST — PHASE 7 COMPLETION REPORT
+Completed: $GeneratedAt
+Project: $ProjectRoot
+FINAL ISSUE
+SiteHeaderProps aur SiteFooterProps type declarations
+components se props remove hone ke baad unused reh gaye thay.
+ESLint zero-warning mode mein run ho raha tha, is liye
+unused type warnings pipeline ko rok rahi thin.
+FIX APPLIED
+- SiteHeaderProps removed
+- SiteFooterProps removed
+- Formatting passed
+- TypeScript passed
+- ESLint passed with zero warnings
+- Production build passed
+PHASE 7 STATUS
+COMPLETE
+The string is missing the terminator: "@.
+>> try {
+    function Invoke-Checked {
+        param(
+            [Parameter(Mandatory)]
+            [string]$Name,
+            [Parameter(Mandatory)]
+            [scriptblock]$Command
+        )
+        Write-Host ""
+        Write-Host "=== $Name ===" -ForegroundColor Cyan
+        $global:LASTEXITCODE = 0
+        & $Command
+        if ($LASTEXITCODE -ne 0) {
+            throw "$Name failed with exit code $LASTEXITCODE."
+        }
+        Write-Host "$Name PASSED" -ForegroundColor Green
+    }
+    foreach ($FilePath in @($HeaderPath, $FooterPath)) {
+        if (-not (Test-Path -LiteralPath $FilePath)) {
+            throw "Required file is missing: $FilePath"
+        }
+        Copy-Item `
+            -LiteralPath $FilePath `
+            -Destination (Join-Path $BackupRoot (Split-Path $FilePath -Leaf)) `
+            -Force
+    }
+    Write-Host ""
+    Write-Host "=== REMOVE UNUSED PROP TYPES ===" -ForegroundColor Cyan
+    $HeaderContent = Get-Content `
+        -LiteralPath $HeaderPath `
+        -Raw
+    $FooterContent = Get-Content `
+        -LiteralPath $FooterPath `
+        -Raw
+    $HeaderContent = [regex]::Replace(
+        $HeaderContent,
+        '(?ms)^\s*(?:export\s+)?type\s+SiteHeaderProps\s*=\s*\{.*?^\s*\};?\s*',
+        ''
+    )
+    $HeaderContent = [regex]::Replace(
+        $HeaderContent,
+        '(?ms)^\s*(?:export\s+)?interface\s+SiteHeaderProps\s*\{.*?^\s*\}\s*',
+        ''
+    )
+    $FooterContent = [regex]::Replace(
+        $FooterContent,
+        '(?ms)^\s*(?:export\s+)?type\s+SiteFooterProps\s*=\s*\{.*?^\s*\};?\s*',
+        ''
+    )
+    $FooterContent = [regex]::Replace(
+        $FooterContent,
+        '(?ms)^\s*(?:export\s+)?interface\s+SiteFooterProps\s*\{.*?^\s*\}\s*',
+        ''
+    )
+    if ($HeaderContent -match '\bSiteHeaderProps\b') {
+        throw "SiteHeaderProps still exists in site-header.tsx."
+    }
+    if ($FooterContent -match '\bSiteFooterProps\b') {
+        throw "SiteFooterProps still exists in site-footer.tsx."
+    }
+    Set-Content `
+        -LiteralPath $HeaderPath `
+        -Value $HeaderContent `
+        -Encoding UTF8
+    Set-Content `
+        -LiteralPath $FooterPath `
+        -Value $FooterContent `
+        -Encoding UTF8
+    Write-Host "UNUSED PROP TYPES REMOVED" -ForegroundColor Green
+    $PackageJson = Get-Content `
+        -LiteralPath (Join-Path $ProjectRoot "package.json") `
+        -Raw |
+        ConvertFrom-Json
+    $Scripts = @(
+        $PackageJson.scripts.PSObject.Properties.Name
+    )
+    Invoke-Checked "HEADER AND FOOTER PARSE TEST" {
+        pnpm exec prettier `
+            --write `
+            "src/components/site/site-header.tsx" `
+            "src/components/site/site-footer.tsx"
+    }
+    Invoke-Checked "FORMAT WRITE" {
+        if ($Scripts -contains "format") {
+            pnpm run format
+        }
+        else {
+            pnpm exec prettier --write .
+        }
+    }
+    Invoke-Checked "FORMAT CHECK" {
+        if ($Scripts -contains "format:check") {
+            pnpm run format:check
+        }
+        else {
+            pnpm exec prettier --check .
+        }
+    }
+    Invoke-Checked "TYPESCRIPT CHECK" {
+        if ($Scripts -contains "typecheck") {
+            pnpm run typecheck
+        }
+        else {
+            pnpm exec tsc --noEmit
+        }
+    }
+    Invoke-Checked "ESLINT ZERO WARNINGS" {
+        if ($Scripts -contains "lint") {
+            pnpm run lint -- --max-warnings=0
+        }
+        else {
+            pnpm exec eslint . --max-warnings=0
+        }
+    }
+    Invoke-Checked "PRODUCTION BUILD" {
+        if ($Scripts -contains "build") {
+            pnpm run build
+        }
+        else {
+            throw "build script is missing from package.json."
+        }
+    }
+    $RequiredPhase7Files = @(
+        "src\lib\theme\types.ts",
+        "src\lib\theme\presets.ts",
+        "src\lib\theme\theme-store.ts",
+        "src\lib\theme\ai-generator.ts",
+        "src\app\api\admin\themes\route.ts",
+        "src\app\api\admin\themes\generate\route.ts",
+        "src\components\admin\themes\theme-studio.tsx",
+        "src\app\admin\themes\page.tsx",
+        "src\components\site\active-theme-style.tsx",
+        "src\components\site\dynamic-homepage.tsx",
+        "src\components\site\site-header.tsx",
+        "src\components\site\site-footer.tsx",
+        "src\components\admin\admin-sidebar.tsx",
+        "src\app\page.tsx"
+    )
+    foreach ($RequiredFile in $RequiredPhase7Files) {
+        $RequiredPath = Join-Path $ProjectRoot $RequiredFile
+        if (-not (Test-Path -LiteralPath $RequiredPath)) {
+            throw "Phase 7 file is missing: $RequiredFile"
+        }
+    }
+    @"
+KNOWLEDGE NEST — PHASE 7 COMPLETION REPORT
+Completed: $GeneratedAt
+Project: $ProjectRoot
+FINAL ISSUE
+SiteHeaderProps aur SiteFooterProps type declarations
+components se props remove hone ke baad unused reh gaye thay.
+ESLint zero-warning mode mein run ho raha tha, is liye
+unused type warnings pipeline ko rok rahi thin.
+FIX APPLIED
+- SiteHeaderProps removed
+- SiteFooterProps removed
+- Formatting passed
+- TypeScript passed
+- ESLint passed with zero warnings
+- Production build passed
+PHASE 7 STATUS
+COMPLETE
+NEXT PHASE
+The string is missing the terminator: "@.
+>> try {
+    function Invoke-Checked {
+        param(
+            [Parameter(Mandatory)]
+            [string]$Name,
+            [Parameter(Mandatory)]
+            [scriptblock]$Command
+        )
+        Write-Host ""
+        Write-Host "=== $Name ===" -ForegroundColor Cyan
+        $global:LASTEXITCODE = 0
+        & $Command
+        if ($LASTEXITCODE -ne 0) {
+            throw "$Name failed with exit code $LASTEXITCODE."
+        }
+        Write-Host "$Name PASSED" -ForegroundColor Green
+    }
+    foreach ($FilePath in @($HeaderPath, $FooterPath)) {
+        if (-not (Test-Path -LiteralPath $FilePath)) {
+            throw "Required file is missing: $FilePath"
+        }
+        Copy-Item `
+            -LiteralPath $FilePath `
+            -Destination (Join-Path $BackupRoot (Split-Path $FilePath -Leaf)) `
+            -Force
+    }
+    Write-Host ""
+    Write-Host "=== REMOVE UNUSED PROP TYPES ===" -ForegroundColor Cyan
+    $HeaderContent = Get-Content `
+        -LiteralPath $HeaderPath `
+        -Raw
+    $FooterContent = Get-Content `
+        -LiteralPath $FooterPath `
+        -Raw
+    $HeaderContent = [regex]::Replace(
+        $HeaderContent,
+        '(?ms)^\s*(?:export\s+)?type\s+SiteHeaderProps\s*=\s*\{.*?^\s*\};?\s*',
+        ''
+    )
+    $HeaderContent = [regex]::Replace(
+        $HeaderContent,
+        '(?ms)^\s*(?:export\s+)?interface\s+SiteHeaderProps\s*\{.*?^\s*\}\s*',
+        ''
+    )
+    $FooterContent = [regex]::Replace(
+        $FooterContent,
+        '(?ms)^\s*(?:export\s+)?type\s+SiteFooterProps\s*=\s*\{.*?^\s*\};?\s*',
+        ''
+    )
+    $FooterContent = [regex]::Replace(
+        $FooterContent,
+        '(?ms)^\s*(?:export\s+)?interface\s+SiteFooterProps\s*\{.*?^\s*\}\s*',
+        ''
+    )
+    if ($HeaderContent -match '\bSiteHeaderProps\b') {
+        throw "SiteHeaderProps still exists in site-header.tsx."
+    }
+    if ($FooterContent -match '\bSiteFooterProps\b') {
+        throw "SiteFooterProps still exists in site-footer.tsx."
+    }
+    Set-Content `
+        -LiteralPath $HeaderPath `
+        -Value $HeaderContent `
+        -Encoding UTF8
+    Set-Content `
+        -LiteralPath $FooterPath `
+        -Value $FooterContent `
+        -Encoding UTF8
+    Write-Host "UNUSED PROP TYPES REMOVED" -ForegroundColor Green
+    $PackageJson = Get-Content `
+        -LiteralPath (Join-Path $ProjectRoot "package.json") `
+        -Raw |
+        ConvertFrom-Json
+    $Scripts = @(
+        $PackageJson.scripts.PSObject.Properties.Name
+    )
+    Invoke-Checked "HEADER AND FOOTER PARSE TEST" {
+        pnpm exec prettier `
+            --write `
+            "src/components/site/site-header.tsx" `
+            "src/components/site/site-footer.tsx"
+    }
+    Invoke-Checked "FORMAT WRITE" {
+        if ($Scripts -contains "format") {
+            pnpm run format
+        }
+        else {
+            pnpm exec prettier --write .
+        }
+    }
+    Invoke-Checked "FORMAT CHECK" {
+        if ($Scripts -contains "format:check") {
+            pnpm run format:check
+        }
+        else {
+            pnpm exec prettier --check .
+        }
+    }
+    Invoke-Checked "TYPESCRIPT CHECK" {
+        if ($Scripts -contains "typecheck") {
+            pnpm run typecheck
+        }
+        else {
+            pnpm exec tsc --noEmit
+        }
+    }
+    Invoke-Checked "ESLINT ZERO WARNINGS" {
+        if ($Scripts -contains "lint") {
+            pnpm run lint -- --max-warnings=0
+        }
+        else {
+            pnpm exec eslint . --max-warnings=0
+        }
+    }
+    Invoke-Checked "PRODUCTION BUILD" {
+        if ($Scripts -contains "build") {
+            pnpm run build
+        }
+        else {
+            throw "build script is missing from package.json."
+        }
+    }
+    $RequiredPhase7Files = @(
+        "src\lib\theme\types.ts",
+        "src\lib\theme\presets.ts",
+        "src\lib\theme\theme-store.ts",
+        "src\lib\theme\ai-generator.ts",
+        "src\app\api\admin\themes\route.ts",
+        "src\app\api\admin\themes\generate\route.ts",
+        "src\components\admin\themes\theme-studio.tsx",
+        "src\app\admin\themes\page.tsx",
+        "src\components\site\active-theme-style.tsx",
+        "src\components\site\dynamic-homepage.tsx",
+        "src\components\site\site-header.tsx",
+        "src\components\site\site-footer.tsx",
+        "src\components\admin\admin-sidebar.tsx",
+        "src\app\page.tsx"
+    )
+    foreach ($RequiredFile in $RequiredPhase7Files) {
+        $RequiredPath = Join-Path $ProjectRoot $RequiredFile
+        if (-not (Test-Path -LiteralPath $RequiredPath)) {
+            throw "Phase 7 file is missing: $RequiredFile"
+        }
+    }
+    @"
+KNOWLEDGE NEST — PHASE 7 COMPLETION REPORT
+Completed: $GeneratedAt
+Project: $ProjectRoot
+FINAL ISSUE
+SiteHeaderProps aur SiteFooterProps type declarations
+components se props remove hone ke baad unused reh gaye thay.
+ESLint zero-warning mode mein run ho raha tha, is liye
+unused type warnings pipeline ko rok rahi thin.
+FIX APPLIED
+- SiteHeaderProps removed
+- SiteFooterProps removed
+- Formatting passed
+- TypeScript passed
+- ESLint passed with zero warnings
+- Production build passed
+PHASE 7 STATUS
+COMPLETE
+NEXT PHASE
+Phase 8 — Advanced Frontend UI/UX
+The string is missing the terminator: "@.
+>> try {
+    function Invoke-Checked {
+        param(
+            [Parameter(Mandatory)]
+            [string]$Name,
+            [Parameter(Mandatory)]
+            [scriptblock]$Command
+        )
+        Write-Host ""
+        Write-Host "=== $Name ===" -ForegroundColor Cyan
+        $global:LASTEXITCODE = 0
+        & $Command
+        if ($LASTEXITCODE -ne 0) {
+            throw "$Name failed with exit code $LASTEXITCODE."
+        }
+        Write-Host "$Name PASSED" -ForegroundColor Green
+    }
+    foreach ($FilePath in @($HeaderPath, $FooterPath)) {
+        if (-not (Test-Path -LiteralPath $FilePath)) {
+            throw "Required file is missing: $FilePath"
+        }
+        Copy-Item `
+            -LiteralPath $FilePath `
+            -Destination (Join-Path $BackupRoot (Split-Path $FilePath -Leaf)) `
+            -Force
+    }
+    Write-Host ""
+    Write-Host "=== REMOVE UNUSED PROP TYPES ===" -ForegroundColor Cyan
+    $HeaderContent = Get-Content `
+        -LiteralPath $HeaderPath `
+        -Raw
+    $FooterContent = Get-Content `
+        -LiteralPath $FooterPath `
+        -Raw
+    $HeaderContent = [regex]::Replace(
+        $HeaderContent,
+        '(?ms)^\s*(?:export\s+)?type\s+SiteHeaderProps\s*=\s*\{.*?^\s*\};?\s*',
+        ''
+    )
+    $HeaderContent = [regex]::Replace(
+        $HeaderContent,
+        '(?ms)^\s*(?:export\s+)?interface\s+SiteHeaderProps\s*\{.*?^\s*\}\s*',
+        ''
+    )
+    $FooterContent = [regex]::Replace(
+        $FooterContent,
+        '(?ms)^\s*(?:export\s+)?type\s+SiteFooterProps\s*=\s*\{.*?^\s*\};?\s*',
+        ''
+    )
+    $FooterContent = [regex]::Replace(
+        $FooterContent,
+        '(?ms)^\s*(?:export\s+)?interface\s+SiteFooterProps\s*\{.*?^\s*\}\s*',
+        ''
+    )
+    if ($HeaderContent -match '\bSiteHeaderProps\b') {
+        throw "SiteHeaderProps still exists in site-header.tsx."
+    }
+    if ($FooterContent -match '\bSiteFooterProps\b') {
+        throw "SiteFooterProps still exists in site-footer.tsx."
+    }
+    Set-Content `
+        -LiteralPath $HeaderPath `
+        -Value $HeaderContent `
+        -Encoding UTF8
+    Set-Content `
+        -LiteralPath $FooterPath `
+        -Value $FooterContent `
+        -Encoding UTF8
+    Write-Host "UNUSED PROP TYPES REMOVED" -ForegroundColor Green
+    $PackageJson = Get-Content `
+        -LiteralPath (Join-Path $ProjectRoot "package.json") `
+        -Raw |
+        ConvertFrom-Json
+    $Scripts = @(
+        $PackageJson.scripts.PSObject.Properties.Name
+    )
+    Invoke-Checked "HEADER AND FOOTER PARSE TEST" {
+        pnpm exec prettier `
+            --write `
+            "src/components/site/site-header.tsx" `
+            "src/components/site/site-footer.tsx"
+    }
+    Invoke-Checked "FORMAT WRITE" {
+        if ($Scripts -contains "format") {
+            pnpm run format
+        }
+        else {
+            pnpm exec prettier --write .
+        }
+    }
+    Invoke-Checked "FORMAT CHECK" {
+        if ($Scripts -contains "format:check") {
+            pnpm run format:check
+        }
+        else {
+            pnpm exec prettier --check .
+        }
+    }
+    Invoke-Checked "TYPESCRIPT CHECK" {
+        if ($Scripts -contains "typecheck") {
+            pnpm run typecheck
+        }
+        else {
+            pnpm exec tsc --noEmit
+        }
+    }
+    Invoke-Checked "ESLINT ZERO WARNINGS" {
+        if ($Scripts -contains "lint") {
+            pnpm run lint -- --max-warnings=0
+        }
+        else {
+            pnpm exec eslint . --max-warnings=0
+        }
+    }
+    Invoke-Checked "PRODUCTION BUILD" {
+        if ($Scripts -contains "build") {
+            pnpm run build
+        }
+        else {
+            throw "build script is missing from package.json."
+        }
+    }
+    $RequiredPhase7Files = @(
+        "src\lib\theme\types.ts",
+        "src\lib\theme\presets.ts",
+        "src\lib\theme\theme-store.ts",
+        "src\lib\theme\ai-generator.ts",
+        "src\app\api\admin\themes\route.ts",
+        "src\app\api\admin\themes\generate\route.ts",
+        "src\components\admin\themes\theme-studio.tsx",
+        "src\app\admin\themes\page.tsx",
+        "src\components\site\active-theme-style.tsx",
+        "src\components\site\dynamic-homepage.tsx",
+        "src\components\site\site-header.tsx",
+        "src\components\site\site-footer.tsx",
+        "src\components\admin\admin-sidebar.tsx",
+        "src\app\page.tsx"
+    )
+    foreach ($RequiredFile in $RequiredPhase7Files) {
+        $RequiredPath = Join-Path $ProjectRoot $RequiredFile
+        if (-not (Test-Path -LiteralPath $RequiredPath)) {
+            throw "Phase 7 file is missing: $RequiredFile"
+        }
+    }
+    @"
+KNOWLEDGE NEST — PHASE 7 COMPLETION REPORT
+Completed: $GeneratedAt
+Project: $ProjectRoot
+FINAL ISSUE
+SiteHeaderProps aur SiteFooterProps type declarations
+components se props remove hone ke baad unused reh gaye thay.
+ESLint zero-warning mode mein run ho raha tha, is liye
+unused type warnings pipeline ko rok rahi thin.
+FIX APPLIED
+- SiteHeaderProps removed
+- SiteFooterProps removed
+- Formatting passed
+- TypeScript passed
+- ESLint passed with zero warnings
+- Production build passed
+PHASE 7 STATUS
+COMPLETE
+NEXT PHASE
+Phase 8 — Advanced Frontend UI/UX
+Backup:
+$BackupRoot
+The string is missing the terminator: "@.
+>> try {
+    function Invoke-Checked {
+        param(
+            [Parameter(Mandatory)]
+            [string]$Name,
+            [Parameter(Mandatory)]
+            [scriptblock]$Command
+        )
+        Write-Host ""
+        Write-Host "=== $Name ===" -ForegroundColor Cyan
+        $global:LASTEXITCODE = 0
+        & $Command
+        if ($LASTEXITCODE -ne 0) {
+            throw "$Name failed with exit code $LASTEXITCODE."
+        }
+        Write-Host "$Name PASSED" -ForegroundColor Green
+    }
+    foreach ($FilePath in @($HeaderPath, $FooterPath)) {
+        if (-not (Test-Path -LiteralPath $FilePath)) {
+            throw "Required file is missing: $FilePath"
+        }
+        Copy-Item `
+            -LiteralPath $FilePath `
+            -Destination (Join-Path $BackupRoot (Split-Path $FilePath -Leaf)) `
+            -Force
+    }
+    Write-Host ""
+    Write-Host "=== REMOVE UNUSED PROP TYPES ===" -ForegroundColor Cyan
+    $HeaderContent = Get-Content `
+        -LiteralPath $HeaderPath `
+        -Raw
+    $FooterContent = Get-Content `
+        -LiteralPath $FooterPath `
+        -Raw
+    $HeaderContent = [regex]::Replace(
+        $HeaderContent,
+        '(?ms)^\s*(?:export\s+)?type\s+SiteHeaderProps\s*=\s*\{.*?^\s*\};?\s*',
+        ''
+    )
+    $HeaderContent = [regex]::Replace(
+        $HeaderContent,
+        '(?ms)^\s*(?:export\s+)?interface\s+SiteHeaderProps\s*\{.*?^\s*\}\s*',
+        ''
+    )
+    $FooterContent = [regex]::Replace(
+        $FooterContent,
+        '(?ms)^\s*(?:export\s+)?type\s+SiteFooterProps\s*=\s*\{.*?^\s*\};?\s*',
+        ''
+    )
+    $FooterContent = [regex]::Replace(
+        $FooterContent,
+        '(?ms)^\s*(?:export\s+)?interface\s+SiteFooterProps\s*\{.*?^\s*\}\s*',
+        ''
+    )
+    if ($HeaderContent -match '\bSiteHeaderProps\b') {
+        throw "SiteHeaderProps still exists in site-header.tsx."
+    }
+    if ($FooterContent -match '\bSiteFooterProps\b') {
+        throw "SiteFooterProps still exists in site-footer.tsx."
+    }
+    Set-Content `
+        -LiteralPath $HeaderPath `
+        -Value $HeaderContent `
+        -Encoding UTF8
+    Set-Content `
+        -LiteralPath $FooterPath `
+        -Value $FooterContent `
+        -Encoding UTF8
+    Write-Host "UNUSED PROP TYPES REMOVED" -ForegroundColor Green
+    $PackageJson = Get-Content `
+        -LiteralPath (Join-Path $ProjectRoot "package.json") `
+        -Raw |
+        ConvertFrom-Json
+    $Scripts = @(
+        $PackageJson.scripts.PSObject.Properties.Name
+    )
+    Invoke-Checked "HEADER AND FOOTER PARSE TEST" {
+        pnpm exec prettier `
+            --write `
+            "src/components/site/site-header.tsx" `
+            "src/components/site/site-footer.tsx"
+    }
+    Invoke-Checked "FORMAT WRITE" {
+        if ($Scripts -contains "format") {
+            pnpm run format
+        }
+        else {
+            pnpm exec prettier --write .
+        }
+    }
+    Invoke-Checked "FORMAT CHECK" {
+        if ($Scripts -contains "format:check") {
+            pnpm run format:check
+        }
+        else {
+            pnpm exec prettier --check .
+        }
+    }
+    Invoke-Checked "TYPESCRIPT CHECK" {
+        if ($Scripts -contains "typecheck") {
+            pnpm run typecheck
+        }
+        else {
+            pnpm exec tsc --noEmit
+        }
+    }
+    Invoke-Checked "ESLINT ZERO WARNINGS" {
+        if ($Scripts -contains "lint") {
+            pnpm run lint -- --max-warnings=0
+        }
+        else {
+            pnpm exec eslint . --max-warnings=0
+        }
+    }
+    Invoke-Checked "PRODUCTION BUILD" {
+        if ($Scripts -contains "build") {
+            pnpm run build
+        }
+        else {
+            throw "build script is missing from package.json."
+        }
+    }
+    $RequiredPhase7Files = @(
+        "src\lib\theme\types.ts",
+        "src\lib\theme\presets.ts",
+        "src\lib\theme\theme-store.ts",
+        "src\lib\theme\ai-generator.ts",
+        "src\app\api\admin\themes\route.ts",
+        "src\app\api\admin\themes\generate\route.ts",
+        "src\components\admin\themes\theme-studio.tsx",
+        "src\app\admin\themes\page.tsx",
+        "src\components\site\active-theme-style.tsx",
+        "src\components\site\dynamic-homepage.tsx",
+        "src\components\site\site-header.tsx",
+        "src\components\site\site-footer.tsx",
+        "src\components\admin\admin-sidebar.tsx",
+        "src\app\page.tsx"
+    )
+    foreach ($RequiredFile in $RequiredPhase7Files) {
+        $RequiredPath = Join-Path $ProjectRoot $RequiredFile
+        if (-not (Test-Path -LiteralPath $RequiredPath)) {
+            throw "Phase 7 file is missing: $RequiredFile"
+        }
+    }
+    @"
+KNOWLEDGE NEST — PHASE 7 COMPLETION REPORT
+Completed: $GeneratedAt
+Project: $ProjectRoot
+FINAL ISSUE
+SiteHeaderProps aur SiteFooterProps type declarations
+components se props remove hone ke baad unused reh gaye thay.
+ESLint zero-warning mode mein run ho raha tha, is liye
+unused type warnings pipeline ko rok rahi thin.
+FIX APPLIED
+- SiteHeaderProps removed
+- SiteFooterProps removed
+- Formatting passed
+- TypeScript passed
+- ESLint passed with zero warnings
+- Production build passed
+PHASE 7 STATUS
+COMPLETE
+NEXT PHASE
+Phase 8 — Advanced Frontend UI/UX
+Backup:
+$BackupRoot
+Log:
+$LogPath
+"@ | Set-Content `
+        -LiteralPath $ReportPath `
+        -Encoding UTF8
+Missing closing '}' in statement block or type definition.
+>> try {
+    function Invoke-Checked {
+        param(
+            [Parameter(Mandatory)]
+            [string]$Name,
+            [Parameter(Mandatory)]
+            [scriptblock]$Command
+        )
+        Write-Host ""
+        Write-Host "=== $Name ===" -ForegroundColor Cyan
+        $global:LASTEXITCODE = 0
+        & $Command
+        if ($LASTEXITCODE -ne 0) {
+            throw "$Name failed with exit code $LASTEXITCODE."
+        }
+        Write-Host "$Name PASSED" -ForegroundColor Green
+    }
+    foreach ($FilePath in @($HeaderPath, $FooterPath)) {
+        if (-not (Test-Path -LiteralPath $FilePath)) {
+            throw "Required file is missing: $FilePath"
+        }
+        Copy-Item `
+            -LiteralPath $FilePath `
+            -Destination (Join-Path $BackupRoot (Split-Path $FilePath -Leaf)) `
+            -Force
+    }
+    Write-Host ""
+    Write-Host "=== REMOVE UNUSED PROP TYPES ===" -ForegroundColor Cyan
+    $HeaderContent = Get-Content `
+        -LiteralPath $HeaderPath `
+        -Raw
+    $FooterContent = Get-Content `
+        -LiteralPath $FooterPath `
+        -Raw
+    $HeaderContent = [regex]::Replace(
+        $HeaderContent,
+        '(?ms)^\s*(?:export\s+)?type\s+SiteHeaderProps\s*=\s*\{.*?^\s*\};?\s*',
+        ''
+    )
+    $HeaderContent = [regex]::Replace(
+        $HeaderContent,
+        '(?ms)^\s*(?:export\s+)?interface\s+SiteHeaderProps\s*\{.*?^\s*\}\s*',
+        ''
+    )
+    $FooterContent = [regex]::Replace(
+        $FooterContent,
+        '(?ms)^\s*(?:export\s+)?type\s+SiteFooterProps\s*=\s*\{.*?^\s*\};?\s*',
+        ''
+    )
+    $FooterContent = [regex]::Replace(
+        $FooterContent,
+        '(?ms)^\s*(?:export\s+)?interface\s+SiteFooterProps\s*\{.*?^\s*\}\s*',
+        ''
+    )
+    if ($HeaderContent -match '\bSiteHeaderProps\b') {
+        throw "SiteHeaderProps still exists in site-header.tsx."
+    }
+    if ($FooterContent -match '\bSiteFooterProps\b') {
+        throw "SiteFooterProps still exists in site-footer.tsx."
+    }
+    Set-Content `
+        -LiteralPath $HeaderPath `
+        -Value $HeaderContent `
+        -Encoding UTF8
+    Set-Content `
+        -LiteralPath $FooterPath `
+        -Value $FooterContent `
+        -Encoding UTF8
+    Write-Host "UNUSED PROP TYPES REMOVED" -ForegroundColor Green
+    $PackageJson = Get-Content `
+        -LiteralPath (Join-Path $ProjectRoot "package.json") `
+        -Raw |
+        ConvertFrom-Json
+    $Scripts = @(
+        $PackageJson.scripts.PSObject.Properties.Name
+    )
+    Invoke-Checked "HEADER AND FOOTER PARSE TEST" {
+        pnpm exec prettier `
+            --write `
+            "src/components/site/site-header.tsx" `
+            "src/components/site/site-footer.tsx"
+    }
+    Invoke-Checked "FORMAT WRITE" {
+        if ($Scripts -contains "format") {
+            pnpm run format
+        }
+        else {
+            pnpm exec prettier --write .
+        }
+    }
+    Invoke-Checked "FORMAT CHECK" {
+        if ($Scripts -contains "format:check") {
+            pnpm run format:check
+        }
+        else {
+            pnpm exec prettier --check .
+        }
+    }
+    Invoke-Checked "TYPESCRIPT CHECK" {
+        if ($Scripts -contains "typecheck") {
+            pnpm run typecheck
+        }
+        else {
+            pnpm exec tsc --noEmit
+        }
+    }
+    Invoke-Checked "ESLINT ZERO WARNINGS" {
+        if ($Scripts -contains "lint") {
+            pnpm run lint -- --max-warnings=0
+        }
+        else {
+            pnpm exec eslint . --max-warnings=0
+        }
+    }
+    Invoke-Checked "PRODUCTION BUILD" {
+        if ($Scripts -contains "build") {
+            pnpm run build
+        }
+        else {
+            throw "build script is missing from package.json."
+        }
+    }
+    $RequiredPhase7Files = @(
+        "src\lib\theme\types.ts",
+        "src\lib\theme\presets.ts",
+        "src\lib\theme\theme-store.ts",
+        "src\lib\theme\ai-generator.ts",
+        "src\app\api\admin\themes\route.ts",
+        "src\app\api\admin\themes\generate\route.ts",
+        "src\components\admin\themes\theme-studio.tsx",
+        "src\app\admin\themes\page.tsx",
+        "src\components\site\active-theme-style.tsx",
+        "src\components\site\dynamic-homepage.tsx",
+        "src\components\site\site-header.tsx",
+        "src\components\site\site-footer.tsx",
+        "src\components\admin\admin-sidebar.tsx",
+        "src\app\page.tsx"
+    )
+    foreach ($RequiredFile in $RequiredPhase7Files) {
+        $RequiredPath = Join-Path $ProjectRoot $RequiredFile
+        if (-not (Test-Path -LiteralPath $RequiredPath)) {
+            throw "Phase 7 file is missing: $RequiredFile"
+        }
+    }
+    @"
+KNOWLEDGE NEST — PHASE 7 COMPLETION REPORT
+Completed: $GeneratedAt
+Project: $ProjectRoot
+FINAL ISSUE
+SiteHeaderProps aur SiteFooterProps type declarations
+components se props remove hone ke baad unused reh gaye thay.
+ESLint zero-warning mode mein run ho raha tha, is liye
+unused type warnings pipeline ko rok rahi thin.
+FIX APPLIED
+- SiteHeaderProps removed
+- SiteFooterProps removed
+- Formatting passed
+- TypeScript passed
+- ESLint passed with zero warnings
+- Production build passed
+PHASE 7 STATUS
+COMPLETE
+NEXT PHASE
+Phase 8 — Advanced Frontend UI/UX
+Backup:
+$BackupRoot
+Log:
+$LogPath
+"@ | Set-Content `
+        -LiteralPath $ReportPath `
+        -Encoding UTF8
+    @"
+PHASE 7 COMPLETE
+The string is missing the terminator: "@.
+>> try {
+    function Invoke-Checked {
+        param(
+            [Parameter(Mandatory)]
+            [string]$Name,
+            [Parameter(Mandatory)]
+            [scriptblock]$Command
+        )
+        Write-Host ""
+        Write-Host "=== $Name ===" -ForegroundColor Cyan
+        $global:LASTEXITCODE = 0
+        & $Command
+        if ($LASTEXITCODE -ne 0) {
+            throw "$Name failed with exit code $LASTEXITCODE."
+        }
+        Write-Host "$Name PASSED" -ForegroundColor Green
+    }
+    foreach ($FilePath in @($HeaderPath, $FooterPath)) {
+        if (-not (Test-Path -LiteralPath $FilePath)) {
+            throw "Required file is missing: $FilePath"
+        }
+        Copy-Item `
+            -LiteralPath $FilePath `
+            -Destination (Join-Path $BackupRoot (Split-Path $FilePath -Leaf)) `
+            -Force
+    }
+    Write-Host ""
+    Write-Host "=== REMOVE UNUSED PROP TYPES ===" -ForegroundColor Cyan
+    $HeaderContent = Get-Content `
+        -LiteralPath $HeaderPath `
+        -Raw
+    $FooterContent = Get-Content `
+        -LiteralPath $FooterPath `
+        -Raw
+    $HeaderContent = [regex]::Replace(
+        $HeaderContent,
+        '(?ms)^\s*(?:export\s+)?type\s+SiteHeaderProps\s*=\s*\{.*?^\s*\};?\s*',
+        ''
+    )
+    $HeaderContent = [regex]::Replace(
+        $HeaderContent,
+        '(?ms)^\s*(?:export\s+)?interface\s+SiteHeaderProps\s*\{.*?^\s*\}\s*',
+        ''
+    )
+    $FooterContent = [regex]::Replace(
+        $FooterContent,
+        '(?ms)^\s*(?:export\s+)?type\s+SiteFooterProps\s*=\s*\{.*?^\s*\};?\s*',
+        ''
+    )
+    $FooterContent = [regex]::Replace(
+        $FooterContent,
+        '(?ms)^\s*(?:export\s+)?interface\s+SiteFooterProps\s*\{.*?^\s*\}\s*',
+        ''
+    )
+    if ($HeaderContent -match '\bSiteHeaderProps\b') {
+        throw "SiteHeaderProps still exists in site-header.tsx."
+    }
+    if ($FooterContent -match '\bSiteFooterProps\b') {
+        throw "SiteFooterProps still exists in site-footer.tsx."
+    }
+    Set-Content `
+        -LiteralPath $HeaderPath `
+        -Value $HeaderContent `
+        -Encoding UTF8
+    Set-Content `
+        -LiteralPath $FooterPath `
+        -Value $FooterContent `
+        -Encoding UTF8
+    Write-Host "UNUSED PROP TYPES REMOVED" -ForegroundColor Green
+    $PackageJson = Get-Content `
+        -LiteralPath (Join-Path $ProjectRoot "package.json") `
+        -Raw |
+        ConvertFrom-Json
+    $Scripts = @(
+        $PackageJson.scripts.PSObject.Properties.Name
+    )
+    Invoke-Checked "HEADER AND FOOTER PARSE TEST" {
+        pnpm exec prettier `
+            --write `
+            "src/components/site/site-header.tsx" `
+            "src/components/site/site-footer.tsx"
+    }
+    Invoke-Checked "FORMAT WRITE" {
+        if ($Scripts -contains "format") {
+            pnpm run format
+        }
+        else {
+            pnpm exec prettier --write .
+        }
+    }
+    Invoke-Checked "FORMAT CHECK" {
+        if ($Scripts -contains "format:check") {
+            pnpm run format:check
+        }
+        else {
+            pnpm exec prettier --check .
+        }
+    }
+    Invoke-Checked "TYPESCRIPT CHECK" {
+        if ($Scripts -contains "typecheck") {
+            pnpm run typecheck
+        }
+        else {
+            pnpm exec tsc --noEmit
+        }
+    }
+    Invoke-Checked "ESLINT ZERO WARNINGS" {
+        if ($Scripts -contains "lint") {
+            pnpm run lint -- --max-warnings=0
+        }
+        else {
+            pnpm exec eslint . --max-warnings=0
+        }
+    }
+    Invoke-Checked "PRODUCTION BUILD" {
+        if ($Scripts -contains "build") {
+            pnpm run build
+        }
+        else {
+            throw "build script is missing from package.json."
+        }
+    }
+    $RequiredPhase7Files = @(
+        "src\lib\theme\types.ts",
+        "src\lib\theme\presets.ts",
+        "src\lib\theme\theme-store.ts",
+        "src\lib\theme\ai-generator.ts",
+        "src\app\api\admin\themes\route.ts",
+        "src\app\api\admin\themes\generate\route.ts",
+        "src\components\admin\themes\theme-studio.tsx",
+        "src\app\admin\themes\page.tsx",
+        "src\components\site\active-theme-style.tsx",
+        "src\components\site\dynamic-homepage.tsx",
+        "src\components\site\site-header.tsx",
+        "src\components\site\site-footer.tsx",
+        "src\components\admin\admin-sidebar.tsx",
+        "src\app\page.tsx"
+    )
+    foreach ($RequiredFile in $RequiredPhase7Files) {
+        $RequiredPath = Join-Path $ProjectRoot $RequiredFile
+        if (-not (Test-Path -LiteralPath $RequiredPath)) {
+            throw "Phase 7 file is missing: $RequiredFile"
+        }
+    }
+    @"
+KNOWLEDGE NEST — PHASE 7 COMPLETION REPORT
+Completed: $GeneratedAt
+Project: $ProjectRoot
+FINAL ISSUE
+SiteHeaderProps aur SiteFooterProps type declarations
+components se props remove hone ke baad unused reh gaye thay.
+ESLint zero-warning mode mein run ho raha tha, is liye
+unused type warnings pipeline ko rok rahi thin.
+FIX APPLIED
+- SiteHeaderProps removed
+- SiteFooterProps removed
+- Formatting passed
+- TypeScript passed
+- ESLint passed with zero warnings
+- Production build passed
+PHASE 7 STATUS
+COMPLETE
+NEXT PHASE
+Phase 8 — Advanced Frontend UI/UX
+Backup:
+$BackupRoot
+Log:
+$LogPath
+"@ | Set-Content `
+        -LiteralPath $ReportPath `
+        -Encoding UTF8
+    @"
+PHASE 7 COMPLETE
+Completed: $GeneratedAt
+Project: $ProjectRoot
+The string is missing the terminator: "@.
+>> try {
+    function Invoke-Checked {
+        param(
+            [Parameter(Mandatory)]
+            [string]$Name,
+            [Parameter(Mandatory)]
+            [scriptblock]$Command
+        )
+        Write-Host ""
+        Write-Host "=== $Name ===" -ForegroundColor Cyan
+        $global:LASTEXITCODE = 0
+        & $Command
+        if ($LASTEXITCODE -ne 0) {
+            throw "$Name failed with exit code $LASTEXITCODE."
+        }
+        Write-Host "$Name PASSED" -ForegroundColor Green
+    }
+    foreach ($FilePath in @($HeaderPath, $FooterPath)) {
+        if (-not (Test-Path -LiteralPath $FilePath)) {
+            throw "Required file is missing: $FilePath"
+        }
+        Copy-Item `
+            -LiteralPath $FilePath `
+            -Destination (Join-Path $BackupRoot (Split-Path $FilePath -Leaf)) `
+            -Force
+    }
+    Write-Host ""
+    Write-Host "=== REMOVE UNUSED PROP TYPES ===" -ForegroundColor Cyan
+    $HeaderContent = Get-Content `
+        -LiteralPath $HeaderPath `
+        -Raw
+    $FooterContent = Get-Content `
+        -LiteralPath $FooterPath `
+        -Raw
+    $HeaderContent = [regex]::Replace(
+        $HeaderContent,
+        '(?ms)^\s*(?:export\s+)?type\s+SiteHeaderProps\s*=\s*\{.*?^\s*\};?\s*',
+        ''
+    )
+    $HeaderContent = [regex]::Replace(
+        $HeaderContent,
+        '(?ms)^\s*(?:export\s+)?interface\s+SiteHeaderProps\s*\{.*?^\s*\}\s*',
+        ''
+    )
+    $FooterContent = [regex]::Replace(
+        $FooterContent,
+        '(?ms)^\s*(?:export\s+)?type\s+SiteFooterProps\s*=\s*\{.*?^\s*\};?\s*',
+        ''
+    )
+    $FooterContent = [regex]::Replace(
+        $FooterContent,
+        '(?ms)^\s*(?:export\s+)?interface\s+SiteFooterProps\s*\{.*?^\s*\}\s*',
+        ''
+    )
+    if ($HeaderContent -match '\bSiteHeaderProps\b') {
+        throw "SiteHeaderProps still exists in site-header.tsx."
+    }
+    if ($FooterContent -match '\bSiteFooterProps\b') {
+        throw "SiteFooterProps still exists in site-footer.tsx."
+    }
+    Set-Content `
+        -LiteralPath $HeaderPath `
+        -Value $HeaderContent `
+        -Encoding UTF8
+    Set-Content `
+        -LiteralPath $FooterPath `
+        -Value $FooterContent `
+        -Encoding UTF8
+    Write-Host "UNUSED PROP TYPES REMOVED" -ForegroundColor Green
+    $PackageJson = Get-Content `
+        -LiteralPath (Join-Path $ProjectRoot "package.json") `
+        -Raw |
+        ConvertFrom-Json
+    $Scripts = @(
+        $PackageJson.scripts.PSObject.Properties.Name
+    )
+    Invoke-Checked "HEADER AND FOOTER PARSE TEST" {
+        pnpm exec prettier `
+            --write `
+            "src/components/site/site-header.tsx" `
+            "src/components/site/site-footer.tsx"
+    }
+    Invoke-Checked "FORMAT WRITE" {
+        if ($Scripts -contains "format") {
+            pnpm run format
+        }
+        else {
+            pnpm exec prettier --write .
+        }
+    }
+    Invoke-Checked "FORMAT CHECK" {
+        if ($Scripts -contains "format:check") {
+            pnpm run format:check
+        }
+        else {
+            pnpm exec prettier --check .
+        }
+    }
+    Invoke-Checked "TYPESCRIPT CHECK" {
+        if ($Scripts -contains "typecheck") {
+            pnpm run typecheck
+        }
+        else {
+            pnpm exec tsc --noEmit
+        }
+    }
+    Invoke-Checked "ESLINT ZERO WARNINGS" {
+        if ($Scripts -contains "lint") {
+            pnpm run lint -- --max-warnings=0
+        }
+        else {
+            pnpm exec eslint . --max-warnings=0
+        }
+    }
+    Invoke-Checked "PRODUCTION BUILD" {
+        if ($Scripts -contains "build") {
+            pnpm run build
+        }
+        else {
+            throw "build script is missing from package.json."
+        }
+    }
+    $RequiredPhase7Files = @(
+        "src\lib\theme\types.ts",
+        "src\lib\theme\presets.ts",
+        "src\lib\theme\theme-store.ts",
+        "src\lib\theme\ai-generator.ts",
+        "src\app\api\admin\themes\route.ts",
+        "src\app\api\admin\themes\generate\route.ts",
+        "src\components\admin\themes\theme-studio.tsx",
+        "src\app\admin\themes\page.tsx",
+        "src\components\site\active-theme-style.tsx",
+        "src\components\site\dynamic-homepage.tsx",
+        "src\components\site\site-header.tsx",
+        "src\components\site\site-footer.tsx",
+        "src\components\admin\admin-sidebar.tsx",
+        "src\app\page.tsx"
+    )
+    foreach ($RequiredFile in $RequiredPhase7Files) {
+        $RequiredPath = Join-Path $ProjectRoot $RequiredFile
+        if (-not (Test-Path -LiteralPath $RequiredPath)) {
+            throw "Phase 7 file is missing: $RequiredFile"
+        }
+    }
+    @"
+KNOWLEDGE NEST — PHASE 7 COMPLETION REPORT
+Completed: $GeneratedAt
+Project: $ProjectRoot
+FINAL ISSUE
+SiteHeaderProps aur SiteFooterProps type declarations
+components se props remove hone ke baad unused reh gaye thay.
+ESLint zero-warning mode mein run ho raha tha, is liye
+unused type warnings pipeline ko rok rahi thin.
+FIX APPLIED
+- SiteHeaderProps removed
+- SiteFooterProps removed
+- Formatting passed
+- TypeScript passed
+- ESLint passed with zero warnings
+- Production build passed
+PHASE 7 STATUS
+COMPLETE
+NEXT PHASE
+Phase 8 — Advanced Frontend UI/UX
+Backup:
+$BackupRoot
+Log:
+$LogPath
+"@ | Set-Content `
+        -LiteralPath $ReportPath `
+        -Encoding UTF8
+    @"
+PHASE 7 COMPLETE
+Completed: $GeneratedAt
+Project: $ProjectRoot
+Verification:
+- Formatting passed
+- TypeScript passed
+- ESLint passed with zero warnings
+- Production build passed
+The string is missing the terminator: "@.
+>> try {
+    function Invoke-Checked {
+        param(
+            [Parameter(Mandatory)]
+            [string]$Name,
+            [Parameter(Mandatory)]
+            [scriptblock]$Command
+        )
+        Write-Host ""
+        Write-Host "=== $Name ===" -ForegroundColor Cyan
+        $global:LASTEXITCODE = 0
+        & $Command
+        if ($LASTEXITCODE -ne 0) {
+            throw "$Name failed with exit code $LASTEXITCODE."
+        }
+        Write-Host "$Name PASSED" -ForegroundColor Green
+    }
+    foreach ($FilePath in @($HeaderPath, $FooterPath)) {
+        if (-not (Test-Path -LiteralPath $FilePath)) {
+            throw "Required file is missing: $FilePath"
+        }
+        Copy-Item `
+            -LiteralPath $FilePath `
+            -Destination (Join-Path $BackupRoot (Split-Path $FilePath -Leaf)) `
+            -Force
+    }
+    Write-Host ""
+    Write-Host "=== REMOVE UNUSED PROP TYPES ===" -ForegroundColor Cyan
+    $HeaderContent = Get-Content `
+        -LiteralPath $HeaderPath `
+        -Raw
+    $FooterContent = Get-Content `
+        -LiteralPath $FooterPath `
+        -Raw
+    $HeaderContent = [regex]::Replace(
+        $HeaderContent,
+        '(?ms)^\s*(?:export\s+)?type\s+SiteHeaderProps\s*=\s*\{.*?^\s*\};?\s*',
+        ''
+    )
+    $HeaderContent = [regex]::Replace(
+        $HeaderContent,
+        '(?ms)^\s*(?:export\s+)?interface\s+SiteHeaderProps\s*\{.*?^\s*\}\s*',
+        ''
+    )
+    $FooterContent = [regex]::Replace(
+        $FooterContent,
+        '(?ms)^\s*(?:export\s+)?type\s+SiteFooterProps\s*=\s*\{.*?^\s*\};?\s*',
+        ''
+    )
+    $FooterContent = [regex]::Replace(
+        $FooterContent,
+        '(?ms)^\s*(?:export\s+)?interface\s+SiteFooterProps\s*\{.*?^\s*\}\s*',
+        ''
+    )
+    if ($HeaderContent -match '\bSiteHeaderProps\b') {
+        throw "SiteHeaderProps still exists in site-header.tsx."
+    }
+    if ($FooterContent -match '\bSiteFooterProps\b') {
+        throw "SiteFooterProps still exists in site-footer.tsx."
+    }
+    Set-Content `
+        -LiteralPath $HeaderPath `
+        -Value $HeaderContent `
+        -Encoding UTF8
+    Set-Content `
+        -LiteralPath $FooterPath `
+        -Value $FooterContent `
+        -Encoding UTF8
+    Write-Host "UNUSED PROP TYPES REMOVED" -ForegroundColor Green
+    $PackageJson = Get-Content `
+        -LiteralPath (Join-Path $ProjectRoot "package.json") `
+        -Raw |
+        ConvertFrom-Json
+    $Scripts = @(
+        $PackageJson.scripts.PSObject.Properties.Name
+    )
+    Invoke-Checked "HEADER AND FOOTER PARSE TEST" {
+        pnpm exec prettier `
+            --write `
+            "src/components/site/site-header.tsx" `
+            "src/components/site/site-footer.tsx"
+    }
+    Invoke-Checked "FORMAT WRITE" {
+        if ($Scripts -contains "format") {
+            pnpm run format
+        }
+        else {
+            pnpm exec prettier --write .
+        }
+    }
+    Invoke-Checked "FORMAT CHECK" {
+        if ($Scripts -contains "format:check") {
+            pnpm run format:check
+        }
+        else {
+            pnpm exec prettier --check .
+        }
+    }
+    Invoke-Checked "TYPESCRIPT CHECK" {
+        if ($Scripts -contains "typecheck") {
+            pnpm run typecheck
+        }
+        else {
+            pnpm exec tsc --noEmit
+        }
+    }
+    Invoke-Checked "ESLINT ZERO WARNINGS" {
+        if ($Scripts -contains "lint") {
+            pnpm run lint -- --max-warnings=0
+        }
+        else {
+            pnpm exec eslint . --max-warnings=0
+        }
+    }
+    Invoke-Checked "PRODUCTION BUILD" {
+        if ($Scripts -contains "build") {
+            pnpm run build
+        }
+        else {
+            throw "build script is missing from package.json."
+        }
+    }
+    $RequiredPhase7Files = @(
+        "src\lib\theme\types.ts",
+        "src\lib\theme\presets.ts",
+        "src\lib\theme\theme-store.ts",
+        "src\lib\theme\ai-generator.ts",
+        "src\app\api\admin\themes\route.ts",
+        "src\app\api\admin\themes\generate\route.ts",
+        "src\components\admin\themes\theme-studio.tsx",
+        "src\app\admin\themes\page.tsx",
+        "src\components\site\active-theme-style.tsx",
+        "src\components\site\dynamic-homepage.tsx",
+        "src\components\site\site-header.tsx",
+        "src\components\site\site-footer.tsx",
+        "src\components\admin\admin-sidebar.tsx",
+        "src\app\page.tsx"
+    )
+    foreach ($RequiredFile in $RequiredPhase7Files) {
+        $RequiredPath = Join-Path $ProjectRoot $RequiredFile
+        if (-not (Test-Path -LiteralPath $RequiredPath)) {
+            throw "Phase 7 file is missing: $RequiredFile"
+        }
+    }
+    @"
+KNOWLEDGE NEST — PHASE 7 COMPLETION REPORT
+Completed: $GeneratedAt
+Project: $ProjectRoot
+FINAL ISSUE
+SiteHeaderProps aur SiteFooterProps type declarations
+components se props remove hone ke baad unused reh gaye thay.
+ESLint zero-warning mode mein run ho raha tha, is liye
+unused type warnings pipeline ko rok rahi thin.
+FIX APPLIED
+- SiteHeaderProps removed
+- SiteFooterProps removed
+- Formatting passed
+- TypeScript passed
+- ESLint passed with zero warnings
+- Production build passed
+PHASE 7 STATUS
+COMPLETE
+NEXT PHASE
+Phase 8 — Advanced Frontend UI/UX
+Backup:
+$BackupRoot
+Log:
+$LogPath
+"@ | Set-Content `
+        -LiteralPath $ReportPath `
+        -Encoding UTF8
+    @"
+PHASE 7 COMPLETE
+Completed: $GeneratedAt
+Project: $ProjectRoot
+Verification:
+- Formatting passed
+- TypeScript passed
+- ESLint passed with zero warnings
+- Production build passed
+Report:
+$ReportPath
+The string is missing the terminator: "@.
+>> try {
+    function Invoke-Checked {
+        param(
+            [Parameter(Mandatory)]
+            [string]$Name,
+            [Parameter(Mandatory)]
+            [scriptblock]$Command
+        )
+        Write-Host ""
+        Write-Host "=== $Name ===" -ForegroundColor Cyan
+        $global:LASTEXITCODE = 0
+        & $Command
+        if ($LASTEXITCODE -ne 0) {
+            throw "$Name failed with exit code $LASTEXITCODE."
+        }
+        Write-Host "$Name PASSED" -ForegroundColor Green
+    }
+    foreach ($FilePath in @($HeaderPath, $FooterPath)) {
+        if (-not (Test-Path -LiteralPath $FilePath)) {
+            throw "Required file is missing: $FilePath"
+        }
+        Copy-Item `
+            -LiteralPath $FilePath `
+            -Destination (Join-Path $BackupRoot (Split-Path $FilePath -Leaf)) `
+            -Force
+    }
+    Write-Host ""
+    Write-Host "=== REMOVE UNUSED PROP TYPES ===" -ForegroundColor Cyan
+    $HeaderContent = Get-Content `
+        -LiteralPath $HeaderPath `
+        -Raw
+    $FooterContent = Get-Content `
+        -LiteralPath $FooterPath `
+        -Raw
+    $HeaderContent = [regex]::Replace(
+        $HeaderContent,
+        '(?ms)^\s*(?:export\s+)?type\s+SiteHeaderProps\s*=\s*\{.*?^\s*\};?\s*',
+        ''
+    )
+    $HeaderContent = [regex]::Replace(
+        $HeaderContent,
+        '(?ms)^\s*(?:export\s+)?interface\s+SiteHeaderProps\s*\{.*?^\s*\}\s*',
+        ''
+    )
+    $FooterContent = [regex]::Replace(
+        $FooterContent,
+        '(?ms)^\s*(?:export\s+)?type\s+SiteFooterProps\s*=\s*\{.*?^\s*\};?\s*',
+        ''
+    )
+    $FooterContent = [regex]::Replace(
+        $FooterContent,
+        '(?ms)^\s*(?:export\s+)?interface\s+SiteFooterProps\s*\{.*?^\s*\}\s*',
+        ''
+    )
+    if ($HeaderContent -match '\bSiteHeaderProps\b') {
+        throw "SiteHeaderProps still exists in site-header.tsx."
+    }
+    if ($FooterContent -match '\bSiteFooterProps\b') {
+        throw "SiteFooterProps still exists in site-footer.tsx."
+    }
+    Set-Content `
+        -LiteralPath $HeaderPath `
+        -Value $HeaderContent `
+        -Encoding UTF8
+    Set-Content `
+        -LiteralPath $FooterPath `
+        -Value $FooterContent `
+        -Encoding UTF8
+    Write-Host "UNUSED PROP TYPES REMOVED" -ForegroundColor Green
+    $PackageJson = Get-Content `
+        -LiteralPath (Join-Path $ProjectRoot "package.json") `
+        -Raw |
+        ConvertFrom-Json
+    $Scripts = @(
+        $PackageJson.scripts.PSObject.Properties.Name
+    )
+    Invoke-Checked "HEADER AND FOOTER PARSE TEST" {
+        pnpm exec prettier `
+            --write `
+            "src/components/site/site-header.tsx" `
+            "src/components/site/site-footer.tsx"
+    }
+    Invoke-Checked "FORMAT WRITE" {
+        if ($Scripts -contains "format") {
+            pnpm run format
+        }
+        else {
+            pnpm exec prettier --write .
+        }
+    }
+    Invoke-Checked "FORMAT CHECK" {
+        if ($Scripts -contains "format:check") {
+            pnpm run format:check
+        }
+        else {
+            pnpm exec prettier --check .
+        }
+    }
+    Invoke-Checked "TYPESCRIPT CHECK" {
+        if ($Scripts -contains "typecheck") {
+            pnpm run typecheck
+        }
+        else {
+            pnpm exec tsc --noEmit
+        }
+    }
+    Invoke-Checked "ESLINT ZERO WARNINGS" {
+        if ($Scripts -contains "lint") {
+            pnpm run lint -- --max-warnings=0
+        }
+        else {
+            pnpm exec eslint . --max-warnings=0
+        }
+    }
+    Invoke-Checked "PRODUCTION BUILD" {
+        if ($Scripts -contains "build") {
+            pnpm run build
+        }
+        else {
+            throw "build script is missing from package.json."
+        }
+    }
+    $RequiredPhase7Files = @(
+        "src\lib\theme\types.ts",
+        "src\lib\theme\presets.ts",
+        "src\lib\theme\theme-store.ts",
+        "src\lib\theme\ai-generator.ts",
+        "src\app\api\admin\themes\route.ts",
+        "src\app\api\admin\themes\generate\route.ts",
+        "src\components\admin\themes\theme-studio.tsx",
+        "src\app\admin\themes\page.tsx",
+        "src\components\site\active-theme-style.tsx",
+        "src\components\site\dynamic-homepage.tsx",
+        "src\components\site\site-header.tsx",
+        "src\components\site\site-footer.tsx",
+        "src\components\admin\admin-sidebar.tsx",
+        "src\app\page.tsx"
+    )
+    foreach ($RequiredFile in $RequiredPhase7Files) {
+        $RequiredPath = Join-Path $ProjectRoot $RequiredFile
+        if (-not (Test-Path -LiteralPath $RequiredPath)) {
+            throw "Phase 7 file is missing: $RequiredFile"
+        }
+    }
+    @"
+KNOWLEDGE NEST — PHASE 7 COMPLETION REPORT
+Completed: $GeneratedAt
+Project: $ProjectRoot
+FINAL ISSUE
+SiteHeaderProps aur SiteFooterProps type declarations
+components se props remove hone ke baad unused reh gaye thay.
+ESLint zero-warning mode mein run ho raha tha, is liye
+unused type warnings pipeline ko rok rahi thin.
+FIX APPLIED
+- SiteHeaderProps removed
+- SiteFooterProps removed
+- Formatting passed
+- TypeScript passed
+- ESLint passed with zero warnings
+- Production build passed
+PHASE 7 STATUS
+COMPLETE
+NEXT PHASE
+Phase 8 — Advanced Frontend UI/UX
+Backup:
+$BackupRoot
+Log:
+$LogPath
+"@ | Set-Content `
+        -LiteralPath $ReportPath `
+        -Encoding UTF8
+    @"
+PHASE 7 COMPLETE
+Completed: $GeneratedAt
+Project: $ProjectRoot
+Verification:
+- Formatting passed
+- TypeScript passed
+- ESLint passed with zero warnings
+- Production build passed
+Report:
+$ReportPath
+Backup:
+$BackupRoot
+The string is missing the terminator: "@.
+>> try {
+    function Invoke-Checked {
+        param(
+            [Parameter(Mandatory)]
+            [string]$Name,
+            [Parameter(Mandatory)]
+            [scriptblock]$Command
+        )
+        Write-Host ""
+        Write-Host "=== $Name ===" -ForegroundColor Cyan
+        $global:LASTEXITCODE = 0
+        & $Command
+        if ($LASTEXITCODE -ne 0) {
+            throw "$Name failed with exit code $LASTEXITCODE."
+        }
+        Write-Host "$Name PASSED" -ForegroundColor Green
+    }
+    foreach ($FilePath in @($HeaderPath, $FooterPath)) {
+        if (-not (Test-Path -LiteralPath $FilePath)) {
+            throw "Required file is missing: $FilePath"
+        }
+        Copy-Item `
+            -LiteralPath $FilePath `
+            -Destination (Join-Path $BackupRoot (Split-Path $FilePath -Leaf)) `
+            -Force
+    }
+    Write-Host ""
+    Write-Host "=== REMOVE UNUSED PROP TYPES ===" -ForegroundColor Cyan
+    $HeaderContent = Get-Content `
+        -LiteralPath $HeaderPath `
+        -Raw
+    $FooterContent = Get-Content `
+        -LiteralPath $FooterPath `
+        -Raw
+    $HeaderContent = [regex]::Replace(
+        $HeaderContent,
+        '(?ms)^\s*(?:export\s+)?type\s+SiteHeaderProps\s*=\s*\{.*?^\s*\};?\s*',
+        ''
+    )
+    $HeaderContent = [regex]::Replace(
+        $HeaderContent,
+        '(?ms)^\s*(?:export\s+)?interface\s+SiteHeaderProps\s*\{.*?^\s*\}\s*',
+        ''
+    )
+    $FooterContent = [regex]::Replace(
+        $FooterContent,
+        '(?ms)^\s*(?:export\s+)?type\s+SiteFooterProps\s*=\s*\{.*?^\s*\};?\s*',
+        ''
+    )
+    $FooterContent = [regex]::Replace(
+        $FooterContent,
+        '(?ms)^\s*(?:export\s+)?interface\s+SiteFooterProps\s*\{.*?^\s*\}\s*',
+        ''
+    )
+    if ($HeaderContent -match '\bSiteHeaderProps\b') {
+        throw "SiteHeaderProps still exists in site-header.tsx."
+    }
+    if ($FooterContent -match '\bSiteFooterProps\b') {
+        throw "SiteFooterProps still exists in site-footer.tsx."
+    }
+    Set-Content `
+        -LiteralPath $HeaderPath `
+        -Value $HeaderContent `
+        -Encoding UTF8
+    Set-Content `
+        -LiteralPath $FooterPath `
+        -Value $FooterContent `
+        -Encoding UTF8
+    Write-Host "UNUSED PROP TYPES REMOVED" -ForegroundColor Green
+    $PackageJson = Get-Content `
+        -LiteralPath (Join-Path $ProjectRoot "package.json") `
+        -Raw |
+        ConvertFrom-Json
+    $Scripts = @(
+        $PackageJson.scripts.PSObject.Properties.Name
+    )
+    Invoke-Checked "HEADER AND FOOTER PARSE TEST" {
+        pnpm exec prettier `
+            --write `
+            "src/components/site/site-header.tsx" `
+            "src/components/site/site-footer.tsx"
+    }
+    Invoke-Checked "FORMAT WRITE" {
+        if ($Scripts -contains "format") {
+            pnpm run format
+        }
+        else {
+            pnpm exec prettier --write .
+        }
+    }
+    Invoke-Checked "FORMAT CHECK" {
+        if ($Scripts -contains "format:check") {
+            pnpm run format:check
+        }
+        else {
+            pnpm exec prettier --check .
+        }
+    }
+    Invoke-Checked "TYPESCRIPT CHECK" {
+        if ($Scripts -contains "typecheck") {
+            pnpm run typecheck
+        }
+        else {
+            pnpm exec tsc --noEmit
+        }
+    }
+    Invoke-Checked "ESLINT ZERO WARNINGS" {
+        if ($Scripts -contains "lint") {
+            pnpm run lint -- --max-warnings=0
+        }
+        else {
+            pnpm exec eslint . --max-warnings=0
+        }
+    }
+    Invoke-Checked "PRODUCTION BUILD" {
+        if ($Scripts -contains "build") {
+            pnpm run build
+        }
+        else {
+            throw "build script is missing from package.json."
+        }
+    }
+    $RequiredPhase7Files = @(
+        "src\lib\theme\types.ts",
+        "src\lib\theme\presets.ts",
+        "src\lib\theme\theme-store.ts",
+        "src\lib\theme\ai-generator.ts",
+        "src\app\api\admin\themes\route.ts",
+        "src\app\api\admin\themes\generate\route.ts",
+        "src\components\admin\themes\theme-studio.tsx",
+        "src\app\admin\themes\page.tsx",
+        "src\components\site\active-theme-style.tsx",
+        "src\components\site\dynamic-homepage.tsx",
+        "src\components\site\site-header.tsx",
+        "src\components\site\site-footer.tsx",
+        "src\components\admin\admin-sidebar.tsx",
+        "src\app\page.tsx"
+    )
+    foreach ($RequiredFile in $RequiredPhase7Files) {
+        $RequiredPath = Join-Path $ProjectRoot $RequiredFile
+        if (-not (Test-Path -LiteralPath $RequiredPath)) {
+            throw "Phase 7 file is missing: $RequiredFile"
+        }
+    }
+    @"
+KNOWLEDGE NEST — PHASE 7 COMPLETION REPORT
+Completed: $GeneratedAt
+Project: $ProjectRoot
+FINAL ISSUE
+SiteHeaderProps aur SiteFooterProps type declarations
+components se props remove hone ke baad unused reh gaye thay.
+ESLint zero-warning mode mein run ho raha tha, is liye
+unused type warnings pipeline ko rok rahi thin.
+FIX APPLIED
+- SiteHeaderProps removed
+- SiteFooterProps removed
+- Formatting passed
+- TypeScript passed
+- ESLint passed with zero warnings
+- Production build passed
+PHASE 7 STATUS
+COMPLETE
+NEXT PHASE
+Phase 8 — Advanced Frontend UI/UX
+Backup:
+$BackupRoot
+Log:
+$LogPath
+"@ | Set-Content `
+        -LiteralPath $ReportPath `
+        -Encoding UTF8
+    @"
+PHASE 7 COMPLETE
+Completed: $GeneratedAt
+Project: $ProjectRoot
+Verification:
+- Formatting passed
+- TypeScript passed
+- ESLint passed with zero warnings
+- Production build passed
+Report:
+$ReportPath
+Backup:
+$BackupRoot
+Log:
+$LogPath
+The string is missing the terminator: "@.
+>> try {
+    function Invoke-Checked {
+        param(
+            [Parameter(Mandatory)]
+            [string]$Name,
+            [Parameter(Mandatory)]
+            [scriptblock]$Command
+        )
+        Write-Host ""
+        Write-Host "=== $Name ===" -ForegroundColor Cyan
+        $global:LASTEXITCODE = 0
+        & $Command
+        if ($LASTEXITCODE -ne 0) {
+            throw "$Name failed with exit code $LASTEXITCODE."
+        }
+        Write-Host "$Name PASSED" -ForegroundColor Green
+    }
+    foreach ($FilePath in @($HeaderPath, $FooterPath)) {
+        if (-not (Test-Path -LiteralPath $FilePath)) {
+            throw "Required file is missing: $FilePath"
+        }
+        Copy-Item `
+            -LiteralPath $FilePath `
+            -Destination (Join-Path $BackupRoot (Split-Path $FilePath -Leaf)) `
+            -Force
+    }
+    Write-Host ""
+    Write-Host "=== REMOVE UNUSED PROP TYPES ===" -ForegroundColor Cyan
+    $HeaderContent = Get-Content `
+        -LiteralPath $HeaderPath `
+        -Raw
+    $FooterContent = Get-Content `
+        -LiteralPath $FooterPath `
+        -Raw
+    $HeaderContent = [regex]::Replace(
+        $HeaderContent,
+        '(?ms)^\s*(?:export\s+)?type\s+SiteHeaderProps\s*=\s*\{.*?^\s*\};?\s*',
+        ''
+    )
+    $HeaderContent = [regex]::Replace(
+        $HeaderContent,
+        '(?ms)^\s*(?:export\s+)?interface\s+SiteHeaderProps\s*\{.*?^\s*\}\s*',
+        ''
+    )
+    $FooterContent = [regex]::Replace(
+        $FooterContent,
+        '(?ms)^\s*(?:export\s+)?type\s+SiteFooterProps\s*=\s*\{.*?^\s*\};?\s*',
+        ''
+    )
+    $FooterContent = [regex]::Replace(
+        $FooterContent,
+        '(?ms)^\s*(?:export\s+)?interface\s+SiteFooterProps\s*\{.*?^\s*\}\s*',
+        ''
+    )
+    if ($HeaderContent -match '\bSiteHeaderProps\b') {
+        throw "SiteHeaderProps still exists in site-header.tsx."
+    }
+    if ($FooterContent -match '\bSiteFooterProps\b') {
+        throw "SiteFooterProps still exists in site-footer.tsx."
+    }
+    Set-Content `
+        -LiteralPath $HeaderPath `
+        -Value $HeaderContent `
+        -Encoding UTF8
+    Set-Content `
+        -LiteralPath $FooterPath `
+        -Value $FooterContent `
+        -Encoding UTF8
+    Write-Host "UNUSED PROP TYPES REMOVED" -ForegroundColor Green
+    $PackageJson = Get-Content `
+        -LiteralPath (Join-Path $ProjectRoot "package.json") `
+        -Raw |
+        ConvertFrom-Json
+    $Scripts = @(
+        $PackageJson.scripts.PSObject.Properties.Name
+    )
+    Invoke-Checked "HEADER AND FOOTER PARSE TEST" {
+        pnpm exec prettier `
+            --write `
+            "src/components/site/site-header.tsx" `
+            "src/components/site/site-footer.tsx"
+    }
+    Invoke-Checked "FORMAT WRITE" {
+        if ($Scripts -contains "format") {
+            pnpm run format
+        }
+        else {
+            pnpm exec prettier --write .
+        }
+    }
+    Invoke-Checked "FORMAT CHECK" {
+        if ($Scripts -contains "format:check") {
+            pnpm run format:check
+        }
+        else {
+            pnpm exec prettier --check .
+        }
+    }
+    Invoke-Checked "TYPESCRIPT CHECK" {
+        if ($Scripts -contains "typecheck") {
+            pnpm run typecheck
+        }
+        else {
+            pnpm exec tsc --noEmit
+        }
+    }
+    Invoke-Checked "ESLINT ZERO WARNINGS" {
+        if ($Scripts -contains "lint") {
+            pnpm run lint -- --max-warnings=0
+        }
+        else {
+            pnpm exec eslint . --max-warnings=0
+        }
+    }
+    Invoke-Checked "PRODUCTION BUILD" {
+        if ($Scripts -contains "build") {
+            pnpm run build
+        }
+        else {
+            throw "build script is missing from package.json."
+        }
+    }
+    $RequiredPhase7Files = @(
+        "src\lib\theme\types.ts",
+        "src\lib\theme\presets.ts",
+        "src\lib\theme\theme-store.ts",
+        "src\lib\theme\ai-generator.ts",
+        "src\app\api\admin\themes\route.ts",
+        "src\app\api\admin\themes\generate\route.ts",
+        "src\components\admin\themes\theme-studio.tsx",
+        "src\app\admin\themes\page.tsx",
+        "src\components\site\active-theme-style.tsx",
+        "src\components\site\dynamic-homepage.tsx",
+        "src\components\site\site-header.tsx",
+        "src\components\site\site-footer.tsx",
+        "src\components\admin\admin-sidebar.tsx",
+        "src\app\page.tsx"
+    )
+    foreach ($RequiredFile in $RequiredPhase7Files) {
+        $RequiredPath = Join-Path $ProjectRoot $RequiredFile
+        if (-not (Test-Path -LiteralPath $RequiredPath)) {
+            throw "Phase 7 file is missing: $RequiredFile"
+        }
+    }
+    @"
+KNOWLEDGE NEST — PHASE 7 COMPLETION REPORT
+Completed: $GeneratedAt
+Project: $ProjectRoot
+FINAL ISSUE
+SiteHeaderProps aur SiteFooterProps type declarations
+components se props remove hone ke baad unused reh gaye thay.
+ESLint zero-warning mode mein run ho raha tha, is liye
+unused type warnings pipeline ko rok rahi thin.
+FIX APPLIED
+- SiteHeaderProps removed
+- SiteFooterProps removed
+- Formatting passed
+- TypeScript passed
+- ESLint passed with zero warnings
+- Production build passed
+PHASE 7 STATUS
+COMPLETE
+NEXT PHASE
+Phase 8 — Advanced Frontend UI/UX
+Backup:
+$BackupRoot
+Log:
+$LogPath
+"@ | Set-Content `
+        -LiteralPath $ReportPath `
+        -Encoding UTF8
+    @"
+PHASE 7 COMPLETE
+Completed: $GeneratedAt
+Project: $ProjectRoot
+Verification:
+- Formatting passed
+- TypeScript passed
+- ESLint passed with zero warnings
+- Production build passed
+Report:
+$ReportPath
+Backup:
+$BackupRoot
+Log:
+$LogPath
+Next Phase:
+Phase 8 — Advanced Frontend UI/UX
+"@ | Set-Content `
+        -LiteralPath $CompleteMarker `
+        -Encoding UTF8
+Missing closing '}' in statement block or type definition.
+>> try {
+    function Invoke-Checked {
+        param(
+            [Parameter(Mandatory)]
+            [string]$Name,
+            [Parameter(Mandatory)]
+            [scriptblock]$Command
+        )
+        Write-Host ""
+        Write-Host "=== $Name ===" -ForegroundColor Cyan
+        $global:LASTEXITCODE = 0
+        & $Command
+        if ($LASTEXITCODE -ne 0) {
+            throw "$Name failed with exit code $LASTEXITCODE."
+        }
+        Write-Host "$Name PASSED" -ForegroundColor Green
+    }
+    foreach ($FilePath in @($HeaderPath, $FooterPath)) {
+        if (-not (Test-Path -LiteralPath $FilePath)) {
+            throw "Required file is missing: $FilePath"
+        }
+        Copy-Item `
+            -LiteralPath $FilePath `
+            -Destination (Join-Path $BackupRoot (Split-Path $FilePath -Leaf)) `
+            -Force
+    }
+    Write-Host ""
+    Write-Host "=== REMOVE UNUSED PROP TYPES ===" -ForegroundColor Cyan
+    $HeaderContent = Get-Content `
+        -LiteralPath $HeaderPath `
+        -Raw
+    $FooterContent = Get-Content `
+        -LiteralPath $FooterPath `
+        -Raw
+    $HeaderContent = [regex]::Replace(
+        $HeaderContent,
+        '(?ms)^\s*(?:export\s+)?type\s+SiteHeaderProps\s*=\s*\{.*?^\s*\};?\s*',
+        ''
+    )
+    $HeaderContent = [regex]::Replace(
+        $HeaderContent,
+        '(?ms)^\s*(?:export\s+)?interface\s+SiteHeaderProps\s*\{.*?^\s*\}\s*',
+        ''
+    )
+    $FooterContent = [regex]::Replace(
+        $FooterContent,
+        '(?ms)^\s*(?:export\s+)?type\s+SiteFooterProps\s*=\s*\{.*?^\s*\};?\s*',
+        ''
+    )
+    $FooterContent = [regex]::Replace(
+        $FooterContent,
+        '(?ms)^\s*(?:export\s+)?interface\s+SiteFooterProps\s*\{.*?^\s*\}\s*',
+        ''
+    )
+    if ($HeaderContent -match '\bSiteHeaderProps\b') {
+        throw "SiteHeaderProps still exists in site-header.tsx."
+    }
+    if ($FooterContent -match '\bSiteFooterProps\b') {
+        throw "SiteFooterProps still exists in site-footer.tsx."
+    }
+    Set-Content `
+        -LiteralPath $HeaderPath `
+        -Value $HeaderContent `
+        -Encoding UTF8
+    Set-Content `
+        -LiteralPath $FooterPath `
+        -Value $FooterContent `
+        -Encoding UTF8
+    Write-Host "UNUSED PROP TYPES REMOVED" -ForegroundColor Green
+    $PackageJson = Get-Content `
+        -LiteralPath (Join-Path $ProjectRoot "package.json") `
+        -Raw |
+        ConvertFrom-Json
+    $Scripts = @(
+        $PackageJson.scripts.PSObject.Properties.Name
+    )
+    Invoke-Checked "HEADER AND FOOTER PARSE TEST" {
+        pnpm exec prettier `
+            --write `
+            "src/components/site/site-header.tsx" `
+            "src/components/site/site-footer.tsx"
+    }
+    Invoke-Checked "FORMAT WRITE" {
+        if ($Scripts -contains "format") {
+            pnpm run format
+        }
+        else {
+            pnpm exec prettier --write .
+        }
+    }
+    Invoke-Checked "FORMAT CHECK" {
+        if ($Scripts -contains "format:check") {
+            pnpm run format:check
+        }
+        else {
+            pnpm exec prettier --check .
+        }
+    }
+    Invoke-Checked "TYPESCRIPT CHECK" {
+        if ($Scripts -contains "typecheck") {
+            pnpm run typecheck
+        }
+        else {
+            pnpm exec tsc --noEmit
+        }
+    }
+    Invoke-Checked "ESLINT ZERO WARNINGS" {
+        if ($Scripts -contains "lint") {
+            pnpm run lint -- --max-warnings=0
+        }
+        else {
+            pnpm exec eslint . --max-warnings=0
+        }
+    }
+    Invoke-Checked "PRODUCTION BUILD" {
+        if ($Scripts -contains "build") {
+            pnpm run build
+        }
+        else {
+            throw "build script is missing from package.json."
+        }
+    }
+    $RequiredPhase7Files = @(
+        "src\lib\theme\types.ts",
+        "src\lib\theme\presets.ts",
+        "src\lib\theme\theme-store.ts",
+        "src\lib\theme\ai-generator.ts",
+        "src\app\api\admin\themes\route.ts",
+        "src\app\api\admin\themes\generate\route.ts",
+        "src\components\admin\themes\theme-studio.tsx",
+        "src\app\admin\themes\page.tsx",
+        "src\components\site\active-theme-style.tsx",
+        "src\components\site\dynamic-homepage.tsx",
+        "src\components\site\site-header.tsx",
+        "src\components\site\site-footer.tsx",
+        "src\components\admin\admin-sidebar.tsx",
+        "src\app\page.tsx"
+    )
+    foreach ($RequiredFile in $RequiredPhase7Files) {
+        $RequiredPath = Join-Path $ProjectRoot $RequiredFile
+        if (-not (Test-Path -LiteralPath $RequiredPath)) {
+            throw "Phase 7 file is missing: $RequiredFile"
+        }
+    }
+    @"
+KNOWLEDGE NEST — PHASE 7 COMPLETION REPORT
+Completed: $GeneratedAt
+Project: $ProjectRoot
+FINAL ISSUE
+SiteHeaderProps aur SiteFooterProps type declarations
+components se props remove hone ke baad unused reh gaye thay.
+ESLint zero-warning mode mein run ho raha tha, is liye
+unused type warnings pipeline ko rok rahi thin.
+FIX APPLIED
+- SiteHeaderProps removed
+- SiteFooterProps removed
+- Formatting passed
+- TypeScript passed
+- ESLint passed with zero warnings
+- Production build passed
+PHASE 7 STATUS
+COMPLETE
+NEXT PHASE
+Phase 8 — Advanced Frontend UI/UX
+Backup:
+$BackupRoot
+Log:
+$LogPath
+"@ | Set-Content `
+        -LiteralPath $ReportPath `
+        -Encoding UTF8
+    @"
+PHASE 7 COMPLETE
+Completed: $GeneratedAt
+Project: $ProjectRoot
+Verification:
+- Formatting passed
+- TypeScript passed
+- ESLint passed with zero warnings
+- Production build passed
+Report:
+$ReportPath
+Backup:
+$BackupRoot
+Log:
+$LogPath
+Next Phase:
+Phase 8 — Advanced Frontend UI/UX
+"@ | Set-Content `
+        -LiteralPath $CompleteMarker `
+        -Encoding UTF8
+    Write-Host ""
+    Write-Host "========================================" -ForegroundColor Green
+    Write-Host "UNUSED TYPE WARNINGS FIXED" -ForegroundColor Green
+    Write-Host "TYPESCRIPT PASSED" -ForegroundColor Green
+    Write-Host "ESLINT PASSED WITH ZERO WARNINGS" -ForegroundColor Green
+    Write-Host "PRODUCTION BUILD PASSED" -ForegroundColor Green
+    Write-Host "PHASE 7 COMPLETE" -ForegroundColor Green
+    Write-Host "REPORT: $ReportPath" -ForegroundColor Green
+    Write-Host "MARKER: $CompleteMarker" -ForegroundColor Green
+    Write-Host "BACKUP: $BackupRoot" -ForegroundColor Green
+    Write-Host "LOG: $LogPath" -ForegroundColor Green
+    Write-Host "NEXT: PHASE 8" -ForegroundColor Yellow
+    Write-Host "========================================" -ForegroundColor Green
+}
+catch {
+    Write-Host ""
+    Write-Host "========================================" -ForegroundColor Red
+    Write-Host "PHASE 7 VERIFICATION FAILED" -ForegroundColor Red
+    Write-Host $_.Exception.Message -ForegroundColor Red
+    Write-Host "BACKUP: $BackupRoot" -ForegroundColor Yellow
+    Write-Host "LOG: $LogPath" -ForegroundColor Yellow
+    Write-Host "========================================" -ForegroundColor Red
+    throw
+}
+finally {
+    Stop-Transcript -ErrorAction SilentlyContinue | Out-Null
+}
+
+=== REMOVE UNUSED PROP TYPES ===
+
+========================================
+PHASE 7 VERIFICATION FAILED
+SiteHeaderProps still exists in site-header.tsx.
+BACKUP: C:\Users\A C\Downloads\knowledge-nest-backups\phase-7-unused-types-fix-20260727-130158
+LOG: C:\Users\A C\Downloads\knowledge-nest\logs\phase-7-unused-types-fix-20260727-130158.log
+========================================
+**********************
+Windows PowerShell transcript end
+End time: 20260727130202
+**********************

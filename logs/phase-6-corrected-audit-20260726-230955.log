@@ -1,0 +1,4074 @@
+﻿**********************
+Windows PowerShell transcript start
+Start time: 20260726230956
+Username: GULZAR-PC\A C
+RunAs User: GULZAR-PC\A C
+Configuration Name: 
+Machine: GULZAR-PC (Microsoft Windows NT 10.0.19045.0)
+Host Application: C:\Windows\System32\WindowsPowerShell\v1.0\powershell.exe -noexit -command try { . "c:\Users\A C\AppData\Local\Programs\Microsoft VS Code\1b6a188127\resources\app\out\vs\workbench\contrib\terminal\common\scripts\shellIntegration.ps1" } catch {}
+Process ID: 7472
+PSVersion: 5.1.19041.7548
+PSEdition: Desktop
+PSCompatibleVersions: 1.0, 2.0, 3.0, 4.0, 5.0, 5.1.19041.7548
+BuildVersion: 10.0.19041.7548
+CLRVersion: 4.0.30319.42000
+WSManStackVersion: 3.0
+PSRemotingProtocolVersion: 2.3
+SerializationVersion: 1.1.0.1
+**********************
+]633;D;0]633;A]633;P;Cwd=C:\x5cUsers\x5cA C\x5cDownloads\x5cknowledge-nestPS C:\Users\A C\Downloads\knowledge-nest> ]633;B
+]633;D]633;A]633;P;Cwd=C:\x5cUsers\x5cA C\x5cDownloads\x5cknowledge-nestPS C:\Users\A C\Downloads\knowledge-nest> ]633;B
+PS>try {
+Missing closing '}' in statement block or type definition.
+>> try {
+    function Invoke-Checked {
+        param(
+            [Parameter(Mandatory)]
+            [string]$Name,
+Missing expression after ','.
+>> try {
+    function Invoke-Checked {
+        param(
+            [Parameter(Mandatory)]
+            [string]$Name,
+            [Parameter(Mandatory)]
+            [scriptblock]$Command
+        )
+Missing closing '}' in statement block or type definition.
+>> try {
+    function Invoke-Checked {
+        param(
+            [Parameter(Mandatory)]
+            [string]$Name,
+            [Parameter(Mandatory)]
+            [scriptblock]$Command
+        )
+        Write-Host "`n=== $Name ===" -ForegroundColor Cyan
+Missing closing '}' in statement block or type definition.
+>> try {
+    function Invoke-Checked {
+        param(
+            [Parameter(Mandatory)]
+            [string]$Name,
+            [Parameter(Mandatory)]
+            [scriptblock]$Command
+        )
+        Write-Host "`n=== $Name ===" -ForegroundColor Cyan
+        $global:LASTEXITCODE = 0
+        & $Command
+Missing closing '}' in statement block or type definition.
+>> try {
+    function Invoke-Checked {
+        param(
+            [Parameter(Mandatory)]
+            [string]$Name,
+            [Parameter(Mandatory)]
+            [scriptblock]$Command
+        )
+        Write-Host "`n=== $Name ===" -ForegroundColor Cyan
+        $global:LASTEXITCODE = 0
+        & $Command
+        if ($LASTEXITCODE -ne 0) {
+            throw "$Name failed with exit code $LASTEXITCODE."
+        }
+Missing closing '}' in statement block or type definition.
+>> try {
+    function Invoke-Checked {
+        param(
+            [Parameter(Mandatory)]
+            [string]$Name,
+            [Parameter(Mandatory)]
+            [scriptblock]$Command
+        )
+        Write-Host "`n=== $Name ===" -ForegroundColor Cyan
+        $global:LASTEXITCODE = 0
+        & $Command
+        if ($LASTEXITCODE -ne 0) {
+            throw "$Name failed with exit code $LASTEXITCODE."
+        }
+        Write-Host "$Name PASSED" -ForegroundColor Green
+    }
+Missing closing '}' in statement block or type definition.
+>> try {
+    function Invoke-Checked {
+        param(
+            [Parameter(Mandatory)]
+            [string]$Name,
+            [Parameter(Mandatory)]
+            [scriptblock]$Command
+        )
+        Write-Host "`n=== $Name ===" -ForegroundColor Cyan
+        $global:LASTEXITCODE = 0
+        & $Command
+        if ($LASTEXITCODE -ne 0) {
+            throw "$Name failed with exit code $LASTEXITCODE."
+        }
+        Write-Host "$Name PASSED" -ForegroundColor Green
+    }
+    Write-Host "`n=== PHASE 6 CORRECTED AUDIT ===" -ForegroundColor Cyan
+Missing closing '}' in statement block or type definition.
+>> try {
+    function Invoke-Checked {
+        param(
+            [Parameter(Mandatory)]
+            [string]$Name,
+            [Parameter(Mandatory)]
+            [scriptblock]$Command
+        )
+        Write-Host "`n=== $Name ===" -ForegroundColor Cyan
+        $global:LASTEXITCODE = 0
+        & $Command
+        if ($LASTEXITCODE -ne 0) {
+            throw "$Name failed with exit code $LASTEXITCODE."
+        }
+        Write-Host "$Name PASSED" -ForegroundColor Green
+    }
+    Write-Host "`n=== PHASE 6 CORRECTED AUDIT ===" -ForegroundColor Cyan
+    if (-not (Test-Path $Phase5BMarker)) {
+        throw "PHASE-5B-COMPLETE.txt is missing."
+    }
+Missing closing '}' in statement block or type definition.
+>> try {
+    function Invoke-Checked {
+        param(
+            [Parameter(Mandatory)]
+            [string]$Name,
+            [Parameter(Mandatory)]
+            [scriptblock]$Command
+        )
+        Write-Host "`n=== $Name ===" -ForegroundColor Cyan
+        $global:LASTEXITCODE = 0
+        & $Command
+        if ($LASTEXITCODE -ne 0) {
+            throw "$Name failed with exit code $LASTEXITCODE."
+        }
+        Write-Host "$Name PASSED" -ForegroundColor Green
+    }
+    Write-Host "`n=== PHASE 6 CORRECTED AUDIT ===" -ForegroundColor Cyan
+    if (-not (Test-Path $Phase5BMarker)) {
+        throw "PHASE-5B-COMPLETE.txt is missing."
+    }
+    $Phase5BStatus = Get-Content $Phase5BMarker -Raw
+Missing closing '}' in statement block or type definition.
+>> try {
+    function Invoke-Checked {
+        param(
+            [Parameter(Mandatory)]
+            [string]$Name,
+            [Parameter(Mandatory)]
+            [scriptblock]$Command
+        )
+        Write-Host "`n=== $Name ===" -ForegroundColor Cyan
+        $global:LASTEXITCODE = 0
+        & $Command
+        if ($LASTEXITCODE -ne 0) {
+            throw "$Name failed with exit code $LASTEXITCODE."
+        }
+        Write-Host "$Name PASSED" -ForegroundColor Green
+    }
+    Write-Host "`n=== PHASE 6 CORRECTED AUDIT ===" -ForegroundColor Cyan
+    if (-not (Test-Path $Phase5BMarker)) {
+        throw "PHASE-5B-COMPLETE.txt is missing."
+    }
+    $Phase5BStatus = Get-Content $Phase5BMarker -Raw
+    if ($Phase5BStatus -notmatch "PHASE 5B COMPLETE") {
+        throw "Phase 5B is not marked complete."
+    }
+Missing closing '}' in statement block or type definition.
+>> try {
+    function Invoke-Checked {
+        param(
+            [Parameter(Mandatory)]
+            [string]$Name,
+            [Parameter(Mandatory)]
+            [scriptblock]$Command
+        )
+        Write-Host "`n=== $Name ===" -ForegroundColor Cyan
+        $global:LASTEXITCODE = 0
+        & $Command
+        if ($LASTEXITCODE -ne 0) {
+            throw "$Name failed with exit code $LASTEXITCODE."
+        }
+        Write-Host "$Name PASSED" -ForegroundColor Green
+    }
+    Write-Host "`n=== PHASE 6 CORRECTED AUDIT ===" -ForegroundColor Cyan
+    if (-not (Test-Path $Phase5BMarker)) {
+        throw "PHASE-5B-COMPLETE.txt is missing."
+    }
+    $Phase5BStatus = Get-Content $Phase5BMarker -Raw
+    if ($Phase5BStatus -notmatch "PHASE 5B COMPLETE") {
+        throw "Phase 5B is not marked complete."
+    }
+    Write-Host "Phase 5B prerequisite PASSED" -ForegroundColor Green
+Missing closing '}' in statement block or type definition.
+>> try {
+    function Invoke-Checked {
+        param(
+            [Parameter(Mandatory)]
+            [string]$Name,
+            [Parameter(Mandatory)]
+            [scriptblock]$Command
+        )
+        Write-Host "`n=== $Name ===" -ForegroundColor Cyan
+        $global:LASTEXITCODE = 0
+        & $Command
+        if ($LASTEXITCODE -ne 0) {
+            throw "$Name failed with exit code $LASTEXITCODE."
+        }
+        Write-Host "$Name PASSED" -ForegroundColor Green
+    }
+    Write-Host "`n=== PHASE 6 CORRECTED AUDIT ===" -ForegroundColor Cyan
+    if (-not (Test-Path $Phase5BMarker)) {
+        throw "PHASE-5B-COMPLETE.txt is missing."
+    }
+    $Phase5BStatus = Get-Content $Phase5BMarker -Raw
+    if ($Phase5BStatus -notmatch "PHASE 5B COMPLETE") {
+        throw "Phase 5B is not marked complete."
+    }
+    Write-Host "Phase 5B prerequisite PASSED" -ForegroundColor Green
+    if (-not (Test-Path $EnvFile)) {
+        throw ".env.local is missing."
+    }
+Missing closing '}' in statement block or type definition.
+>> try {
+    function Invoke-Checked {
+        param(
+            [Parameter(Mandatory)]
+            [string]$Name,
+            [Parameter(Mandatory)]
+            [scriptblock]$Command
+        )
+        Write-Host "`n=== $Name ===" -ForegroundColor Cyan
+        $global:LASTEXITCODE = 0
+        & $Command
+        if ($LASTEXITCODE -ne 0) {
+            throw "$Name failed with exit code $LASTEXITCODE."
+        }
+        Write-Host "$Name PASSED" -ForegroundColor Green
+    }
+    Write-Host "`n=== PHASE 6 CORRECTED AUDIT ===" -ForegroundColor Cyan
+    if (-not (Test-Path $Phase5BMarker)) {
+        throw "PHASE-5B-COMPLETE.txt is missing."
+    }
+    $Phase5BStatus = Get-Content $Phase5BMarker -Raw
+    if ($Phase5BStatus -notmatch "PHASE 5B COMPLETE") {
+        throw "Phase 5B is not marked complete."
+    }
+    Write-Host "Phase 5B prerequisite PASSED" -ForegroundColor Green
+    if (-not (Test-Path $EnvFile)) {
+        throw ".env.local is missing."
+    }
+    $DatabaseLine = Get-Content $EnvFile |
+        Where-Object { $_ -match '^\s*DATABASE_URL\s*=' } |
+        Select-Object -First 1
+Missing closing '}' in statement block or type definition.
+>> try {
+    function Invoke-Checked {
+        param(
+            [Parameter(Mandatory)]
+            [string]$Name,
+            [Parameter(Mandatory)]
+            [scriptblock]$Command
+        )
+        Write-Host "`n=== $Name ===" -ForegroundColor Cyan
+        $global:LASTEXITCODE = 0
+        & $Command
+        if ($LASTEXITCODE -ne 0) {
+            throw "$Name failed with exit code $LASTEXITCODE."
+        }
+        Write-Host "$Name PASSED" -ForegroundColor Green
+    }
+    Write-Host "`n=== PHASE 6 CORRECTED AUDIT ===" -ForegroundColor Cyan
+    if (-not (Test-Path $Phase5BMarker)) {
+        throw "PHASE-5B-COMPLETE.txt is missing."
+    }
+    $Phase5BStatus = Get-Content $Phase5BMarker -Raw
+    if ($Phase5BStatus -notmatch "PHASE 5B COMPLETE") {
+        throw "Phase 5B is not marked complete."
+    }
+    Write-Host "Phase 5B prerequisite PASSED" -ForegroundColor Green
+    if (-not (Test-Path $EnvFile)) {
+        throw ".env.local is missing."
+    }
+    $DatabaseLine = Get-Content $EnvFile |
+        Where-Object { $_ -match '^\s*DATABASE_URL\s*=' } |
+        Select-Object -First 1
+    if (-not $DatabaseLine) {
+        throw "DATABASE_URL is missing from .env.local."
+    }
+Missing closing '}' in statement block or type definition.
+>> try {
+    function Invoke-Checked {
+        param(
+            [Parameter(Mandatory)]
+            [string]$Name,
+            [Parameter(Mandatory)]
+            [scriptblock]$Command
+        )
+        Write-Host "`n=== $Name ===" -ForegroundColor Cyan
+        $global:LASTEXITCODE = 0
+        & $Command
+        if ($LASTEXITCODE -ne 0) {
+            throw "$Name failed with exit code $LASTEXITCODE."
+        }
+        Write-Host "$Name PASSED" -ForegroundColor Green
+    }
+    Write-Host "`n=== PHASE 6 CORRECTED AUDIT ===" -ForegroundColor Cyan
+    if (-not (Test-Path $Phase5BMarker)) {
+        throw "PHASE-5B-COMPLETE.txt is missing."
+    }
+    $Phase5BStatus = Get-Content $Phase5BMarker -Raw
+    if ($Phase5BStatus -notmatch "PHASE 5B COMPLETE") {
+        throw "Phase 5B is not marked complete."
+    }
+    Write-Host "Phase 5B prerequisite PASSED" -ForegroundColor Green
+    if (-not (Test-Path $EnvFile)) {
+        throw ".env.local is missing."
+    }
+    $DatabaseLine = Get-Content $EnvFile |
+        Where-Object { $_ -match '^\s*DATABASE_URL\s*=' } |
+        Select-Object -First 1
+    if (-not $DatabaseLine) {
+        throw "DATABASE_URL is missing from .env.local."
+    }
+    $DatabaseUrl = ($DatabaseLine -split "=", 2)[1].Trim().Trim('"').Trim("'")
+Missing closing '}' in statement block or type definition.
+>> try {
+    function Invoke-Checked {
+        param(
+            [Parameter(Mandatory)]
+            [string]$Name,
+            [Parameter(Mandatory)]
+            [scriptblock]$Command
+        )
+        Write-Host "`n=== $Name ===" -ForegroundColor Cyan
+        $global:LASTEXITCODE = 0
+        & $Command
+        if ($LASTEXITCODE -ne 0) {
+            throw "$Name failed with exit code $LASTEXITCODE."
+        }
+        Write-Host "$Name PASSED" -ForegroundColor Green
+    }
+    Write-Host "`n=== PHASE 6 CORRECTED AUDIT ===" -ForegroundColor Cyan
+    if (-not (Test-Path $Phase5BMarker)) {
+        throw "PHASE-5B-COMPLETE.txt is missing."
+    }
+    $Phase5BStatus = Get-Content $Phase5BMarker -Raw
+    if ($Phase5BStatus -notmatch "PHASE 5B COMPLETE") {
+        throw "Phase 5B is not marked complete."
+    }
+    Write-Host "Phase 5B prerequisite PASSED" -ForegroundColor Green
+    if (-not (Test-Path $EnvFile)) {
+        throw ".env.local is missing."
+    }
+    $DatabaseLine = Get-Content $EnvFile |
+        Where-Object { $_ -match '^\s*DATABASE_URL\s*=' } |
+        Select-Object -First 1
+    if (-not $DatabaseLine) {
+        throw "DATABASE_URL is missing from .env.local."
+    }
+    $DatabaseUrl = ($DatabaseLine -split "=", 2)[1].Trim().Trim('"').Trim("'")
+    if (
+        [string]::IsNullOrWhiteSpace($DatabaseUrl) -or
+        $DatabaseUrl -notmatch '^postgres(ql)?://'
+    ) {
+        throw "DATABASE_URL is empty or invalid."
+    }
+Missing closing '}' in statement block or type definition.
+>> try {
+    function Invoke-Checked {
+        param(
+            [Parameter(Mandatory)]
+            [string]$Name,
+            [Parameter(Mandatory)]
+            [scriptblock]$Command
+        )
+        Write-Host "`n=== $Name ===" -ForegroundColor Cyan
+        $global:LASTEXITCODE = 0
+        & $Command
+        if ($LASTEXITCODE -ne 0) {
+            throw "$Name failed with exit code $LASTEXITCODE."
+        }
+        Write-Host "$Name PASSED" -ForegroundColor Green
+    }
+    Write-Host "`n=== PHASE 6 CORRECTED AUDIT ===" -ForegroundColor Cyan
+    if (-not (Test-Path $Phase5BMarker)) {
+        throw "PHASE-5B-COMPLETE.txt is missing."
+    }
+    $Phase5BStatus = Get-Content $Phase5BMarker -Raw
+    if ($Phase5BStatus -notmatch "PHASE 5B COMPLETE") {
+        throw "Phase 5B is not marked complete."
+    }
+    Write-Host "Phase 5B prerequisite PASSED" -ForegroundColor Green
+    if (-not (Test-Path $EnvFile)) {
+        throw ".env.local is missing."
+    }
+    $DatabaseLine = Get-Content $EnvFile |
+        Where-Object { $_ -match '^\s*DATABASE_URL\s*=' } |
+        Select-Object -First 1
+    if (-not $DatabaseLine) {
+        throw "DATABASE_URL is missing from .env.local."
+    }
+    $DatabaseUrl = ($DatabaseLine -split "=", 2)[1].Trim().Trim('"').Trim("'")
+    if (
+        [string]::IsNullOrWhiteSpace($DatabaseUrl) -or
+        $DatabaseUrl -notmatch '^postgres(ql)?://'
+    ) {
+        throw "DATABASE_URL is empty or invalid."
+    }
+    $env:DATABASE_URL = $DatabaseUrl
+    Write-Host "DATABASE_URL PASSED" -ForegroundColor Green
+Missing closing '}' in statement block or type definition.
+>> try {
+    function Invoke-Checked {
+        param(
+            [Parameter(Mandatory)]
+            [string]$Name,
+            [Parameter(Mandatory)]
+            [scriptblock]$Command
+        )
+        Write-Host "`n=== $Name ===" -ForegroundColor Cyan
+        $global:LASTEXITCODE = 0
+        & $Command
+        if ($LASTEXITCODE -ne 0) {
+            throw "$Name failed with exit code $LASTEXITCODE."
+        }
+        Write-Host "$Name PASSED" -ForegroundColor Green
+    }
+    Write-Host "`n=== PHASE 6 CORRECTED AUDIT ===" -ForegroundColor Cyan
+    if (-not (Test-Path $Phase5BMarker)) {
+        throw "PHASE-5B-COMPLETE.txt is missing."
+    }
+    $Phase5BStatus = Get-Content $Phase5BMarker -Raw
+    if ($Phase5BStatus -notmatch "PHASE 5B COMPLETE") {
+        throw "Phase 5B is not marked complete."
+    }
+    Write-Host "Phase 5B prerequisite PASSED" -ForegroundColor Green
+    if (-not (Test-Path $EnvFile)) {
+        throw ".env.local is missing."
+    }
+    $DatabaseLine = Get-Content $EnvFile |
+        Where-Object { $_ -match '^\s*DATABASE_URL\s*=' } |
+        Select-Object -First 1
+    if (-not $DatabaseLine) {
+        throw "DATABASE_URL is missing from .env.local."
+    }
+    $DatabaseUrl = ($DatabaseLine -split "=", 2)[1].Trim().Trim('"').Trim("'")
+    if (
+        [string]::IsNullOrWhiteSpace($DatabaseUrl) -or
+        $DatabaseUrl -notmatch '^postgres(ql)?://'
+    ) {
+        throw "DATABASE_URL is empty or invalid."
+    }
+    $env:DATABASE_URL = $DatabaseUrl
+    Write-Host "DATABASE_URL PASSED" -ForegroundColor Green
+    $PackageJson = Get-Content ".\package.json" -Raw | ConvertFrom-Json
+    $Scripts = @($PackageJson.scripts.PSObject.Properties.Name)
+Missing closing '}' in statement block or type definition.
+>> try {
+    function Invoke-Checked {
+        param(
+            [Parameter(Mandatory)]
+            [string]$Name,
+            [Parameter(Mandatory)]
+            [scriptblock]$Command
+        )
+        Write-Host "`n=== $Name ===" -ForegroundColor Cyan
+        $global:LASTEXITCODE = 0
+        & $Command
+        if ($LASTEXITCODE -ne 0) {
+            throw "$Name failed with exit code $LASTEXITCODE."
+        }
+        Write-Host "$Name PASSED" -ForegroundColor Green
+    }
+    Write-Host "`n=== PHASE 6 CORRECTED AUDIT ===" -ForegroundColor Cyan
+    if (-not (Test-Path $Phase5BMarker)) {
+        throw "PHASE-5B-COMPLETE.txt is missing."
+    }
+    $Phase5BStatus = Get-Content $Phase5BMarker -Raw
+    if ($Phase5BStatus -notmatch "PHASE 5B COMPLETE") {
+        throw "Phase 5B is not marked complete."
+    }
+    Write-Host "Phase 5B prerequisite PASSED" -ForegroundColor Green
+    if (-not (Test-Path $EnvFile)) {
+        throw ".env.local is missing."
+    }
+    $DatabaseLine = Get-Content $EnvFile |
+        Where-Object { $_ -match '^\s*DATABASE_URL\s*=' } |
+        Select-Object -First 1
+    if (-not $DatabaseLine) {
+        throw "DATABASE_URL is missing from .env.local."
+    }
+    $DatabaseUrl = ($DatabaseLine -split "=", 2)[1].Trim().Trim('"').Trim("'")
+    if (
+        [string]::IsNullOrWhiteSpace($DatabaseUrl) -or
+        $DatabaseUrl -notmatch '^postgres(ql)?://'
+    ) {
+        throw "DATABASE_URL is empty or invalid."
+    }
+    $env:DATABASE_URL = $DatabaseUrl
+    Write-Host "DATABASE_URL PASSED" -ForegroundColor Green
+    $PackageJson = Get-Content ".\package.json" -Raw | ConvertFrom-Json
+    $Scripts = @($PackageJson.scripts.PSObject.Properties.Name)
+    Invoke-Checked "DEPENDENCY INSTALL" {
+        pnpm install --frozen-lockfile
+    }
+Missing closing '}' in statement block or type definition.
+>> try {
+    function Invoke-Checked {
+        param(
+            [Parameter(Mandatory)]
+            [string]$Name,
+            [Parameter(Mandatory)]
+            [scriptblock]$Command
+        )
+        Write-Host "`n=== $Name ===" -ForegroundColor Cyan
+        $global:LASTEXITCODE = 0
+        & $Command
+        if ($LASTEXITCODE -ne 0) {
+            throw "$Name failed with exit code $LASTEXITCODE."
+        }
+        Write-Host "$Name PASSED" -ForegroundColor Green
+    }
+    Write-Host "`n=== PHASE 6 CORRECTED AUDIT ===" -ForegroundColor Cyan
+    if (-not (Test-Path $Phase5BMarker)) {
+        throw "PHASE-5B-COMPLETE.txt is missing."
+    }
+    $Phase5BStatus = Get-Content $Phase5BMarker -Raw
+    if ($Phase5BStatus -notmatch "PHASE 5B COMPLETE") {
+        throw "Phase 5B is not marked complete."
+    }
+    Write-Host "Phase 5B prerequisite PASSED" -ForegroundColor Green
+    if (-not (Test-Path $EnvFile)) {
+        throw ".env.local is missing."
+    }
+    $DatabaseLine = Get-Content $EnvFile |
+        Where-Object { $_ -match '^\s*DATABASE_URL\s*=' } |
+        Select-Object -First 1
+    if (-not $DatabaseLine) {
+        throw "DATABASE_URL is missing from .env.local."
+    }
+    $DatabaseUrl = ($DatabaseLine -split "=", 2)[1].Trim().Trim('"').Trim("'")
+    if (
+        [string]::IsNullOrWhiteSpace($DatabaseUrl) -or
+        $DatabaseUrl -notmatch '^postgres(ql)?://'
+    ) {
+        throw "DATABASE_URL is empty or invalid."
+    }
+    $env:DATABASE_URL = $DatabaseUrl
+    Write-Host "DATABASE_URL PASSED" -ForegroundColor Green
+    $PackageJson = Get-Content ".\package.json" -Raw | ConvertFrom-Json
+    $Scripts = @($PackageJson.scripts.PSObject.Properties.Name)
+    Invoke-Checked "DEPENDENCY INSTALL" {
+        pnpm install --frozen-lockfile
+    }
+    if ($Scripts -contains "db:generate") {
+        Invoke-Checked "DATABASE SCHEMA GENERATION" {
+            pnpm run db:generate
+        }
+    }
+Missing closing '}' in statement block or type definition.
+>> try {
+    function Invoke-Checked {
+        param(
+            [Parameter(Mandatory)]
+            [string]$Name,
+            [Parameter(Mandatory)]
+            [scriptblock]$Command
+        )
+        Write-Host "`n=== $Name ===" -ForegroundColor Cyan
+        $global:LASTEXITCODE = 0
+        & $Command
+        if ($LASTEXITCODE -ne 0) {
+            throw "$Name failed with exit code $LASTEXITCODE."
+        }
+        Write-Host "$Name PASSED" -ForegroundColor Green
+    }
+    Write-Host "`n=== PHASE 6 CORRECTED AUDIT ===" -ForegroundColor Cyan
+    if (-not (Test-Path $Phase5BMarker)) {
+        throw "PHASE-5B-COMPLETE.txt is missing."
+    }
+    $Phase5BStatus = Get-Content $Phase5BMarker -Raw
+    if ($Phase5BStatus -notmatch "PHASE 5B COMPLETE") {
+        throw "Phase 5B is not marked complete."
+    }
+    Write-Host "Phase 5B prerequisite PASSED" -ForegroundColor Green
+    if (-not (Test-Path $EnvFile)) {
+        throw ".env.local is missing."
+    }
+    $DatabaseLine = Get-Content $EnvFile |
+        Where-Object { $_ -match '^\s*DATABASE_URL\s*=' } |
+        Select-Object -First 1
+    if (-not $DatabaseLine) {
+        throw "DATABASE_URL is missing from .env.local."
+    }
+    $DatabaseUrl = ($DatabaseLine -split "=", 2)[1].Trim().Trim('"').Trim("'")
+    if (
+        [string]::IsNullOrWhiteSpace($DatabaseUrl) -or
+        $DatabaseUrl -notmatch '^postgres(ql)?://'
+    ) {
+        throw "DATABASE_URL is empty or invalid."
+    }
+    $env:DATABASE_URL = $DatabaseUrl
+    Write-Host "DATABASE_URL PASSED" -ForegroundColor Green
+    $PackageJson = Get-Content ".\package.json" -Raw | ConvertFrom-Json
+    $Scripts = @($PackageJson.scripts.PSObject.Properties.Name)
+    Invoke-Checked "DEPENDENCY INSTALL" {
+        pnpm install --frozen-lockfile
+    }
+    if ($Scripts -contains "db:generate") {
+        Invoke-Checked "DATABASE SCHEMA GENERATION" {
+            pnpm run db:generate
+        }
+    }
+    if ($Scripts -contains "db:migrate") {
+        Invoke-Checked "DATABASE MIGRATION" {
+            pnpm run db:migrate
+        }
+    }
+Missing closing '}' in statement block or type definition.
+>> try {
+    function Invoke-Checked {
+        param(
+            [Parameter(Mandatory)]
+            [string]$Name,
+            [Parameter(Mandatory)]
+            [scriptblock]$Command
+        )
+        Write-Host "`n=== $Name ===" -ForegroundColor Cyan
+        $global:LASTEXITCODE = 0
+        & $Command
+        if ($LASTEXITCODE -ne 0) {
+            throw "$Name failed with exit code $LASTEXITCODE."
+        }
+        Write-Host "$Name PASSED" -ForegroundColor Green
+    }
+    Write-Host "`n=== PHASE 6 CORRECTED AUDIT ===" -ForegroundColor Cyan
+    if (-not (Test-Path $Phase5BMarker)) {
+        throw "PHASE-5B-COMPLETE.txt is missing."
+    }
+    $Phase5BStatus = Get-Content $Phase5BMarker -Raw
+    if ($Phase5BStatus -notmatch "PHASE 5B COMPLETE") {
+        throw "Phase 5B is not marked complete."
+    }
+    Write-Host "Phase 5B prerequisite PASSED" -ForegroundColor Green
+    if (-not (Test-Path $EnvFile)) {
+        throw ".env.local is missing."
+    }
+    $DatabaseLine = Get-Content $EnvFile |
+        Where-Object { $_ -match '^\s*DATABASE_URL\s*=' } |
+        Select-Object -First 1
+    if (-not $DatabaseLine) {
+        throw "DATABASE_URL is missing from .env.local."
+    }
+    $DatabaseUrl = ($DatabaseLine -split "=", 2)[1].Trim().Trim('"').Trim("'")
+    if (
+        [string]::IsNullOrWhiteSpace($DatabaseUrl) -or
+        $DatabaseUrl -notmatch '^postgres(ql)?://'
+    ) {
+        throw "DATABASE_URL is empty or invalid."
+    }
+    $env:DATABASE_URL = $DatabaseUrl
+    Write-Host "DATABASE_URL PASSED" -ForegroundColor Green
+    $PackageJson = Get-Content ".\package.json" -Raw | ConvertFrom-Json
+    $Scripts = @($PackageJson.scripts.PSObject.Properties.Name)
+    Invoke-Checked "DEPENDENCY INSTALL" {
+        pnpm install --frozen-lockfile
+    }
+    if ($Scripts -contains "db:generate") {
+        Invoke-Checked "DATABASE SCHEMA GENERATION" {
+            pnpm run db:generate
+        }
+    }
+    if ($Scripts -contains "db:migrate") {
+        Invoke-Checked "DATABASE MIGRATION" {
+            pnpm run db:migrate
+        }
+    }
+    $RequiredFiles = @(
+        "src\app\page.tsx",
+        "src\app\layout.tsx",
+        "src\app\api\health\route.ts",
+        "src\app\api\search\route.ts",
+        "src\app\admin\page.tsx",
+        "src\app\admin\articles\page.tsx",
+        "src\app\article\[slug]\page.tsx",
+        "src\app\category\[slug]\page.tsx",
+        "src\app\search\page.tsx"
+    )
+Missing closing '}' in statement block or type definition.
+>> try {
+    function Invoke-Checked {
+        param(
+            [Parameter(Mandatory)]
+            [string]$Name,
+            [Parameter(Mandatory)]
+            [scriptblock]$Command
+        )
+        Write-Host "`n=== $Name ===" -ForegroundColor Cyan
+        $global:LASTEXITCODE = 0
+        & $Command
+        if ($LASTEXITCODE -ne 0) {
+            throw "$Name failed with exit code $LASTEXITCODE."
+        }
+        Write-Host "$Name PASSED" -ForegroundColor Green
+    }
+    Write-Host "`n=== PHASE 6 CORRECTED AUDIT ===" -ForegroundColor Cyan
+    if (-not (Test-Path $Phase5BMarker)) {
+        throw "PHASE-5B-COMPLETE.txt is missing."
+    }
+    $Phase5BStatus = Get-Content $Phase5BMarker -Raw
+    if ($Phase5BStatus -notmatch "PHASE 5B COMPLETE") {
+        throw "Phase 5B is not marked complete."
+    }
+    Write-Host "Phase 5B prerequisite PASSED" -ForegroundColor Green
+    if (-not (Test-Path $EnvFile)) {
+        throw ".env.local is missing."
+    }
+    $DatabaseLine = Get-Content $EnvFile |
+        Where-Object { $_ -match '^\s*DATABASE_URL\s*=' } |
+        Select-Object -First 1
+    if (-not $DatabaseLine) {
+        throw "DATABASE_URL is missing from .env.local."
+    }
+    $DatabaseUrl = ($DatabaseLine -split "=", 2)[1].Trim().Trim('"').Trim("'")
+    if (
+        [string]::IsNullOrWhiteSpace($DatabaseUrl) -or
+        $DatabaseUrl -notmatch '^postgres(ql)?://'
+    ) {
+        throw "DATABASE_URL is empty or invalid."
+    }
+    $env:DATABASE_URL = $DatabaseUrl
+    Write-Host "DATABASE_URL PASSED" -ForegroundColor Green
+    $PackageJson = Get-Content ".\package.json" -Raw | ConvertFrom-Json
+    $Scripts = @($PackageJson.scripts.PSObject.Properties.Name)
+    Invoke-Checked "DEPENDENCY INSTALL" {
+        pnpm install --frozen-lockfile
+    }
+    if ($Scripts -contains "db:generate") {
+        Invoke-Checked "DATABASE SCHEMA GENERATION" {
+            pnpm run db:generate
+        }
+    }
+    if ($Scripts -contains "db:migrate") {
+        Invoke-Checked "DATABASE MIGRATION" {
+            pnpm run db:migrate
+        }
+    }
+    $RequiredFiles = @(
+        "src\app\page.tsx",
+        "src\app\layout.tsx",
+        "src\app\api\health\route.ts",
+        "src\app\api\search\route.ts",
+        "src\app\admin\page.tsx",
+        "src\app\admin\articles\page.tsx",
+        "src\app\article\[slug]\page.tsx",
+        "src\app\category\[slug]\page.tsx",
+        "src\app\search\page.tsx"
+    )
+    $MissingFiles = foreach ($RelativePath in $RequiredFiles) {
+        $FullPath = Join-Path $ProjectRoot $RelativePath
+Missing closing '}' in statement block or type definition.
+>> try {
+    function Invoke-Checked {
+        param(
+            [Parameter(Mandatory)]
+            [string]$Name,
+            [Parameter(Mandatory)]
+            [scriptblock]$Command
+        )
+        Write-Host "`n=== $Name ===" -ForegroundColor Cyan
+        $global:LASTEXITCODE = 0
+        & $Command
+        if ($LASTEXITCODE -ne 0) {
+            throw "$Name failed with exit code $LASTEXITCODE."
+        }
+        Write-Host "$Name PASSED" -ForegroundColor Green
+    }
+    Write-Host "`n=== PHASE 6 CORRECTED AUDIT ===" -ForegroundColor Cyan
+    if (-not (Test-Path $Phase5BMarker)) {
+        throw "PHASE-5B-COMPLETE.txt is missing."
+    }
+    $Phase5BStatus = Get-Content $Phase5BMarker -Raw
+    if ($Phase5BStatus -notmatch "PHASE 5B COMPLETE") {
+        throw "Phase 5B is not marked complete."
+    }
+    Write-Host "Phase 5B prerequisite PASSED" -ForegroundColor Green
+    if (-not (Test-Path $EnvFile)) {
+        throw ".env.local is missing."
+    }
+    $DatabaseLine = Get-Content $EnvFile |
+        Where-Object { $_ -match '^\s*DATABASE_URL\s*=' } |
+        Select-Object -First 1
+    if (-not $DatabaseLine) {
+        throw "DATABASE_URL is missing from .env.local."
+    }
+    $DatabaseUrl = ($DatabaseLine -split "=", 2)[1].Trim().Trim('"').Trim("'")
+    if (
+        [string]::IsNullOrWhiteSpace($DatabaseUrl) -or
+        $DatabaseUrl -notmatch '^postgres(ql)?://'
+    ) {
+        throw "DATABASE_URL is empty or invalid."
+    }
+    $env:DATABASE_URL = $DatabaseUrl
+    Write-Host "DATABASE_URL PASSED" -ForegroundColor Green
+    $PackageJson = Get-Content ".\package.json" -Raw | ConvertFrom-Json
+    $Scripts = @($PackageJson.scripts.PSObject.Properties.Name)
+    Invoke-Checked "DEPENDENCY INSTALL" {
+        pnpm install --frozen-lockfile
+    }
+    if ($Scripts -contains "db:generate") {
+        Invoke-Checked "DATABASE SCHEMA GENERATION" {
+            pnpm run db:generate
+        }
+    }
+    if ($Scripts -contains "db:migrate") {
+        Invoke-Checked "DATABASE MIGRATION" {
+            pnpm run db:migrate
+        }
+    }
+    $RequiredFiles = @(
+        "src\app\page.tsx",
+        "src\app\layout.tsx",
+        "src\app\api\health\route.ts",
+        "src\app\api\search\route.ts",
+        "src\app\admin\page.tsx",
+        "src\app\admin\articles\page.tsx",
+        "src\app\article\[slug]\page.tsx",
+        "src\app\category\[slug]\page.tsx",
+        "src\app\search\page.tsx"
+    )
+    $MissingFiles = foreach ($RelativePath in $RequiredFiles) {
+        $FullPath = Join-Path $ProjectRoot $RelativePath
+        if (-not (Test-Path -LiteralPath $FullPath)) {
+            $RelativePath
+        }
+    }
+Missing closing '}' in statement block or type definition.
+>> try {
+    function Invoke-Checked {
+        param(
+            [Parameter(Mandatory)]
+            [string]$Name,
+            [Parameter(Mandatory)]
+            [scriptblock]$Command
+        )
+        Write-Host "`n=== $Name ===" -ForegroundColor Cyan
+        $global:LASTEXITCODE = 0
+        & $Command
+        if ($LASTEXITCODE -ne 0) {
+            throw "$Name failed with exit code $LASTEXITCODE."
+        }
+        Write-Host "$Name PASSED" -ForegroundColor Green
+    }
+    Write-Host "`n=== PHASE 6 CORRECTED AUDIT ===" -ForegroundColor Cyan
+    if (-not (Test-Path $Phase5BMarker)) {
+        throw "PHASE-5B-COMPLETE.txt is missing."
+    }
+    $Phase5BStatus = Get-Content $Phase5BMarker -Raw
+    if ($Phase5BStatus -notmatch "PHASE 5B COMPLETE") {
+        throw "Phase 5B is not marked complete."
+    }
+    Write-Host "Phase 5B prerequisite PASSED" -ForegroundColor Green
+    if (-not (Test-Path $EnvFile)) {
+        throw ".env.local is missing."
+    }
+    $DatabaseLine = Get-Content $EnvFile |
+        Where-Object { $_ -match '^\s*DATABASE_URL\s*=' } |
+        Select-Object -First 1
+    if (-not $DatabaseLine) {
+        throw "DATABASE_URL is missing from .env.local."
+    }
+    $DatabaseUrl = ($DatabaseLine -split "=", 2)[1].Trim().Trim('"').Trim("'")
+    if (
+        [string]::IsNullOrWhiteSpace($DatabaseUrl) -or
+        $DatabaseUrl -notmatch '^postgres(ql)?://'
+    ) {
+        throw "DATABASE_URL is empty or invalid."
+    }
+    $env:DATABASE_URL = $DatabaseUrl
+    Write-Host "DATABASE_URL PASSED" -ForegroundColor Green
+    $PackageJson = Get-Content ".\package.json" -Raw | ConvertFrom-Json
+    $Scripts = @($PackageJson.scripts.PSObject.Properties.Name)
+    Invoke-Checked "DEPENDENCY INSTALL" {
+        pnpm install --frozen-lockfile
+    }
+    if ($Scripts -contains "db:generate") {
+        Invoke-Checked "DATABASE SCHEMA GENERATION" {
+            pnpm run db:generate
+        }
+    }
+    if ($Scripts -contains "db:migrate") {
+        Invoke-Checked "DATABASE MIGRATION" {
+            pnpm run db:migrate
+        }
+    }
+    $RequiredFiles = @(
+        "src\app\page.tsx",
+        "src\app\layout.tsx",
+        "src\app\api\health\route.ts",
+        "src\app\api\search\route.ts",
+        "src\app\admin\page.tsx",
+        "src\app\admin\articles\page.tsx",
+        "src\app\article\[slug]\page.tsx",
+        "src\app\category\[slug]\page.tsx",
+        "src\app\search\page.tsx"
+    )
+    $MissingFiles = foreach ($RelativePath in $RequiredFiles) {
+        $FullPath = Join-Path $ProjectRoot $RelativePath
+        if (-not (Test-Path -LiteralPath $FullPath)) {
+            $RelativePath
+        }
+    }
+    if ($MissingFiles) {
+        throw "Required files are missing:`n$($MissingFiles -join "`n")"
+    }
+Missing closing '}' in statement block or type definition.
+>> try {
+    function Invoke-Checked {
+        param(
+            [Parameter(Mandatory)]
+            [string]$Name,
+            [Parameter(Mandatory)]
+            [scriptblock]$Command
+        )
+        Write-Host "`n=== $Name ===" -ForegroundColor Cyan
+        $global:LASTEXITCODE = 0
+        & $Command
+        if ($LASTEXITCODE -ne 0) {
+            throw "$Name failed with exit code $LASTEXITCODE."
+        }
+        Write-Host "$Name PASSED" -ForegroundColor Green
+    }
+    Write-Host "`n=== PHASE 6 CORRECTED AUDIT ===" -ForegroundColor Cyan
+    if (-not (Test-Path $Phase5BMarker)) {
+        throw "PHASE-5B-COMPLETE.txt is missing."
+    }
+    $Phase5BStatus = Get-Content $Phase5BMarker -Raw
+    if ($Phase5BStatus -notmatch "PHASE 5B COMPLETE") {
+        throw "Phase 5B is not marked complete."
+    }
+    Write-Host "Phase 5B prerequisite PASSED" -ForegroundColor Green
+    if (-not (Test-Path $EnvFile)) {
+        throw ".env.local is missing."
+    }
+    $DatabaseLine = Get-Content $EnvFile |
+        Where-Object { $_ -match '^\s*DATABASE_URL\s*=' } |
+        Select-Object -First 1
+    if (-not $DatabaseLine) {
+        throw "DATABASE_URL is missing from .env.local."
+    }
+    $DatabaseUrl = ($DatabaseLine -split "=", 2)[1].Trim().Trim('"').Trim("'")
+    if (
+        [string]::IsNullOrWhiteSpace($DatabaseUrl) -or
+        $DatabaseUrl -notmatch '^postgres(ql)?://'
+    ) {
+        throw "DATABASE_URL is empty or invalid."
+    }
+    $env:DATABASE_URL = $DatabaseUrl
+    Write-Host "DATABASE_URL PASSED" -ForegroundColor Green
+    $PackageJson = Get-Content ".\package.json" -Raw | ConvertFrom-Json
+    $Scripts = @($PackageJson.scripts.PSObject.Properties.Name)
+    Invoke-Checked "DEPENDENCY INSTALL" {
+        pnpm install --frozen-lockfile
+    }
+    if ($Scripts -contains "db:generate") {
+        Invoke-Checked "DATABASE SCHEMA GENERATION" {
+            pnpm run db:generate
+        }
+    }
+    if ($Scripts -contains "db:migrate") {
+        Invoke-Checked "DATABASE MIGRATION" {
+            pnpm run db:migrate
+        }
+    }
+    $RequiredFiles = @(
+        "src\app\page.tsx",
+        "src\app\layout.tsx",
+        "src\app\api\health\route.ts",
+        "src\app\api\search\route.ts",
+        "src\app\admin\page.tsx",
+        "src\app\admin\articles\page.tsx",
+        "src\app\article\[slug]\page.tsx",
+        "src\app\category\[slug]\page.tsx",
+        "src\app\search\page.tsx"
+    )
+    $MissingFiles = foreach ($RelativePath in $RequiredFiles) {
+        $FullPath = Join-Path $ProjectRoot $RelativePath
+        if (-not (Test-Path -LiteralPath $FullPath)) {
+            $RelativePath
+        }
+    }
+    if ($MissingFiles) {
+        throw "Required files are missing:`n$($MissingFiles -join "`n")"
+    }
+    Write-Host "REQUIRED ROUTES PASSED" -ForegroundColor Green
+Missing closing '}' in statement block or type definition.
+>> try {
+    function Invoke-Checked {
+        param(
+            [Parameter(Mandatory)]
+            [string]$Name,
+            [Parameter(Mandatory)]
+            [scriptblock]$Command
+        )
+        Write-Host "`n=== $Name ===" -ForegroundColor Cyan
+        $global:LASTEXITCODE = 0
+        & $Command
+        if ($LASTEXITCODE -ne 0) {
+            throw "$Name failed with exit code $LASTEXITCODE."
+        }
+        Write-Host "$Name PASSED" -ForegroundColor Green
+    }
+    Write-Host "`n=== PHASE 6 CORRECTED AUDIT ===" -ForegroundColor Cyan
+    if (-not (Test-Path $Phase5BMarker)) {
+        throw "PHASE-5B-COMPLETE.txt is missing."
+    }
+    $Phase5BStatus = Get-Content $Phase5BMarker -Raw
+    if ($Phase5BStatus -notmatch "PHASE 5B COMPLETE") {
+        throw "Phase 5B is not marked complete."
+    }
+    Write-Host "Phase 5B prerequisite PASSED" -ForegroundColor Green
+    if (-not (Test-Path $EnvFile)) {
+        throw ".env.local is missing."
+    }
+    $DatabaseLine = Get-Content $EnvFile |
+        Where-Object { $_ -match '^\s*DATABASE_URL\s*=' } |
+        Select-Object -First 1
+    if (-not $DatabaseLine) {
+        throw "DATABASE_URL is missing from .env.local."
+    }
+    $DatabaseUrl = ($DatabaseLine -split "=", 2)[1].Trim().Trim('"').Trim("'")
+    if (
+        [string]::IsNullOrWhiteSpace($DatabaseUrl) -or
+        $DatabaseUrl -notmatch '^postgres(ql)?://'
+    ) {
+        throw "DATABASE_URL is empty or invalid."
+    }
+    $env:DATABASE_URL = $DatabaseUrl
+    Write-Host "DATABASE_URL PASSED" -ForegroundColor Green
+    $PackageJson = Get-Content ".\package.json" -Raw | ConvertFrom-Json
+    $Scripts = @($PackageJson.scripts.PSObject.Properties.Name)
+    Invoke-Checked "DEPENDENCY INSTALL" {
+        pnpm install --frozen-lockfile
+    }
+    if ($Scripts -contains "db:generate") {
+        Invoke-Checked "DATABASE SCHEMA GENERATION" {
+            pnpm run db:generate
+        }
+    }
+    if ($Scripts -contains "db:migrate") {
+        Invoke-Checked "DATABASE MIGRATION" {
+            pnpm run db:migrate
+        }
+    }
+    $RequiredFiles = @(
+        "src\app\page.tsx",
+        "src\app\layout.tsx",
+        "src\app\api\health\route.ts",
+        "src\app\api\search\route.ts",
+        "src\app\admin\page.tsx",
+        "src\app\admin\articles\page.tsx",
+        "src\app\article\[slug]\page.tsx",
+        "src\app\category\[slug]\page.tsx",
+        "src\app\search\page.tsx"
+    )
+    $MissingFiles = foreach ($RelativePath in $RequiredFiles) {
+        $FullPath = Join-Path $ProjectRoot $RelativePath
+        if (-not (Test-Path -LiteralPath $FullPath)) {
+            $RelativePath
+        }
+    }
+    if ($MissingFiles) {
+        throw "Required files are missing:`n$($MissingFiles -join "`n")"
+    }
+    Write-Host "REQUIRED ROUTES PASSED" -ForegroundColor Green
+    $SourceFiles = Get-ChildItem `
+        -Path (Join-Path $ProjectRoot "src") `
+        -Recurse `
+        -File `
+        -Include "*.ts","*.tsx","*.js","*.jsx","*.css"
+Missing closing '}' in statement block or type definition.
+>> try {
+    function Invoke-Checked {
+        param(
+            [Parameter(Mandatory)]
+            [string]$Name,
+            [Parameter(Mandatory)]
+            [scriptblock]$Command
+        )
+        Write-Host "`n=== $Name ===" -ForegroundColor Cyan
+        $global:LASTEXITCODE = 0
+        & $Command
+        if ($LASTEXITCODE -ne 0) {
+            throw "$Name failed with exit code $LASTEXITCODE."
+        }
+        Write-Host "$Name PASSED" -ForegroundColor Green
+    }
+    Write-Host "`n=== PHASE 6 CORRECTED AUDIT ===" -ForegroundColor Cyan
+    if (-not (Test-Path $Phase5BMarker)) {
+        throw "PHASE-5B-COMPLETE.txt is missing."
+    }
+    $Phase5BStatus = Get-Content $Phase5BMarker -Raw
+    if ($Phase5BStatus -notmatch "PHASE 5B COMPLETE") {
+        throw "Phase 5B is not marked complete."
+    }
+    Write-Host "Phase 5B prerequisite PASSED" -ForegroundColor Green
+    if (-not (Test-Path $EnvFile)) {
+        throw ".env.local is missing."
+    }
+    $DatabaseLine = Get-Content $EnvFile |
+        Where-Object { $_ -match '^\s*DATABASE_URL\s*=' } |
+        Select-Object -First 1
+    if (-not $DatabaseLine) {
+        throw "DATABASE_URL is missing from .env.local."
+    }
+    $DatabaseUrl = ($DatabaseLine -split "=", 2)[1].Trim().Trim('"').Trim("'")
+    if (
+        [string]::IsNullOrWhiteSpace($DatabaseUrl) -or
+        $DatabaseUrl -notmatch '^postgres(ql)?://'
+    ) {
+        throw "DATABASE_URL is empty or invalid."
+    }
+    $env:DATABASE_URL = $DatabaseUrl
+    Write-Host "DATABASE_URL PASSED" -ForegroundColor Green
+    $PackageJson = Get-Content ".\package.json" -Raw | ConvertFrom-Json
+    $Scripts = @($PackageJson.scripts.PSObject.Properties.Name)
+    Invoke-Checked "DEPENDENCY INSTALL" {
+        pnpm install --frozen-lockfile
+    }
+    if ($Scripts -contains "db:generate") {
+        Invoke-Checked "DATABASE SCHEMA GENERATION" {
+            pnpm run db:generate
+        }
+    }
+    if ($Scripts -contains "db:migrate") {
+        Invoke-Checked "DATABASE MIGRATION" {
+            pnpm run db:migrate
+        }
+    }
+    $RequiredFiles = @(
+        "src\app\page.tsx",
+        "src\app\layout.tsx",
+        "src\app\api\health\route.ts",
+        "src\app\api\search\route.ts",
+        "src\app\admin\page.tsx",
+        "src\app\admin\articles\page.tsx",
+        "src\app\article\[slug]\page.tsx",
+        "src\app\category\[slug]\page.tsx",
+        "src\app\search\page.tsx"
+    )
+    $MissingFiles = foreach ($RelativePath in $RequiredFiles) {
+        $FullPath = Join-Path $ProjectRoot $RelativePath
+        if (-not (Test-Path -LiteralPath $FullPath)) {
+            $RelativePath
+        }
+    }
+    if ($MissingFiles) {
+        throw "Required files are missing:`n$($MissingFiles -join "`n")"
+    }
+    Write-Host "REQUIRED ROUTES PASSED" -ForegroundColor Green
+    $SourceFiles = Get-ChildItem `
+        -Path (Join-Path $ProjectRoot "src") `
+        -Recurse `
+        -File `
+        -Include "*.ts","*.tsx","*.js","*.jsx","*.css"
+    $SourceFileCount = @($SourceFiles).Count
+Missing closing '}' in statement block or type definition.
+>> try {
+    function Invoke-Checked {
+        param(
+            [Parameter(Mandatory)]
+            [string]$Name,
+            [Parameter(Mandatory)]
+            [scriptblock]$Command
+        )
+        Write-Host "`n=== $Name ===" -ForegroundColor Cyan
+        $global:LASTEXITCODE = 0
+        & $Command
+        if ($LASTEXITCODE -ne 0) {
+            throw "$Name failed with exit code $LASTEXITCODE."
+        }
+        Write-Host "$Name PASSED" -ForegroundColor Green
+    }
+    Write-Host "`n=== PHASE 6 CORRECTED AUDIT ===" -ForegroundColor Cyan
+    if (-not (Test-Path $Phase5BMarker)) {
+        throw "PHASE-5B-COMPLETE.txt is missing."
+    }
+    $Phase5BStatus = Get-Content $Phase5BMarker -Raw
+    if ($Phase5BStatus -notmatch "PHASE 5B COMPLETE") {
+        throw "Phase 5B is not marked complete."
+    }
+    Write-Host "Phase 5B prerequisite PASSED" -ForegroundColor Green
+    if (-not (Test-Path $EnvFile)) {
+        throw ".env.local is missing."
+    }
+    $DatabaseLine = Get-Content $EnvFile |
+        Where-Object { $_ -match '^\s*DATABASE_URL\s*=' } |
+        Select-Object -First 1
+    if (-not $DatabaseLine) {
+        throw "DATABASE_URL is missing from .env.local."
+    }
+    $DatabaseUrl = ($DatabaseLine -split "=", 2)[1].Trim().Trim('"').Trim("'")
+    if (
+        [string]::IsNullOrWhiteSpace($DatabaseUrl) -or
+        $DatabaseUrl -notmatch '^postgres(ql)?://'
+    ) {
+        throw "DATABASE_URL is empty or invalid."
+    }
+    $env:DATABASE_URL = $DatabaseUrl
+    Write-Host "DATABASE_URL PASSED" -ForegroundColor Green
+    $PackageJson = Get-Content ".\package.json" -Raw | ConvertFrom-Json
+    $Scripts = @($PackageJson.scripts.PSObject.Properties.Name)
+    Invoke-Checked "DEPENDENCY INSTALL" {
+        pnpm install --frozen-lockfile
+    }
+    if ($Scripts -contains "db:generate") {
+        Invoke-Checked "DATABASE SCHEMA GENERATION" {
+            pnpm run db:generate
+        }
+    }
+    if ($Scripts -contains "db:migrate") {
+        Invoke-Checked "DATABASE MIGRATION" {
+            pnpm run db:migrate
+        }
+    }
+    $RequiredFiles = @(
+        "src\app\page.tsx",
+        "src\app\layout.tsx",
+        "src\app\api\health\route.ts",
+        "src\app\api\search\route.ts",
+        "src\app\admin\page.tsx",
+        "src\app\admin\articles\page.tsx",
+        "src\app\article\[slug]\page.tsx",
+        "src\app\category\[slug]\page.tsx",
+        "src\app\search\page.tsx"
+    )
+    $MissingFiles = foreach ($RelativePath in $RequiredFiles) {
+        $FullPath = Join-Path $ProjectRoot $RelativePath
+        if (-not (Test-Path -LiteralPath $FullPath)) {
+            $RelativePath
+        }
+    }
+    if ($MissingFiles) {
+        throw "Required files are missing:`n$($MissingFiles -join "`n")"
+    }
+    Write-Host "REQUIRED ROUTES PASSED" -ForegroundColor Green
+    $SourceFiles = Get-ChildItem `
+        -Path (Join-Path $ProjectRoot "src") `
+        -Recurse `
+        -File `
+        -Include "*.ts","*.tsx","*.js","*.jsx","*.css"
+    $SourceFileCount = @($SourceFiles).Count
+    if ($SourceFileCount -eq 0) {
+        throw "No source files were found."
+    }
+Missing closing '}' in statement block or type definition.
+>> try {
+    function Invoke-Checked {
+        param(
+            [Parameter(Mandatory)]
+            [string]$Name,
+            [Parameter(Mandatory)]
+            [scriptblock]$Command
+        )
+        Write-Host "`n=== $Name ===" -ForegroundColor Cyan
+        $global:LASTEXITCODE = 0
+        & $Command
+        if ($LASTEXITCODE -ne 0) {
+            throw "$Name failed with exit code $LASTEXITCODE."
+        }
+        Write-Host "$Name PASSED" -ForegroundColor Green
+    }
+    Write-Host "`n=== PHASE 6 CORRECTED AUDIT ===" -ForegroundColor Cyan
+    if (-not (Test-Path $Phase5BMarker)) {
+        throw "PHASE-5B-COMPLETE.txt is missing."
+    }
+    $Phase5BStatus = Get-Content $Phase5BMarker -Raw
+    if ($Phase5BStatus -notmatch "PHASE 5B COMPLETE") {
+        throw "Phase 5B is not marked complete."
+    }
+    Write-Host "Phase 5B prerequisite PASSED" -ForegroundColor Green
+    if (-not (Test-Path $EnvFile)) {
+        throw ".env.local is missing."
+    }
+    $DatabaseLine = Get-Content $EnvFile |
+        Where-Object { $_ -match '^\s*DATABASE_URL\s*=' } |
+        Select-Object -First 1
+    if (-not $DatabaseLine) {
+        throw "DATABASE_URL is missing from .env.local."
+    }
+    $DatabaseUrl = ($DatabaseLine -split "=", 2)[1].Trim().Trim('"').Trim("'")
+    if (
+        [string]::IsNullOrWhiteSpace($DatabaseUrl) -or
+        $DatabaseUrl -notmatch '^postgres(ql)?://'
+    ) {
+        throw "DATABASE_URL is empty or invalid."
+    }
+    $env:DATABASE_URL = $DatabaseUrl
+    Write-Host "DATABASE_URL PASSED" -ForegroundColor Green
+    $PackageJson = Get-Content ".\package.json" -Raw | ConvertFrom-Json
+    $Scripts = @($PackageJson.scripts.PSObject.Properties.Name)
+    Invoke-Checked "DEPENDENCY INSTALL" {
+        pnpm install --frozen-lockfile
+    }
+    if ($Scripts -contains "db:generate") {
+        Invoke-Checked "DATABASE SCHEMA GENERATION" {
+            pnpm run db:generate
+        }
+    }
+    if ($Scripts -contains "db:migrate") {
+        Invoke-Checked "DATABASE MIGRATION" {
+            pnpm run db:migrate
+        }
+    }
+    $RequiredFiles = @(
+        "src\app\page.tsx",
+        "src\app\layout.tsx",
+        "src\app\api\health\route.ts",
+        "src\app\api\search\route.ts",
+        "src\app\admin\page.tsx",
+        "src\app\admin\articles\page.tsx",
+        "src\app\article\[slug]\page.tsx",
+        "src\app\category\[slug]\page.tsx",
+        "src\app\search\page.tsx"
+    )
+    $MissingFiles = foreach ($RelativePath in $RequiredFiles) {
+        $FullPath = Join-Path $ProjectRoot $RelativePath
+        if (-not (Test-Path -LiteralPath $FullPath)) {
+            $RelativePath
+        }
+    }
+    if ($MissingFiles) {
+        throw "Required files are missing:`n$($MissingFiles -join "`n")"
+    }
+    Write-Host "REQUIRED ROUTES PASSED" -ForegroundColor Green
+    $SourceFiles = Get-ChildItem `
+        -Path (Join-Path $ProjectRoot "src") `
+        -Recurse `
+        -File `
+        -Include "*.ts","*.tsx","*.js","*.jsx","*.css"
+    $SourceFileCount = @($SourceFiles).Count
+    if ($SourceFileCount -eq 0) {
+        throw "No source files were found."
+    }
+    $TodoResults = $SourceFiles |
+        Select-String `
+            -Pattern 'PHASE[\s-]*6.*TODO|TODO.*PHASE[\s-]*6|IMPLEMENT[\s-]*PHASE[\s-]*6' `
+            -CaseSensitive:$false
+Missing closing '}' in statement block or type definition.
+>> try {
+    function Invoke-Checked {
+        param(
+            [Parameter(Mandatory)]
+            [string]$Name,
+            [Parameter(Mandatory)]
+            [scriptblock]$Command
+        )
+        Write-Host "`n=== $Name ===" -ForegroundColor Cyan
+        $global:LASTEXITCODE = 0
+        & $Command
+        if ($LASTEXITCODE -ne 0) {
+            throw "$Name failed with exit code $LASTEXITCODE."
+        }
+        Write-Host "$Name PASSED" -ForegroundColor Green
+    }
+    Write-Host "`n=== PHASE 6 CORRECTED AUDIT ===" -ForegroundColor Cyan
+    if (-not (Test-Path $Phase5BMarker)) {
+        throw "PHASE-5B-COMPLETE.txt is missing."
+    }
+    $Phase5BStatus = Get-Content $Phase5BMarker -Raw
+    if ($Phase5BStatus -notmatch "PHASE 5B COMPLETE") {
+        throw "Phase 5B is not marked complete."
+    }
+    Write-Host "Phase 5B prerequisite PASSED" -ForegroundColor Green
+    if (-not (Test-Path $EnvFile)) {
+        throw ".env.local is missing."
+    }
+    $DatabaseLine = Get-Content $EnvFile |
+        Where-Object { $_ -match '^\s*DATABASE_URL\s*=' } |
+        Select-Object -First 1
+    if (-not $DatabaseLine) {
+        throw "DATABASE_URL is missing from .env.local."
+    }
+    $DatabaseUrl = ($DatabaseLine -split "=", 2)[1].Trim().Trim('"').Trim("'")
+    if (
+        [string]::IsNullOrWhiteSpace($DatabaseUrl) -or
+        $DatabaseUrl -notmatch '^postgres(ql)?://'
+    ) {
+        throw "DATABASE_URL is empty or invalid."
+    }
+    $env:DATABASE_URL = $DatabaseUrl
+    Write-Host "DATABASE_URL PASSED" -ForegroundColor Green
+    $PackageJson = Get-Content ".\package.json" -Raw | ConvertFrom-Json
+    $Scripts = @($PackageJson.scripts.PSObject.Properties.Name)
+    Invoke-Checked "DEPENDENCY INSTALL" {
+        pnpm install --frozen-lockfile
+    }
+    if ($Scripts -contains "db:generate") {
+        Invoke-Checked "DATABASE SCHEMA GENERATION" {
+            pnpm run db:generate
+        }
+    }
+    if ($Scripts -contains "db:migrate") {
+        Invoke-Checked "DATABASE MIGRATION" {
+            pnpm run db:migrate
+        }
+    }
+    $RequiredFiles = @(
+        "src\app\page.tsx",
+        "src\app\layout.tsx",
+        "src\app\api\health\route.ts",
+        "src\app\api\search\route.ts",
+        "src\app\admin\page.tsx",
+        "src\app\admin\articles\page.tsx",
+        "src\app\article\[slug]\page.tsx",
+        "src\app\category\[slug]\page.tsx",
+        "src\app\search\page.tsx"
+    )
+    $MissingFiles = foreach ($RelativePath in $RequiredFiles) {
+        $FullPath = Join-Path $ProjectRoot $RelativePath
+        if (-not (Test-Path -LiteralPath $FullPath)) {
+            $RelativePath
+        }
+    }
+    if ($MissingFiles) {
+        throw "Required files are missing:`n$($MissingFiles -join "`n")"
+    }
+    Write-Host "REQUIRED ROUTES PASSED" -ForegroundColor Green
+    $SourceFiles = Get-ChildItem `
+        -Path (Join-Path $ProjectRoot "src") `
+        -Recurse `
+        -File `
+        -Include "*.ts","*.tsx","*.js","*.jsx","*.css"
+    $SourceFileCount = @($SourceFiles).Count
+    if ($SourceFileCount -eq 0) {
+        throw "No source files were found."
+    }
+    $TodoResults = $SourceFiles |
+        Select-String `
+            -Pattern 'PHASE[\s-]*6.*TODO|TODO.*PHASE[\s-]*6|IMPLEMENT[\s-]*PHASE[\s-]*6' `
+            -CaseSensitive:$false
+    if ($TodoResults) {
+        $TodoText = $TodoResults |
+            ForEach-Object {
+                "$($_.Path):$($_.LineNumber): $($_.Line.Trim())"
+            }
+Missing closing '}' in statement block or type definition.
+>> try {
+    function Invoke-Checked {
+        param(
+            [Parameter(Mandatory)]
+            [string]$Name,
+            [Parameter(Mandatory)]
+            [scriptblock]$Command
+        )
+        Write-Host "`n=== $Name ===" -ForegroundColor Cyan
+        $global:LASTEXITCODE = 0
+        & $Command
+        if ($LASTEXITCODE -ne 0) {
+            throw "$Name failed with exit code $LASTEXITCODE."
+        }
+        Write-Host "$Name PASSED" -ForegroundColor Green
+    }
+    Write-Host "`n=== PHASE 6 CORRECTED AUDIT ===" -ForegroundColor Cyan
+    if (-not (Test-Path $Phase5BMarker)) {
+        throw "PHASE-5B-COMPLETE.txt is missing."
+    }
+    $Phase5BStatus = Get-Content $Phase5BMarker -Raw
+    if ($Phase5BStatus -notmatch "PHASE 5B COMPLETE") {
+        throw "Phase 5B is not marked complete."
+    }
+    Write-Host "Phase 5B prerequisite PASSED" -ForegroundColor Green
+    if (-not (Test-Path $EnvFile)) {
+        throw ".env.local is missing."
+    }
+    $DatabaseLine = Get-Content $EnvFile |
+        Where-Object { $_ -match '^\s*DATABASE_URL\s*=' } |
+        Select-Object -First 1
+    if (-not $DatabaseLine) {
+        throw "DATABASE_URL is missing from .env.local."
+    }
+    $DatabaseUrl = ($DatabaseLine -split "=", 2)[1].Trim().Trim('"').Trim("'")
+    if (
+        [string]::IsNullOrWhiteSpace($DatabaseUrl) -or
+        $DatabaseUrl -notmatch '^postgres(ql)?://'
+    ) {
+        throw "DATABASE_URL is empty or invalid."
+    }
+    $env:DATABASE_URL = $DatabaseUrl
+    Write-Host "DATABASE_URL PASSED" -ForegroundColor Green
+    $PackageJson = Get-Content ".\package.json" -Raw | ConvertFrom-Json
+    $Scripts = @($PackageJson.scripts.PSObject.Properties.Name)
+    Invoke-Checked "DEPENDENCY INSTALL" {
+        pnpm install --frozen-lockfile
+    }
+    if ($Scripts -contains "db:generate") {
+        Invoke-Checked "DATABASE SCHEMA GENERATION" {
+            pnpm run db:generate
+        }
+    }
+    if ($Scripts -contains "db:migrate") {
+        Invoke-Checked "DATABASE MIGRATION" {
+            pnpm run db:migrate
+        }
+    }
+    $RequiredFiles = @(
+        "src\app\page.tsx",
+        "src\app\layout.tsx",
+        "src\app\api\health\route.ts",
+        "src\app\api\search\route.ts",
+        "src\app\admin\page.tsx",
+        "src\app\admin\articles\page.tsx",
+        "src\app\article\[slug]\page.tsx",
+        "src\app\category\[slug]\page.tsx",
+        "src\app\search\page.tsx"
+    )
+    $MissingFiles = foreach ($RelativePath in $RequiredFiles) {
+        $FullPath = Join-Path $ProjectRoot $RelativePath
+        if (-not (Test-Path -LiteralPath $FullPath)) {
+            $RelativePath
+        }
+    }
+    if ($MissingFiles) {
+        throw "Required files are missing:`n$($MissingFiles -join "`n")"
+    }
+    Write-Host "REQUIRED ROUTES PASSED" -ForegroundColor Green
+    $SourceFiles = Get-ChildItem `
+        -Path (Join-Path $ProjectRoot "src") `
+        -Recurse `
+        -File `
+        -Include "*.ts","*.tsx","*.js","*.jsx","*.css"
+    $SourceFileCount = @($SourceFiles).Count
+    if ($SourceFileCount -eq 0) {
+        throw "No source files were found."
+    }
+    $TodoResults = $SourceFiles |
+        Select-String `
+            -Pattern 'PHASE[\s-]*6.*TODO|TODO.*PHASE[\s-]*6|IMPLEMENT[\s-]*PHASE[\s-]*6' `
+            -CaseSensitive:$false
+    if ($TodoResults) {
+        $TodoText = $TodoResults |
+            ForEach-Object {
+                "$($_.Path):$($_.LineNumber): $($_.Line.Trim())"
+            }
+        throw "Unfinished Phase 6 markers found:`n$($TodoText -join "`n")"
+    }
+Missing closing '}' in statement block or type definition.
+>> try {
+    function Invoke-Checked {
+        param(
+            [Parameter(Mandatory)]
+            [string]$Name,
+            [Parameter(Mandatory)]
+            [scriptblock]$Command
+        )
+        Write-Host "`n=== $Name ===" -ForegroundColor Cyan
+        $global:LASTEXITCODE = 0
+        & $Command
+        if ($LASTEXITCODE -ne 0) {
+            throw "$Name failed with exit code $LASTEXITCODE."
+        }
+        Write-Host "$Name PASSED" -ForegroundColor Green
+    }
+    Write-Host "`n=== PHASE 6 CORRECTED AUDIT ===" -ForegroundColor Cyan
+    if (-not (Test-Path $Phase5BMarker)) {
+        throw "PHASE-5B-COMPLETE.txt is missing."
+    }
+    $Phase5BStatus = Get-Content $Phase5BMarker -Raw
+    if ($Phase5BStatus -notmatch "PHASE 5B COMPLETE") {
+        throw "Phase 5B is not marked complete."
+    }
+    Write-Host "Phase 5B prerequisite PASSED" -ForegroundColor Green
+    if (-not (Test-Path $EnvFile)) {
+        throw ".env.local is missing."
+    }
+    $DatabaseLine = Get-Content $EnvFile |
+        Where-Object { $_ -match '^\s*DATABASE_URL\s*=' } |
+        Select-Object -First 1
+    if (-not $DatabaseLine) {
+        throw "DATABASE_URL is missing from .env.local."
+    }
+    $DatabaseUrl = ($DatabaseLine -split "=", 2)[1].Trim().Trim('"').Trim("'")
+    if (
+        [string]::IsNullOrWhiteSpace($DatabaseUrl) -or
+        $DatabaseUrl -notmatch '^postgres(ql)?://'
+    ) {
+        throw "DATABASE_URL is empty or invalid."
+    }
+    $env:DATABASE_URL = $DatabaseUrl
+    Write-Host "DATABASE_URL PASSED" -ForegroundColor Green
+    $PackageJson = Get-Content ".\package.json" -Raw | ConvertFrom-Json
+    $Scripts = @($PackageJson.scripts.PSObject.Properties.Name)
+    Invoke-Checked "DEPENDENCY INSTALL" {
+        pnpm install --frozen-lockfile
+    }
+    if ($Scripts -contains "db:generate") {
+        Invoke-Checked "DATABASE SCHEMA GENERATION" {
+            pnpm run db:generate
+        }
+    }
+    if ($Scripts -contains "db:migrate") {
+        Invoke-Checked "DATABASE MIGRATION" {
+            pnpm run db:migrate
+        }
+    }
+    $RequiredFiles = @(
+        "src\app\page.tsx",
+        "src\app\layout.tsx",
+        "src\app\api\health\route.ts",
+        "src\app\api\search\route.ts",
+        "src\app\admin\page.tsx",
+        "src\app\admin\articles\page.tsx",
+        "src\app\article\[slug]\page.tsx",
+        "src\app\category\[slug]\page.tsx",
+        "src\app\search\page.tsx"
+    )
+    $MissingFiles = foreach ($RelativePath in $RequiredFiles) {
+        $FullPath = Join-Path $ProjectRoot $RelativePath
+        if (-not (Test-Path -LiteralPath $FullPath)) {
+            $RelativePath
+        }
+    }
+    if ($MissingFiles) {
+        throw "Required files are missing:`n$($MissingFiles -join "`n")"
+    }
+    Write-Host "REQUIRED ROUTES PASSED" -ForegroundColor Green
+    $SourceFiles = Get-ChildItem `
+        -Path (Join-Path $ProjectRoot "src") `
+        -Recurse `
+        -File `
+        -Include "*.ts","*.tsx","*.js","*.jsx","*.css"
+    $SourceFileCount = @($SourceFiles).Count
+    if ($SourceFileCount -eq 0) {
+        throw "No source files were found."
+    }
+    $TodoResults = $SourceFiles |
+        Select-String `
+            -Pattern 'PHASE[\s-]*6.*TODO|TODO.*PHASE[\s-]*6|IMPLEMENT[\s-]*PHASE[\s-]*6' `
+            -CaseSensitive:$false
+    if ($TodoResults) {
+        $TodoText = $TodoResults |
+            ForEach-Object {
+                "$($_.Path):$($_.LineNumber): $($_.Line.Trim())"
+            }
+        throw "Unfinished Phase 6 markers found:`n$($TodoText -join "`n")"
+    }
+    Write-Host "NO UNFINISHED PHASE 6 MARKERS" -ForegroundColor Green
+Missing closing '}' in statement block or type definition.
+>> try {
+    function Invoke-Checked {
+        param(
+            [Parameter(Mandatory)]
+            [string]$Name,
+            [Parameter(Mandatory)]
+            [scriptblock]$Command
+        )
+        Write-Host "`n=== $Name ===" -ForegroundColor Cyan
+        $global:LASTEXITCODE = 0
+        & $Command
+        if ($LASTEXITCODE -ne 0) {
+            throw "$Name failed with exit code $LASTEXITCODE."
+        }
+        Write-Host "$Name PASSED" -ForegroundColor Green
+    }
+    Write-Host "`n=== PHASE 6 CORRECTED AUDIT ===" -ForegroundColor Cyan
+    if (-not (Test-Path $Phase5BMarker)) {
+        throw "PHASE-5B-COMPLETE.txt is missing."
+    }
+    $Phase5BStatus = Get-Content $Phase5BMarker -Raw
+    if ($Phase5BStatus -notmatch "PHASE 5B COMPLETE") {
+        throw "Phase 5B is not marked complete."
+    }
+    Write-Host "Phase 5B prerequisite PASSED" -ForegroundColor Green
+    if (-not (Test-Path $EnvFile)) {
+        throw ".env.local is missing."
+    }
+    $DatabaseLine = Get-Content $EnvFile |
+        Where-Object { $_ -match '^\s*DATABASE_URL\s*=' } |
+        Select-Object -First 1
+    if (-not $DatabaseLine) {
+        throw "DATABASE_URL is missing from .env.local."
+    }
+    $DatabaseUrl = ($DatabaseLine -split "=", 2)[1].Trim().Trim('"').Trim("'")
+    if (
+        [string]::IsNullOrWhiteSpace($DatabaseUrl) -or
+        $DatabaseUrl -notmatch '^postgres(ql)?://'
+    ) {
+        throw "DATABASE_URL is empty or invalid."
+    }
+    $env:DATABASE_URL = $DatabaseUrl
+    Write-Host "DATABASE_URL PASSED" -ForegroundColor Green
+    $PackageJson = Get-Content ".\package.json" -Raw | ConvertFrom-Json
+    $Scripts = @($PackageJson.scripts.PSObject.Properties.Name)
+    Invoke-Checked "DEPENDENCY INSTALL" {
+        pnpm install --frozen-lockfile
+    }
+    if ($Scripts -contains "db:generate") {
+        Invoke-Checked "DATABASE SCHEMA GENERATION" {
+            pnpm run db:generate
+        }
+    }
+    if ($Scripts -contains "db:migrate") {
+        Invoke-Checked "DATABASE MIGRATION" {
+            pnpm run db:migrate
+        }
+    }
+    $RequiredFiles = @(
+        "src\app\page.tsx",
+        "src\app\layout.tsx",
+        "src\app\api\health\route.ts",
+        "src\app\api\search\route.ts",
+        "src\app\admin\page.tsx",
+        "src\app\admin\articles\page.tsx",
+        "src\app\article\[slug]\page.tsx",
+        "src\app\category\[slug]\page.tsx",
+        "src\app\search\page.tsx"
+    )
+    $MissingFiles = foreach ($RelativePath in $RequiredFiles) {
+        $FullPath = Join-Path $ProjectRoot $RelativePath
+        if (-not (Test-Path -LiteralPath $FullPath)) {
+            $RelativePath
+        }
+    }
+    if ($MissingFiles) {
+        throw "Required files are missing:`n$($MissingFiles -join "`n")"
+    }
+    Write-Host "REQUIRED ROUTES PASSED" -ForegroundColor Green
+    $SourceFiles = Get-ChildItem `
+        -Path (Join-Path $ProjectRoot "src") `
+        -Recurse `
+        -File `
+        -Include "*.ts","*.tsx","*.js","*.jsx","*.css"
+    $SourceFileCount = @($SourceFiles).Count
+    if ($SourceFileCount -eq 0) {
+        throw "No source files were found."
+    }
+    $TodoResults = $SourceFiles |
+        Select-String `
+            -Pattern 'PHASE[\s-]*6.*TODO|TODO.*PHASE[\s-]*6|IMPLEMENT[\s-]*PHASE[\s-]*6' `
+            -CaseSensitive:$false
+    if ($TodoResults) {
+        $TodoText = $TodoResults |
+            ForEach-Object {
+                "$($_.Path):$($_.LineNumber): $($_.Line.Trim())"
+            }
+        throw "Unfinished Phase 6 markers found:`n$($TodoText -join "`n")"
+    }
+    Write-Host "NO UNFINISHED PHASE 6 MARKERS" -ForegroundColor Green
+    if ($Scripts -contains "format:check") {
+        Invoke-Checked "FORMAT CHECK" {
+            pnpm run format:check
+        }
+    }
+Missing closing '}' in statement block or type definition.
+>> try {
+    function Invoke-Checked {
+        param(
+            [Parameter(Mandatory)]
+            [string]$Name,
+            [Parameter(Mandatory)]
+            [scriptblock]$Command
+        )
+        Write-Host "`n=== $Name ===" -ForegroundColor Cyan
+        $global:LASTEXITCODE = 0
+        & $Command
+        if ($LASTEXITCODE -ne 0) {
+            throw "$Name failed with exit code $LASTEXITCODE."
+        }
+        Write-Host "$Name PASSED" -ForegroundColor Green
+    }
+    Write-Host "`n=== PHASE 6 CORRECTED AUDIT ===" -ForegroundColor Cyan
+    if (-not (Test-Path $Phase5BMarker)) {
+        throw "PHASE-5B-COMPLETE.txt is missing."
+    }
+    $Phase5BStatus = Get-Content $Phase5BMarker -Raw
+    if ($Phase5BStatus -notmatch "PHASE 5B COMPLETE") {
+        throw "Phase 5B is not marked complete."
+    }
+    Write-Host "Phase 5B prerequisite PASSED" -ForegroundColor Green
+    if (-not (Test-Path $EnvFile)) {
+        throw ".env.local is missing."
+    }
+    $DatabaseLine = Get-Content $EnvFile |
+        Where-Object { $_ -match '^\s*DATABASE_URL\s*=' } |
+        Select-Object -First 1
+    if (-not $DatabaseLine) {
+        throw "DATABASE_URL is missing from .env.local."
+    }
+    $DatabaseUrl = ($DatabaseLine -split "=", 2)[1].Trim().Trim('"').Trim("'")
+    if (
+        [string]::IsNullOrWhiteSpace($DatabaseUrl) -or
+        $DatabaseUrl -notmatch '^postgres(ql)?://'
+    ) {
+        throw "DATABASE_URL is empty or invalid."
+    }
+    $env:DATABASE_URL = $DatabaseUrl
+    Write-Host "DATABASE_URL PASSED" -ForegroundColor Green
+    $PackageJson = Get-Content ".\package.json" -Raw | ConvertFrom-Json
+    $Scripts = @($PackageJson.scripts.PSObject.Properties.Name)
+    Invoke-Checked "DEPENDENCY INSTALL" {
+        pnpm install --frozen-lockfile
+    }
+    if ($Scripts -contains "db:generate") {
+        Invoke-Checked "DATABASE SCHEMA GENERATION" {
+            pnpm run db:generate
+        }
+    }
+    if ($Scripts -contains "db:migrate") {
+        Invoke-Checked "DATABASE MIGRATION" {
+            pnpm run db:migrate
+        }
+    }
+    $RequiredFiles = @(
+        "src\app\page.tsx",
+        "src\app\layout.tsx",
+        "src\app\api\health\route.ts",
+        "src\app\api\search\route.ts",
+        "src\app\admin\page.tsx",
+        "src\app\admin\articles\page.tsx",
+        "src\app\article\[slug]\page.tsx",
+        "src\app\category\[slug]\page.tsx",
+        "src\app\search\page.tsx"
+    )
+    $MissingFiles = foreach ($RelativePath in $RequiredFiles) {
+        $FullPath = Join-Path $ProjectRoot $RelativePath
+        if (-not (Test-Path -LiteralPath $FullPath)) {
+            $RelativePath
+        }
+    }
+    if ($MissingFiles) {
+        throw "Required files are missing:`n$($MissingFiles -join "`n")"
+    }
+    Write-Host "REQUIRED ROUTES PASSED" -ForegroundColor Green
+    $SourceFiles = Get-ChildItem `
+        -Path (Join-Path $ProjectRoot "src") `
+        -Recurse `
+        -File `
+        -Include "*.ts","*.tsx","*.js","*.jsx","*.css"
+    $SourceFileCount = @($SourceFiles).Count
+    if ($SourceFileCount -eq 0) {
+        throw "No source files were found."
+    }
+    $TodoResults = $SourceFiles |
+        Select-String `
+            -Pattern 'PHASE[\s-]*6.*TODO|TODO.*PHASE[\s-]*6|IMPLEMENT[\s-]*PHASE[\s-]*6' `
+            -CaseSensitive:$false
+    if ($TodoResults) {
+        $TodoText = $TodoResults |
+            ForEach-Object {
+                "$($_.Path):$($_.LineNumber): $($_.Line.Trim())"
+            }
+        throw "Unfinished Phase 6 markers found:`n$($TodoText -join "`n")"
+    }
+    Write-Host "NO UNFINISHED PHASE 6 MARKERS" -ForegroundColor Green
+    if ($Scripts -contains "format:check") {
+        Invoke-Checked "FORMAT CHECK" {
+            pnpm run format:check
+        }
+    }
+    if ($Scripts -contains "lint") {
+        Invoke-Checked "ESLINT" {
+            pnpm run lint
+        }
+    }
+Missing closing '}' in statement block or type definition.
+>> try {
+    function Invoke-Checked {
+        param(
+            [Parameter(Mandatory)]
+            [string]$Name,
+            [Parameter(Mandatory)]
+            [scriptblock]$Command
+        )
+        Write-Host "`n=== $Name ===" -ForegroundColor Cyan
+        $global:LASTEXITCODE = 0
+        & $Command
+        if ($LASTEXITCODE -ne 0) {
+            throw "$Name failed with exit code $LASTEXITCODE."
+        }
+        Write-Host "$Name PASSED" -ForegroundColor Green
+    }
+    Write-Host "`n=== PHASE 6 CORRECTED AUDIT ===" -ForegroundColor Cyan
+    if (-not (Test-Path $Phase5BMarker)) {
+        throw "PHASE-5B-COMPLETE.txt is missing."
+    }
+    $Phase5BStatus = Get-Content $Phase5BMarker -Raw
+    if ($Phase5BStatus -notmatch "PHASE 5B COMPLETE") {
+        throw "Phase 5B is not marked complete."
+    }
+    Write-Host "Phase 5B prerequisite PASSED" -ForegroundColor Green
+    if (-not (Test-Path $EnvFile)) {
+        throw ".env.local is missing."
+    }
+    $DatabaseLine = Get-Content $EnvFile |
+        Where-Object { $_ -match '^\s*DATABASE_URL\s*=' } |
+        Select-Object -First 1
+    if (-not $DatabaseLine) {
+        throw "DATABASE_URL is missing from .env.local."
+    }
+    $DatabaseUrl = ($DatabaseLine -split "=", 2)[1].Trim().Trim('"').Trim("'")
+    if (
+        [string]::IsNullOrWhiteSpace($DatabaseUrl) -or
+        $DatabaseUrl -notmatch '^postgres(ql)?://'
+    ) {
+        throw "DATABASE_URL is empty or invalid."
+    }
+    $env:DATABASE_URL = $DatabaseUrl
+    Write-Host "DATABASE_URL PASSED" -ForegroundColor Green
+    $PackageJson = Get-Content ".\package.json" -Raw | ConvertFrom-Json
+    $Scripts = @($PackageJson.scripts.PSObject.Properties.Name)
+    Invoke-Checked "DEPENDENCY INSTALL" {
+        pnpm install --frozen-lockfile
+    }
+    if ($Scripts -contains "db:generate") {
+        Invoke-Checked "DATABASE SCHEMA GENERATION" {
+            pnpm run db:generate
+        }
+    }
+    if ($Scripts -contains "db:migrate") {
+        Invoke-Checked "DATABASE MIGRATION" {
+            pnpm run db:migrate
+        }
+    }
+    $RequiredFiles = @(
+        "src\app\page.tsx",
+        "src\app\layout.tsx",
+        "src\app\api\health\route.ts",
+        "src\app\api\search\route.ts",
+        "src\app\admin\page.tsx",
+        "src\app\admin\articles\page.tsx",
+        "src\app\article\[slug]\page.tsx",
+        "src\app\category\[slug]\page.tsx",
+        "src\app\search\page.tsx"
+    )
+    $MissingFiles = foreach ($RelativePath in $RequiredFiles) {
+        $FullPath = Join-Path $ProjectRoot $RelativePath
+        if (-not (Test-Path -LiteralPath $FullPath)) {
+            $RelativePath
+        }
+    }
+    if ($MissingFiles) {
+        throw "Required files are missing:`n$($MissingFiles -join "`n")"
+    }
+    Write-Host "REQUIRED ROUTES PASSED" -ForegroundColor Green
+    $SourceFiles = Get-ChildItem `
+        -Path (Join-Path $ProjectRoot "src") `
+        -Recurse `
+        -File `
+        -Include "*.ts","*.tsx","*.js","*.jsx","*.css"
+    $SourceFileCount = @($SourceFiles).Count
+    if ($SourceFileCount -eq 0) {
+        throw "No source files were found."
+    }
+    $TodoResults = $SourceFiles |
+        Select-String `
+            -Pattern 'PHASE[\s-]*6.*TODO|TODO.*PHASE[\s-]*6|IMPLEMENT[\s-]*PHASE[\s-]*6' `
+            -CaseSensitive:$false
+    if ($TodoResults) {
+        $TodoText = $TodoResults |
+            ForEach-Object {
+                "$($_.Path):$($_.LineNumber): $($_.Line.Trim())"
+            }
+        throw "Unfinished Phase 6 markers found:`n$($TodoText -join "`n")"
+    }
+    Write-Host "NO UNFINISHED PHASE 6 MARKERS" -ForegroundColor Green
+    if ($Scripts -contains "format:check") {
+        Invoke-Checked "FORMAT CHECK" {
+            pnpm run format:check
+        }
+    }
+    if ($Scripts -contains "lint") {
+        Invoke-Checked "ESLINT" {
+            pnpm run lint
+        }
+    }
+    if ($Scripts -contains "typecheck") {
+        Invoke-Checked "TYPESCRIPT CHECK" {
+            pnpm run typecheck
+        }
+    }
+Missing closing '}' in statement block or type definition.
+>> try {
+    function Invoke-Checked {
+        param(
+            [Parameter(Mandatory)]
+            [string]$Name,
+            [Parameter(Mandatory)]
+            [scriptblock]$Command
+        )
+        Write-Host "`n=== $Name ===" -ForegroundColor Cyan
+        $global:LASTEXITCODE = 0
+        & $Command
+        if ($LASTEXITCODE -ne 0) {
+            throw "$Name failed with exit code $LASTEXITCODE."
+        }
+        Write-Host "$Name PASSED" -ForegroundColor Green
+    }
+    Write-Host "`n=== PHASE 6 CORRECTED AUDIT ===" -ForegroundColor Cyan
+    if (-not (Test-Path $Phase5BMarker)) {
+        throw "PHASE-5B-COMPLETE.txt is missing."
+    }
+    $Phase5BStatus = Get-Content $Phase5BMarker -Raw
+    if ($Phase5BStatus -notmatch "PHASE 5B COMPLETE") {
+        throw "Phase 5B is not marked complete."
+    }
+    Write-Host "Phase 5B prerequisite PASSED" -ForegroundColor Green
+    if (-not (Test-Path $EnvFile)) {
+        throw ".env.local is missing."
+    }
+    $DatabaseLine = Get-Content $EnvFile |
+        Where-Object { $_ -match '^\s*DATABASE_URL\s*=' } |
+        Select-Object -First 1
+    if (-not $DatabaseLine) {
+        throw "DATABASE_URL is missing from .env.local."
+    }
+    $DatabaseUrl = ($DatabaseLine -split "=", 2)[1].Trim().Trim('"').Trim("'")
+    if (
+        [string]::IsNullOrWhiteSpace($DatabaseUrl) -or
+        $DatabaseUrl -notmatch '^postgres(ql)?://'
+    ) {
+        throw "DATABASE_URL is empty or invalid."
+    }
+    $env:DATABASE_URL = $DatabaseUrl
+    Write-Host "DATABASE_URL PASSED" -ForegroundColor Green
+    $PackageJson = Get-Content ".\package.json" -Raw | ConvertFrom-Json
+    $Scripts = @($PackageJson.scripts.PSObject.Properties.Name)
+    Invoke-Checked "DEPENDENCY INSTALL" {
+        pnpm install --frozen-lockfile
+    }
+    if ($Scripts -contains "db:generate") {
+        Invoke-Checked "DATABASE SCHEMA GENERATION" {
+            pnpm run db:generate
+        }
+    }
+    if ($Scripts -contains "db:migrate") {
+        Invoke-Checked "DATABASE MIGRATION" {
+            pnpm run db:migrate
+        }
+    }
+    $RequiredFiles = @(
+        "src\app\page.tsx",
+        "src\app\layout.tsx",
+        "src\app\api\health\route.ts",
+        "src\app\api\search\route.ts",
+        "src\app\admin\page.tsx",
+        "src\app\admin\articles\page.tsx",
+        "src\app\article\[slug]\page.tsx",
+        "src\app\category\[slug]\page.tsx",
+        "src\app\search\page.tsx"
+    )
+    $MissingFiles = foreach ($RelativePath in $RequiredFiles) {
+        $FullPath = Join-Path $ProjectRoot $RelativePath
+        if (-not (Test-Path -LiteralPath $FullPath)) {
+            $RelativePath
+        }
+    }
+    if ($MissingFiles) {
+        throw "Required files are missing:`n$($MissingFiles -join "`n")"
+    }
+    Write-Host "REQUIRED ROUTES PASSED" -ForegroundColor Green
+    $SourceFiles = Get-ChildItem `
+        -Path (Join-Path $ProjectRoot "src") `
+        -Recurse `
+        -File `
+        -Include "*.ts","*.tsx","*.js","*.jsx","*.css"
+    $SourceFileCount = @($SourceFiles).Count
+    if ($SourceFileCount -eq 0) {
+        throw "No source files were found."
+    }
+    $TodoResults = $SourceFiles |
+        Select-String `
+            -Pattern 'PHASE[\s-]*6.*TODO|TODO.*PHASE[\s-]*6|IMPLEMENT[\s-]*PHASE[\s-]*6' `
+            -CaseSensitive:$false
+    if ($TodoResults) {
+        $TodoText = $TodoResults |
+            ForEach-Object {
+                "$($_.Path):$($_.LineNumber): $($_.Line.Trim())"
+            }
+        throw "Unfinished Phase 6 markers found:`n$($TodoText -join "`n")"
+    }
+    Write-Host "NO UNFINISHED PHASE 6 MARKERS" -ForegroundColor Green
+    if ($Scripts -contains "format:check") {
+        Invoke-Checked "FORMAT CHECK" {
+            pnpm run format:check
+        }
+    }
+    if ($Scripts -contains "lint") {
+        Invoke-Checked "ESLINT" {
+            pnpm run lint
+        }
+    }
+    if ($Scripts -contains "typecheck") {
+        Invoke-Checked "TYPESCRIPT CHECK" {
+            pnpm run typecheck
+        }
+    }
+    if ($Scripts -contains "build") {
+        Invoke-Checked "PRODUCTION BUILD" {
+            pnpm run build
+        }
+    }
+Missing closing '}' in statement block or type definition.
+>> try {
+    function Invoke-Checked {
+        param(
+            [Parameter(Mandatory)]
+            [string]$Name,
+            [Parameter(Mandatory)]
+            [scriptblock]$Command
+        )
+        Write-Host "`n=== $Name ===" -ForegroundColor Cyan
+        $global:LASTEXITCODE = 0
+        & $Command
+        if ($LASTEXITCODE -ne 0) {
+            throw "$Name failed with exit code $LASTEXITCODE."
+        }
+        Write-Host "$Name PASSED" -ForegroundColor Green
+    }
+    Write-Host "`n=== PHASE 6 CORRECTED AUDIT ===" -ForegroundColor Cyan
+    if (-not (Test-Path $Phase5BMarker)) {
+        throw "PHASE-5B-COMPLETE.txt is missing."
+    }
+    $Phase5BStatus = Get-Content $Phase5BMarker -Raw
+    if ($Phase5BStatus -notmatch "PHASE 5B COMPLETE") {
+        throw "Phase 5B is not marked complete."
+    }
+    Write-Host "Phase 5B prerequisite PASSED" -ForegroundColor Green
+    if (-not (Test-Path $EnvFile)) {
+        throw ".env.local is missing."
+    }
+    $DatabaseLine = Get-Content $EnvFile |
+        Where-Object { $_ -match '^\s*DATABASE_URL\s*=' } |
+        Select-Object -First 1
+    if (-not $DatabaseLine) {
+        throw "DATABASE_URL is missing from .env.local."
+    }
+    $DatabaseUrl = ($DatabaseLine -split "=", 2)[1].Trim().Trim('"').Trim("'")
+    if (
+        [string]::IsNullOrWhiteSpace($DatabaseUrl) -or
+        $DatabaseUrl -notmatch '^postgres(ql)?://'
+    ) {
+        throw "DATABASE_URL is empty or invalid."
+    }
+    $env:DATABASE_URL = $DatabaseUrl
+    Write-Host "DATABASE_URL PASSED" -ForegroundColor Green
+    $PackageJson = Get-Content ".\package.json" -Raw | ConvertFrom-Json
+    $Scripts = @($PackageJson.scripts.PSObject.Properties.Name)
+    Invoke-Checked "DEPENDENCY INSTALL" {
+        pnpm install --frozen-lockfile
+    }
+    if ($Scripts -contains "db:generate") {
+        Invoke-Checked "DATABASE SCHEMA GENERATION" {
+            pnpm run db:generate
+        }
+    }
+    if ($Scripts -contains "db:migrate") {
+        Invoke-Checked "DATABASE MIGRATION" {
+            pnpm run db:migrate
+        }
+    }
+    $RequiredFiles = @(
+        "src\app\page.tsx",
+        "src\app\layout.tsx",
+        "src\app\api\health\route.ts",
+        "src\app\api\search\route.ts",
+        "src\app\admin\page.tsx",
+        "src\app\admin\articles\page.tsx",
+        "src\app\article\[slug]\page.tsx",
+        "src\app\category\[slug]\page.tsx",
+        "src\app\search\page.tsx"
+    )
+    $MissingFiles = foreach ($RelativePath in $RequiredFiles) {
+        $FullPath = Join-Path $ProjectRoot $RelativePath
+        if (-not (Test-Path -LiteralPath $FullPath)) {
+            $RelativePath
+        }
+    }
+    if ($MissingFiles) {
+        throw "Required files are missing:`n$($MissingFiles -join "`n")"
+    }
+    Write-Host "REQUIRED ROUTES PASSED" -ForegroundColor Green
+    $SourceFiles = Get-ChildItem `
+        -Path (Join-Path $ProjectRoot "src") `
+        -Recurse `
+        -File `
+        -Include "*.ts","*.tsx","*.js","*.jsx","*.css"
+    $SourceFileCount = @($SourceFiles).Count
+    if ($SourceFileCount -eq 0) {
+        throw "No source files were found."
+    }
+    $TodoResults = $SourceFiles |
+        Select-String `
+            -Pattern 'PHASE[\s-]*6.*TODO|TODO.*PHASE[\s-]*6|IMPLEMENT[\s-]*PHASE[\s-]*6' `
+            -CaseSensitive:$false
+    if ($TodoResults) {
+        $TodoText = $TodoResults |
+            ForEach-Object {
+                "$($_.Path):$($_.LineNumber): $($_.Line.Trim())"
+            }
+        throw "Unfinished Phase 6 markers found:`n$($TodoText -join "`n")"
+    }
+    Write-Host "NO UNFINISHED PHASE 6 MARKERS" -ForegroundColor Green
+    if ($Scripts -contains "format:check") {
+        Invoke-Checked "FORMAT CHECK" {
+            pnpm run format:check
+        }
+    }
+    if ($Scripts -contains "lint") {
+        Invoke-Checked "ESLINT" {
+            pnpm run lint
+        }
+    }
+    if ($Scripts -contains "typecheck") {
+        Invoke-Checked "TYPESCRIPT CHECK" {
+            pnpm run typecheck
+        }
+    }
+    if ($Scripts -contains "build") {
+        Invoke-Checked "PRODUCTION BUILD" {
+            pnpm run build
+        }
+    }
+    $GitBranch = if (Test-Path ".\.git") {
+        git branch --show-current
+    }
+    else {
+        "NO-GIT-REPOSITORY"
+    }
+Missing closing '}' in statement block or type definition.
+>> try {
+    function Invoke-Checked {
+        param(
+            [Parameter(Mandatory)]
+            [string]$Name,
+            [Parameter(Mandatory)]
+            [scriptblock]$Command
+        )
+        Write-Host "`n=== $Name ===" -ForegroundColor Cyan
+        $global:LASTEXITCODE = 0
+        & $Command
+        if ($LASTEXITCODE -ne 0) {
+            throw "$Name failed with exit code $LASTEXITCODE."
+        }
+        Write-Host "$Name PASSED" -ForegroundColor Green
+    }
+    Write-Host "`n=== PHASE 6 CORRECTED AUDIT ===" -ForegroundColor Cyan
+    if (-not (Test-Path $Phase5BMarker)) {
+        throw "PHASE-5B-COMPLETE.txt is missing."
+    }
+    $Phase5BStatus = Get-Content $Phase5BMarker -Raw
+    if ($Phase5BStatus -notmatch "PHASE 5B COMPLETE") {
+        throw "Phase 5B is not marked complete."
+    }
+    Write-Host "Phase 5B prerequisite PASSED" -ForegroundColor Green
+    if (-not (Test-Path $EnvFile)) {
+        throw ".env.local is missing."
+    }
+    $DatabaseLine = Get-Content $EnvFile |
+        Where-Object { $_ -match '^\s*DATABASE_URL\s*=' } |
+        Select-Object -First 1
+    if (-not $DatabaseLine) {
+        throw "DATABASE_URL is missing from .env.local."
+    }
+    $DatabaseUrl = ($DatabaseLine -split "=", 2)[1].Trim().Trim('"').Trim("'")
+    if (
+        [string]::IsNullOrWhiteSpace($DatabaseUrl) -or
+        $DatabaseUrl -notmatch '^postgres(ql)?://'
+    ) {
+        throw "DATABASE_URL is empty or invalid."
+    }
+    $env:DATABASE_URL = $DatabaseUrl
+    Write-Host "DATABASE_URL PASSED" -ForegroundColor Green
+    $PackageJson = Get-Content ".\package.json" -Raw | ConvertFrom-Json
+    $Scripts = @($PackageJson.scripts.PSObject.Properties.Name)
+    Invoke-Checked "DEPENDENCY INSTALL" {
+        pnpm install --frozen-lockfile
+    }
+    if ($Scripts -contains "db:generate") {
+        Invoke-Checked "DATABASE SCHEMA GENERATION" {
+            pnpm run db:generate
+        }
+    }
+    if ($Scripts -contains "db:migrate") {
+        Invoke-Checked "DATABASE MIGRATION" {
+            pnpm run db:migrate
+        }
+    }
+    $RequiredFiles = @(
+        "src\app\page.tsx",
+        "src\app\layout.tsx",
+        "src\app\api\health\route.ts",
+        "src\app\api\search\route.ts",
+        "src\app\admin\page.tsx",
+        "src\app\admin\articles\page.tsx",
+        "src\app\article\[slug]\page.tsx",
+        "src\app\category\[slug]\page.tsx",
+        "src\app\search\page.tsx"
+    )
+    $MissingFiles = foreach ($RelativePath in $RequiredFiles) {
+        $FullPath = Join-Path $ProjectRoot $RelativePath
+        if (-not (Test-Path -LiteralPath $FullPath)) {
+            $RelativePath
+        }
+    }
+    if ($MissingFiles) {
+        throw "Required files are missing:`n$($MissingFiles -join "`n")"
+    }
+    Write-Host "REQUIRED ROUTES PASSED" -ForegroundColor Green
+    $SourceFiles = Get-ChildItem `
+        -Path (Join-Path $ProjectRoot "src") `
+        -Recurse `
+        -File `
+        -Include "*.ts","*.tsx","*.js","*.jsx","*.css"
+    $SourceFileCount = @($SourceFiles).Count
+    if ($SourceFileCount -eq 0) {
+        throw "No source files were found."
+    }
+    $TodoResults = $SourceFiles |
+        Select-String `
+            -Pattern 'PHASE[\s-]*6.*TODO|TODO.*PHASE[\s-]*6|IMPLEMENT[\s-]*PHASE[\s-]*6' `
+            -CaseSensitive:$false
+    if ($TodoResults) {
+        $TodoText = $TodoResults |
+            ForEach-Object {
+                "$($_.Path):$($_.LineNumber): $($_.Line.Trim())"
+            }
+        throw "Unfinished Phase 6 markers found:`n$($TodoText -join "`n")"
+    }
+    Write-Host "NO UNFINISHED PHASE 6 MARKERS" -ForegroundColor Green
+    if ($Scripts -contains "format:check") {
+        Invoke-Checked "FORMAT CHECK" {
+            pnpm run format:check
+        }
+    }
+    if ($Scripts -contains "lint") {
+        Invoke-Checked "ESLINT" {
+            pnpm run lint
+        }
+    }
+    if ($Scripts -contains "typecheck") {
+        Invoke-Checked "TYPESCRIPT CHECK" {
+            pnpm run typecheck
+        }
+    }
+    if ($Scripts -contains "build") {
+        Invoke-Checked "PRODUCTION BUILD" {
+            pnpm run build
+        }
+    }
+    $GitBranch = if (Test-Path ".\.git") {
+        git branch --show-current
+    }
+    else {
+        "NO-GIT-REPOSITORY"
+    }
+    $GitStatus = if (Test-Path ".\.git") {
+        $StatusOutput = git status --short
+Missing closing '}' in statement block or type definition.
+>> try {
+    function Invoke-Checked {
+        param(
+            [Parameter(Mandatory)]
+            [string]$Name,
+            [Parameter(Mandatory)]
+            [scriptblock]$Command
+        )
+        Write-Host "`n=== $Name ===" -ForegroundColor Cyan
+        $global:LASTEXITCODE = 0
+        & $Command
+        if ($LASTEXITCODE -ne 0) {
+            throw "$Name failed with exit code $LASTEXITCODE."
+        }
+        Write-Host "$Name PASSED" -ForegroundColor Green
+    }
+    Write-Host "`n=== PHASE 6 CORRECTED AUDIT ===" -ForegroundColor Cyan
+    if (-not (Test-Path $Phase5BMarker)) {
+        throw "PHASE-5B-COMPLETE.txt is missing."
+    }
+    $Phase5BStatus = Get-Content $Phase5BMarker -Raw
+    if ($Phase5BStatus -notmatch "PHASE 5B COMPLETE") {
+        throw "Phase 5B is not marked complete."
+    }
+    Write-Host "Phase 5B prerequisite PASSED" -ForegroundColor Green
+    if (-not (Test-Path $EnvFile)) {
+        throw ".env.local is missing."
+    }
+    $DatabaseLine = Get-Content $EnvFile |
+        Where-Object { $_ -match '^\s*DATABASE_URL\s*=' } |
+        Select-Object -First 1
+    if (-not $DatabaseLine) {
+        throw "DATABASE_URL is missing from .env.local."
+    }
+    $DatabaseUrl = ($DatabaseLine -split "=", 2)[1].Trim().Trim('"').Trim("'")
+    if (
+        [string]::IsNullOrWhiteSpace($DatabaseUrl) -or
+        $DatabaseUrl -notmatch '^postgres(ql)?://'
+    ) {
+        throw "DATABASE_URL is empty or invalid."
+    }
+    $env:DATABASE_URL = $DatabaseUrl
+    Write-Host "DATABASE_URL PASSED" -ForegroundColor Green
+    $PackageJson = Get-Content ".\package.json" -Raw | ConvertFrom-Json
+    $Scripts = @($PackageJson.scripts.PSObject.Properties.Name)
+    Invoke-Checked "DEPENDENCY INSTALL" {
+        pnpm install --frozen-lockfile
+    }
+    if ($Scripts -contains "db:generate") {
+        Invoke-Checked "DATABASE SCHEMA GENERATION" {
+            pnpm run db:generate
+        }
+    }
+    if ($Scripts -contains "db:migrate") {
+        Invoke-Checked "DATABASE MIGRATION" {
+            pnpm run db:migrate
+        }
+    }
+    $RequiredFiles = @(
+        "src\app\page.tsx",
+        "src\app\layout.tsx",
+        "src\app\api\health\route.ts",
+        "src\app\api\search\route.ts",
+        "src\app\admin\page.tsx",
+        "src\app\admin\articles\page.tsx",
+        "src\app\article\[slug]\page.tsx",
+        "src\app\category\[slug]\page.tsx",
+        "src\app\search\page.tsx"
+    )
+    $MissingFiles = foreach ($RelativePath in $RequiredFiles) {
+        $FullPath = Join-Path $ProjectRoot $RelativePath
+        if (-not (Test-Path -LiteralPath $FullPath)) {
+            $RelativePath
+        }
+    }
+    if ($MissingFiles) {
+        throw "Required files are missing:`n$($MissingFiles -join "`n")"
+    }
+    Write-Host "REQUIRED ROUTES PASSED" -ForegroundColor Green
+    $SourceFiles = Get-ChildItem `
+        -Path (Join-Path $ProjectRoot "src") `
+        -Recurse `
+        -File `
+        -Include "*.ts","*.tsx","*.js","*.jsx","*.css"
+    $SourceFileCount = @($SourceFiles).Count
+    if ($SourceFileCount -eq 0) {
+        throw "No source files were found."
+    }
+    $TodoResults = $SourceFiles |
+        Select-String `
+            -Pattern 'PHASE[\s-]*6.*TODO|TODO.*PHASE[\s-]*6|IMPLEMENT[\s-]*PHASE[\s-]*6' `
+            -CaseSensitive:$false
+    if ($TodoResults) {
+        $TodoText = $TodoResults |
+            ForEach-Object {
+                "$($_.Path):$($_.LineNumber): $($_.Line.Trim())"
+            }
+        throw "Unfinished Phase 6 markers found:`n$($TodoText -join "`n")"
+    }
+    Write-Host "NO UNFINISHED PHASE 6 MARKERS" -ForegroundColor Green
+    if ($Scripts -contains "format:check") {
+        Invoke-Checked "FORMAT CHECK" {
+            pnpm run format:check
+        }
+    }
+    if ($Scripts -contains "lint") {
+        Invoke-Checked "ESLINT" {
+            pnpm run lint
+        }
+    }
+    if ($Scripts -contains "typecheck") {
+        Invoke-Checked "TYPESCRIPT CHECK" {
+            pnpm run typecheck
+        }
+    }
+    if ($Scripts -contains "build") {
+        Invoke-Checked "PRODUCTION BUILD" {
+            pnpm run build
+        }
+    }
+    $GitBranch = if (Test-Path ".\.git") {
+        git branch --show-current
+    }
+    else {
+        "NO-GIT-REPOSITORY"
+    }
+    $GitStatus = if (Test-Path ".\.git") {
+        $StatusOutput = git status --short
+        if ($StatusOutput) {
+            $StatusOutput -join "`r`n"
+        }
+        else {
+            "CLEAN"
+        }
+    }
+    else {
+        "NO-GIT-REPOSITORY"
+    }
+Missing closing '}' in statement block or type definition.
+>> try {
+    function Invoke-Checked {
+        param(
+            [Parameter(Mandatory)]
+            [string]$Name,
+            [Parameter(Mandatory)]
+            [scriptblock]$Command
+        )
+        Write-Host "`n=== $Name ===" -ForegroundColor Cyan
+        $global:LASTEXITCODE = 0
+        & $Command
+        if ($LASTEXITCODE -ne 0) {
+            throw "$Name failed with exit code $LASTEXITCODE."
+        }
+        Write-Host "$Name PASSED" -ForegroundColor Green
+    }
+    Write-Host "`n=== PHASE 6 CORRECTED AUDIT ===" -ForegroundColor Cyan
+    if (-not (Test-Path $Phase5BMarker)) {
+        throw "PHASE-5B-COMPLETE.txt is missing."
+    }
+    $Phase5BStatus = Get-Content $Phase5BMarker -Raw
+    if ($Phase5BStatus -notmatch "PHASE 5B COMPLETE") {
+        throw "Phase 5B is not marked complete."
+    }
+    Write-Host "Phase 5B prerequisite PASSED" -ForegroundColor Green
+    if (-not (Test-Path $EnvFile)) {
+        throw ".env.local is missing."
+    }
+    $DatabaseLine = Get-Content $EnvFile |
+        Where-Object { $_ -match '^\s*DATABASE_URL\s*=' } |
+        Select-Object -First 1
+    if (-not $DatabaseLine) {
+        throw "DATABASE_URL is missing from .env.local."
+    }
+    $DatabaseUrl = ($DatabaseLine -split "=", 2)[1].Trim().Trim('"').Trim("'")
+    if (
+        [string]::IsNullOrWhiteSpace($DatabaseUrl) -or
+        $DatabaseUrl -notmatch '^postgres(ql)?://'
+    ) {
+        throw "DATABASE_URL is empty or invalid."
+    }
+    $env:DATABASE_URL = $DatabaseUrl
+    Write-Host "DATABASE_URL PASSED" -ForegroundColor Green
+    $PackageJson = Get-Content ".\package.json" -Raw | ConvertFrom-Json
+    $Scripts = @($PackageJson.scripts.PSObject.Properties.Name)
+    Invoke-Checked "DEPENDENCY INSTALL" {
+        pnpm install --frozen-lockfile
+    }
+    if ($Scripts -contains "db:generate") {
+        Invoke-Checked "DATABASE SCHEMA GENERATION" {
+            pnpm run db:generate
+        }
+    }
+    if ($Scripts -contains "db:migrate") {
+        Invoke-Checked "DATABASE MIGRATION" {
+            pnpm run db:migrate
+        }
+    }
+    $RequiredFiles = @(
+        "src\app\page.tsx",
+        "src\app\layout.tsx",
+        "src\app\api\health\route.ts",
+        "src\app\api\search\route.ts",
+        "src\app\admin\page.tsx",
+        "src\app\admin\articles\page.tsx",
+        "src\app\article\[slug]\page.tsx",
+        "src\app\category\[slug]\page.tsx",
+        "src\app\search\page.tsx"
+    )
+    $MissingFiles = foreach ($RelativePath in $RequiredFiles) {
+        $FullPath = Join-Path $ProjectRoot $RelativePath
+        if (-not (Test-Path -LiteralPath $FullPath)) {
+            $RelativePath
+        }
+    }
+    if ($MissingFiles) {
+        throw "Required files are missing:`n$($MissingFiles -join "`n")"
+    }
+    Write-Host "REQUIRED ROUTES PASSED" -ForegroundColor Green
+    $SourceFiles = Get-ChildItem `
+        -Path (Join-Path $ProjectRoot "src") `
+        -Recurse `
+        -File `
+        -Include "*.ts","*.tsx","*.js","*.jsx","*.css"
+    $SourceFileCount = @($SourceFiles).Count
+    if ($SourceFileCount -eq 0) {
+        throw "No source files were found."
+    }
+    $TodoResults = $SourceFiles |
+        Select-String `
+            -Pattern 'PHASE[\s-]*6.*TODO|TODO.*PHASE[\s-]*6|IMPLEMENT[\s-]*PHASE[\s-]*6' `
+            -CaseSensitive:$false
+    if ($TodoResults) {
+        $TodoText = $TodoResults |
+            ForEach-Object {
+                "$($_.Path):$($_.LineNumber): $($_.Line.Trim())"
+            }
+        throw "Unfinished Phase 6 markers found:`n$($TodoText -join "`n")"
+    }
+    Write-Host "NO UNFINISHED PHASE 6 MARKERS" -ForegroundColor Green
+    if ($Scripts -contains "format:check") {
+        Invoke-Checked "FORMAT CHECK" {
+            pnpm run format:check
+        }
+    }
+    if ($Scripts -contains "lint") {
+        Invoke-Checked "ESLINT" {
+            pnpm run lint
+        }
+    }
+    if ($Scripts -contains "typecheck") {
+        Invoke-Checked "TYPESCRIPT CHECK" {
+            pnpm run typecheck
+        }
+    }
+    if ($Scripts -contains "build") {
+        Invoke-Checked "PRODUCTION BUILD" {
+            pnpm run build
+        }
+    }
+    $GitBranch = if (Test-Path ".\.git") {
+        git branch --show-current
+    }
+    else {
+        "NO-GIT-REPOSITORY"
+    }
+    $GitStatus = if (Test-Path ".\.git") {
+        $StatusOutput = git status --short
+        if ($StatusOutput) {
+            $StatusOutput -join "`r`n"
+        }
+        else {
+            "CLEAN"
+        }
+    }
+    else {
+        "NO-GIT-REPOSITORY"
+    }
+    $Report = @"
+KNOWLEDGE NEST — PHASE 6 CORRECTED AUDIT
+Generated: $(Get-Date -Format "yyyy-MM-dd HH:mm:ss")
+Project: $ProjectRoot
+Git branch: $GitBranch
+PowerShell log: $LogPath
+The string is missing the terminator: "@.
+>> try {
+    function Invoke-Checked {
+        param(
+            [Parameter(Mandatory)]
+            [string]$Name,
+            [Parameter(Mandatory)]
+            [scriptblock]$Command
+        )
+        Write-Host "`n=== $Name ===" -ForegroundColor Cyan
+        $global:LASTEXITCODE = 0
+        & $Command
+        if ($LASTEXITCODE -ne 0) {
+            throw "$Name failed with exit code $LASTEXITCODE."
+        }
+        Write-Host "$Name PASSED" -ForegroundColor Green
+    }
+    Write-Host "`n=== PHASE 6 CORRECTED AUDIT ===" -ForegroundColor Cyan
+    if (-not (Test-Path $Phase5BMarker)) {
+        throw "PHASE-5B-COMPLETE.txt is missing."
+    }
+    $Phase5BStatus = Get-Content $Phase5BMarker -Raw
+    if ($Phase5BStatus -notmatch "PHASE 5B COMPLETE") {
+        throw "Phase 5B is not marked complete."
+    }
+    Write-Host "Phase 5B prerequisite PASSED" -ForegroundColor Green
+    if (-not (Test-Path $EnvFile)) {
+        throw ".env.local is missing."
+    }
+    $DatabaseLine = Get-Content $EnvFile |
+        Where-Object { $_ -match '^\s*DATABASE_URL\s*=' } |
+        Select-Object -First 1
+    if (-not $DatabaseLine) {
+        throw "DATABASE_URL is missing from .env.local."
+    }
+    $DatabaseUrl = ($DatabaseLine -split "=", 2)[1].Trim().Trim('"').Trim("'")
+    if (
+        [string]::IsNullOrWhiteSpace($DatabaseUrl) -or
+        $DatabaseUrl -notmatch '^postgres(ql)?://'
+    ) {
+        throw "DATABASE_URL is empty or invalid."
+    }
+    $env:DATABASE_URL = $DatabaseUrl
+    Write-Host "DATABASE_URL PASSED" -ForegroundColor Green
+    $PackageJson = Get-Content ".\package.json" -Raw | ConvertFrom-Json
+    $Scripts = @($PackageJson.scripts.PSObject.Properties.Name)
+    Invoke-Checked "DEPENDENCY INSTALL" {
+        pnpm install --frozen-lockfile
+    }
+    if ($Scripts -contains "db:generate") {
+        Invoke-Checked "DATABASE SCHEMA GENERATION" {
+            pnpm run db:generate
+        }
+    }
+    if ($Scripts -contains "db:migrate") {
+        Invoke-Checked "DATABASE MIGRATION" {
+            pnpm run db:migrate
+        }
+    }
+    $RequiredFiles = @(
+        "src\app\page.tsx",
+        "src\app\layout.tsx",
+        "src\app\api\health\route.ts",
+        "src\app\api\search\route.ts",
+        "src\app\admin\page.tsx",
+        "src\app\admin\articles\page.tsx",
+        "src\app\article\[slug]\page.tsx",
+        "src\app\category\[slug]\page.tsx",
+        "src\app\search\page.tsx"
+    )
+    $MissingFiles = foreach ($RelativePath in $RequiredFiles) {
+        $FullPath = Join-Path $ProjectRoot $RelativePath
+        if (-not (Test-Path -LiteralPath $FullPath)) {
+            $RelativePath
+        }
+    }
+    if ($MissingFiles) {
+        throw "Required files are missing:`n$($MissingFiles -join "`n")"
+    }
+    Write-Host "REQUIRED ROUTES PASSED" -ForegroundColor Green
+    $SourceFiles = Get-ChildItem `
+        -Path (Join-Path $ProjectRoot "src") `
+        -Recurse `
+        -File `
+        -Include "*.ts","*.tsx","*.js","*.jsx","*.css"
+    $SourceFileCount = @($SourceFiles).Count
+    if ($SourceFileCount -eq 0) {
+        throw "No source files were found."
+    }
+    $TodoResults = $SourceFiles |
+        Select-String `
+            -Pattern 'PHASE[\s-]*6.*TODO|TODO.*PHASE[\s-]*6|IMPLEMENT[\s-]*PHASE[\s-]*6' `
+            -CaseSensitive:$false
+    if ($TodoResults) {
+        $TodoText = $TodoResults |
+            ForEach-Object {
+                "$($_.Path):$($_.LineNumber): $($_.Line.Trim())"
+            }
+        throw "Unfinished Phase 6 markers found:`n$($TodoText -join "`n")"
+    }
+    Write-Host "NO UNFINISHED PHASE 6 MARKERS" -ForegroundColor Green
+    if ($Scripts -contains "format:check") {
+        Invoke-Checked "FORMAT CHECK" {
+            pnpm run format:check
+        }
+    }
+    if ($Scripts -contains "lint") {
+        Invoke-Checked "ESLINT" {
+            pnpm run lint
+        }
+    }
+    if ($Scripts -contains "typecheck") {
+        Invoke-Checked "TYPESCRIPT CHECK" {
+            pnpm run typecheck
+        }
+    }
+    if ($Scripts -contains "build") {
+        Invoke-Checked "PRODUCTION BUILD" {
+            pnpm run build
+        }
+    }
+    $GitBranch = if (Test-Path ".\.git") {
+        git branch --show-current
+    }
+    else {
+        "NO-GIT-REPOSITORY"
+    }
+    $GitStatus = if (Test-Path ".\.git") {
+        $StatusOutput = git status --short
+        if ($StatusOutput) {
+            $StatusOutput -join "`r`n"
+        }
+        else {
+            "CLEAN"
+        }
+    }
+    else {
+        "NO-GIT-REPOSITORY"
+    }
+    $Report = @"
+KNOWLEDGE NEST — PHASE 6 CORRECTED AUDIT
+Generated: $(Get-Date -Format "yyyy-MM-dd HH:mm:ss")
+Project: $ProjectRoot
+Git branch: $GitBranch
+PowerShell log: $LogPath
+RESULTS
+Phase 5B prerequisite: PASSED
+Database URL: PASSED
+Dependency installation: PASSED
+Database schema generation: PASSED
+Database migration: PASSED
+Required application routes: PASSED
+Phase 6 unfinished markers: NONE
+Formatting: PASSED
+ESLint: PASSED
+TypeScript: PASSED
+Production build: PASSED
+The string is missing the terminator: "@.
+>> try {
+    function Invoke-Checked {
+        param(
+            [Parameter(Mandatory)]
+            [string]$Name,
+            [Parameter(Mandatory)]
+            [scriptblock]$Command
+        )
+        Write-Host "`n=== $Name ===" -ForegroundColor Cyan
+        $global:LASTEXITCODE = 0
+        & $Command
+        if ($LASTEXITCODE -ne 0) {
+            throw "$Name failed with exit code $LASTEXITCODE."
+        }
+        Write-Host "$Name PASSED" -ForegroundColor Green
+    }
+    Write-Host "`n=== PHASE 6 CORRECTED AUDIT ===" -ForegroundColor Cyan
+    if (-not (Test-Path $Phase5BMarker)) {
+        throw "PHASE-5B-COMPLETE.txt is missing."
+    }
+    $Phase5BStatus = Get-Content $Phase5BMarker -Raw
+    if ($Phase5BStatus -notmatch "PHASE 5B COMPLETE") {
+        throw "Phase 5B is not marked complete."
+    }
+    Write-Host "Phase 5B prerequisite PASSED" -ForegroundColor Green
+    if (-not (Test-Path $EnvFile)) {
+        throw ".env.local is missing."
+    }
+    $DatabaseLine = Get-Content $EnvFile |
+        Where-Object { $_ -match '^\s*DATABASE_URL\s*=' } |
+        Select-Object -First 1
+    if (-not $DatabaseLine) {
+        throw "DATABASE_URL is missing from .env.local."
+    }
+    $DatabaseUrl = ($DatabaseLine -split "=", 2)[1].Trim().Trim('"').Trim("'")
+    if (
+        [string]::IsNullOrWhiteSpace($DatabaseUrl) -or
+        $DatabaseUrl -notmatch '^postgres(ql)?://'
+    ) {
+        throw "DATABASE_URL is empty or invalid."
+    }
+    $env:DATABASE_URL = $DatabaseUrl
+    Write-Host "DATABASE_URL PASSED" -ForegroundColor Green
+    $PackageJson = Get-Content ".\package.json" -Raw | ConvertFrom-Json
+    $Scripts = @($PackageJson.scripts.PSObject.Properties.Name)
+    Invoke-Checked "DEPENDENCY INSTALL" {
+        pnpm install --frozen-lockfile
+    }
+    if ($Scripts -contains "db:generate") {
+        Invoke-Checked "DATABASE SCHEMA GENERATION" {
+            pnpm run db:generate
+        }
+    }
+    if ($Scripts -contains "db:migrate") {
+        Invoke-Checked "DATABASE MIGRATION" {
+            pnpm run db:migrate
+        }
+    }
+    $RequiredFiles = @(
+        "src\app\page.tsx",
+        "src\app\layout.tsx",
+        "src\app\api\health\route.ts",
+        "src\app\api\search\route.ts",
+        "src\app\admin\page.tsx",
+        "src\app\admin\articles\page.tsx",
+        "src\app\article\[slug]\page.tsx",
+        "src\app\category\[slug]\page.tsx",
+        "src\app\search\page.tsx"
+    )
+    $MissingFiles = foreach ($RelativePath in $RequiredFiles) {
+        $FullPath = Join-Path $ProjectRoot $RelativePath
+        if (-not (Test-Path -LiteralPath $FullPath)) {
+            $RelativePath
+        }
+    }
+    if ($MissingFiles) {
+        throw "Required files are missing:`n$($MissingFiles -join "`n")"
+    }
+    Write-Host "REQUIRED ROUTES PASSED" -ForegroundColor Green
+    $SourceFiles = Get-ChildItem `
+        -Path (Join-Path $ProjectRoot "src") `
+        -Recurse `
+        -File `
+        -Include "*.ts","*.tsx","*.js","*.jsx","*.css"
+    $SourceFileCount = @($SourceFiles).Count
+    if ($SourceFileCount -eq 0) {
+        throw "No source files were found."
+    }
+    $TodoResults = $SourceFiles |
+        Select-String `
+            -Pattern 'PHASE[\s-]*6.*TODO|TODO.*PHASE[\s-]*6|IMPLEMENT[\s-]*PHASE[\s-]*6' `
+            -CaseSensitive:$false
+    if ($TodoResults) {
+        $TodoText = $TodoResults |
+            ForEach-Object {
+                "$($_.Path):$($_.LineNumber): $($_.Line.Trim())"
+            }
+        throw "Unfinished Phase 6 markers found:`n$($TodoText -join "`n")"
+    }
+    Write-Host "NO UNFINISHED PHASE 6 MARKERS" -ForegroundColor Green
+    if ($Scripts -contains "format:check") {
+        Invoke-Checked "FORMAT CHECK" {
+            pnpm run format:check
+        }
+    }
+    if ($Scripts -contains "lint") {
+        Invoke-Checked "ESLINT" {
+            pnpm run lint
+        }
+    }
+    if ($Scripts -contains "typecheck") {
+        Invoke-Checked "TYPESCRIPT CHECK" {
+            pnpm run typecheck
+        }
+    }
+    if ($Scripts -contains "build") {
+        Invoke-Checked "PRODUCTION BUILD" {
+            pnpm run build
+        }
+    }
+    $GitBranch = if (Test-Path ".\.git") {
+        git branch --show-current
+    }
+    else {
+        "NO-GIT-REPOSITORY"
+    }
+    $GitStatus = if (Test-Path ".\.git") {
+        $StatusOutput = git status --short
+        if ($StatusOutput) {
+            $StatusOutput -join "`r`n"
+        }
+        else {
+            "CLEAN"
+        }
+    }
+    else {
+        "NO-GIT-REPOSITORY"
+    }
+    $Report = @"
+KNOWLEDGE NEST — PHASE 6 CORRECTED AUDIT
+Generated: $(Get-Date -Format "yyyy-MM-dd HH:mm:ss")
+Project: $ProjectRoot
+Git branch: $GitBranch
+PowerShell log: $LogPath
+RESULTS
+Phase 5B prerequisite: PASSED
+Database URL: PASSED
+Dependency installation: PASSED
+Database schema generation: PASSED
+Database migration: PASSED
+Required application routes: PASSED
+Phase 6 unfinished markers: NONE
+Formatting: PASSED
+ESLint: PASSED
+TypeScript: PASSED
+Production build: PASSED
+DATABASE NOTES
+"No schema changes, nothing to migrate" means the database schema is already current.
+Existing drizzle schema and migration table messages are PostgreSQL NOTICE messages, not errors.
+Migrations were applied successfully.
+The string is missing the terminator: "@.
+>> try {
+    function Invoke-Checked {
+        param(
+            [Parameter(Mandatory)]
+            [string]$Name,
+            [Parameter(Mandatory)]
+            [scriptblock]$Command
+        )
+        Write-Host "`n=== $Name ===" -ForegroundColor Cyan
+        $global:LASTEXITCODE = 0
+        & $Command
+        if ($LASTEXITCODE -ne 0) {
+            throw "$Name failed with exit code $LASTEXITCODE."
+        }
+        Write-Host "$Name PASSED" -ForegroundColor Green
+    }
+    Write-Host "`n=== PHASE 6 CORRECTED AUDIT ===" -ForegroundColor Cyan
+    if (-not (Test-Path $Phase5BMarker)) {
+        throw "PHASE-5B-COMPLETE.txt is missing."
+    }
+    $Phase5BStatus = Get-Content $Phase5BMarker -Raw
+    if ($Phase5BStatus -notmatch "PHASE 5B COMPLETE") {
+        throw "Phase 5B is not marked complete."
+    }
+    Write-Host "Phase 5B prerequisite PASSED" -ForegroundColor Green
+    if (-not (Test-Path $EnvFile)) {
+        throw ".env.local is missing."
+    }
+    $DatabaseLine = Get-Content $EnvFile |
+        Where-Object { $_ -match '^\s*DATABASE_URL\s*=' } |
+        Select-Object -First 1
+    if (-not $DatabaseLine) {
+        throw "DATABASE_URL is missing from .env.local."
+    }
+    $DatabaseUrl = ($DatabaseLine -split "=", 2)[1].Trim().Trim('"').Trim("'")
+    if (
+        [string]::IsNullOrWhiteSpace($DatabaseUrl) -or
+        $DatabaseUrl -notmatch '^postgres(ql)?://'
+    ) {
+        throw "DATABASE_URL is empty or invalid."
+    }
+    $env:DATABASE_URL = $DatabaseUrl
+    Write-Host "DATABASE_URL PASSED" -ForegroundColor Green
+    $PackageJson = Get-Content ".\package.json" -Raw | ConvertFrom-Json
+    $Scripts = @($PackageJson.scripts.PSObject.Properties.Name)
+    Invoke-Checked "DEPENDENCY INSTALL" {
+        pnpm install --frozen-lockfile
+    }
+    if ($Scripts -contains "db:generate") {
+        Invoke-Checked "DATABASE SCHEMA GENERATION" {
+            pnpm run db:generate
+        }
+    }
+    if ($Scripts -contains "db:migrate") {
+        Invoke-Checked "DATABASE MIGRATION" {
+            pnpm run db:migrate
+        }
+    }
+    $RequiredFiles = @(
+        "src\app\page.tsx",
+        "src\app\layout.tsx",
+        "src\app\api\health\route.ts",
+        "src\app\api\search\route.ts",
+        "src\app\admin\page.tsx",
+        "src\app\admin\articles\page.tsx",
+        "src\app\article\[slug]\page.tsx",
+        "src\app\category\[slug]\page.tsx",
+        "src\app\search\page.tsx"
+    )
+    $MissingFiles = foreach ($RelativePath in $RequiredFiles) {
+        $FullPath = Join-Path $ProjectRoot $RelativePath
+        if (-not (Test-Path -LiteralPath $FullPath)) {
+            $RelativePath
+        }
+    }
+    if ($MissingFiles) {
+        throw "Required files are missing:`n$($MissingFiles -join "`n")"
+    }
+    Write-Host "REQUIRED ROUTES PASSED" -ForegroundColor Green
+    $SourceFiles = Get-ChildItem `
+        -Path (Join-Path $ProjectRoot "src") `
+        -Recurse `
+        -File `
+        -Include "*.ts","*.tsx","*.js","*.jsx","*.css"
+    $SourceFileCount = @($SourceFiles).Count
+    if ($SourceFileCount -eq 0) {
+        throw "No source files were found."
+    }
+    $TodoResults = $SourceFiles |
+        Select-String `
+            -Pattern 'PHASE[\s-]*6.*TODO|TODO.*PHASE[\s-]*6|IMPLEMENT[\s-]*PHASE[\s-]*6' `
+            -CaseSensitive:$false
+    if ($TodoResults) {
+        $TodoText = $TodoResults |
+            ForEach-Object {
+                "$($_.Path):$($_.LineNumber): $($_.Line.Trim())"
+            }
+        throw "Unfinished Phase 6 markers found:`n$($TodoText -join "`n")"
+    }
+    Write-Host "NO UNFINISHED PHASE 6 MARKERS" -ForegroundColor Green
+    if ($Scripts -contains "format:check") {
+        Invoke-Checked "FORMAT CHECK" {
+            pnpm run format:check
+        }
+    }
+    if ($Scripts -contains "lint") {
+        Invoke-Checked "ESLINT" {
+            pnpm run lint
+        }
+    }
+    if ($Scripts -contains "typecheck") {
+        Invoke-Checked "TYPESCRIPT CHECK" {
+            pnpm run typecheck
+        }
+    }
+    if ($Scripts -contains "build") {
+        Invoke-Checked "PRODUCTION BUILD" {
+            pnpm run build
+        }
+    }
+    $GitBranch = if (Test-Path ".\.git") {
+        git branch --show-current
+    }
+    else {
+        "NO-GIT-REPOSITORY"
+    }
+    $GitStatus = if (Test-Path ".\.git") {
+        $StatusOutput = git status --short
+        if ($StatusOutput) {
+            $StatusOutput -join "`r`n"
+        }
+        else {
+            "CLEAN"
+        }
+    }
+    else {
+        "NO-GIT-REPOSITORY"
+    }
+    $Report = @"
+KNOWLEDGE NEST — PHASE 6 CORRECTED AUDIT
+Generated: $(Get-Date -Format "yyyy-MM-dd HH:mm:ss")
+Project: $ProjectRoot
+Git branch: $GitBranch
+PowerShell log: $LogPath
+RESULTS
+Phase 5B prerequisite: PASSED
+Database URL: PASSED
+Dependency installation: PASSED
+Database schema generation: PASSED
+Database migration: PASSED
+Required application routes: PASSED
+Phase 6 unfinished markers: NONE
+Formatting: PASSED
+ESLint: PASSED
+TypeScript: PASSED
+Production build: PASSED
+DATABASE NOTES
+"No schema changes, nothing to migrate" means the database schema is already current.
+Existing drizzle schema and migration table messages are PostgreSQL NOTICE messages, not errors.
+Migrations were applied successfully.
+SOURCE FILE COUNT
+$SourceFileCount
+The string is missing the terminator: "@.
+>> try {
+    function Invoke-Checked {
+        param(
+            [Parameter(Mandatory)]
+            [string]$Name,
+            [Parameter(Mandatory)]
+            [scriptblock]$Command
+        )
+        Write-Host "`n=== $Name ===" -ForegroundColor Cyan
+        $global:LASTEXITCODE = 0
+        & $Command
+        if ($LASTEXITCODE -ne 0) {
+            throw "$Name failed with exit code $LASTEXITCODE."
+        }
+        Write-Host "$Name PASSED" -ForegroundColor Green
+    }
+    Write-Host "`n=== PHASE 6 CORRECTED AUDIT ===" -ForegroundColor Cyan
+    if (-not (Test-Path $Phase5BMarker)) {
+        throw "PHASE-5B-COMPLETE.txt is missing."
+    }
+    $Phase5BStatus = Get-Content $Phase5BMarker -Raw
+    if ($Phase5BStatus -notmatch "PHASE 5B COMPLETE") {
+        throw "Phase 5B is not marked complete."
+    }
+    Write-Host "Phase 5B prerequisite PASSED" -ForegroundColor Green
+    if (-not (Test-Path $EnvFile)) {
+        throw ".env.local is missing."
+    }
+    $DatabaseLine = Get-Content $EnvFile |
+        Where-Object { $_ -match '^\s*DATABASE_URL\s*=' } |
+        Select-Object -First 1
+    if (-not $DatabaseLine) {
+        throw "DATABASE_URL is missing from .env.local."
+    }
+    $DatabaseUrl = ($DatabaseLine -split "=", 2)[1].Trim().Trim('"').Trim("'")
+    if (
+        [string]::IsNullOrWhiteSpace($DatabaseUrl) -or
+        $DatabaseUrl -notmatch '^postgres(ql)?://'
+    ) {
+        throw "DATABASE_URL is empty or invalid."
+    }
+    $env:DATABASE_URL = $DatabaseUrl
+    Write-Host "DATABASE_URL PASSED" -ForegroundColor Green
+    $PackageJson = Get-Content ".\package.json" -Raw | ConvertFrom-Json
+    $Scripts = @($PackageJson.scripts.PSObject.Properties.Name)
+    Invoke-Checked "DEPENDENCY INSTALL" {
+        pnpm install --frozen-lockfile
+    }
+    if ($Scripts -contains "db:generate") {
+        Invoke-Checked "DATABASE SCHEMA GENERATION" {
+            pnpm run db:generate
+        }
+    }
+    if ($Scripts -contains "db:migrate") {
+        Invoke-Checked "DATABASE MIGRATION" {
+            pnpm run db:migrate
+        }
+    }
+    $RequiredFiles = @(
+        "src\app\page.tsx",
+        "src\app\layout.tsx",
+        "src\app\api\health\route.ts",
+        "src\app\api\search\route.ts",
+        "src\app\admin\page.tsx",
+        "src\app\admin\articles\page.tsx",
+        "src\app\article\[slug]\page.tsx",
+        "src\app\category\[slug]\page.tsx",
+        "src\app\search\page.tsx"
+    )
+    $MissingFiles = foreach ($RelativePath in $RequiredFiles) {
+        $FullPath = Join-Path $ProjectRoot $RelativePath
+        if (-not (Test-Path -LiteralPath $FullPath)) {
+            $RelativePath
+        }
+    }
+    if ($MissingFiles) {
+        throw "Required files are missing:`n$($MissingFiles -join "`n")"
+    }
+    Write-Host "REQUIRED ROUTES PASSED" -ForegroundColor Green
+    $SourceFiles = Get-ChildItem `
+        -Path (Join-Path $ProjectRoot "src") `
+        -Recurse `
+        -File `
+        -Include "*.ts","*.tsx","*.js","*.jsx","*.css"
+    $SourceFileCount = @($SourceFiles).Count
+    if ($SourceFileCount -eq 0) {
+        throw "No source files were found."
+    }
+    $TodoResults = $SourceFiles |
+        Select-String `
+            -Pattern 'PHASE[\s-]*6.*TODO|TODO.*PHASE[\s-]*6|IMPLEMENT[\s-]*PHASE[\s-]*6' `
+            -CaseSensitive:$false
+    if ($TodoResults) {
+        $TodoText = $TodoResults |
+            ForEach-Object {
+                "$($_.Path):$($_.LineNumber): $($_.Line.Trim())"
+            }
+        throw "Unfinished Phase 6 markers found:`n$($TodoText -join "`n")"
+    }
+    Write-Host "NO UNFINISHED PHASE 6 MARKERS" -ForegroundColor Green
+    if ($Scripts -contains "format:check") {
+        Invoke-Checked "FORMAT CHECK" {
+            pnpm run format:check
+        }
+    }
+    if ($Scripts -contains "lint") {
+        Invoke-Checked "ESLINT" {
+            pnpm run lint
+        }
+    }
+    if ($Scripts -contains "typecheck") {
+        Invoke-Checked "TYPESCRIPT CHECK" {
+            pnpm run typecheck
+        }
+    }
+    if ($Scripts -contains "build") {
+        Invoke-Checked "PRODUCTION BUILD" {
+            pnpm run build
+        }
+    }
+    $GitBranch = if (Test-Path ".\.git") {
+        git branch --show-current
+    }
+    else {
+        "NO-GIT-REPOSITORY"
+    }
+    $GitStatus = if (Test-Path ".\.git") {
+        $StatusOutput = git status --short
+        if ($StatusOutput) {
+            $StatusOutput -join "`r`n"
+        }
+        else {
+            "CLEAN"
+        }
+    }
+    else {
+        "NO-GIT-REPOSITORY"
+    }
+    $Report = @"
+KNOWLEDGE NEST — PHASE 6 CORRECTED AUDIT
+Generated: $(Get-Date -Format "yyyy-MM-dd HH:mm:ss")
+Project: $ProjectRoot
+Git branch: $GitBranch
+PowerShell log: $LogPath
+RESULTS
+Phase 5B prerequisite: PASSED
+Database URL: PASSED
+Dependency installation: PASSED
+Database schema generation: PASSED
+Database migration: PASSED
+Required application routes: PASSED
+Phase 6 unfinished markers: NONE
+Formatting: PASSED
+ESLint: PASSED
+TypeScript: PASSED
+Production build: PASSED
+DATABASE NOTES
+"No schema changes, nothing to migrate" means the database schema is already current.
+Existing drizzle schema and migration table messages are PostgreSQL NOTICE messages, not errors.
+Migrations were applied successfully.
+SOURCE FILE COUNT
+$SourceFileCount
+GIT STATUS
+$GitStatus
+The string is missing the terminator: "@.
+>> try {
+    function Invoke-Checked {
+        param(
+            [Parameter(Mandatory)]
+            [string]$Name,
+            [Parameter(Mandatory)]
+            [scriptblock]$Command
+        )
+        Write-Host "`n=== $Name ===" -ForegroundColor Cyan
+        $global:LASTEXITCODE = 0
+        & $Command
+        if ($LASTEXITCODE -ne 0) {
+            throw "$Name failed with exit code $LASTEXITCODE."
+        }
+        Write-Host "$Name PASSED" -ForegroundColor Green
+    }
+    Write-Host "`n=== PHASE 6 CORRECTED AUDIT ===" -ForegroundColor Cyan
+    if (-not (Test-Path $Phase5BMarker)) {
+        throw "PHASE-5B-COMPLETE.txt is missing."
+    }
+    $Phase5BStatus = Get-Content $Phase5BMarker -Raw
+    if ($Phase5BStatus -notmatch "PHASE 5B COMPLETE") {
+        throw "Phase 5B is not marked complete."
+    }
+    Write-Host "Phase 5B prerequisite PASSED" -ForegroundColor Green
+    if (-not (Test-Path $EnvFile)) {
+        throw ".env.local is missing."
+    }
+    $DatabaseLine = Get-Content $EnvFile |
+        Where-Object { $_ -match '^\s*DATABASE_URL\s*=' } |
+        Select-Object -First 1
+    if (-not $DatabaseLine) {
+        throw "DATABASE_URL is missing from .env.local."
+    }
+    $DatabaseUrl = ($DatabaseLine -split "=", 2)[1].Trim().Trim('"').Trim("'")
+    if (
+        [string]::IsNullOrWhiteSpace($DatabaseUrl) -or
+        $DatabaseUrl -notmatch '^postgres(ql)?://'
+    ) {
+        throw "DATABASE_URL is empty or invalid."
+    }
+    $env:DATABASE_URL = $DatabaseUrl
+    Write-Host "DATABASE_URL PASSED" -ForegroundColor Green
+    $PackageJson = Get-Content ".\package.json" -Raw | ConvertFrom-Json
+    $Scripts = @($PackageJson.scripts.PSObject.Properties.Name)
+    Invoke-Checked "DEPENDENCY INSTALL" {
+        pnpm install --frozen-lockfile
+    }
+    if ($Scripts -contains "db:generate") {
+        Invoke-Checked "DATABASE SCHEMA GENERATION" {
+            pnpm run db:generate
+        }
+    }
+    if ($Scripts -contains "db:migrate") {
+        Invoke-Checked "DATABASE MIGRATION" {
+            pnpm run db:migrate
+        }
+    }
+    $RequiredFiles = @(
+        "src\app\page.tsx",
+        "src\app\layout.tsx",
+        "src\app\api\health\route.ts",
+        "src\app\api\search\route.ts",
+        "src\app\admin\page.tsx",
+        "src\app\admin\articles\page.tsx",
+        "src\app\article\[slug]\page.tsx",
+        "src\app\category\[slug]\page.tsx",
+        "src\app\search\page.tsx"
+    )
+    $MissingFiles = foreach ($RelativePath in $RequiredFiles) {
+        $FullPath = Join-Path $ProjectRoot $RelativePath
+        if (-not (Test-Path -LiteralPath $FullPath)) {
+            $RelativePath
+        }
+    }
+    if ($MissingFiles) {
+        throw "Required files are missing:`n$($MissingFiles -join "`n")"
+    }
+    Write-Host "REQUIRED ROUTES PASSED" -ForegroundColor Green
+    $SourceFiles = Get-ChildItem `
+        -Path (Join-Path $ProjectRoot "src") `
+        -Recurse `
+        -File `
+        -Include "*.ts","*.tsx","*.js","*.jsx","*.css"
+    $SourceFileCount = @($SourceFiles).Count
+    if ($SourceFileCount -eq 0) {
+        throw "No source files were found."
+    }
+    $TodoResults = $SourceFiles |
+        Select-String `
+            -Pattern 'PHASE[\s-]*6.*TODO|TODO.*PHASE[\s-]*6|IMPLEMENT[\s-]*PHASE[\s-]*6' `
+            -CaseSensitive:$false
+    if ($TodoResults) {
+        $TodoText = $TodoResults |
+            ForEach-Object {
+                "$($_.Path):$($_.LineNumber): $($_.Line.Trim())"
+            }
+        throw "Unfinished Phase 6 markers found:`n$($TodoText -join "`n")"
+    }
+    Write-Host "NO UNFINISHED PHASE 6 MARKERS" -ForegroundColor Green
+    if ($Scripts -contains "format:check") {
+        Invoke-Checked "FORMAT CHECK" {
+            pnpm run format:check
+        }
+    }
+    if ($Scripts -contains "lint") {
+        Invoke-Checked "ESLINT" {
+            pnpm run lint
+        }
+    }
+    if ($Scripts -contains "typecheck") {
+        Invoke-Checked "TYPESCRIPT CHECK" {
+            pnpm run typecheck
+        }
+    }
+    if ($Scripts -contains "build") {
+        Invoke-Checked "PRODUCTION BUILD" {
+            pnpm run build
+        }
+    }
+    $GitBranch = if (Test-Path ".\.git") {
+        git branch --show-current
+    }
+    else {
+        "NO-GIT-REPOSITORY"
+    }
+    $GitStatus = if (Test-Path ".\.git") {
+        $StatusOutput = git status --short
+        if ($StatusOutput) {
+            $StatusOutput -join "`r`n"
+        }
+        else {
+            "CLEAN"
+        }
+    }
+    else {
+        "NO-GIT-REPOSITORY"
+    }
+    $Report = @"
+KNOWLEDGE NEST — PHASE 6 CORRECTED AUDIT
+Generated: $(Get-Date -Format "yyyy-MM-dd HH:mm:ss")
+Project: $ProjectRoot
+Git branch: $GitBranch
+PowerShell log: $LogPath
+RESULTS
+Phase 5B prerequisite: PASSED
+Database URL: PASSED
+Dependency installation: PASSED
+Database schema generation: PASSED
+Database migration: PASSED
+Required application routes: PASSED
+Phase 6 unfinished markers: NONE
+Formatting: PASSED
+ESLint: PASSED
+TypeScript: PASSED
+Production build: PASSED
+DATABASE NOTES
+"No schema changes, nothing to migrate" means the database schema is already current.
+Existing drizzle schema and migration table messages are PostgreSQL NOTICE messages, not errors.
+Migrations were applied successfully.
+SOURCE FILE COUNT
+$SourceFileCount
+GIT STATUS
+$GitStatus
+PHASE 6 STATUS
+AUDIT COMPLETE
+IMPLEMENTATION NOT YET MARKED COMPLETE
+"@
+Missing closing '}' in statement block or type definition.
+>> try {
+    function Invoke-Checked {
+        param(
+            [Parameter(Mandatory)]
+            [string]$Name,
+            [Parameter(Mandatory)]
+            [scriptblock]$Command
+        )
+        Write-Host "`n=== $Name ===" -ForegroundColor Cyan
+        $global:LASTEXITCODE = 0
+        & $Command
+        if ($LASTEXITCODE -ne 0) {
+            throw "$Name failed with exit code $LASTEXITCODE."
+        }
+        Write-Host "$Name PASSED" -ForegroundColor Green
+    }
+    Write-Host "`n=== PHASE 6 CORRECTED AUDIT ===" -ForegroundColor Cyan
+    if (-not (Test-Path $Phase5BMarker)) {
+        throw "PHASE-5B-COMPLETE.txt is missing."
+    }
+    $Phase5BStatus = Get-Content $Phase5BMarker -Raw
+    if ($Phase5BStatus -notmatch "PHASE 5B COMPLETE") {
+        throw "Phase 5B is not marked complete."
+    }
+    Write-Host "Phase 5B prerequisite PASSED" -ForegroundColor Green
+    if (-not (Test-Path $EnvFile)) {
+        throw ".env.local is missing."
+    }
+    $DatabaseLine = Get-Content $EnvFile |
+        Where-Object { $_ -match '^\s*DATABASE_URL\s*=' } |
+        Select-Object -First 1
+    if (-not $DatabaseLine) {
+        throw "DATABASE_URL is missing from .env.local."
+    }
+    $DatabaseUrl = ($DatabaseLine -split "=", 2)[1].Trim().Trim('"').Trim("'")
+    if (
+        [string]::IsNullOrWhiteSpace($DatabaseUrl) -or
+        $DatabaseUrl -notmatch '^postgres(ql)?://'
+    ) {
+        throw "DATABASE_URL is empty or invalid."
+    }
+    $env:DATABASE_URL = $DatabaseUrl
+    Write-Host "DATABASE_URL PASSED" -ForegroundColor Green
+    $PackageJson = Get-Content ".\package.json" -Raw | ConvertFrom-Json
+    $Scripts = @($PackageJson.scripts.PSObject.Properties.Name)
+    Invoke-Checked "DEPENDENCY INSTALL" {
+        pnpm install --frozen-lockfile
+    }
+    if ($Scripts -contains "db:generate") {
+        Invoke-Checked "DATABASE SCHEMA GENERATION" {
+            pnpm run db:generate
+        }
+    }
+    if ($Scripts -contains "db:migrate") {
+        Invoke-Checked "DATABASE MIGRATION" {
+            pnpm run db:migrate
+        }
+    }
+    $RequiredFiles = @(
+        "src\app\page.tsx",
+        "src\app\layout.tsx",
+        "src\app\api\health\route.ts",
+        "src\app\api\search\route.ts",
+        "src\app\admin\page.tsx",
+        "src\app\admin\articles\page.tsx",
+        "src\app\article\[slug]\page.tsx",
+        "src\app\category\[slug]\page.tsx",
+        "src\app\search\page.tsx"
+    )
+    $MissingFiles = foreach ($RelativePath in $RequiredFiles) {
+        $FullPath = Join-Path $ProjectRoot $RelativePath
+        if (-not (Test-Path -LiteralPath $FullPath)) {
+            $RelativePath
+        }
+    }
+    if ($MissingFiles) {
+        throw "Required files are missing:`n$($MissingFiles -join "`n")"
+    }
+    Write-Host "REQUIRED ROUTES PASSED" -ForegroundColor Green
+    $SourceFiles = Get-ChildItem `
+        -Path (Join-Path $ProjectRoot "src") `
+        -Recurse `
+        -File `
+        -Include "*.ts","*.tsx","*.js","*.jsx","*.css"
+    $SourceFileCount = @($SourceFiles).Count
+    if ($SourceFileCount -eq 0) {
+        throw "No source files were found."
+    }
+    $TodoResults = $SourceFiles |
+        Select-String `
+            -Pattern 'PHASE[\s-]*6.*TODO|TODO.*PHASE[\s-]*6|IMPLEMENT[\s-]*PHASE[\s-]*6' `
+            -CaseSensitive:$false
+    if ($TodoResults) {
+        $TodoText = $TodoResults |
+            ForEach-Object {
+                "$($_.Path):$($_.LineNumber): $($_.Line.Trim())"
+            }
+        throw "Unfinished Phase 6 markers found:`n$($TodoText -join "`n")"
+    }
+    Write-Host "NO UNFINISHED PHASE 6 MARKERS" -ForegroundColor Green
+    if ($Scripts -contains "format:check") {
+        Invoke-Checked "FORMAT CHECK" {
+            pnpm run format:check
+        }
+    }
+    if ($Scripts -contains "lint") {
+        Invoke-Checked "ESLINT" {
+            pnpm run lint
+        }
+    }
+    if ($Scripts -contains "typecheck") {
+        Invoke-Checked "TYPESCRIPT CHECK" {
+            pnpm run typecheck
+        }
+    }
+    if ($Scripts -contains "build") {
+        Invoke-Checked "PRODUCTION BUILD" {
+            pnpm run build
+        }
+    }
+    $GitBranch = if (Test-Path ".\.git") {
+        git branch --show-current
+    }
+    else {
+        "NO-GIT-REPOSITORY"
+    }
+    $GitStatus = if (Test-Path ".\.git") {
+        $StatusOutput = git status --short
+        if ($StatusOutput) {
+            $StatusOutput -join "`r`n"
+        }
+        else {
+            "CLEAN"
+        }
+    }
+    else {
+        "NO-GIT-REPOSITORY"
+    }
+    $Report = @"
+KNOWLEDGE NEST — PHASE 6 CORRECTED AUDIT
+Generated: $(Get-Date -Format "yyyy-MM-dd HH:mm:ss")
+Project: $ProjectRoot
+Git branch: $GitBranch
+PowerShell log: $LogPath
+RESULTS
+Phase 5B prerequisite: PASSED
+Database URL: PASSED
+Dependency installation: PASSED
+Database schema generation: PASSED
+Database migration: PASSED
+Required application routes: PASSED
+Phase 6 unfinished markers: NONE
+Formatting: PASSED
+ESLint: PASSED
+TypeScript: PASSED
+Production build: PASSED
+DATABASE NOTES
+"No schema changes, nothing to migrate" means the database schema is already current.
+Existing drizzle schema and migration table messages are PostgreSQL NOTICE messages, not errors.
+Migrations were applied successfully.
+SOURCE FILE COUNT
+$SourceFileCount
+GIT STATUS
+$GitStatus
+PHASE 6 STATUS
+AUDIT COMPLETE
+IMPLEMENTATION NOT YET MARKED COMPLETE
+"@
+    Set-Content `
+        -Path $ReportPath `
+        -Value $Report `
+        -Encoding UTF8
+Missing closing '}' in statement block or type definition.
+>> try {
+    function Invoke-Checked {
+        param(
+            [Parameter(Mandatory)]
+            [string]$Name,
+            [Parameter(Mandatory)]
+            [scriptblock]$Command
+        )
+        Write-Host "`n=== $Name ===" -ForegroundColor Cyan
+        $global:LASTEXITCODE = 0
+        & $Command
+        if ($LASTEXITCODE -ne 0) {
+            throw "$Name failed with exit code $LASTEXITCODE."
+        }
+        Write-Host "$Name PASSED" -ForegroundColor Green
+    }
+    Write-Host "`n=== PHASE 6 CORRECTED AUDIT ===" -ForegroundColor Cyan
+    if (-not (Test-Path $Phase5BMarker)) {
+        throw "PHASE-5B-COMPLETE.txt is missing."
+    }
+    $Phase5BStatus = Get-Content $Phase5BMarker -Raw
+    if ($Phase5BStatus -notmatch "PHASE 5B COMPLETE") {
+        throw "Phase 5B is not marked complete."
+    }
+    Write-Host "Phase 5B prerequisite PASSED" -ForegroundColor Green
+    if (-not (Test-Path $EnvFile)) {
+        throw ".env.local is missing."
+    }
+    $DatabaseLine = Get-Content $EnvFile |
+        Where-Object { $_ -match '^\s*DATABASE_URL\s*=' } |
+        Select-Object -First 1
+    if (-not $DatabaseLine) {
+        throw "DATABASE_URL is missing from .env.local."
+    }
+    $DatabaseUrl = ($DatabaseLine -split "=", 2)[1].Trim().Trim('"').Trim("'")
+    if (
+        [string]::IsNullOrWhiteSpace($DatabaseUrl) -or
+        $DatabaseUrl -notmatch '^postgres(ql)?://'
+    ) {
+        throw "DATABASE_URL is empty or invalid."
+    }
+    $env:DATABASE_URL = $DatabaseUrl
+    Write-Host "DATABASE_URL PASSED" -ForegroundColor Green
+    $PackageJson = Get-Content ".\package.json" -Raw | ConvertFrom-Json
+    $Scripts = @($PackageJson.scripts.PSObject.Properties.Name)
+    Invoke-Checked "DEPENDENCY INSTALL" {
+        pnpm install --frozen-lockfile
+    }
+    if ($Scripts -contains "db:generate") {
+        Invoke-Checked "DATABASE SCHEMA GENERATION" {
+            pnpm run db:generate
+        }
+    }
+    if ($Scripts -contains "db:migrate") {
+        Invoke-Checked "DATABASE MIGRATION" {
+            pnpm run db:migrate
+        }
+    }
+    $RequiredFiles = @(
+        "src\app\page.tsx",
+        "src\app\layout.tsx",
+        "src\app\api\health\route.ts",
+        "src\app\api\search\route.ts",
+        "src\app\admin\page.tsx",
+        "src\app\admin\articles\page.tsx",
+        "src\app\article\[slug]\page.tsx",
+        "src\app\category\[slug]\page.tsx",
+        "src\app\search\page.tsx"
+    )
+    $MissingFiles = foreach ($RelativePath in $RequiredFiles) {
+        $FullPath = Join-Path $ProjectRoot $RelativePath
+        if (-not (Test-Path -LiteralPath $FullPath)) {
+            $RelativePath
+        }
+    }
+    if ($MissingFiles) {
+        throw "Required files are missing:`n$($MissingFiles -join "`n")"
+    }
+    Write-Host "REQUIRED ROUTES PASSED" -ForegroundColor Green
+    $SourceFiles = Get-ChildItem `
+        -Path (Join-Path $ProjectRoot "src") `
+        -Recurse `
+        -File `
+        -Include "*.ts","*.tsx","*.js","*.jsx","*.css"
+    $SourceFileCount = @($SourceFiles).Count
+    if ($SourceFileCount -eq 0) {
+        throw "No source files were found."
+    }
+    $TodoResults = $SourceFiles |
+        Select-String `
+            -Pattern 'PHASE[\s-]*6.*TODO|TODO.*PHASE[\s-]*6|IMPLEMENT[\s-]*PHASE[\s-]*6' `
+            -CaseSensitive:$false
+    if ($TodoResults) {
+        $TodoText = $TodoResults |
+            ForEach-Object {
+                "$($_.Path):$($_.LineNumber): $($_.Line.Trim())"
+            }
+        throw "Unfinished Phase 6 markers found:`n$($TodoText -join "`n")"
+    }
+    Write-Host "NO UNFINISHED PHASE 6 MARKERS" -ForegroundColor Green
+    if ($Scripts -contains "format:check") {
+        Invoke-Checked "FORMAT CHECK" {
+            pnpm run format:check
+        }
+    }
+    if ($Scripts -contains "lint") {
+        Invoke-Checked "ESLINT" {
+            pnpm run lint
+        }
+    }
+    if ($Scripts -contains "typecheck") {
+        Invoke-Checked "TYPESCRIPT CHECK" {
+            pnpm run typecheck
+        }
+    }
+    if ($Scripts -contains "build") {
+        Invoke-Checked "PRODUCTION BUILD" {
+            pnpm run build
+        }
+    }
+    $GitBranch = if (Test-Path ".\.git") {
+        git branch --show-current
+    }
+    else {
+        "NO-GIT-REPOSITORY"
+    }
+    $GitStatus = if (Test-Path ".\.git") {
+        $StatusOutput = git status --short
+        if ($StatusOutput) {
+            $StatusOutput -join "`r`n"
+        }
+        else {
+            "CLEAN"
+        }
+    }
+    else {
+        "NO-GIT-REPOSITORY"
+    }
+    $Report = @"
+KNOWLEDGE NEST — PHASE 6 CORRECTED AUDIT
+Generated: $(Get-Date -Format "yyyy-MM-dd HH:mm:ss")
+Project: $ProjectRoot
+Git branch: $GitBranch
+PowerShell log: $LogPath
+RESULTS
+Phase 5B prerequisite: PASSED
+Database URL: PASSED
+Dependency installation: PASSED
+Database schema generation: PASSED
+Database migration: PASSED
+Required application routes: PASSED
+Phase 6 unfinished markers: NONE
+Formatting: PASSED
+ESLint: PASSED
+TypeScript: PASSED
+Production build: PASSED
+DATABASE NOTES
+"No schema changes, nothing to migrate" means the database schema is already current.
+Existing drizzle schema and migration table messages are PostgreSQL NOTICE messages, not errors.
+Migrations were applied successfully.
+SOURCE FILE COUNT
+$SourceFileCount
+GIT STATUS
+$GitStatus
+PHASE 6 STATUS
+AUDIT COMPLETE
+IMPLEMENTATION NOT YET MARKED COMPLETE
+"@
+    Set-Content `
+        -Path $ReportPath `
+        -Value $Report `
+        -Encoding UTF8
+    Set-Content `
+        -Path $AuditMarker `
+        -Value @"
+PHASE 6 AUDIT COMPLETE
+Completed: $(Get-Date -Format "yyyy-MM-dd HH:mm:ss")
+Verification ID: $Timestamp
+Report: $ReportPath
+PowerShell log: $LogPath
+Phase 6 implementation: NOT YET MARKED COMPLETE
+"@ `
+        -Encoding UTF8
+Missing closing '}' in statement block or type definition.
+>> try {
+    function Invoke-Checked {
+        param(
+            [Parameter(Mandatory)]
+            [string]$Name,
+            [Parameter(Mandatory)]
+            [scriptblock]$Command
+        )
+        Write-Host "`n=== $Name ===" -ForegroundColor Cyan
+        $global:LASTEXITCODE = 0
+        & $Command
+        if ($LASTEXITCODE -ne 0) {
+            throw "$Name failed with exit code $LASTEXITCODE."
+        }
+        Write-Host "$Name PASSED" -ForegroundColor Green
+    }
+    Write-Host "`n=== PHASE 6 CORRECTED AUDIT ===" -ForegroundColor Cyan
+    if (-not (Test-Path $Phase5BMarker)) {
+        throw "PHASE-5B-COMPLETE.txt is missing."
+    }
+    $Phase5BStatus = Get-Content $Phase5BMarker -Raw
+    if ($Phase5BStatus -notmatch "PHASE 5B COMPLETE") {
+        throw "Phase 5B is not marked complete."
+    }
+    Write-Host "Phase 5B prerequisite PASSED" -ForegroundColor Green
+    if (-not (Test-Path $EnvFile)) {
+        throw ".env.local is missing."
+    }
+    $DatabaseLine = Get-Content $EnvFile |
+        Where-Object { $_ -match '^\s*DATABASE_URL\s*=' } |
+        Select-Object -First 1
+    if (-not $DatabaseLine) {
+        throw "DATABASE_URL is missing from .env.local."
+    }
+    $DatabaseUrl = ($DatabaseLine -split "=", 2)[1].Trim().Trim('"').Trim("'")
+    if (
+        [string]::IsNullOrWhiteSpace($DatabaseUrl) -or
+        $DatabaseUrl -notmatch '^postgres(ql)?://'
+    ) {
+        throw "DATABASE_URL is empty or invalid."
+    }
+    $env:DATABASE_URL = $DatabaseUrl
+    Write-Host "DATABASE_URL PASSED" -ForegroundColor Green
+    $PackageJson = Get-Content ".\package.json" -Raw | ConvertFrom-Json
+    $Scripts = @($PackageJson.scripts.PSObject.Properties.Name)
+    Invoke-Checked "DEPENDENCY INSTALL" {
+        pnpm install --frozen-lockfile
+    }
+    if ($Scripts -contains "db:generate") {
+        Invoke-Checked "DATABASE SCHEMA GENERATION" {
+            pnpm run db:generate
+        }
+    }
+    if ($Scripts -contains "db:migrate") {
+        Invoke-Checked "DATABASE MIGRATION" {
+            pnpm run db:migrate
+        }
+    }
+    $RequiredFiles = @(
+        "src\app\page.tsx",
+        "src\app\layout.tsx",
+        "src\app\api\health\route.ts",
+        "src\app\api\search\route.ts",
+        "src\app\admin\page.tsx",
+        "src\app\admin\articles\page.tsx",
+        "src\app\article\[slug]\page.tsx",
+        "src\app\category\[slug]\page.tsx",
+        "src\app\search\page.tsx"
+    )
+    $MissingFiles = foreach ($RelativePath in $RequiredFiles) {
+        $FullPath = Join-Path $ProjectRoot $RelativePath
+        if (-not (Test-Path -LiteralPath $FullPath)) {
+            $RelativePath
+        }
+    }
+    if ($MissingFiles) {
+        throw "Required files are missing:`n$($MissingFiles -join "`n")"
+    }
+    Write-Host "REQUIRED ROUTES PASSED" -ForegroundColor Green
+    $SourceFiles = Get-ChildItem `
+        -Path (Join-Path $ProjectRoot "src") `
+        -Recurse `
+        -File `
+        -Include "*.ts","*.tsx","*.js","*.jsx","*.css"
+    $SourceFileCount = @($SourceFiles).Count
+    if ($SourceFileCount -eq 0) {
+        throw "No source files were found."
+    }
+    $TodoResults = $SourceFiles |
+        Select-String `
+            -Pattern 'PHASE[\s-]*6.*TODO|TODO.*PHASE[\s-]*6|IMPLEMENT[\s-]*PHASE[\s-]*6' `
+            -CaseSensitive:$false
+    if ($TodoResults) {
+        $TodoText = $TodoResults |
+            ForEach-Object {
+                "$($_.Path):$($_.LineNumber): $($_.Line.Trim())"
+            }
+        throw "Unfinished Phase 6 markers found:`n$($TodoText -join "`n")"
+    }
+    Write-Host "NO UNFINISHED PHASE 6 MARKERS" -ForegroundColor Green
+    if ($Scripts -contains "format:check") {
+        Invoke-Checked "FORMAT CHECK" {
+            pnpm run format:check
+        }
+    }
+    if ($Scripts -contains "lint") {
+        Invoke-Checked "ESLINT" {
+            pnpm run lint
+        }
+    }
+    if ($Scripts -contains "typecheck") {
+        Invoke-Checked "TYPESCRIPT CHECK" {
+            pnpm run typecheck
+        }
+    }
+    if ($Scripts -contains "build") {
+        Invoke-Checked "PRODUCTION BUILD" {
+            pnpm run build
+        }
+    }
+    $GitBranch = if (Test-Path ".\.git") {
+        git branch --show-current
+    }
+    else {
+        "NO-GIT-REPOSITORY"
+    }
+    $GitStatus = if (Test-Path ".\.git") {
+        $StatusOutput = git status --short
+        if ($StatusOutput) {
+            $StatusOutput -join "`r`n"
+        }
+        else {
+            "CLEAN"
+        }
+    }
+    else {
+        "NO-GIT-REPOSITORY"
+    }
+    $Report = @"
+KNOWLEDGE NEST — PHASE 6 CORRECTED AUDIT
+Generated: $(Get-Date -Format "yyyy-MM-dd HH:mm:ss")
+Project: $ProjectRoot
+Git branch: $GitBranch
+PowerShell log: $LogPath
+RESULTS
+Phase 5B prerequisite: PASSED
+Database URL: PASSED
+Dependency installation: PASSED
+Database schema generation: PASSED
+Database migration: PASSED
+Required application routes: PASSED
+Phase 6 unfinished markers: NONE
+Formatting: PASSED
+ESLint: PASSED
+TypeScript: PASSED
+Production build: PASSED
+DATABASE NOTES
+"No schema changes, nothing to migrate" means the database schema is already current.
+Existing drizzle schema and migration table messages are PostgreSQL NOTICE messages, not errors.
+Migrations were applied successfully.
+SOURCE FILE COUNT
+$SourceFileCount
+GIT STATUS
+$GitStatus
+PHASE 6 STATUS
+AUDIT COMPLETE
+IMPLEMENTATION NOT YET MARKED COMPLETE
+"@
+    Set-Content `
+        -Path $ReportPath `
+        -Value $Report `
+        -Encoding UTF8
+    Set-Content `
+        -Path $AuditMarker `
+        -Value @"
+PHASE 6 AUDIT COMPLETE
+Completed: $(Get-Date -Format "yyyy-MM-dd HH:mm:ss")
+Verification ID: $Timestamp
+Report: $ReportPath
+PowerShell log: $LogPath
+Phase 6 implementation: NOT YET MARKED COMPLETE
+"@ `
+        -Encoding UTF8
+    Write-Host ""
+    Write-Host "========================================" -ForegroundColor Green
+    Write-Host "PHASE 6 CORRECTED AUDIT PASSED" -ForegroundColor Green
+    Write-Host "DATABASE MIGRATION PASSED" -ForegroundColor Green
+    Write-Host "ALL FALSE ERRORS CLEARED" -ForegroundColor Green
+    Write-Host "REPORT: $ReportPath" -ForegroundColor Green
+    Write-Host "LOG: $LogPath" -ForegroundColor Green
+    Write-Host "========================================" -ForegroundColor Green
+}
+catch {
+    Write-Host ""
+    Write-Host "========================================" -ForegroundColor Red
+    Write-Host "PHASE 6 AUDIT FAILED" -ForegroundColor Red
+    Write-Host $_.Exception.Message -ForegroundColor Red
+    Write-Host "LOG: $LogPath" -ForegroundColor Yellow
+    Write-Host "========================================" -ForegroundColor Red
+    throw
+}
+finally {
+    Stop-Transcript -ErrorAction SilentlyContinue | Out-Null
+}
+
+=== PHASE 6 CORRECTED AUDIT ===
+Phase 5B prerequisite PASSED
+DATABASE_URL PASSED
+
+=== DEPENDENCY INSTALL ===
+
+DEPENDENCY INSTALL PASSED
+
+=== DATABASE SCHEMA GENERATION ===
+
+DATABASE SCHEMA GENERATION PASSED
+
+=== DATABASE MIGRATION ===
+[✓] migrations applied successfully!
+DATABASE MIGRATION PASSED
+REQUIRED ROUTES PASSED
+NO UNFINISHED PHASE 6 MARKERS
+
+=== FORMAT CHECK ===
+
+FORMAT CHECK PASSED
+
+=== ESLINT ===
+
+ESLINT PASSED
+
+=== TYPESCRIPT CHECK ===
+
+TYPESCRIPT CHECK PASSED
+
+=== PRODUCTION BUILD ===
+
+PRODUCTION BUILD PASSED
+
+========================================
+PHASE 6 CORRECTED AUDIT PASSED
+DATABASE MIGRATION PASSED
+ALL FALSE ERRORS CLEARED
+REPORT: C:\Users\A C\Downloads\knowledge-nest\phase-6-audit-report.txt
+LOG: C:\Users\A C\Downloads\knowledge-nest\logs\phase-6-corrected-audit-20260726-230955.log
+========================================
+**********************
+Windows PowerShell transcript end
+End time: 20260726231210
+**********************

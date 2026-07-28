@@ -1,0 +1,2571 @@
+﻿**********************
+Windows PowerShell transcript start
+Start time: 20260727004111
+Username: GULZAR-PC\A C
+RunAs User: GULZAR-PC\A C
+Configuration Name: 
+Machine: GULZAR-PC (Microsoft Windows NT 10.0.19045.0)
+Host Application: C:\Windows\System32\WindowsPowerShell\v1.0\powershell.exe -noexit -command try { . "c:\Users\A C\AppData\Local\Programs\Microsoft VS Code\1b6a188127\resources\app\out\vs\workbench\contrib\terminal\common\scripts\shellIntegration.ps1" } catch {}
+Process ID: 7472
+PSVersion: 5.1.19041.7548
+PSEdition: Desktop
+PSCompatibleVersions: 1.0, 2.0, 3.0, 4.0, 5.0, 5.1.19041.7548
+BuildVersion: 10.0.19041.7548
+CLRVersion: 4.0.30319.42000
+WSManStackVersion: 3.0
+PSRemotingProtocolVersion: 2.3
+SerializationVersion: 1.1.0.1
+**********************
+]633;D;0]633;A]633;P;Cwd=C:\x5cUsers\x5cA C\x5cDownloads\x5cknowledge-nestPS C:\Users\A C\Downloads\knowledge-nest> ]633;B
+]633;D]633;A]633;P;Cwd=C:\x5cUsers\x5cA C\x5cDownloads\x5cknowledge-nestPS C:\Users\A C\Downloads\knowledge-nest> ]633;B
+PS>try {
+Missing closing '}' in statement block or type definition.
+>> try {
+    function Invoke-Checked {
+        param(
+            [Parameter(Mandatory)]
+            [string]$Name,
+Missing expression after ','.
+>> try {
+    function Invoke-Checked {
+        param(
+            [Parameter(Mandatory)]
+            [string]$Name,
+            [Parameter(Mandatory)]
+            [scriptblock]$Command
+        )
+Missing closing '}' in statement block or type definition.
+>> try {
+    function Invoke-Checked {
+        param(
+            [Parameter(Mandatory)]
+            [string]$Name,
+            [Parameter(Mandatory)]
+            [scriptblock]$Command
+        )
+        Write-Host ""
+        Write-Host "=== $Name ===" -ForegroundColor Cyan
+Missing closing '}' in statement block or type definition.
+>> try {
+    function Invoke-Checked {
+        param(
+            [Parameter(Mandatory)]
+            [string]$Name,
+            [Parameter(Mandatory)]
+            [scriptblock]$Command
+        )
+        Write-Host ""
+        Write-Host "=== $Name ===" -ForegroundColor Cyan
+        $global:LASTEXITCODE = 0
+        & $Command
+Missing closing '}' in statement block or type definition.
+>> try {
+    function Invoke-Checked {
+        param(
+            [Parameter(Mandatory)]
+            [string]$Name,
+            [Parameter(Mandatory)]
+            [scriptblock]$Command
+        )
+        Write-Host ""
+        Write-Host "=== $Name ===" -ForegroundColor Cyan
+        $global:LASTEXITCODE = 0
+        & $Command
+        if ($LASTEXITCODE -ne 0) {
+            throw "$Name failed with exit code $LASTEXITCODE."
+        }
+Missing closing '}' in statement block or type definition.
+>> try {
+    function Invoke-Checked {
+        param(
+            [Parameter(Mandatory)]
+            [string]$Name,
+            [Parameter(Mandatory)]
+            [scriptblock]$Command
+        )
+        Write-Host ""
+        Write-Host "=== $Name ===" -ForegroundColor Cyan
+        $global:LASTEXITCODE = 0
+        & $Command
+        if ($LASTEXITCODE -ne 0) {
+            throw "$Name failed with exit code $LASTEXITCODE."
+        }
+        Write-Host "$Name PASSED" -ForegroundColor Green
+    }
+Missing closing '}' in statement block or type definition.
+>> try {
+    function Invoke-Checked {
+        param(
+            [Parameter(Mandatory)]
+            [string]$Name,
+            [Parameter(Mandatory)]
+            [scriptblock]$Command
+        )
+        Write-Host ""
+        Write-Host "=== $Name ===" -ForegroundColor Cyan
+        $global:LASTEXITCODE = 0
+        & $Command
+        if ($LASTEXITCODE -ne 0) {
+            throw "$Name failed with exit code $LASTEXITCODE."
+        }
+        Write-Host "$Name PASSED" -ForegroundColor Green
+    }
+    if (-not (Test-Path ".\PHASE-7-STARTED.txt")) {
+        throw "PHASE-7-STARTED.txt is missing."
+    }
+Missing closing '}' in statement block or type definition.
+>> try {
+    function Invoke-Checked {
+        param(
+            [Parameter(Mandatory)]
+            [string]$Name,
+            [Parameter(Mandatory)]
+            [scriptblock]$Command
+        )
+        Write-Host ""
+        Write-Host "=== $Name ===" -ForegroundColor Cyan
+        $global:LASTEXITCODE = 0
+        & $Command
+        if ($LASTEXITCODE -ne 0) {
+            throw "$Name failed with exit code $LASTEXITCODE."
+        }
+        Write-Host "$Name PASSED" -ForegroundColor Green
+    }
+    if (-not (Test-Path ".\PHASE-7-STARTED.txt")) {
+        throw "PHASE-7-STARTED.txt is missing."
+    }
+    $RequiredFiles = @(
+        "src\lib\theme\types.ts",
+        "src\lib\theme\presets.ts",
+        "src\lib\theme\theme-store.ts",
+        "src\app\api\admin\themes\route.ts",
+        "src\components\admin\themes\theme-studio.tsx",
+        "src\app\admin\themes\page.tsx",
+        "src\components\site\active-theme-style.tsx",
+        "src\app\layout.tsx"
+    )
+Missing closing '}' in statement block or type definition.
+>> try {
+    function Invoke-Checked {
+        param(
+            [Parameter(Mandatory)]
+            [string]$Name,
+            [Parameter(Mandatory)]
+            [scriptblock]$Command
+        )
+        Write-Host ""
+        Write-Host "=== $Name ===" -ForegroundColor Cyan
+        $global:LASTEXITCODE = 0
+        & $Command
+        if ($LASTEXITCODE -ne 0) {
+            throw "$Name failed with exit code $LASTEXITCODE."
+        }
+        Write-Host "$Name PASSED" -ForegroundColor Green
+    }
+    if (-not (Test-Path ".\PHASE-7-STARTED.txt")) {
+        throw "PHASE-7-STARTED.txt is missing."
+    }
+    $RequiredFiles = @(
+        "src\lib\theme\types.ts",
+        "src\lib\theme\presets.ts",
+        "src\lib\theme\theme-store.ts",
+        "src\app\api\admin\themes\route.ts",
+        "src\components\admin\themes\theme-studio.tsx",
+        "src\app\admin\themes\page.tsx",
+        "src\components\site\active-theme-style.tsx",
+        "src\app\layout.tsx"
+    )
+    foreach ($RequiredFile in $RequiredFiles) {
+        $FullPath = Join-Path $ProjectRoot $RequiredFile
+Missing closing '}' in statement block or type definition.
+>> try {
+    function Invoke-Checked {
+        param(
+            [Parameter(Mandatory)]
+            [string]$Name,
+            [Parameter(Mandatory)]
+            [scriptblock]$Command
+        )
+        Write-Host ""
+        Write-Host "=== $Name ===" -ForegroundColor Cyan
+        $global:LASTEXITCODE = 0
+        & $Command
+        if ($LASTEXITCODE -ne 0) {
+            throw "$Name failed with exit code $LASTEXITCODE."
+        }
+        Write-Host "$Name PASSED" -ForegroundColor Green
+    }
+    if (-not (Test-Path ".\PHASE-7-STARTED.txt")) {
+        throw "PHASE-7-STARTED.txt is missing."
+    }
+    $RequiredFiles = @(
+        "src\lib\theme\types.ts",
+        "src\lib\theme\presets.ts",
+        "src\lib\theme\theme-store.ts",
+        "src\app\api\admin\themes\route.ts",
+        "src\components\admin\themes\theme-studio.tsx",
+        "src\app\admin\themes\page.tsx",
+        "src\components\site\active-theme-style.tsx",
+        "src\app\layout.tsx"
+    )
+    foreach ($RequiredFile in $RequiredFiles) {
+        $FullPath = Join-Path $ProjectRoot $RequiredFile
+        if (-not (Test-Path -LiteralPath $FullPath)) {
+            throw "Required Phase 7 file is missing: $RequiredFile"
+        }
+    }
+Missing closing '}' in statement block or type definition.
+>> try {
+    function Invoke-Checked {
+        param(
+            [Parameter(Mandatory)]
+            [string]$Name,
+            [Parameter(Mandatory)]
+            [scriptblock]$Command
+        )
+        Write-Host ""
+        Write-Host "=== $Name ===" -ForegroundColor Cyan
+        $global:LASTEXITCODE = 0
+        & $Command
+        if ($LASTEXITCODE -ne 0) {
+            throw "$Name failed with exit code $LASTEXITCODE."
+        }
+        Write-Host "$Name PASSED" -ForegroundColor Green
+    }
+    if (-not (Test-Path ".\PHASE-7-STARTED.txt")) {
+        throw "PHASE-7-STARTED.txt is missing."
+    }
+    $RequiredFiles = @(
+        "src\lib\theme\types.ts",
+        "src\lib\theme\presets.ts",
+        "src\lib\theme\theme-store.ts",
+        "src\app\api\admin\themes\route.ts",
+        "src\components\admin\themes\theme-studio.tsx",
+        "src\app\admin\themes\page.tsx",
+        "src\components\site\active-theme-style.tsx",
+        "src\app\layout.tsx"
+    )
+    foreach ($RequiredFile in $RequiredFiles) {
+        $FullPath = Join-Path $ProjectRoot $RequiredFile
+        if (-not (Test-Path -LiteralPath $FullPath)) {
+            throw "Required Phase 7 file is missing: $RequiredFile"
+        }
+    }
+    $LayoutPath = Join-Path $ProjectRoot "src\app\layout.tsx"
+    $LayoutContent = Get-Content -LiteralPath $LayoutPath -Raw
+Missing closing '}' in statement block or type definition.
+>> try {
+    function Invoke-Checked {
+        param(
+            [Parameter(Mandatory)]
+            [string]$Name,
+            [Parameter(Mandatory)]
+            [scriptblock]$Command
+        )
+        Write-Host ""
+        Write-Host "=== $Name ===" -ForegroundColor Cyan
+        $global:LASTEXITCODE = 0
+        & $Command
+        if ($LASTEXITCODE -ne 0) {
+            throw "$Name failed with exit code $LASTEXITCODE."
+        }
+        Write-Host "$Name PASSED" -ForegroundColor Green
+    }
+    if (-not (Test-Path ".\PHASE-7-STARTED.txt")) {
+        throw "PHASE-7-STARTED.txt is missing."
+    }
+    $RequiredFiles = @(
+        "src\lib\theme\types.ts",
+        "src\lib\theme\presets.ts",
+        "src\lib\theme\theme-store.ts",
+        "src\app\api\admin\themes\route.ts",
+        "src\components\admin\themes\theme-studio.tsx",
+        "src\app\admin\themes\page.tsx",
+        "src\components\site\active-theme-style.tsx",
+        "src\app\layout.tsx"
+    )
+    foreach ($RequiredFile in $RequiredFiles) {
+        $FullPath = Join-Path $ProjectRoot $RequiredFile
+        if (-not (Test-Path -LiteralPath $FullPath)) {
+            throw "Required Phase 7 file is missing: $RequiredFile"
+        }
+    }
+    $LayoutPath = Join-Path $ProjectRoot "src\app\layout.tsx"
+    $LayoutContent = Get-Content -LiteralPath $LayoutPath -Raw
+    if ($LayoutContent -notmatch 'ActiveThemeStyle') {
+        $ImportPattern = '(import\s+["'']\.\/globals\.css["''];?)'
+        $ImportRegex = [regex]::new($ImportPattern)
+Missing closing '}' in statement block or type definition.
+>> try {
+    function Invoke-Checked {
+        param(
+            [Parameter(Mandatory)]
+            [string]$Name,
+            [Parameter(Mandatory)]
+            [scriptblock]$Command
+        )
+        Write-Host ""
+        Write-Host "=== $Name ===" -ForegroundColor Cyan
+        $global:LASTEXITCODE = 0
+        & $Command
+        if ($LASTEXITCODE -ne 0) {
+            throw "$Name failed with exit code $LASTEXITCODE."
+        }
+        Write-Host "$Name PASSED" -ForegroundColor Green
+    }
+    if (-not (Test-Path ".\PHASE-7-STARTED.txt")) {
+        throw "PHASE-7-STARTED.txt is missing."
+    }
+    $RequiredFiles = @(
+        "src\lib\theme\types.ts",
+        "src\lib\theme\presets.ts",
+        "src\lib\theme\theme-store.ts",
+        "src\app\api\admin\themes\route.ts",
+        "src\components\admin\themes\theme-studio.tsx",
+        "src\app\admin\themes\page.tsx",
+        "src\components\site\active-theme-style.tsx",
+        "src\app\layout.tsx"
+    )
+    foreach ($RequiredFile in $RequiredFiles) {
+        $FullPath = Join-Path $ProjectRoot $RequiredFile
+        if (-not (Test-Path -LiteralPath $FullPath)) {
+            throw "Required Phase 7 file is missing: $RequiredFile"
+        }
+    }
+    $LayoutPath = Join-Path $ProjectRoot "src\app\layout.tsx"
+    $LayoutContent = Get-Content -LiteralPath $LayoutPath -Raw
+    if ($LayoutContent -notmatch 'ActiveThemeStyle') {
+        $ImportPattern = '(import\s+["'']\.\/globals\.css["''];?)'
+        $ImportRegex = [regex]::new($ImportPattern)
+        if (-not $ImportRegex.IsMatch($LayoutContent)) {
+            throw "globals.css import was not found in src\app\layout.tsx."
+        }
+Missing closing '}' in statement block or type definition.
+>> try {
+    function Invoke-Checked {
+        param(
+            [Parameter(Mandatory)]
+            [string]$Name,
+            [Parameter(Mandatory)]
+            [scriptblock]$Command
+        )
+        Write-Host ""
+        Write-Host "=== $Name ===" -ForegroundColor Cyan
+        $global:LASTEXITCODE = 0
+        & $Command
+        if ($LASTEXITCODE -ne 0) {
+            throw "$Name failed with exit code $LASTEXITCODE."
+        }
+        Write-Host "$Name PASSED" -ForegroundColor Green
+    }
+    if (-not (Test-Path ".\PHASE-7-STARTED.txt")) {
+        throw "PHASE-7-STARTED.txt is missing."
+    }
+    $RequiredFiles = @(
+        "src\lib\theme\types.ts",
+        "src\lib\theme\presets.ts",
+        "src\lib\theme\theme-store.ts",
+        "src\app\api\admin\themes\route.ts",
+        "src\components\admin\themes\theme-studio.tsx",
+        "src\app\admin\themes\page.tsx",
+        "src\components\site\active-theme-style.tsx",
+        "src\app\layout.tsx"
+    )
+    foreach ($RequiredFile in $RequiredFiles) {
+        $FullPath = Join-Path $ProjectRoot $RequiredFile
+        if (-not (Test-Path -LiteralPath $FullPath)) {
+            throw "Required Phase 7 file is missing: $RequiredFile"
+        }
+    }
+    $LayoutPath = Join-Path $ProjectRoot "src\app\layout.tsx"
+    $LayoutContent = Get-Content -LiteralPath $LayoutPath -Raw
+    if ($LayoutContent -notmatch 'ActiveThemeStyle') {
+        $ImportPattern = '(import\s+["'']\.\/globals\.css["''];?)'
+        $ImportRegex = [regex]::new($ImportPattern)
+        if (-not $ImportRegex.IsMatch($LayoutContent)) {
+            throw "globals.css import was not found in src\app\layout.tsx."
+        }
+        $ImportReplacement = '$1' + "`r`n" +
+            'import { ActiveThemeStyle } from "@/components/site/active-theme-style";'
+Missing closing '}' in statement block or type definition.
+>> try {
+    function Invoke-Checked {
+        param(
+            [Parameter(Mandatory)]
+            [string]$Name,
+            [Parameter(Mandatory)]
+            [scriptblock]$Command
+        )
+        Write-Host ""
+        Write-Host "=== $Name ===" -ForegroundColor Cyan
+        $global:LASTEXITCODE = 0
+        & $Command
+        if ($LASTEXITCODE -ne 0) {
+            throw "$Name failed with exit code $LASTEXITCODE."
+        }
+        Write-Host "$Name PASSED" -ForegroundColor Green
+    }
+    if (-not (Test-Path ".\PHASE-7-STARTED.txt")) {
+        throw "PHASE-7-STARTED.txt is missing."
+    }
+    $RequiredFiles = @(
+        "src\lib\theme\types.ts",
+        "src\lib\theme\presets.ts",
+        "src\lib\theme\theme-store.ts",
+        "src\app\api\admin\themes\route.ts",
+        "src\components\admin\themes\theme-studio.tsx",
+        "src\app\admin\themes\page.tsx",
+        "src\components\site\active-theme-style.tsx",
+        "src\app\layout.tsx"
+    )
+    foreach ($RequiredFile in $RequiredFiles) {
+        $FullPath = Join-Path $ProjectRoot $RequiredFile
+        if (-not (Test-Path -LiteralPath $FullPath)) {
+            throw "Required Phase 7 file is missing: $RequiredFile"
+        }
+    }
+    $LayoutPath = Join-Path $ProjectRoot "src\app\layout.tsx"
+    $LayoutContent = Get-Content -LiteralPath $LayoutPath -Raw
+    if ($LayoutContent -notmatch 'ActiveThemeStyle') {
+        $ImportPattern = '(import\s+["'']\.\/globals\.css["''];?)'
+        $ImportRegex = [regex]::new($ImportPattern)
+        if (-not $ImportRegex.IsMatch($LayoutContent)) {
+            throw "globals.css import was not found in src\app\layout.tsx."
+        }
+        $ImportReplacement = '$1' + "`r`n" +
+            'import { ActiveThemeStyle } from "@/components/site/active-theme-style";'
+        $LayoutContent = $ImportRegex.Replace(
+            $LayoutContent,
+            $ImportReplacement,
+            1
+        )
+    }
+Missing closing '}' in statement block or type definition.
+>> try {
+    function Invoke-Checked {
+        param(
+            [Parameter(Mandatory)]
+            [string]$Name,
+            [Parameter(Mandatory)]
+            [scriptblock]$Command
+        )
+        Write-Host ""
+        Write-Host "=== $Name ===" -ForegroundColor Cyan
+        $global:LASTEXITCODE = 0
+        & $Command
+        if ($LASTEXITCODE -ne 0) {
+            throw "$Name failed with exit code $LASTEXITCODE."
+        }
+        Write-Host "$Name PASSED" -ForegroundColor Green
+    }
+    if (-not (Test-Path ".\PHASE-7-STARTED.txt")) {
+        throw "PHASE-7-STARTED.txt is missing."
+    }
+    $RequiredFiles = @(
+        "src\lib\theme\types.ts",
+        "src\lib\theme\presets.ts",
+        "src\lib\theme\theme-store.ts",
+        "src\app\api\admin\themes\route.ts",
+        "src\components\admin\themes\theme-studio.tsx",
+        "src\app\admin\themes\page.tsx",
+        "src\components\site\active-theme-style.tsx",
+        "src\app\layout.tsx"
+    )
+    foreach ($RequiredFile in $RequiredFiles) {
+        $FullPath = Join-Path $ProjectRoot $RequiredFile
+        if (-not (Test-Path -LiteralPath $FullPath)) {
+            throw "Required Phase 7 file is missing: $RequiredFile"
+        }
+    }
+    $LayoutPath = Join-Path $ProjectRoot "src\app\layout.tsx"
+    $LayoutContent = Get-Content -LiteralPath $LayoutPath -Raw
+    if ($LayoutContent -notmatch 'ActiveThemeStyle') {
+        $ImportPattern = '(import\s+["'']\.\/globals\.css["''];?)'
+        $ImportRegex = [regex]::new($ImportPattern)
+        if (-not $ImportRegex.IsMatch($LayoutContent)) {
+            throw "globals.css import was not found in src\app\layout.tsx."
+        }
+        $ImportReplacement = '$1' + "`r`n" +
+            'import { ActiveThemeStyle } from "@/components/site/active-theme-style";'
+        $LayoutContent = $ImportRegex.Replace(
+            $LayoutContent,
+            $ImportReplacement,
+            1
+        )
+    }
+    if ($LayoutContent -notmatch '<ActiveThemeStyle\s*/>') {
+        $BodyPattern = '(<body\b[^>]*>)'
+        $BodyRegex = [regex]::new($BodyPattern)
+Missing closing '}' in statement block or type definition.
+>> try {
+    function Invoke-Checked {
+        param(
+            [Parameter(Mandatory)]
+            [string]$Name,
+            [Parameter(Mandatory)]
+            [scriptblock]$Command
+        )
+        Write-Host ""
+        Write-Host "=== $Name ===" -ForegroundColor Cyan
+        $global:LASTEXITCODE = 0
+        & $Command
+        if ($LASTEXITCODE -ne 0) {
+            throw "$Name failed with exit code $LASTEXITCODE."
+        }
+        Write-Host "$Name PASSED" -ForegroundColor Green
+    }
+    if (-not (Test-Path ".\PHASE-7-STARTED.txt")) {
+        throw "PHASE-7-STARTED.txt is missing."
+    }
+    $RequiredFiles = @(
+        "src\lib\theme\types.ts",
+        "src\lib\theme\presets.ts",
+        "src\lib\theme\theme-store.ts",
+        "src\app\api\admin\themes\route.ts",
+        "src\components\admin\themes\theme-studio.tsx",
+        "src\app\admin\themes\page.tsx",
+        "src\components\site\active-theme-style.tsx",
+        "src\app\layout.tsx"
+    )
+    foreach ($RequiredFile in $RequiredFiles) {
+        $FullPath = Join-Path $ProjectRoot $RequiredFile
+        if (-not (Test-Path -LiteralPath $FullPath)) {
+            throw "Required Phase 7 file is missing: $RequiredFile"
+        }
+    }
+    $LayoutPath = Join-Path $ProjectRoot "src\app\layout.tsx"
+    $LayoutContent = Get-Content -LiteralPath $LayoutPath -Raw
+    if ($LayoutContent -notmatch 'ActiveThemeStyle') {
+        $ImportPattern = '(import\s+["'']\.\/globals\.css["''];?)'
+        $ImportRegex = [regex]::new($ImportPattern)
+        if (-not $ImportRegex.IsMatch($LayoutContent)) {
+            throw "globals.css import was not found in src\app\layout.tsx."
+        }
+        $ImportReplacement = '$1' + "`r`n" +
+            'import { ActiveThemeStyle } from "@/components/site/active-theme-style";'
+        $LayoutContent = $ImportRegex.Replace(
+            $LayoutContent,
+            $ImportReplacement,
+            1
+        )
+    }
+    if ($LayoutContent -notmatch '<ActiveThemeStyle\s*/>') {
+        $BodyPattern = '(<body\b[^>]*>)'
+        $BodyRegex = [regex]::new($BodyPattern)
+        if (-not $BodyRegex.IsMatch($LayoutContent)) {
+            throw "The body element was not found in src\app\layout.tsx."
+        }
+Missing closing '}' in statement block or type definition.
+>> try {
+    function Invoke-Checked {
+        param(
+            [Parameter(Mandatory)]
+            [string]$Name,
+            [Parameter(Mandatory)]
+            [scriptblock]$Command
+        )
+        Write-Host ""
+        Write-Host "=== $Name ===" -ForegroundColor Cyan
+        $global:LASTEXITCODE = 0
+        & $Command
+        if ($LASTEXITCODE -ne 0) {
+            throw "$Name failed with exit code $LASTEXITCODE."
+        }
+        Write-Host "$Name PASSED" -ForegroundColor Green
+    }
+    if (-not (Test-Path ".\PHASE-7-STARTED.txt")) {
+        throw "PHASE-7-STARTED.txt is missing."
+    }
+    $RequiredFiles = @(
+        "src\lib\theme\types.ts",
+        "src\lib\theme\presets.ts",
+        "src\lib\theme\theme-store.ts",
+        "src\app\api\admin\themes\route.ts",
+        "src\components\admin\themes\theme-studio.tsx",
+        "src\app\admin\themes\page.tsx",
+        "src\components\site\active-theme-style.tsx",
+        "src\app\layout.tsx"
+    )
+    foreach ($RequiredFile in $RequiredFiles) {
+        $FullPath = Join-Path $ProjectRoot $RequiredFile
+        if (-not (Test-Path -LiteralPath $FullPath)) {
+            throw "Required Phase 7 file is missing: $RequiredFile"
+        }
+    }
+    $LayoutPath = Join-Path $ProjectRoot "src\app\layout.tsx"
+    $LayoutContent = Get-Content -LiteralPath $LayoutPath -Raw
+    if ($LayoutContent -notmatch 'ActiveThemeStyle') {
+        $ImportPattern = '(import\s+["'']\.\/globals\.css["''];?)'
+        $ImportRegex = [regex]::new($ImportPattern)
+        if (-not $ImportRegex.IsMatch($LayoutContent)) {
+            throw "globals.css import was not found in src\app\layout.tsx."
+        }
+        $ImportReplacement = '$1' + "`r`n" +
+            'import { ActiveThemeStyle } from "@/components/site/active-theme-style";'
+        $LayoutContent = $ImportRegex.Replace(
+            $LayoutContent,
+            $ImportReplacement,
+            1
+        )
+    }
+    if ($LayoutContent -notmatch '<ActiveThemeStyle\s*/>') {
+        $BodyPattern = '(<body\b[^>]*>)'
+        $BodyRegex = [regex]::new($BodyPattern)
+        if (-not $BodyRegex.IsMatch($LayoutContent)) {
+            throw "The body element was not found in src\app\layout.tsx."
+        }
+        $BodyReplacement = '$1' + "`r`n" + '        <ActiveThemeStyle />'
+Missing closing '}' in statement block or type definition.
+>> try {
+    function Invoke-Checked {
+        param(
+            [Parameter(Mandatory)]
+            [string]$Name,
+            [Parameter(Mandatory)]
+            [scriptblock]$Command
+        )
+        Write-Host ""
+        Write-Host "=== $Name ===" -ForegroundColor Cyan
+        $global:LASTEXITCODE = 0
+        & $Command
+        if ($LASTEXITCODE -ne 0) {
+            throw "$Name failed with exit code $LASTEXITCODE."
+        }
+        Write-Host "$Name PASSED" -ForegroundColor Green
+    }
+    if (-not (Test-Path ".\PHASE-7-STARTED.txt")) {
+        throw "PHASE-7-STARTED.txt is missing."
+    }
+    $RequiredFiles = @(
+        "src\lib\theme\types.ts",
+        "src\lib\theme\presets.ts",
+        "src\lib\theme\theme-store.ts",
+        "src\app\api\admin\themes\route.ts",
+        "src\components\admin\themes\theme-studio.tsx",
+        "src\app\admin\themes\page.tsx",
+        "src\components\site\active-theme-style.tsx",
+        "src\app\layout.tsx"
+    )
+    foreach ($RequiredFile in $RequiredFiles) {
+        $FullPath = Join-Path $ProjectRoot $RequiredFile
+        if (-not (Test-Path -LiteralPath $FullPath)) {
+            throw "Required Phase 7 file is missing: $RequiredFile"
+        }
+    }
+    $LayoutPath = Join-Path $ProjectRoot "src\app\layout.tsx"
+    $LayoutContent = Get-Content -LiteralPath $LayoutPath -Raw
+    if ($LayoutContent -notmatch 'ActiveThemeStyle') {
+        $ImportPattern = '(import\s+["'']\.\/globals\.css["''];?)'
+        $ImportRegex = [regex]::new($ImportPattern)
+        if (-not $ImportRegex.IsMatch($LayoutContent)) {
+            throw "globals.css import was not found in src\app\layout.tsx."
+        }
+        $ImportReplacement = '$1' + "`r`n" +
+            'import { ActiveThemeStyle } from "@/components/site/active-theme-style";'
+        $LayoutContent = $ImportRegex.Replace(
+            $LayoutContent,
+            $ImportReplacement,
+            1
+        )
+    }
+    if ($LayoutContent -notmatch '<ActiveThemeStyle\s*/>') {
+        $BodyPattern = '(<body\b[^>]*>)'
+        $BodyRegex = [regex]::new($BodyPattern)
+        if (-not $BodyRegex.IsMatch($LayoutContent)) {
+            throw "The body element was not found in src\app\layout.tsx."
+        }
+        $BodyReplacement = '$1' + "`r`n" + '        <ActiveThemeStyle />'
+        $LayoutContent = $BodyRegex.Replace(
+            $LayoutContent,
+            $BodyReplacement,
+            1
+        )
+    }
+Missing closing '}' in statement block or type definition.
+>> try {
+    function Invoke-Checked {
+        param(
+            [Parameter(Mandatory)]
+            [string]$Name,
+            [Parameter(Mandatory)]
+            [scriptblock]$Command
+        )
+        Write-Host ""
+        Write-Host "=== $Name ===" -ForegroundColor Cyan
+        $global:LASTEXITCODE = 0
+        & $Command
+        if ($LASTEXITCODE -ne 0) {
+            throw "$Name failed with exit code $LASTEXITCODE."
+        }
+        Write-Host "$Name PASSED" -ForegroundColor Green
+    }
+    if (-not (Test-Path ".\PHASE-7-STARTED.txt")) {
+        throw "PHASE-7-STARTED.txt is missing."
+    }
+    $RequiredFiles = @(
+        "src\lib\theme\types.ts",
+        "src\lib\theme\presets.ts",
+        "src\lib\theme\theme-store.ts",
+        "src\app\api\admin\themes\route.ts",
+        "src\components\admin\themes\theme-studio.tsx",
+        "src\app\admin\themes\page.tsx",
+        "src\components\site\active-theme-style.tsx",
+        "src\app\layout.tsx"
+    )
+    foreach ($RequiredFile in $RequiredFiles) {
+        $FullPath = Join-Path $ProjectRoot $RequiredFile
+        if (-not (Test-Path -LiteralPath $FullPath)) {
+            throw "Required Phase 7 file is missing: $RequiredFile"
+        }
+    }
+    $LayoutPath = Join-Path $ProjectRoot "src\app\layout.tsx"
+    $LayoutContent = Get-Content -LiteralPath $LayoutPath -Raw
+    if ($LayoutContent -notmatch 'ActiveThemeStyle') {
+        $ImportPattern = '(import\s+["'']\.\/globals\.css["''];?)'
+        $ImportRegex = [regex]::new($ImportPattern)
+        if (-not $ImportRegex.IsMatch($LayoutContent)) {
+            throw "globals.css import was not found in src\app\layout.tsx."
+        }
+        $ImportReplacement = '$1' + "`r`n" +
+            'import { ActiveThemeStyle } from "@/components/site/active-theme-style";'
+        $LayoutContent = $ImportRegex.Replace(
+            $LayoutContent,
+            $ImportReplacement,
+            1
+        )
+    }
+    if ($LayoutContent -notmatch '<ActiveThemeStyle\s*/>') {
+        $BodyPattern = '(<body\b[^>]*>)'
+        $BodyRegex = [regex]::new($BodyPattern)
+        if (-not $BodyRegex.IsMatch($LayoutContent)) {
+            throw "The body element was not found in src\app\layout.tsx."
+        }
+        $BodyReplacement = '$1' + "`r`n" + '        <ActiveThemeStyle />'
+        $LayoutContent = $BodyRegex.Replace(
+            $LayoutContent,
+            $BodyReplacement,
+            1
+        )
+    }
+    Set-Content `
+        -LiteralPath $LayoutPath `
+        -Value $LayoutContent `
+        -Encoding UTF8
+Missing closing '}' in statement block or type definition.
+>> try {
+    function Invoke-Checked {
+        param(
+            [Parameter(Mandatory)]
+            [string]$Name,
+            [Parameter(Mandatory)]
+            [scriptblock]$Command
+        )
+        Write-Host ""
+        Write-Host "=== $Name ===" -ForegroundColor Cyan
+        $global:LASTEXITCODE = 0
+        & $Command
+        if ($LASTEXITCODE -ne 0) {
+            throw "$Name failed with exit code $LASTEXITCODE."
+        }
+        Write-Host "$Name PASSED" -ForegroundColor Green
+    }
+    if (-not (Test-Path ".\PHASE-7-STARTED.txt")) {
+        throw "PHASE-7-STARTED.txt is missing."
+    }
+    $RequiredFiles = @(
+        "src\lib\theme\types.ts",
+        "src\lib\theme\presets.ts",
+        "src\lib\theme\theme-store.ts",
+        "src\app\api\admin\themes\route.ts",
+        "src\components\admin\themes\theme-studio.tsx",
+        "src\app\admin\themes\page.tsx",
+        "src\components\site\active-theme-style.tsx",
+        "src\app\layout.tsx"
+    )
+    foreach ($RequiredFile in $RequiredFiles) {
+        $FullPath = Join-Path $ProjectRoot $RequiredFile
+        if (-not (Test-Path -LiteralPath $FullPath)) {
+            throw "Required Phase 7 file is missing: $RequiredFile"
+        }
+    }
+    $LayoutPath = Join-Path $ProjectRoot "src\app\layout.tsx"
+    $LayoutContent = Get-Content -LiteralPath $LayoutPath -Raw
+    if ($LayoutContent -notmatch 'ActiveThemeStyle') {
+        $ImportPattern = '(import\s+["'']\.\/globals\.css["''];?)'
+        $ImportRegex = [regex]::new($ImportPattern)
+        if (-not $ImportRegex.IsMatch($LayoutContent)) {
+            throw "globals.css import was not found in src\app\layout.tsx."
+        }
+        $ImportReplacement = '$1' + "`r`n" +
+            'import { ActiveThemeStyle } from "@/components/site/active-theme-style";'
+        $LayoutContent = $ImportRegex.Replace(
+            $LayoutContent,
+            $ImportReplacement,
+            1
+        )
+    }
+    if ($LayoutContent -notmatch '<ActiveThemeStyle\s*/>') {
+        $BodyPattern = '(<body\b[^>]*>)'
+        $BodyRegex = [regex]::new($BodyPattern)
+        if (-not $BodyRegex.IsMatch($LayoutContent)) {
+            throw "The body element was not found in src\app\layout.tsx."
+        }
+        $BodyReplacement = '$1' + "`r`n" + '        <ActiveThemeStyle />'
+        $LayoutContent = $BodyRegex.Replace(
+            $LayoutContent,
+            $BodyReplacement,
+            1
+        )
+    }
+    Set-Content `
+        -LiteralPath $LayoutPath `
+        -Value $LayoutContent `
+        -Encoding UTF8
+    $PackageJson = Get-Content ".\package.json" -Raw | ConvertFrom-Json
+    $Scripts = @($PackageJson.scripts.PSObject.Properties.Name)
+Missing closing '}' in statement block or type definition.
+>> try {
+    function Invoke-Checked {
+        param(
+            [Parameter(Mandatory)]
+            [string]$Name,
+            [Parameter(Mandatory)]
+            [scriptblock]$Command
+        )
+        Write-Host ""
+        Write-Host "=== $Name ===" -ForegroundColor Cyan
+        $global:LASTEXITCODE = 0
+        & $Command
+        if ($LASTEXITCODE -ne 0) {
+            throw "$Name failed with exit code $LASTEXITCODE."
+        }
+        Write-Host "$Name PASSED" -ForegroundColor Green
+    }
+    if (-not (Test-Path ".\PHASE-7-STARTED.txt")) {
+        throw "PHASE-7-STARTED.txt is missing."
+    }
+    $RequiredFiles = @(
+        "src\lib\theme\types.ts",
+        "src\lib\theme\presets.ts",
+        "src\lib\theme\theme-store.ts",
+        "src\app\api\admin\themes\route.ts",
+        "src\components\admin\themes\theme-studio.tsx",
+        "src\app\admin\themes\page.tsx",
+        "src\components\site\active-theme-style.tsx",
+        "src\app\layout.tsx"
+    )
+    foreach ($RequiredFile in $RequiredFiles) {
+        $FullPath = Join-Path $ProjectRoot $RequiredFile
+        if (-not (Test-Path -LiteralPath $FullPath)) {
+            throw "Required Phase 7 file is missing: $RequiredFile"
+        }
+    }
+    $LayoutPath = Join-Path $ProjectRoot "src\app\layout.tsx"
+    $LayoutContent = Get-Content -LiteralPath $LayoutPath -Raw
+    if ($LayoutContent -notmatch 'ActiveThemeStyle') {
+        $ImportPattern = '(import\s+["'']\.\/globals\.css["''];?)'
+        $ImportRegex = [regex]::new($ImportPattern)
+        if (-not $ImportRegex.IsMatch($LayoutContent)) {
+            throw "globals.css import was not found in src\app\layout.tsx."
+        }
+        $ImportReplacement = '$1' + "`r`n" +
+            'import { ActiveThemeStyle } from "@/components/site/active-theme-style";'
+        $LayoutContent = $ImportRegex.Replace(
+            $LayoutContent,
+            $ImportReplacement,
+            1
+        )
+    }
+    if ($LayoutContent -notmatch '<ActiveThemeStyle\s*/>') {
+        $BodyPattern = '(<body\b[^>]*>)'
+        $BodyRegex = [regex]::new($BodyPattern)
+        if (-not $BodyRegex.IsMatch($LayoutContent)) {
+            throw "The body element was not found in src\app\layout.tsx."
+        }
+        $BodyReplacement = '$1' + "`r`n" + '        <ActiveThemeStyle />'
+        $LayoutContent = $BodyRegex.Replace(
+            $LayoutContent,
+            $BodyReplacement,
+            1
+        )
+    }
+    Set-Content `
+        -LiteralPath $LayoutPath `
+        -Value $LayoutContent `
+        -Encoding UTF8
+    $PackageJson = Get-Content ".\package.json" -Raw | ConvertFrom-Json
+    $Scripts = @($PackageJson.scripts.PSObject.Properties.Name)
+    Invoke-Checked "FORMAT WRITE" {
+        if ($Scripts -contains "format") {
+            pnpm run format
+        }
+        else {
+            pnpm exec prettier --write .
+        }
+    }
+Missing closing '}' in statement block or type definition.
+>> try {
+    function Invoke-Checked {
+        param(
+            [Parameter(Mandatory)]
+            [string]$Name,
+            [Parameter(Mandatory)]
+            [scriptblock]$Command
+        )
+        Write-Host ""
+        Write-Host "=== $Name ===" -ForegroundColor Cyan
+        $global:LASTEXITCODE = 0
+        & $Command
+        if ($LASTEXITCODE -ne 0) {
+            throw "$Name failed with exit code $LASTEXITCODE."
+        }
+        Write-Host "$Name PASSED" -ForegroundColor Green
+    }
+    if (-not (Test-Path ".\PHASE-7-STARTED.txt")) {
+        throw "PHASE-7-STARTED.txt is missing."
+    }
+    $RequiredFiles = @(
+        "src\lib\theme\types.ts",
+        "src\lib\theme\presets.ts",
+        "src\lib\theme\theme-store.ts",
+        "src\app\api\admin\themes\route.ts",
+        "src\components\admin\themes\theme-studio.tsx",
+        "src\app\admin\themes\page.tsx",
+        "src\components\site\active-theme-style.tsx",
+        "src\app\layout.tsx"
+    )
+    foreach ($RequiredFile in $RequiredFiles) {
+        $FullPath = Join-Path $ProjectRoot $RequiredFile
+        if (-not (Test-Path -LiteralPath $FullPath)) {
+            throw "Required Phase 7 file is missing: $RequiredFile"
+        }
+    }
+    $LayoutPath = Join-Path $ProjectRoot "src\app\layout.tsx"
+    $LayoutContent = Get-Content -LiteralPath $LayoutPath -Raw
+    if ($LayoutContent -notmatch 'ActiveThemeStyle') {
+        $ImportPattern = '(import\s+["'']\.\/globals\.css["''];?)'
+        $ImportRegex = [regex]::new($ImportPattern)
+        if (-not $ImportRegex.IsMatch($LayoutContent)) {
+            throw "globals.css import was not found in src\app\layout.tsx."
+        }
+        $ImportReplacement = '$1' + "`r`n" +
+            'import { ActiveThemeStyle } from "@/components/site/active-theme-style";'
+        $LayoutContent = $ImportRegex.Replace(
+            $LayoutContent,
+            $ImportReplacement,
+            1
+        )
+    }
+    if ($LayoutContent -notmatch '<ActiveThemeStyle\s*/>') {
+        $BodyPattern = '(<body\b[^>]*>)'
+        $BodyRegex = [regex]::new($BodyPattern)
+        if (-not $BodyRegex.IsMatch($LayoutContent)) {
+            throw "The body element was not found in src\app\layout.tsx."
+        }
+        $BodyReplacement = '$1' + "`r`n" + '        <ActiveThemeStyle />'
+        $LayoutContent = $BodyRegex.Replace(
+            $LayoutContent,
+            $BodyReplacement,
+            1
+        )
+    }
+    Set-Content `
+        -LiteralPath $LayoutPath `
+        -Value $LayoutContent `
+        -Encoding UTF8
+    $PackageJson = Get-Content ".\package.json" -Raw | ConvertFrom-Json
+    $Scripts = @($PackageJson.scripts.PSObject.Properties.Name)
+    Invoke-Checked "FORMAT WRITE" {
+        if ($Scripts -contains "format") {
+            pnpm run format
+        }
+        else {
+            pnpm exec prettier --write .
+        }
+    }
+    Invoke-Checked "FORMAT CHECK" {
+        if ($Scripts -contains "format:check") {
+            pnpm run format:check
+        }
+        else {
+            pnpm exec prettier --check .
+        }
+    }
+Missing closing '}' in statement block or type definition.
+>> try {
+    function Invoke-Checked {
+        param(
+            [Parameter(Mandatory)]
+            [string]$Name,
+            [Parameter(Mandatory)]
+            [scriptblock]$Command
+        )
+        Write-Host ""
+        Write-Host "=== $Name ===" -ForegroundColor Cyan
+        $global:LASTEXITCODE = 0
+        & $Command
+        if ($LASTEXITCODE -ne 0) {
+            throw "$Name failed with exit code $LASTEXITCODE."
+        }
+        Write-Host "$Name PASSED" -ForegroundColor Green
+    }
+    if (-not (Test-Path ".\PHASE-7-STARTED.txt")) {
+        throw "PHASE-7-STARTED.txt is missing."
+    }
+    $RequiredFiles = @(
+        "src\lib\theme\types.ts",
+        "src\lib\theme\presets.ts",
+        "src\lib\theme\theme-store.ts",
+        "src\app\api\admin\themes\route.ts",
+        "src\components\admin\themes\theme-studio.tsx",
+        "src\app\admin\themes\page.tsx",
+        "src\components\site\active-theme-style.tsx",
+        "src\app\layout.tsx"
+    )
+    foreach ($RequiredFile in $RequiredFiles) {
+        $FullPath = Join-Path $ProjectRoot $RequiredFile
+        if (-not (Test-Path -LiteralPath $FullPath)) {
+            throw "Required Phase 7 file is missing: $RequiredFile"
+        }
+    }
+    $LayoutPath = Join-Path $ProjectRoot "src\app\layout.tsx"
+    $LayoutContent = Get-Content -LiteralPath $LayoutPath -Raw
+    if ($LayoutContent -notmatch 'ActiveThemeStyle') {
+        $ImportPattern = '(import\s+["'']\.\/globals\.css["''];?)'
+        $ImportRegex = [regex]::new($ImportPattern)
+        if (-not $ImportRegex.IsMatch($LayoutContent)) {
+            throw "globals.css import was not found in src\app\layout.tsx."
+        }
+        $ImportReplacement = '$1' + "`r`n" +
+            'import { ActiveThemeStyle } from "@/components/site/active-theme-style";'
+        $LayoutContent = $ImportRegex.Replace(
+            $LayoutContent,
+            $ImportReplacement,
+            1
+        )
+    }
+    if ($LayoutContent -notmatch '<ActiveThemeStyle\s*/>') {
+        $BodyPattern = '(<body\b[^>]*>)'
+        $BodyRegex = [regex]::new($BodyPattern)
+        if (-not $BodyRegex.IsMatch($LayoutContent)) {
+            throw "The body element was not found in src\app\layout.tsx."
+        }
+        $BodyReplacement = '$1' + "`r`n" + '        <ActiveThemeStyle />'
+        $LayoutContent = $BodyRegex.Replace(
+            $LayoutContent,
+            $BodyReplacement,
+            1
+        )
+    }
+    Set-Content `
+        -LiteralPath $LayoutPath `
+        -Value $LayoutContent `
+        -Encoding UTF8
+    $PackageJson = Get-Content ".\package.json" -Raw | ConvertFrom-Json
+    $Scripts = @($PackageJson.scripts.PSObject.Properties.Name)
+    Invoke-Checked "FORMAT WRITE" {
+        if ($Scripts -contains "format") {
+            pnpm run format
+        }
+        else {
+            pnpm exec prettier --write .
+        }
+    }
+    Invoke-Checked "FORMAT CHECK" {
+        if ($Scripts -contains "format:check") {
+            pnpm run format:check
+        }
+        else {
+            pnpm exec prettier --check .
+        }
+    }
+    Invoke-Checked "TYPESCRIPT CHECK" {
+        if ($Scripts -contains "typecheck") {
+            pnpm run typecheck
+        }
+        else {
+            pnpm exec tsc --noEmit
+        }
+    }
+Missing closing '}' in statement block or type definition.
+>> try {
+    function Invoke-Checked {
+        param(
+            [Parameter(Mandatory)]
+            [string]$Name,
+            [Parameter(Mandatory)]
+            [scriptblock]$Command
+        )
+        Write-Host ""
+        Write-Host "=== $Name ===" -ForegroundColor Cyan
+        $global:LASTEXITCODE = 0
+        & $Command
+        if ($LASTEXITCODE -ne 0) {
+            throw "$Name failed with exit code $LASTEXITCODE."
+        }
+        Write-Host "$Name PASSED" -ForegroundColor Green
+    }
+    if (-not (Test-Path ".\PHASE-7-STARTED.txt")) {
+        throw "PHASE-7-STARTED.txt is missing."
+    }
+    $RequiredFiles = @(
+        "src\lib\theme\types.ts",
+        "src\lib\theme\presets.ts",
+        "src\lib\theme\theme-store.ts",
+        "src\app\api\admin\themes\route.ts",
+        "src\components\admin\themes\theme-studio.tsx",
+        "src\app\admin\themes\page.tsx",
+        "src\components\site\active-theme-style.tsx",
+        "src\app\layout.tsx"
+    )
+    foreach ($RequiredFile in $RequiredFiles) {
+        $FullPath = Join-Path $ProjectRoot $RequiredFile
+        if (-not (Test-Path -LiteralPath $FullPath)) {
+            throw "Required Phase 7 file is missing: $RequiredFile"
+        }
+    }
+    $LayoutPath = Join-Path $ProjectRoot "src\app\layout.tsx"
+    $LayoutContent = Get-Content -LiteralPath $LayoutPath -Raw
+    if ($LayoutContent -notmatch 'ActiveThemeStyle') {
+        $ImportPattern = '(import\s+["'']\.\/globals\.css["''];?)'
+        $ImportRegex = [regex]::new($ImportPattern)
+        if (-not $ImportRegex.IsMatch($LayoutContent)) {
+            throw "globals.css import was not found in src\app\layout.tsx."
+        }
+        $ImportReplacement = '$1' + "`r`n" +
+            'import { ActiveThemeStyle } from "@/components/site/active-theme-style";'
+        $LayoutContent = $ImportRegex.Replace(
+            $LayoutContent,
+            $ImportReplacement,
+            1
+        )
+    }
+    if ($LayoutContent -notmatch '<ActiveThemeStyle\s*/>') {
+        $BodyPattern = '(<body\b[^>]*>)'
+        $BodyRegex = [regex]::new($BodyPattern)
+        if (-not $BodyRegex.IsMatch($LayoutContent)) {
+            throw "The body element was not found in src\app\layout.tsx."
+        }
+        $BodyReplacement = '$1' + "`r`n" + '        <ActiveThemeStyle />'
+        $LayoutContent = $BodyRegex.Replace(
+            $LayoutContent,
+            $BodyReplacement,
+            1
+        )
+    }
+    Set-Content `
+        -LiteralPath $LayoutPath `
+        -Value $LayoutContent `
+        -Encoding UTF8
+    $PackageJson = Get-Content ".\package.json" -Raw | ConvertFrom-Json
+    $Scripts = @($PackageJson.scripts.PSObject.Properties.Name)
+    Invoke-Checked "FORMAT WRITE" {
+        if ($Scripts -contains "format") {
+            pnpm run format
+        }
+        else {
+            pnpm exec prettier --write .
+        }
+    }
+    Invoke-Checked "FORMAT CHECK" {
+        if ($Scripts -contains "format:check") {
+            pnpm run format:check
+        }
+        else {
+            pnpm exec prettier --check .
+        }
+    }
+    Invoke-Checked "TYPESCRIPT CHECK" {
+        if ($Scripts -contains "typecheck") {
+            pnpm run typecheck
+        }
+        else {
+            pnpm exec tsc --noEmit
+        }
+    }
+    Invoke-Checked "ESLINT" {
+        if ($Scripts -contains "lint") {
+            pnpm run lint
+        }
+        else {
+            pnpm exec eslint .
+        }
+    }
+Missing closing '}' in statement block or type definition.
+>> try {
+    function Invoke-Checked {
+        param(
+            [Parameter(Mandatory)]
+            [string]$Name,
+            [Parameter(Mandatory)]
+            [scriptblock]$Command
+        )
+        Write-Host ""
+        Write-Host "=== $Name ===" -ForegroundColor Cyan
+        $global:LASTEXITCODE = 0
+        & $Command
+        if ($LASTEXITCODE -ne 0) {
+            throw "$Name failed with exit code $LASTEXITCODE."
+        }
+        Write-Host "$Name PASSED" -ForegroundColor Green
+    }
+    if (-not (Test-Path ".\PHASE-7-STARTED.txt")) {
+        throw "PHASE-7-STARTED.txt is missing."
+    }
+    $RequiredFiles = @(
+        "src\lib\theme\types.ts",
+        "src\lib\theme\presets.ts",
+        "src\lib\theme\theme-store.ts",
+        "src\app\api\admin\themes\route.ts",
+        "src\components\admin\themes\theme-studio.tsx",
+        "src\app\admin\themes\page.tsx",
+        "src\components\site\active-theme-style.tsx",
+        "src\app\layout.tsx"
+    )
+    foreach ($RequiredFile in $RequiredFiles) {
+        $FullPath = Join-Path $ProjectRoot $RequiredFile
+        if (-not (Test-Path -LiteralPath $FullPath)) {
+            throw "Required Phase 7 file is missing: $RequiredFile"
+        }
+    }
+    $LayoutPath = Join-Path $ProjectRoot "src\app\layout.tsx"
+    $LayoutContent = Get-Content -LiteralPath $LayoutPath -Raw
+    if ($LayoutContent -notmatch 'ActiveThemeStyle') {
+        $ImportPattern = '(import\s+["'']\.\/globals\.css["''];?)'
+        $ImportRegex = [regex]::new($ImportPattern)
+        if (-not $ImportRegex.IsMatch($LayoutContent)) {
+            throw "globals.css import was not found in src\app\layout.tsx."
+        }
+        $ImportReplacement = '$1' + "`r`n" +
+            'import { ActiveThemeStyle } from "@/components/site/active-theme-style";'
+        $LayoutContent = $ImportRegex.Replace(
+            $LayoutContent,
+            $ImportReplacement,
+            1
+        )
+    }
+    if ($LayoutContent -notmatch '<ActiveThemeStyle\s*/>') {
+        $BodyPattern = '(<body\b[^>]*>)'
+        $BodyRegex = [regex]::new($BodyPattern)
+        if (-not $BodyRegex.IsMatch($LayoutContent)) {
+            throw "The body element was not found in src\app\layout.tsx."
+        }
+        $BodyReplacement = '$1' + "`r`n" + '        <ActiveThemeStyle />'
+        $LayoutContent = $BodyRegex.Replace(
+            $LayoutContent,
+            $BodyReplacement,
+            1
+        )
+    }
+    Set-Content `
+        -LiteralPath $LayoutPath `
+        -Value $LayoutContent `
+        -Encoding UTF8
+    $PackageJson = Get-Content ".\package.json" -Raw | ConvertFrom-Json
+    $Scripts = @($PackageJson.scripts.PSObject.Properties.Name)
+    Invoke-Checked "FORMAT WRITE" {
+        if ($Scripts -contains "format") {
+            pnpm run format
+        }
+        else {
+            pnpm exec prettier --write .
+        }
+    }
+    Invoke-Checked "FORMAT CHECK" {
+        if ($Scripts -contains "format:check") {
+            pnpm run format:check
+        }
+        else {
+            pnpm exec prettier --check .
+        }
+    }
+    Invoke-Checked "TYPESCRIPT CHECK" {
+        if ($Scripts -contains "typecheck") {
+            pnpm run typecheck
+        }
+        else {
+            pnpm exec tsc --noEmit
+        }
+    }
+    Invoke-Checked "ESLINT" {
+        if ($Scripts -contains "lint") {
+            pnpm run lint
+        }
+        else {
+            pnpm exec eslint .
+        }
+    }
+    Invoke-Checked "PRODUCTION BUILD" {
+        if ($Scripts -contains "build") {
+            pnpm run build
+        }
+        else {
+            throw "build script is missing from package.json."
+        }
+    }
+Missing closing '}' in statement block or type definition.
+>> try {
+    function Invoke-Checked {
+        param(
+            [Parameter(Mandatory)]
+            [string]$Name,
+            [Parameter(Mandatory)]
+            [scriptblock]$Command
+        )
+        Write-Host ""
+        Write-Host "=== $Name ===" -ForegroundColor Cyan
+        $global:LASTEXITCODE = 0
+        & $Command
+        if ($LASTEXITCODE -ne 0) {
+            throw "$Name failed with exit code $LASTEXITCODE."
+        }
+        Write-Host "$Name PASSED" -ForegroundColor Green
+    }
+    if (-not (Test-Path ".\PHASE-7-STARTED.txt")) {
+        throw "PHASE-7-STARTED.txt is missing."
+    }
+    $RequiredFiles = @(
+        "src\lib\theme\types.ts",
+        "src\lib\theme\presets.ts",
+        "src\lib\theme\theme-store.ts",
+        "src\app\api\admin\themes\route.ts",
+        "src\components\admin\themes\theme-studio.tsx",
+        "src\app\admin\themes\page.tsx",
+        "src\components\site\active-theme-style.tsx",
+        "src\app\layout.tsx"
+    )
+    foreach ($RequiredFile in $RequiredFiles) {
+        $FullPath = Join-Path $ProjectRoot $RequiredFile
+        if (-not (Test-Path -LiteralPath $FullPath)) {
+            throw "Required Phase 7 file is missing: $RequiredFile"
+        }
+    }
+    $LayoutPath = Join-Path $ProjectRoot "src\app\layout.tsx"
+    $LayoutContent = Get-Content -LiteralPath $LayoutPath -Raw
+    if ($LayoutContent -notmatch 'ActiveThemeStyle') {
+        $ImportPattern = '(import\s+["'']\.\/globals\.css["''];?)'
+        $ImportRegex = [regex]::new($ImportPattern)
+        if (-not $ImportRegex.IsMatch($LayoutContent)) {
+            throw "globals.css import was not found in src\app\layout.tsx."
+        }
+        $ImportReplacement = '$1' + "`r`n" +
+            'import { ActiveThemeStyle } from "@/components/site/active-theme-style";'
+        $LayoutContent = $ImportRegex.Replace(
+            $LayoutContent,
+            $ImportReplacement,
+            1
+        )
+    }
+    if ($LayoutContent -notmatch '<ActiveThemeStyle\s*/>') {
+        $BodyPattern = '(<body\b[^>]*>)'
+        $BodyRegex = [regex]::new($BodyPattern)
+        if (-not $BodyRegex.IsMatch($LayoutContent)) {
+            throw "The body element was not found in src\app\layout.tsx."
+        }
+        $BodyReplacement = '$1' + "`r`n" + '        <ActiveThemeStyle />'
+        $LayoutContent = $BodyRegex.Replace(
+            $LayoutContent,
+            $BodyReplacement,
+            1
+        )
+    }
+    Set-Content `
+        -LiteralPath $LayoutPath `
+        -Value $LayoutContent `
+        -Encoding UTF8
+    $PackageJson = Get-Content ".\package.json" -Raw | ConvertFrom-Json
+    $Scripts = @($PackageJson.scripts.PSObject.Properties.Name)
+    Invoke-Checked "FORMAT WRITE" {
+        if ($Scripts -contains "format") {
+            pnpm run format
+        }
+        else {
+            pnpm exec prettier --write .
+        }
+    }
+    Invoke-Checked "FORMAT CHECK" {
+        if ($Scripts -contains "format:check") {
+            pnpm run format:check
+        }
+        else {
+            pnpm exec prettier --check .
+        }
+    }
+    Invoke-Checked "TYPESCRIPT CHECK" {
+        if ($Scripts -contains "typecheck") {
+            pnpm run typecheck
+        }
+        else {
+            pnpm exec tsc --noEmit
+        }
+    }
+    Invoke-Checked "ESLINT" {
+        if ($Scripts -contains "lint") {
+            pnpm run lint
+        }
+        else {
+            pnpm exec eslint .
+        }
+    }
+    Invoke-Checked "PRODUCTION BUILD" {
+        if ($Scripts -contains "build") {
+            pnpm run build
+        }
+        else {
+            throw "build script is missing from package.json."
+        }
+    }
+    @"
+KNOWLEDGE NEST — PHASE 7 FOUNDATION REPORT
+The string is missing the terminator: "@.
+>> try {
+    function Invoke-Checked {
+        param(
+            [Parameter(Mandatory)]
+            [string]$Name,
+            [Parameter(Mandatory)]
+            [scriptblock]$Command
+        )
+        Write-Host ""
+        Write-Host "=== $Name ===" -ForegroundColor Cyan
+        $global:LASTEXITCODE = 0
+        & $Command
+        if ($LASTEXITCODE -ne 0) {
+            throw "$Name failed with exit code $LASTEXITCODE."
+        }
+        Write-Host "$Name PASSED" -ForegroundColor Green
+    }
+    if (-not (Test-Path ".\PHASE-7-STARTED.txt")) {
+        throw "PHASE-7-STARTED.txt is missing."
+    }
+    $RequiredFiles = @(
+        "src\lib\theme\types.ts",
+        "src\lib\theme\presets.ts",
+        "src\lib\theme\theme-store.ts",
+        "src\app\api\admin\themes\route.ts",
+        "src\components\admin\themes\theme-studio.tsx",
+        "src\app\admin\themes\page.tsx",
+        "src\components\site\active-theme-style.tsx",
+        "src\app\layout.tsx"
+    )
+    foreach ($RequiredFile in $RequiredFiles) {
+        $FullPath = Join-Path $ProjectRoot $RequiredFile
+        if (-not (Test-Path -LiteralPath $FullPath)) {
+            throw "Required Phase 7 file is missing: $RequiredFile"
+        }
+    }
+    $LayoutPath = Join-Path $ProjectRoot "src\app\layout.tsx"
+    $LayoutContent = Get-Content -LiteralPath $LayoutPath -Raw
+    if ($LayoutContent -notmatch 'ActiveThemeStyle') {
+        $ImportPattern = '(import\s+["'']\.\/globals\.css["''];?)'
+        $ImportRegex = [regex]::new($ImportPattern)
+        if (-not $ImportRegex.IsMatch($LayoutContent)) {
+            throw "globals.css import was not found in src\app\layout.tsx."
+        }
+        $ImportReplacement = '$1' + "`r`n" +
+            'import { ActiveThemeStyle } from "@/components/site/active-theme-style";'
+        $LayoutContent = $ImportRegex.Replace(
+            $LayoutContent,
+            $ImportReplacement,
+            1
+        )
+    }
+    if ($LayoutContent -notmatch '<ActiveThemeStyle\s*/>') {
+        $BodyPattern = '(<body\b[^>]*>)'
+        $BodyRegex = [regex]::new($BodyPattern)
+        if (-not $BodyRegex.IsMatch($LayoutContent)) {
+            throw "The body element was not found in src\app\layout.tsx."
+        }
+        $BodyReplacement = '$1' + "`r`n" + '        <ActiveThemeStyle />'
+        $LayoutContent = $BodyRegex.Replace(
+            $LayoutContent,
+            $BodyReplacement,
+            1
+        )
+    }
+    Set-Content `
+        -LiteralPath $LayoutPath `
+        -Value $LayoutContent `
+        -Encoding UTF8
+    $PackageJson = Get-Content ".\package.json" -Raw | ConvertFrom-Json
+    $Scripts = @($PackageJson.scripts.PSObject.Properties.Name)
+    Invoke-Checked "FORMAT WRITE" {
+        if ($Scripts -contains "format") {
+            pnpm run format
+        }
+        else {
+            pnpm exec prettier --write .
+        }
+    }
+    Invoke-Checked "FORMAT CHECK" {
+        if ($Scripts -contains "format:check") {
+            pnpm run format:check
+        }
+        else {
+            pnpm exec prettier --check .
+        }
+    }
+    Invoke-Checked "TYPESCRIPT CHECK" {
+        if ($Scripts -contains "typecheck") {
+            pnpm run typecheck
+        }
+        else {
+            pnpm exec tsc --noEmit
+        }
+    }
+    Invoke-Checked "ESLINT" {
+        if ($Scripts -contains "lint") {
+            pnpm run lint
+        }
+        else {
+            pnpm exec eslint .
+        }
+    }
+    Invoke-Checked "PRODUCTION BUILD" {
+        if ($Scripts -contains "build") {
+            pnpm run build
+        }
+        else {
+            throw "build script is missing from package.json."
+        }
+    }
+    @"
+KNOWLEDGE NEST — PHASE 7 FOUNDATION REPORT
+Generated: $GeneratedAt
+Project: $ProjectRoot
+Log: $LogPath
+The string is missing the terminator: "@.
+>> try {
+    function Invoke-Checked {
+        param(
+            [Parameter(Mandatory)]
+            [string]$Name,
+            [Parameter(Mandatory)]
+            [scriptblock]$Command
+        )
+        Write-Host ""
+        Write-Host "=== $Name ===" -ForegroundColor Cyan
+        $global:LASTEXITCODE = 0
+        & $Command
+        if ($LASTEXITCODE -ne 0) {
+            throw "$Name failed with exit code $LASTEXITCODE."
+        }
+        Write-Host "$Name PASSED" -ForegroundColor Green
+    }
+    if (-not (Test-Path ".\PHASE-7-STARTED.txt")) {
+        throw "PHASE-7-STARTED.txt is missing."
+    }
+    $RequiredFiles = @(
+        "src\lib\theme\types.ts",
+        "src\lib\theme\presets.ts",
+        "src\lib\theme\theme-store.ts",
+        "src\app\api\admin\themes\route.ts",
+        "src\components\admin\themes\theme-studio.tsx",
+        "src\app\admin\themes\page.tsx",
+        "src\components\site\active-theme-style.tsx",
+        "src\app\layout.tsx"
+    )
+    foreach ($RequiredFile in $RequiredFiles) {
+        $FullPath = Join-Path $ProjectRoot $RequiredFile
+        if (-not (Test-Path -LiteralPath $FullPath)) {
+            throw "Required Phase 7 file is missing: $RequiredFile"
+        }
+    }
+    $LayoutPath = Join-Path $ProjectRoot "src\app\layout.tsx"
+    $LayoutContent = Get-Content -LiteralPath $LayoutPath -Raw
+    if ($LayoutContent -notmatch 'ActiveThemeStyle') {
+        $ImportPattern = '(import\s+["'']\.\/globals\.css["''];?)'
+        $ImportRegex = [regex]::new($ImportPattern)
+        if (-not $ImportRegex.IsMatch($LayoutContent)) {
+            throw "globals.css import was not found in src\app\layout.tsx."
+        }
+        $ImportReplacement = '$1' + "`r`n" +
+            'import { ActiveThemeStyle } from "@/components/site/active-theme-style";'
+        $LayoutContent = $ImportRegex.Replace(
+            $LayoutContent,
+            $ImportReplacement,
+            1
+        )
+    }
+    if ($LayoutContent -notmatch '<ActiveThemeStyle\s*/>') {
+        $BodyPattern = '(<body\b[^>]*>)'
+        $BodyRegex = [regex]::new($BodyPattern)
+        if (-not $BodyRegex.IsMatch($LayoutContent)) {
+            throw "The body element was not found in src\app\layout.tsx."
+        }
+        $BodyReplacement = '$1' + "`r`n" + '        <ActiveThemeStyle />'
+        $LayoutContent = $BodyRegex.Replace(
+            $LayoutContent,
+            $BodyReplacement,
+            1
+        )
+    }
+    Set-Content `
+        -LiteralPath $LayoutPath `
+        -Value $LayoutContent `
+        -Encoding UTF8
+    $PackageJson = Get-Content ".\package.json" -Raw | ConvertFrom-Json
+    $Scripts = @($PackageJson.scripts.PSObject.Properties.Name)
+    Invoke-Checked "FORMAT WRITE" {
+        if ($Scripts -contains "format") {
+            pnpm run format
+        }
+        else {
+            pnpm exec prettier --write .
+        }
+    }
+    Invoke-Checked "FORMAT CHECK" {
+        if ($Scripts -contains "format:check") {
+            pnpm run format:check
+        }
+        else {
+            pnpm exec prettier --check .
+        }
+    }
+    Invoke-Checked "TYPESCRIPT CHECK" {
+        if ($Scripts -contains "typecheck") {
+            pnpm run typecheck
+        }
+        else {
+            pnpm exec tsc --noEmit
+        }
+    }
+    Invoke-Checked "ESLINT" {
+        if ($Scripts -contains "lint") {
+            pnpm run lint
+        }
+        else {
+            pnpm exec eslint .
+        }
+    }
+    Invoke-Checked "PRODUCTION BUILD" {
+        if ($Scripts -contains "build") {
+            pnpm run build
+        }
+        else {
+            throw "build script is missing from package.json."
+        }
+    }
+    @"
+KNOWLEDGE NEST — PHASE 7 FOUNDATION REPORT
+Generated: $GeneratedAt
+Project: $ProjectRoot
+Log: $LogPath
+STATUS
+The string is missing the terminator: "@.
+>> try {
+    function Invoke-Checked {
+        param(
+            [Parameter(Mandatory)]
+            [string]$Name,
+            [Parameter(Mandatory)]
+            [scriptblock]$Command
+        )
+        Write-Host ""
+        Write-Host "=== $Name ===" -ForegroundColor Cyan
+        $global:LASTEXITCODE = 0
+        & $Command
+        if ($LASTEXITCODE -ne 0) {
+            throw "$Name failed with exit code $LASTEXITCODE."
+        }
+        Write-Host "$Name PASSED" -ForegroundColor Green
+    }
+    if (-not (Test-Path ".\PHASE-7-STARTED.txt")) {
+        throw "PHASE-7-STARTED.txt is missing."
+    }
+    $RequiredFiles = @(
+        "src\lib\theme\types.ts",
+        "src\lib\theme\presets.ts",
+        "src\lib\theme\theme-store.ts",
+        "src\app\api\admin\themes\route.ts",
+        "src\components\admin\themes\theme-studio.tsx",
+        "src\app\admin\themes\page.tsx",
+        "src\components\site\active-theme-style.tsx",
+        "src\app\layout.tsx"
+    )
+    foreach ($RequiredFile in $RequiredFiles) {
+        $FullPath = Join-Path $ProjectRoot $RequiredFile
+        if (-not (Test-Path -LiteralPath $FullPath)) {
+            throw "Required Phase 7 file is missing: $RequiredFile"
+        }
+    }
+    $LayoutPath = Join-Path $ProjectRoot "src\app\layout.tsx"
+    $LayoutContent = Get-Content -LiteralPath $LayoutPath -Raw
+    if ($LayoutContent -notmatch 'ActiveThemeStyle') {
+        $ImportPattern = '(import\s+["'']\.\/globals\.css["''];?)'
+        $ImportRegex = [regex]::new($ImportPattern)
+        if (-not $ImportRegex.IsMatch($LayoutContent)) {
+            throw "globals.css import was not found in src\app\layout.tsx."
+        }
+        $ImportReplacement = '$1' + "`r`n" +
+            'import { ActiveThemeStyle } from "@/components/site/active-theme-style";'
+        $LayoutContent = $ImportRegex.Replace(
+            $LayoutContent,
+            $ImportReplacement,
+            1
+        )
+    }
+    if ($LayoutContent -notmatch '<ActiveThemeStyle\s*/>') {
+        $BodyPattern = '(<body\b[^>]*>)'
+        $BodyRegex = [regex]::new($BodyPattern)
+        if (-not $BodyRegex.IsMatch($LayoutContent)) {
+            throw "The body element was not found in src\app\layout.tsx."
+        }
+        $BodyReplacement = '$1' + "`r`n" + '        <ActiveThemeStyle />'
+        $LayoutContent = $BodyRegex.Replace(
+            $LayoutContent,
+            $BodyReplacement,
+            1
+        )
+    }
+    Set-Content `
+        -LiteralPath $LayoutPath `
+        -Value $LayoutContent `
+        -Encoding UTF8
+    $PackageJson = Get-Content ".\package.json" -Raw | ConvertFrom-Json
+    $Scripts = @($PackageJson.scripts.PSObject.Properties.Name)
+    Invoke-Checked "FORMAT WRITE" {
+        if ($Scripts -contains "format") {
+            pnpm run format
+        }
+        else {
+            pnpm exec prettier --write .
+        }
+    }
+    Invoke-Checked "FORMAT CHECK" {
+        if ($Scripts -contains "format:check") {
+            pnpm run format:check
+        }
+        else {
+            pnpm exec prettier --check .
+        }
+    }
+    Invoke-Checked "TYPESCRIPT CHECK" {
+        if ($Scripts -contains "typecheck") {
+            pnpm run typecheck
+        }
+        else {
+            pnpm exec tsc --noEmit
+        }
+    }
+    Invoke-Checked "ESLINT" {
+        if ($Scripts -contains "lint") {
+            pnpm run lint
+        }
+        else {
+            pnpm exec eslint .
+        }
+    }
+    Invoke-Checked "PRODUCTION BUILD" {
+        if ($Scripts -contains "build") {
+            pnpm run build
+        }
+        else {
+            throw "build script is missing from package.json."
+        }
+    }
+    @"
+KNOWLEDGE NEST — PHASE 7 FOUNDATION REPORT
+Generated: $GeneratedAt
+Project: $ProjectRoot
+Log: $LogPath
+STATUS
+PHASE 7 PREPARATION: COMPLETE
+PHASE 7 FOUNDATION: IMPLEMENTED AND VERIFIED
+PHASE 7 FINAL STATUS: IN PROGRESS
+The string is missing the terminator: "@.
+>> try {
+    function Invoke-Checked {
+        param(
+            [Parameter(Mandatory)]
+            [string]$Name,
+            [Parameter(Mandatory)]
+            [scriptblock]$Command
+        )
+        Write-Host ""
+        Write-Host "=== $Name ===" -ForegroundColor Cyan
+        $global:LASTEXITCODE = 0
+        & $Command
+        if ($LASTEXITCODE -ne 0) {
+            throw "$Name failed with exit code $LASTEXITCODE."
+        }
+        Write-Host "$Name PASSED" -ForegroundColor Green
+    }
+    if (-not (Test-Path ".\PHASE-7-STARTED.txt")) {
+        throw "PHASE-7-STARTED.txt is missing."
+    }
+    $RequiredFiles = @(
+        "src\lib\theme\types.ts",
+        "src\lib\theme\presets.ts",
+        "src\lib\theme\theme-store.ts",
+        "src\app\api\admin\themes\route.ts",
+        "src\components\admin\themes\theme-studio.tsx",
+        "src\app\admin\themes\page.tsx",
+        "src\components\site\active-theme-style.tsx",
+        "src\app\layout.tsx"
+    )
+    foreach ($RequiredFile in $RequiredFiles) {
+        $FullPath = Join-Path $ProjectRoot $RequiredFile
+        if (-not (Test-Path -LiteralPath $FullPath)) {
+            throw "Required Phase 7 file is missing: $RequiredFile"
+        }
+    }
+    $LayoutPath = Join-Path $ProjectRoot "src\app\layout.tsx"
+    $LayoutContent = Get-Content -LiteralPath $LayoutPath -Raw
+    if ($LayoutContent -notmatch 'ActiveThemeStyle') {
+        $ImportPattern = '(import\s+["'']\.\/globals\.css["''];?)'
+        $ImportRegex = [regex]::new($ImportPattern)
+        if (-not $ImportRegex.IsMatch($LayoutContent)) {
+            throw "globals.css import was not found in src\app\layout.tsx."
+        }
+        $ImportReplacement = '$1' + "`r`n" +
+            'import { ActiveThemeStyle } from "@/components/site/active-theme-style";'
+        $LayoutContent = $ImportRegex.Replace(
+            $LayoutContent,
+            $ImportReplacement,
+            1
+        )
+    }
+    if ($LayoutContent -notmatch '<ActiveThemeStyle\s*/>') {
+        $BodyPattern = '(<body\b[^>]*>)'
+        $BodyRegex = [regex]::new($BodyPattern)
+        if (-not $BodyRegex.IsMatch($LayoutContent)) {
+            throw "The body element was not found in src\app\layout.tsx."
+        }
+        $BodyReplacement = '$1' + "`r`n" + '        <ActiveThemeStyle />'
+        $LayoutContent = $BodyRegex.Replace(
+            $LayoutContent,
+            $BodyReplacement,
+            1
+        )
+    }
+    Set-Content `
+        -LiteralPath $LayoutPath `
+        -Value $LayoutContent `
+        -Encoding UTF8
+    $PackageJson = Get-Content ".\package.json" -Raw | ConvertFrom-Json
+    $Scripts = @($PackageJson.scripts.PSObject.Properties.Name)
+    Invoke-Checked "FORMAT WRITE" {
+        if ($Scripts -contains "format") {
+            pnpm run format
+        }
+        else {
+            pnpm exec prettier --write .
+        }
+    }
+    Invoke-Checked "FORMAT CHECK" {
+        if ($Scripts -contains "format:check") {
+            pnpm run format:check
+        }
+        else {
+            pnpm exec prettier --check .
+        }
+    }
+    Invoke-Checked "TYPESCRIPT CHECK" {
+        if ($Scripts -contains "typecheck") {
+            pnpm run typecheck
+        }
+        else {
+            pnpm exec tsc --noEmit
+        }
+    }
+    Invoke-Checked "ESLINT" {
+        if ($Scripts -contains "lint") {
+            pnpm run lint
+        }
+        else {
+            pnpm exec eslint .
+        }
+    }
+    Invoke-Checked "PRODUCTION BUILD" {
+        if ($Scripts -contains "build") {
+            pnpm run build
+        }
+        else {
+            throw "build script is missing from package.json."
+        }
+    }
+    @"
+KNOWLEDGE NEST — PHASE 7 FOUNDATION REPORT
+Generated: $GeneratedAt
+Project: $ProjectRoot
+Log: $LogPath
+STATUS
+PHASE 7 PREPARATION: COMPLETE
+PHASE 7 FOUNDATION: IMPLEMENTED AND VERIFIED
+PHASE 7 FINAL STATUS: IN PROGRESS
+COMPLETED FOUNDATION ITEMS
+The string is missing the terminator: "@.
+>> try {
+    function Invoke-Checked {
+        param(
+            [Parameter(Mandatory)]
+            [string]$Name,
+            [Parameter(Mandatory)]
+            [scriptblock]$Command
+        )
+        Write-Host ""
+        Write-Host "=== $Name ===" -ForegroundColor Cyan
+        $global:LASTEXITCODE = 0
+        & $Command
+        if ($LASTEXITCODE -ne 0) {
+            throw "$Name failed with exit code $LASTEXITCODE."
+        }
+        Write-Host "$Name PASSED" -ForegroundColor Green
+    }
+    if (-not (Test-Path ".\PHASE-7-STARTED.txt")) {
+        throw "PHASE-7-STARTED.txt is missing."
+    }
+    $RequiredFiles = @(
+        "src\lib\theme\types.ts",
+        "src\lib\theme\presets.ts",
+        "src\lib\theme\theme-store.ts",
+        "src\app\api\admin\themes\route.ts",
+        "src\components\admin\themes\theme-studio.tsx",
+        "src\app\admin\themes\page.tsx",
+        "src\components\site\active-theme-style.tsx",
+        "src\app\layout.tsx"
+    )
+    foreach ($RequiredFile in $RequiredFiles) {
+        $FullPath = Join-Path $ProjectRoot $RequiredFile
+        if (-not (Test-Path -LiteralPath $FullPath)) {
+            throw "Required Phase 7 file is missing: $RequiredFile"
+        }
+    }
+    $LayoutPath = Join-Path $ProjectRoot "src\app\layout.tsx"
+    $LayoutContent = Get-Content -LiteralPath $LayoutPath -Raw
+    if ($LayoutContent -notmatch 'ActiveThemeStyle') {
+        $ImportPattern = '(import\s+["'']\.\/globals\.css["''];?)'
+        $ImportRegex = [regex]::new($ImportPattern)
+        if (-not $ImportRegex.IsMatch($LayoutContent)) {
+            throw "globals.css import was not found in src\app\layout.tsx."
+        }
+        $ImportReplacement = '$1' + "`r`n" +
+            'import { ActiveThemeStyle } from "@/components/site/active-theme-style";'
+        $LayoutContent = $ImportRegex.Replace(
+            $LayoutContent,
+            $ImportReplacement,
+            1
+        )
+    }
+    if ($LayoutContent -notmatch '<ActiveThemeStyle\s*/>') {
+        $BodyPattern = '(<body\b[^>]*>)'
+        $BodyRegex = [regex]::new($BodyPattern)
+        if (-not $BodyRegex.IsMatch($LayoutContent)) {
+            throw "The body element was not found in src\app\layout.tsx."
+        }
+        $BodyReplacement = '$1' + "`r`n" + '        <ActiveThemeStyle />'
+        $LayoutContent = $BodyRegex.Replace(
+            $LayoutContent,
+            $BodyReplacement,
+            1
+        )
+    }
+    Set-Content `
+        -LiteralPath $LayoutPath `
+        -Value $LayoutContent `
+        -Encoding UTF8
+    $PackageJson = Get-Content ".\package.json" -Raw | ConvertFrom-Json
+    $Scripts = @($PackageJson.scripts.PSObject.Properties.Name)
+    Invoke-Checked "FORMAT WRITE" {
+        if ($Scripts -contains "format") {
+            pnpm run format
+        }
+        else {
+            pnpm exec prettier --write .
+        }
+    }
+    Invoke-Checked "FORMAT CHECK" {
+        if ($Scripts -contains "format:check") {
+            pnpm run format:check
+        }
+        else {
+            pnpm exec prettier --check .
+        }
+    }
+    Invoke-Checked "TYPESCRIPT CHECK" {
+        if ($Scripts -contains "typecheck") {
+            pnpm run typecheck
+        }
+        else {
+            pnpm exec tsc --noEmit
+        }
+    }
+    Invoke-Checked "ESLINT" {
+        if ($Scripts -contains "lint") {
+            pnpm run lint
+        }
+        else {
+            pnpm exec eslint .
+        }
+    }
+    Invoke-Checked "PRODUCTION BUILD" {
+        if ($Scripts -contains "build") {
+            pnpm run build
+        }
+        else {
+            throw "build script is missing from package.json."
+        }
+    }
+    @"
+KNOWLEDGE NEST — PHASE 7 FOUNDATION REPORT
+Generated: $GeneratedAt
+Project: $ProjectRoot
+Log: $LogPath
+STATUS
+PHASE 7 PREPARATION: COMPLETE
+PHASE 7 FOUNDATION: IMPLEMENTED AND VERIFIED
+PHASE 7 FINAL STATUS: IN PROGRESS
+COMPLETED FOUNDATION ITEMS
+✅ Theme types
+✅ Universal niche presets
+✅ Theme preset engine
+✅ Theme storage foundation
+✅ Theme API
+✅ Theme Studio admin page
+✅ Desktop preview
+✅ Tablet preview
+✅ Mobile preview
+✅ Theme import
+✅ Theme export
+✅ Theme backup
+✅ Theme restore
+✅ Theme versioning
+✅ Theme activation
+✅ Colour controls
+✅ Typography controls
+✅ Homepage section controls
+✅ Active theme CSS variables
+✅ TypeScript
+✅ ESLint
+✅ Production Build
+The string is missing the terminator: "@.
+>> try {
+    function Invoke-Checked {
+        param(
+            [Parameter(Mandatory)]
+            [string]$Name,
+            [Parameter(Mandatory)]
+            [scriptblock]$Command
+        )
+        Write-Host ""
+        Write-Host "=== $Name ===" -ForegroundColor Cyan
+        $global:LASTEXITCODE = 0
+        & $Command
+        if ($LASTEXITCODE -ne 0) {
+            throw "$Name failed with exit code $LASTEXITCODE."
+        }
+        Write-Host "$Name PASSED" -ForegroundColor Green
+    }
+    if (-not (Test-Path ".\PHASE-7-STARTED.txt")) {
+        throw "PHASE-7-STARTED.txt is missing."
+    }
+    $RequiredFiles = @(
+        "src\lib\theme\types.ts",
+        "src\lib\theme\presets.ts",
+        "src\lib\theme\theme-store.ts",
+        "src\app\api\admin\themes\route.ts",
+        "src\components\admin\themes\theme-studio.tsx",
+        "src\app\admin\themes\page.tsx",
+        "src\components\site\active-theme-style.tsx",
+        "src\app\layout.tsx"
+    )
+    foreach ($RequiredFile in $RequiredFiles) {
+        $FullPath = Join-Path $ProjectRoot $RequiredFile
+        if (-not (Test-Path -LiteralPath $FullPath)) {
+            throw "Required Phase 7 file is missing: $RequiredFile"
+        }
+    }
+    $LayoutPath = Join-Path $ProjectRoot "src\app\layout.tsx"
+    $LayoutContent = Get-Content -LiteralPath $LayoutPath -Raw
+    if ($LayoutContent -notmatch 'ActiveThemeStyle') {
+        $ImportPattern = '(import\s+["'']\.\/globals\.css["''];?)'
+        $ImportRegex = [regex]::new($ImportPattern)
+        if (-not $ImportRegex.IsMatch($LayoutContent)) {
+            throw "globals.css import was not found in src\app\layout.tsx."
+        }
+        $ImportReplacement = '$1' + "`r`n" +
+            'import { ActiveThemeStyle } from "@/components/site/active-theme-style";'
+        $LayoutContent = $ImportRegex.Replace(
+            $LayoutContent,
+            $ImportReplacement,
+            1
+        )
+    }
+    if ($LayoutContent -notmatch '<ActiveThemeStyle\s*/>') {
+        $BodyPattern = '(<body\b[^>]*>)'
+        $BodyRegex = [regex]::new($BodyPattern)
+        if (-not $BodyRegex.IsMatch($LayoutContent)) {
+            throw "The body element was not found in src\app\layout.tsx."
+        }
+        $BodyReplacement = '$1' + "`r`n" + '        <ActiveThemeStyle />'
+        $LayoutContent = $BodyRegex.Replace(
+            $LayoutContent,
+            $BodyReplacement,
+            1
+        )
+    }
+    Set-Content `
+        -LiteralPath $LayoutPath `
+        -Value $LayoutContent `
+        -Encoding UTF8
+    $PackageJson = Get-Content ".\package.json" -Raw | ConvertFrom-Json
+    $Scripts = @($PackageJson.scripts.PSObject.Properties.Name)
+    Invoke-Checked "FORMAT WRITE" {
+        if ($Scripts -contains "format") {
+            pnpm run format
+        }
+        else {
+            pnpm exec prettier --write .
+        }
+    }
+    Invoke-Checked "FORMAT CHECK" {
+        if ($Scripts -contains "format:check") {
+            pnpm run format:check
+        }
+        else {
+            pnpm exec prettier --check .
+        }
+    }
+    Invoke-Checked "TYPESCRIPT CHECK" {
+        if ($Scripts -contains "typecheck") {
+            pnpm run typecheck
+        }
+        else {
+            pnpm exec tsc --noEmit
+        }
+    }
+    Invoke-Checked "ESLINT" {
+        if ($Scripts -contains "lint") {
+            pnpm run lint
+        }
+        else {
+            pnpm exec eslint .
+        }
+    }
+    Invoke-Checked "PRODUCTION BUILD" {
+        if ($Scripts -contains "build") {
+            pnpm run build
+        }
+        else {
+            throw "build script is missing from package.json."
+        }
+    }
+    @"
+KNOWLEDGE NEST — PHASE 7 FOUNDATION REPORT
+Generated: $GeneratedAt
+Project: $ProjectRoot
+Log: $LogPath
+STATUS
+PHASE 7 PREPARATION: COMPLETE
+PHASE 7 FOUNDATION: IMPLEMENTED AND VERIFIED
+PHASE 7 FINAL STATUS: IN PROGRESS
+COMPLETED FOUNDATION ITEMS
+✅ Theme types
+✅ Universal niche presets
+✅ Theme preset engine
+✅ Theme storage foundation
+✅ Theme API
+✅ Theme Studio admin page
+✅ Desktop preview
+✅ Tablet preview
+✅ Mobile preview
+✅ Theme import
+✅ Theme export
+✅ Theme backup
+✅ Theme restore
+✅ Theme versioning
+✅ Theme activation
+✅ Colour controls
+✅ Typography controls
+✅ Homepage section controls
+✅ Active theme CSS variables
+✅ TypeScript
+✅ ESLint
+✅ Production Build
+REMAINING PHASE 7 ITEMS
+The string is missing the terminator: "@.
+>> try {
+    function Invoke-Checked {
+        param(
+            [Parameter(Mandatory)]
+            [string]$Name,
+            [Parameter(Mandatory)]
+            [scriptblock]$Command
+        )
+        Write-Host ""
+        Write-Host "=== $Name ===" -ForegroundColor Cyan
+        $global:LASTEXITCODE = 0
+        & $Command
+        if ($LASTEXITCODE -ne 0) {
+            throw "$Name failed with exit code $LASTEXITCODE."
+        }
+        Write-Host "$Name PASSED" -ForegroundColor Green
+    }
+    if (-not (Test-Path ".\PHASE-7-STARTED.txt")) {
+        throw "PHASE-7-STARTED.txt is missing."
+    }
+    $RequiredFiles = @(
+        "src\lib\theme\types.ts",
+        "src\lib\theme\presets.ts",
+        "src\lib\theme\theme-store.ts",
+        "src\app\api\admin\themes\route.ts",
+        "src\components\admin\themes\theme-studio.tsx",
+        "src\app\admin\themes\page.tsx",
+        "src\components\site\active-theme-style.tsx",
+        "src\app\layout.tsx"
+    )
+    foreach ($RequiredFile in $RequiredFiles) {
+        $FullPath = Join-Path $ProjectRoot $RequiredFile
+        if (-not (Test-Path -LiteralPath $FullPath)) {
+            throw "Required Phase 7 file is missing: $RequiredFile"
+        }
+    }
+    $LayoutPath = Join-Path $ProjectRoot "src\app\layout.tsx"
+    $LayoutContent = Get-Content -LiteralPath $LayoutPath -Raw
+    if ($LayoutContent -notmatch 'ActiveThemeStyle') {
+        $ImportPattern = '(import\s+["'']\.\/globals\.css["''];?)'
+        $ImportRegex = [regex]::new($ImportPattern)
+        if (-not $ImportRegex.IsMatch($LayoutContent)) {
+            throw "globals.css import was not found in src\app\layout.tsx."
+        }
+        $ImportReplacement = '$1' + "`r`n" +
+            'import { ActiveThemeStyle } from "@/components/site/active-theme-style";'
+        $LayoutContent = $ImportRegex.Replace(
+            $LayoutContent,
+            $ImportReplacement,
+            1
+        )
+    }
+    if ($LayoutContent -notmatch '<ActiveThemeStyle\s*/>') {
+        $BodyPattern = '(<body\b[^>]*>)'
+        $BodyRegex = [regex]::new($BodyPattern)
+        if (-not $BodyRegex.IsMatch($LayoutContent)) {
+            throw "The body element was not found in src\app\layout.tsx."
+        }
+        $BodyReplacement = '$1' + "`r`n" + '        <ActiveThemeStyle />'
+        $LayoutContent = $BodyRegex.Replace(
+            $LayoutContent,
+            $BodyReplacement,
+            1
+        )
+    }
+    Set-Content `
+        -LiteralPath $LayoutPath `
+        -Value $LayoutContent `
+        -Encoding UTF8
+    $PackageJson = Get-Content ".\package.json" -Raw | ConvertFrom-Json
+    $Scripts = @($PackageJson.scripts.PSObject.Properties.Name)
+    Invoke-Checked "FORMAT WRITE" {
+        if ($Scripts -contains "format") {
+            pnpm run format
+        }
+        else {
+            pnpm exec prettier --write .
+        }
+    }
+    Invoke-Checked "FORMAT CHECK" {
+        if ($Scripts -contains "format:check") {
+            pnpm run format:check
+        }
+        else {
+            pnpm exec prettier --check .
+        }
+    }
+    Invoke-Checked "TYPESCRIPT CHECK" {
+        if ($Scripts -contains "typecheck") {
+            pnpm run typecheck
+        }
+        else {
+            pnpm exec tsc --noEmit
+        }
+    }
+    Invoke-Checked "ESLINT" {
+        if ($Scripts -contains "lint") {
+            pnpm run lint
+        }
+        else {
+            pnpm exec eslint .
+        }
+    }
+    Invoke-Checked "PRODUCTION BUILD" {
+        if ($Scripts -contains "build") {
+            pnpm run build
+        }
+        else {
+            throw "build script is missing from package.json."
+        }
+    }
+    @"
+KNOWLEDGE NEST — PHASE 7 FOUNDATION REPORT
+Generated: $GeneratedAt
+Project: $ProjectRoot
+Log: $LogPath
+STATUS
+PHASE 7 PREPARATION: COMPLETE
+PHASE 7 FOUNDATION: IMPLEMENTED AND VERIFIED
+PHASE 7 FINAL STATUS: IN PROGRESS
+COMPLETED FOUNDATION ITEMS
+✅ Theme types
+✅ Universal niche presets
+✅ Theme preset engine
+✅ Theme storage foundation
+✅ Theme API
+✅ Theme Studio admin page
+✅ Desktop preview
+✅ Tablet preview
+✅ Mobile preview
+✅ Theme import
+✅ Theme export
+✅ Theme backup
+✅ Theme restore
+✅ Theme versioning
+✅ Theme activation
+✅ Colour controls
+✅ Typography controls
+✅ Homepage section controls
+✅ Active theme CSS variables
+✅ TypeScript
+✅ ESLint
+✅ Production Build
+REMAINING PHASE 7 ITEMS
+⬜ Database-backed theme persistence
+⬜ Drag-and-drop homepage ordering
+⬜ Dynamic public header
+⬜ Dynamic public footer
+⬜ Dynamic public navigation
+⬜ Dynamic public homepage
+⬜ Dynamic niche category filtering
+⬜ AI colour generator
+⬜ AI typography generator
+⬜ AI layout generator
+⬜ AI Theme Generator connection
+⬜ Final Phase 7 testing
+"@ | Set-Content -LiteralPath $ReportPath -Encoding UTF8
+Missing closing '}' in statement block or type definition.
+>> try {
+    function Invoke-Checked {
+        param(
+            [Parameter(Mandatory)]
+            [string]$Name,
+            [Parameter(Mandatory)]
+            [scriptblock]$Command
+        )
+        Write-Host ""
+        Write-Host "=== $Name ===" -ForegroundColor Cyan
+        $global:LASTEXITCODE = 0
+        & $Command
+        if ($LASTEXITCODE -ne 0) {
+            throw "$Name failed with exit code $LASTEXITCODE."
+        }
+        Write-Host "$Name PASSED" -ForegroundColor Green
+    }
+    if (-not (Test-Path ".\PHASE-7-STARTED.txt")) {
+        throw "PHASE-7-STARTED.txt is missing."
+    }
+    $RequiredFiles = @(
+        "src\lib\theme\types.ts",
+        "src\lib\theme\presets.ts",
+        "src\lib\theme\theme-store.ts",
+        "src\app\api\admin\themes\route.ts",
+        "src\components\admin\themes\theme-studio.tsx",
+        "src\app\admin\themes\page.tsx",
+        "src\components\site\active-theme-style.tsx",
+        "src\app\layout.tsx"
+    )
+    foreach ($RequiredFile in $RequiredFiles) {
+        $FullPath = Join-Path $ProjectRoot $RequiredFile
+        if (-not (Test-Path -LiteralPath $FullPath)) {
+            throw "Required Phase 7 file is missing: $RequiredFile"
+        }
+    }
+    $LayoutPath = Join-Path $ProjectRoot "src\app\layout.tsx"
+    $LayoutContent = Get-Content -LiteralPath $LayoutPath -Raw
+    if ($LayoutContent -notmatch 'ActiveThemeStyle') {
+        $ImportPattern = '(import\s+["'']\.\/globals\.css["''];?)'
+        $ImportRegex = [regex]::new($ImportPattern)
+        if (-not $ImportRegex.IsMatch($LayoutContent)) {
+            throw "globals.css import was not found in src\app\layout.tsx."
+        }
+        $ImportReplacement = '$1' + "`r`n" +
+            'import { ActiveThemeStyle } from "@/components/site/active-theme-style";'
+        $LayoutContent = $ImportRegex.Replace(
+            $LayoutContent,
+            $ImportReplacement,
+            1
+        )
+    }
+    if ($LayoutContent -notmatch '<ActiveThemeStyle\s*/>') {
+        $BodyPattern = '(<body\b[^>]*>)'
+        $BodyRegex = [regex]::new($BodyPattern)
+        if (-not $BodyRegex.IsMatch($LayoutContent)) {
+            throw "The body element was not found in src\app\layout.tsx."
+        }
+        $BodyReplacement = '$1' + "`r`n" + '        <ActiveThemeStyle />'
+        $LayoutContent = $BodyRegex.Replace(
+            $LayoutContent,
+            $BodyReplacement,
+            1
+        )
+    }
+    Set-Content `
+        -LiteralPath $LayoutPath `
+        -Value $LayoutContent `
+        -Encoding UTF8
+    $PackageJson = Get-Content ".\package.json" -Raw | ConvertFrom-Json
+    $Scripts = @($PackageJson.scripts.PSObject.Properties.Name)
+    Invoke-Checked "FORMAT WRITE" {
+        if ($Scripts -contains "format") {
+            pnpm run format
+        }
+        else {
+            pnpm exec prettier --write .
+        }
+    }
+    Invoke-Checked "FORMAT CHECK" {
+        if ($Scripts -contains "format:check") {
+            pnpm run format:check
+        }
+        else {
+            pnpm exec prettier --check .
+        }
+    }
+    Invoke-Checked "TYPESCRIPT CHECK" {
+        if ($Scripts -contains "typecheck") {
+            pnpm run typecheck
+        }
+        else {
+            pnpm exec tsc --noEmit
+        }
+    }
+    Invoke-Checked "ESLINT" {
+        if ($Scripts -contains "lint") {
+            pnpm run lint
+        }
+        else {
+            pnpm exec eslint .
+        }
+    }
+    Invoke-Checked "PRODUCTION BUILD" {
+        if ($Scripts -contains "build") {
+            pnpm run build
+        }
+        else {
+            throw "build script is missing from package.json."
+        }
+    }
+    @"
+KNOWLEDGE NEST — PHASE 7 FOUNDATION REPORT
+Generated: $GeneratedAt
+Project: $ProjectRoot
+Log: $LogPath
+STATUS
+PHASE 7 PREPARATION: COMPLETE
+PHASE 7 FOUNDATION: IMPLEMENTED AND VERIFIED
+PHASE 7 FINAL STATUS: IN PROGRESS
+COMPLETED FOUNDATION ITEMS
+✅ Theme types
+✅ Universal niche presets
+✅ Theme preset engine
+✅ Theme storage foundation
+✅ Theme API
+✅ Theme Studio admin page
+✅ Desktop preview
+✅ Tablet preview
+✅ Mobile preview
+✅ Theme import
+✅ Theme export
+✅ Theme backup
+✅ Theme restore
+✅ Theme versioning
+✅ Theme activation
+✅ Colour controls
+✅ Typography controls
+✅ Homepage section controls
+✅ Active theme CSS variables
+✅ TypeScript
+✅ ESLint
+✅ Production Build
+REMAINING PHASE 7 ITEMS
+⬜ Database-backed theme persistence
+⬜ Drag-and-drop homepage ordering
+⬜ Dynamic public header
+⬜ Dynamic public footer
+⬜ Dynamic public navigation
+⬜ Dynamic public homepage
+⬜ Dynamic niche category filtering
+⬜ AI colour generator
+⬜ AI typography generator
+⬜ AI layout generator
+⬜ AI Theme Generator connection
+⬜ Final Phase 7 testing
+"@ | Set-Content -LiteralPath $ReportPath -Encoding UTF8
+    Write-Host ""
+    Write-Host "========================================" -ForegroundColor Green
+    Write-Host "PHASE 7 FOUNDATION FIXED" -ForegroundColor Green
+    Write-Host "PHASE 7 FOUNDATION VERIFIED" -ForegroundColor Green
+    Write-Host "PHASE 7 STATUS: IN PROGRESS" -ForegroundColor Yellow
+    Write-Host "REPORT: $ReportPath" -ForegroundColor Green
+    Write-Host "LOG: $LogPath" -ForegroundColor Green
+    Write-Host ""
+    Write-Host "REMAINING PHASES:" -ForegroundColor Yellow
+    Write-Host "Phase 7 — AI Theme Engine & Universal Website Builder"
+    Write-Host "Phase 8 — Advanced Frontend UI/UX"
+    Write-Host "Phase 9 — AI Content & SEO Automation"
+    Write-Host "Phase 10 — Advanced CMS"
+    Write-Host "Phase 11 — Performance & Security"
+    Write-Host "Phase 12 — Production & Deployment"
+    Write-Host "========================================" -ForegroundColor Green
+}
+catch {
+    Write-Host ""
+    Write-Host "========================================" -ForegroundColor Red
+    Write-Host "PHASE 7 FOUNDATION FIX FAILED" -ForegroundColor Red
+    Write-Host $_.Exception.Message -ForegroundColor Red
+    Write-Host "LOG: $LogPath" -ForegroundColor Yellow
+    Write-Host "========================================" -ForegroundColor Red
+    throw
+}
+finally {
+    Stop-Transcript -ErrorAction SilentlyContinue | Out-Null
+}
+
+=== FORMAT WRITE ===
+
+FORMAT WRITE PASSED
+
+=== FORMAT CHECK ===
+
+FORMAT CHECK PASSED
+
+=== TYPESCRIPT CHECK ===
+
+TYPESCRIPT CHECK PASSED
+
+=== ESLINT ===
+
+ESLINT PASSED
+
+=== PRODUCTION BUILD ===
+
+PRODUCTION BUILD PASSED
+
+========================================
+PHASE 7 FOUNDATION FIXED
+PHASE 7 FOUNDATION VERIFIED
+PHASE 7 STATUS: IN PROGRESS
+REPORT: C:\Users\A C\Downloads\knowledge-nest\phase-7-foundation-report.txt
+LOG: C:\Users\A C\Downloads\knowledge-nest\logs\phase-7-foundation-fix-20260727-004111.log
+
+REMAINING PHASES:
+Phase 7 — AI Theme Engine & Universal Website Builder
+Phase 8 — Advanced Frontend UI/UX
+Phase 9 — AI Content & SEO Automation
+Phase 10 — Advanced CMS
+Phase 11 — Performance & Security
+Phase 12 — Production & Deployment
+========================================
+**********************
+Windows PowerShell transcript end
+End time: 20260727004302
+**********************

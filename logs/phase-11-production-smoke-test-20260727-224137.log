@@ -1,0 +1,24 @@
+﻿
+Route                     StatusCode ContentType               StatusPassed ContentTypePassed SecurityHeadersPassed Passed Erro
+                                                                                                                           r   
+-----                     ---------- -----------               ------------ ----------------- --------------------- ------ ----
+/                                200 text/html                         True              True                  True   True     
+/about-us                        200 text/html                         True              True                  True   True     
+/contact-us                      200 text/html                         True              True                  True   True     
+/privacy-policy                  200 text/html                         True              True                  True   True     
+/terms-and-conditions            200 text/html                         True              True                  True   True     
+/disclaimer                      200 text/html                         True              True                  True   True     
+/search                          200 text/html                         True              True                  True   True     
+/feed                            200 text/html                         True              True                  True   True     
+/sitemap-page                    200 text/html                         True              True                  True   True     
+/robots.txt                      200 text/plain                        True              True                  True   True     
+/sitemap.xml                     200 application/xml                   True              True                  True   True     
+/rss.xml                         200 application/rss+xml               True              True                  True   True     
+/manifest.webmanifest            200 application/manifest+json         True              True                  True   True     
+/humans.txt                      200 text/plain                        True              True                  True   True     
+/.well-known/security.txt        200 text/plain                        True              True                  True   True     
+/api/health                      200 application/json                  True              True                  True   True     
+/ads.txt                         404 text/plain                        True              True                  True   True     
+
+
+

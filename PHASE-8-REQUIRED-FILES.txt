@@ -1,0 +1,2103 @@
+KNOWLEDGE NEST — PHASE 8 REQUIRED FILES
+Generated: 2026-07-27 13:12:21
+Project: C:\Users\A C\Downloads\knowledge-nest
+
+============================================================
+FILE: package.json
+============================================================
+    1: {
+    2:   "name": "knowledge-nest",
+    3:   "version": "0.1.0",
+    4:   "private": true,
+    5:   "scripts": {
+    6:     "dev": "next dev",
+    7:     "build": "next build",
+    8:     "start": "next start",
+    9:     "lint": "eslint",
+   10:     "typecheck": "tsc --noEmit",
+   11:     "format": "prettier --write .",
+   12:     "format:check": "prettier --check .",
+   13:     "db:generate": "drizzle-kit generate",
+   14:     "db:migrate": "drizzle-kit migrate",
+   15:     "db:push": "drizzle-kit push",
+   16:     "db:studio": "drizzle-kit studio"
+   17:   },
+   18:   "dependencies": {
+   19:     "better-auth": "^1.6.24",
+   20:     "class-variance-authority": "^0.7.1",
+   21:     "clsx": "^2.1.1",
+   22:     "date-fns": "^4.4.0",
+   23:     "dotenv": "^17.4.2",
+   24:     "drizzle-orm": "^0.45.2",
+   25:     "lucide-react": "^1.26.0",
+   26:     "next": "16.2.11",
+   27:     "postgres": "^3.4.9",
+   28:     "react": "19.2.4",
+   29:     "react-dom": "19.2.4",
+   30:     "tailwind-merge": "^3.6.0",
+   31:     "zod": "^4.4.3"
+   32:   },
+   33:   "devDependencies": {
+   34:     "@tailwindcss/postcss": "^4",
+   35:     "@types/node": "^20.19.43",
+   36:     "@types/react": "^19",
+   37:     "@types/react-dom": "^19",
+   38:     "drizzle-kit": "^0.31.10",
+   39:     "eslint": "^9",
+   40:     "eslint-config-next": "16.2.11",
+   41:     "prettier": "^3.9.6",
+   42:     "prettier-plugin-tailwindcss": "^0.8.1",
+   43:     "tailwindcss": "^4",
+   44:     "typescript": "^5"
+   45:   }
+   46: }
+
+============================================================
+FILE: src\app\globals.css
+============================================================
+    1: @import "tailwindcss";
+    2: 
+    3: :root {
+    4:   --background: #ffffff;
+    5:   --foreground: #171717;
+    6: }
+    7: 
+    8: @theme inline {
+    9:   --color-background: var(--background);
+   10:   --color-foreground: var(--foreground);
+   11:   --font-sans: var(--font-geist-sans);
+   12:   --font-mono: var(--font-geist-mono);
+   13: }
+   14: 
+   15: @media (prefers-color-scheme: dark) {
+   16:   :root {
+   17:     --background: #0a0a0a;
+   18:     --foreground: #ededed;
+   19:   }
+   20: }
+   21: 
+   22: body {
+   23:   background: var(--background);
+   24:   color: var(--foreground);
+   25:   font-family: Arial, Helvetica, sans-serif;
+   26: }
+   27: /* PHASE-7-THEME-VARIABLES */
+   28: body {
+   29:   background: var(--theme-background, #ffffff);
+   30:   color: var(--theme-foreground, #0f172a);
+   31:   font-family: var(--theme-body-font, Arial, sans-serif);
+   32: }
+   33: h1,
+   34: h2,
+   35: h3,
+   36: h4,
+   37: h5,
+   38: h6 {
+   39:   font-family: var(--theme-heading-font, Arial, sans-serif);
+   40: }
+   41: ::selection {
+   42:   background: var(--theme-primary, #2563eb);
+   43:   color: var(--theme-background, #ffffff);
+   44: }
+
+============================================================
+FILE: src\app\layout.tsx
+============================================================
+    1: import type { Metadata, Viewport } from "next";
+    2: import { Geist, Geist_Mono } from "next/font/google";
+    3: import { OrganizationJsonLd } from "@/components/site/seo/organization-json-ld";
+    4: import { WebsiteJsonLd } from "@/components/site/seo/website-json-ld";
+    5: import { getSiteUrl } from "@/lib/site-url";
+    6: import "./globals.css";
+    7: import { ActiveThemeStyle } from "@/components/site/active-theme-style";
+    8: const geistSans = Geist({
+    9:   variable: "--font-geist-sans",
+   10:   subsets: ["latin"],
+   11: });
+   12: const geistMono = Geist_Mono({
+   13:   variable: "--font-geist-mono",
+   14:   subsets: ["latin"],
+   15: });
+   16: const siteUrl = getSiteUrl();
+   17: const ogImage = `${siteUrl}/api/og?title=Knowledge%20Nest`;
+   18: export const metadata: Metadata = {
+   19:   metadataBase: new URL(siteUrl),
+   20:   title: {
+   21:     default: "Knowledge Nest",
+   22:     template: "%s | Knowledge Nest",
+   23:   },
+   24:   description:
+   25:     "Educational articles across finance, science, technology, health, education and other knowledge categories.",
+   26:   openGraph: {
+   27:     type: "website",
+   28:     url: "/",
+   29:     siteName: "Knowledge Nest",
+   30:     title: "Knowledge Nest",
+   31:     description:
+   32:       "Educational articles across finance, science, technology, health, education and other knowledge categories.",
+   33:     images: [
+   34:       {
+   35:         url: ogImage,
+   36:         width: 1200,
+   37:         height: 630,
+   38:       },
+   39:     ],
+   40:   },
+   41:   twitter: {
+   42:     card: "summary_large_image",
+   43:     title: "Knowledge Nest",
+   44:     description:
+   45:       "Educational articles across finance, science, technology, health, education and other knowledge categories.",
+   46:     images: [ogImage],
+   47:   },
+   48:   icons: {
+   49:     icon: "/icon.svg",
+   50:   },
+   51:   manifest: "/manifest.webmanifest",
+   52: };
+   53: export const viewport: Viewport = {
+   54:   width: "device-width",
+   55:   initialScale: 1,
+   56:   themeColor: "#ffffff",
+   57: };
+   58: export default function RootLayout({
+   59:   children,
+   60: }: Readonly<{
+   61:   children: React.ReactNode;
+   62: }>) {
+   63:   return (
+   64:     <html lang="en">
+   65:       <body className={`${geistSans.variable} ${geistMono.variable} antialiased`}>
+   66:         <ActiveThemeStyle />
+   67:         <WebsiteJsonLd />
+   68:         <OrganizationJsonLd />
+   69:         {children}
+   70:       </body>
+   71:     </html>
+   72:   );
+   73: }
+
+============================================================
+FILE: src\app\page.tsx
+============================================================
+    1: import type { Metadata } from "next";
+    2: import { DynamicHomepage } from "@/components/site/dynamic-homepage";
+    3: import { getActiveTheme } from "@/lib/theme/theme-store";
+    4: export const dynamic = "force-dynamic";
+    5: export async function generateMetadata(): Promise<Metadata> {
+    6:   const theme = await getActiveTheme();
+    7:   return {
+    8:     title: theme.name,
+    9:     description: `Explore the latest ${theme.niche} articles, guides and updates on ${theme.name}.`,
+   10:   };
+   11: }
+   12: export default function HomePage() {
+   13:   return <DynamicHomepage />;
+   14: }
+
+============================================================
+FILE: src\app\admin\layout.tsx
+============================================================
+    1: import type { ReactNode } from "react";
+    2: import { AdminHeader } from "@/components/admin/admin-header";
+    3: import { AdminSidebar } from "@/components/admin/admin-sidebar";
+    4: export default function AdminLayout({
+    5:   children,
+    6: }: Readonly<{
+    7:   children: ReactNode;
+    8: }>) {
+    9:   return (
+   10:     <div className="bg-muted/30 min-h-screen">
+   11:       <div className="flex">
+   12:         <AdminSidebar />
+   13:         <div className="min-w-0 flex-1">
+   14:           <AdminHeader />
+   15:           <main className="p-4 sm:p-6 lg:p-8">{children}</main>
+   16:         </div>
+   17:       </div>
+   18:     </div>
+   19:   );
+   20: }
+
+============================================================
+FILE: src\app\admin\page.tsx
+============================================================
+    1: import Link from "next/link";
+    2: import { FileText, FolderTree, ImageIcon, Plus, Settings } from "lucide-react";
+    3: const statistics = [
+    4:   {
+    5:     label: "Total Articles",
+    6:     value: "0",
+    7:     icon: FileText,
+    8:   },
+    9:   {
+   10:     label: "Published Articles",
+   11:     value: "0",
+   12:     icon: FileText,
+   13:   },
+   14:   {
+   15:     label: "Categories",
+   16:     value: "0",
+   17:     icon: FolderTree,
+   18:   },
+   19:   {
+   20:     label: "Media Files",
+   21:     value: "0",
+   22:     icon: ImageIcon,
+   23:   },
+   24: ];
+   25: const quickActions = [
+   26:   {
+   27:     label: "Create Article",
+   28:     href: "/admin/articles/new",
+   29:     icon: Plus,
+   30:   },
+   31:   {
+   32:     label: "Manage Categories",
+   33:     href: "/admin/categories",
+   34:     icon: FolderTree,
+   35:   },
+   36:   {
+   37:     label: "Open Media Library",
+   38:     href: "/admin/media",
+   39:     icon: ImageIcon,
+   40:   },
+   41:   {
+   42:     label: "Site Settings",
+   43:     href: "/admin/settings",
+   44:     icon: Settings,
+   45:   },
+   46: ];
+   47: export default function AdminDashboardPage() {
+   48:   return (
+   49:     <div className="space-y-8">
+   50:       <div>
+   51:         <h1 className="text-2xl font-bold tracking-tight sm:text-3xl">Dashboard</h1>
+   52:         <p className="text-muted-foreground mt-2 text-sm">
+   53:           Manage website content, media and settings.
+   54:         </p>
+   55:       </div>
+   56:       <section className="grid gap-4 sm:grid-cols-2 xl:grid-cols-4">
+   57:         {statistics.map((item) => {
+   58:           const Icon = item.icon;
+   59:           return (
+   60:             <article
+   61:               key={item.label}
+   62:               className="border-border bg-background rounded-xl border p-5 shadow-sm"
+   63:             >
+   64:               <div className="flex items-center justify-between">
+   65:                 <p className="text-muted-foreground text-sm font-medium">{item.label}</p>
+   66:                 <Icon className="text-muted-foreground h-5 w-5" />
+   67:               </div>
+   68:               <p className="mt-4 text-3xl font-bold">{item.value}</p>
+   69:             </article>
+   70:           );
+   71:         })}
+   72:       </section>
+   73:       <section className="border-border bg-background rounded-xl border p-5 shadow-sm">
+   74:         <h2 className="text-lg font-semibold">Quick Actions</h2>
+   75:         <div className="mt-4 grid gap-3 sm:grid-cols-2 xl:grid-cols-4">
+   76:           {quickActions.map((action) => {
+   77:             const Icon = action.icon;
+   78:             return (
+   79:               <Link
+   80:                 key={action.href}
+   81:                 href={action.href}
+   82:                 className="border-border hover:bg-muted flex items-center gap-3 rounded-lg border p-4 text-sm font-medium transition-colors"
+   83:               >
+   84:                 <Icon className="h-5 w-5" />
+   85:                 {action.label}
+   86:               </Link>
+   87:             );
+   88:           })}
+   89:         </div>
+   90:       </section>
+   91:       <section className="border-border bg-background rounded-xl border p-5 shadow-sm">
+   92:         <h2 className="text-lg font-semibold">Recent Articles</h2>
+   93:         <div className="text-muted-foreground mt-6 rounded-lg border border-dashed p-8 text-center text-sm">
+   94:           No articles have been created.
+   95:         </div>
+   96:       </section>
+   97:     </div>
+   98:   );
+   99: }
+
+============================================================
+FILE: src\app\admin\themes\page.tsx
+============================================================
+    1: import type { Metadata } from "next";
+    2: import { ThemeStudio } from "@/components/admin/themes/theme-studio";
+    3: export const metadata: Metadata = {
+    4:   title: "Theme Studio | Knowledge Nest",
+    5:   description:
+    6:     "Manage website niches, theme presets, colours, typography and homepage layouts.",
+    7: };
+    8: export default function ThemeStudioPage() {
+    9:   return (
+   10:     <div className="space-y-6">
+   11:       <div>
+   12:         <p className="text-muted-foreground text-sm">
+   13:           Phase 7 — AI Theme Engine & Universal Website Builder
+   14:         </p>
+   15:         <h1 className="mt-1 text-2xl font-bold tracking-tight sm:text-3xl">
+   16:           Theme Studio
+   17:         </h1>
+   18:         <p className="text-muted-foreground mt-2 max-w-3xl text-sm">
+   19:           Create niche-based themes, manage homepage sections, preview responsive layouts,
+   20:           switch themes, import, export, back up and restore theme configurations.
+   21:         </p>
+   22:       </div>
+   23:       <ThemeStudio />
+   24:     </div>
+   25:   );
+   26: }
+
+============================================================
+FILE: src\components\admin\admin-header.tsx
+============================================================
+    1: import Link from "next/link";
+    2: import { Menu, UserCircle } from "lucide-react";
+    3: export function AdminHeader() {
+    4:   return (
+    5:     <header className="border-border bg-background sticky top-0 z-30 flex h-16 items-center justify-between border-b px-4 sm:px-6">
+    6:       <div className="flex items-center gap-3">
+    7:         <button
+    8:           type="button"
+    9:           aria-label="Open navigation"
+   10:           className="border-border hover:bg-muted rounded-md border p-2 lg:hidden"
+   11:         >
+   12:           <Menu className="h-5 w-5" />
+   13:         </button>
+   14:         <span className="text-sm font-semibold sm:text-base">Administration</span>
+   15:       </div>
+   16:       <Link
+   17:         href="/"
+   18:         className="text-muted-foreground hover:text-foreground flex items-center gap-2 text-sm"
+   19:       >
+   20:         <UserCircle className="h-5 w-5" />
+   21:         <span className="hidden sm:inline">View Website</span>
+   22:       </Link>
+   23:     </header>
+   24:   );
+   25: }
+
+============================================================
+FILE: src\components\admin\admin-sidebar.tsx
+============================================================
+    1: "use client";
+    2: import Link from "next/link";
+    3: import { usePathname } from "next/navigation";
+    4: import {
+    5:   FileText,
+    6:   FolderOpen,
+    7:   Image,
+    8:   LayoutDashboard,
+    9:   Palette,
+   10:   Settings,
+   11:   Tags,
+   12:   Files,
+   13:   type LucideIcon,
+   14: } from "lucide-react";
+   15: type NavigationItem = {
+   16:   href: string;
+   17:   label: string;
+   18:   icon: LucideIcon;
+   19: };
+   20: const navigation: NavigationItem[] = [
+   21:   {
+   22:     href: "/admin",
+   23:     label: "Dashboard",
+   24:     icon: LayoutDashboard,
+   25:   },
+   26:   {
+   27:     href: "/admin/articles",
+   28:     label: "Articles",
+   29:     icon: FileText,
+   30:   },
+   31:   {
+   32:     href: "/admin/categories",
+   33:     label: "Categories",
+   34:     icon: FolderOpen,
+   35:   },
+   36:   {
+   37:     href: "/admin/tags",
+   38:     label: "Tags",
+   39:     icon: Tags,
+   40:   },
+   41:   {
+   42:     href: "/admin/media",
+   43:     label: "Media",
+   44:     icon: Image,
+   45:   },
+   46:   {
+   47:     href: "/admin/pages",
+   48:     label: "Pages",
+   49:     icon: Files,
+   50:   },
+   51:   {
+   52:     href: "/admin/themes",
+   53:     label: "Theme Studio",
+   54:     icon: Palette,
+   55:   },
+   56:   {
+   57:     href: "/admin/settings",
+   58:     label: "Settings",
+   59:     icon: Settings,
+   60:   },
+   61: ];
+   62: function isNavigationItemActive(pathname: string, href: string): boolean {
+   63:   if (href === "/admin") {
+   64:     return pathname === "/admin";
+   65:   }
+   66:   return pathname === href || pathname.startsWith(`${href}/`);
+   67: }
+   68: export function AdminSidebar() {
+   69:   const pathname = usePathname();
+   70:   return (
+   71:     <aside className="border-border bg-background hidden min-h-screen w-64 shrink-0 border-r lg:block">
+   72:       <div className="sticky top-0 flex h-screen flex-col">
+   73:         <div className="border-border border-b px-5 py-5">
+   74:           <Link href="/admin" className="text-lg font-bold tracking-tight">
+   75:             Knowledge Nest
+   76:           </Link>
+   77:           <p className="text-muted-foreground mt-1 text-xs">Administration</p>
+   78:         </div>
+   79:         <nav
+   80:           aria-label="Admin navigation"
+   81:           className="flex-1 space-y-1 overflow-y-auto p-3"
+   82:         >
+   83:           {navigation.map((item) => {
+   84:             const Icon = item.icon;
+   85:             const isActive = isNavigationItemActive(pathname, item.href);
+   86:             return (
+   87:               <Link
+   88:                 key={item.href}
+   89:                 href={item.href}
+   90:                 className={[
+   91:                   "flex items-center gap-3 rounded-lg px-3 py-2.5 text-sm font-medium transition-colors",
+   92:                   isActive
+   93:                     ? "bg-foreground text-background"
+   94:                     : "text-muted-foreground hover:bg-muted hover:text-foreground",
+   95:                 ].join(" ")}
+   96:               >
+   97:                 <Icon className="h-4 w-4 shrink-0" aria-hidden="true" />
+   98:                 <span>{item.label}</span>
+   99:               </Link>
+  100:             );
+  101:           })}
+  102:         </nav>
+  103:         <div className="border-border border-t p-3">
+  104:           <Link
+  105:             href="/"
+  106:             className="text-muted-foreground hover:bg-muted hover:text-foreground flex items-center rounded-lg px-3 py-2.5 text-sm font-medium"
+  107:           >
+  108:             View Website
+  109:           </Link>
+  110:         </div>
+  111:       </div>
+  112:     </aside>
+  113:   );
+  114: }
+  115: export default AdminSidebar;
+
+============================================================
+FILE: src\components\admin\themes\theme-studio.tsx
+============================================================
+    1: "use client";
+    2: import {
+    3:   Check,
+    4:   ChevronDown,
+    5:   ChevronUp,
+    6:   Copy,
+    7:   Download,
+    8:   GripVertical,
+    9:   LoaderCircle,
+   10:   Monitor,
+   11:   Palette,
+   12:   Plus,
+   13:   RefreshCcw,
+   14:   Save,
+   15:   Smartphone,
+   16:   Sparkles,
+   17:   Tablet,
+   18:   Trash2,
+   19:   Upload,
+   20: } from "lucide-react";
+   21: import {
+   22:   type ChangeEvent,
+   23:   type DragEvent,
+   24:   useCallback,
+   25:   useEffect,
+   26:   useMemo,
+   27:   useRef,
+   28:   useState,
+   29: } from "react";
+   30: import type {
+   31:   ThemeBackup,
+   32:   ThemeConfiguration,
+   33:   ThemeDevice,
+   34:   ThemeNiche,
+   35:   ThemeSection,
+   36:   ThemeStore,
+   37: } from "@/lib/theme/types";
+   38: const niches: Array<{
+   39:   value: ThemeNiche;
+   40:   label: string;
+   41: }> = [
+   42:   { value: "general", label: "General Blog" },
+   43:   { value: "news", label: "News" },
+   44:   { value: "finance", label: "Finance" },
+   45:   { value: "technology", label: "Technology" },
+   46:   { value: "ai", label: "Artificial Intelligence" },
+   47:   { value: "business", label: "Business" },
+   48:   { value: "education", label: "Education" },
+   49:   { value: "health", label: "Health" },
+   50:   { value: "science", label: "Science" },
+   51:   { value: "fashion", label: "Fashion" },
+   52:   { value: "beauty", label: "Beauty" },
+   53:   { value: "cars", label: "Cars" },
+   54:   { value: "sports", label: "Sports" },
+   55:   { value: "travel", label: "Travel" },
+   56:   { value: "food", label: "Food" },
+   57:   { value: "gaming", label: "Gaming" },
+   58:   { value: "entertainment", label: "Entertainment" },
+   59:   { value: "real-estate", label: "Real Estate" },
+   60:   { value: "agriculture", label: "Agriculture" },
+   61:   { value: "lifestyle", label: "Lifestyle" },
+   62: ];
+   63: type ApiResponse = Partial<ThemeStore> & {
+   64:   theme?: ThemeConfiguration;
+   65:   backup?: ThemeBackup;
+   66:   message?: string;
+   67: };
+   68: function createThemeFile(theme: ThemeConfiguration) {
+   69:   return new Blob([JSON.stringify(theme, null, 2)], {
+   70:     type: "application/json",
+   71:   });
+   72: }
+   73: function normaliseSectionPositions(sections: ThemeSection[]): ThemeSection[] {
+   74:   return sections.map((section, index) => ({
+   75:     ...section,
+   76:     position: index + 1,
+   77:   }));
+   78: }
+   79: export function ThemeStudio() {
+   80:   const importInputRef = useRef<HTMLInputElement>(null);
+   81:   const [store, setStore] = useState<ThemeStore | null>(null);
+   82:   const [selectedThemeId, setSelectedThemeId] = useState("");
+   83:   const [selectedNiche, setSelectedNiche] = useState<ThemeNiche>("general");
+   84:   const [device, setDevice] = useState<ThemeDevice>("desktop");
+   85:   const [isLoading, setIsLoading] = useState(true);
+   86:   const [busyAction, setBusyAction] = useState("");
+   87:   const [message, setMessage] = useState("");
+   88:   const [error, setError] = useState("");
+   89:   const [aiPrompt, setAiPrompt] = useState(
+   90:     "Create a modern premium publication with clear typography",
+   91:   );
+   92:   const [draggedSectionId, setDraggedSectionId] = useState("");
+   93:   const selectedTheme = useMemo(
+   94:     () =>
+   95:       store?.themes.find((theme) => theme.id === selectedThemeId) ??
+   96:       store?.themes[0] ??
+   97:       null,
+   98:     [selectedThemeId, store],
+   99:   );
+  100:   const loadStore = useCallback(async (preferredThemeId?: string) => {
+  101:     setError("");
+  102:     const response = await fetch("/api/admin/themes", {
+  103:       cache: "no-store",
+  104:     });
+  105:     const responseData = (await response.json()) as ApiResponse;
+  106:     if (!response.ok || !responseData.themes) {
+  107:       throw new Error(responseData.message || "Unable to load themes.");
+  108:     }
+  109:     const nextStore: ThemeStore = {
+  110:       activeThemeId: responseData.activeThemeId ?? "",
+  111:       themes: responseData.themes,
+  112:       backups: responseData.backups ?? [],
+  113:     };
+  114:     setStore(nextStore);
+  115:     setSelectedThemeId((currentThemeId) => {
+  116:       const requestedId =
+  117:         preferredThemeId ||
+  118:         currentThemeId ||
+  119:         nextStore.activeThemeId ||
+  120:         nextStore.themes[0]?.id ||
+  121:         "";
+  122:       const requestedThemeExists = nextStore.themes.some(
+  123:         (theme) => theme.id === requestedId,
+  124:       );
+  125:       return requestedThemeExists
+  126:         ? requestedId
+  127:         : nextStore.activeThemeId || nextStore.themes[0]?.id || "";
+  128:     });
+  129:   }, []);
+  130:   useEffect(() => {
+  131:     async function initialise() {
+  132:       try {
+  133:         await loadStore();
+  134:       } catch (loadError) {
+  135:         setError(
+  136:           loadError instanceof Error ? loadError.message : "Unable to load themes.",
+  137:         );
+  138:       } finally {
+  139:         setIsLoading(false);
+  140:       }
+  141:     }
+  142:     void initialise();
+  143:   }, [loadStore]);
+  144:   async function runAction(
+  145:     actionName: string,
+  146:     payload: Record<string, unknown>,
+  147:     preferredThemeId?: string,
+  148:     endpoint = "/api/admin/themes",
+  149:   ) {
+  150:     setBusyAction(actionName);
+  151:     setMessage("");
+  152:     setError("");
+  153:     try {
+  154:       const response = await fetch(endpoint, {
+  155:         method: "POST",
+  156:         headers: {
+  157:           "Content-Type": "application/json",
+  158:         },
+  159:         body: JSON.stringify(payload),
+  160:       });
+  161:       const responseData = (await response.json()) as ApiResponse;
+  162:       if (!response.ok) {
+  163:         throw new Error(responseData.message || "Unable to update the theme.");
+  164:       }
+  165:       const nextThemeId = responseData.theme?.id || preferredThemeId || selectedThemeId;
+  166:       await loadStore(nextThemeId);
+  167:       setMessage("Theme changes saved successfully.");
+  168:     } catch (actionError) {
+  169:       setError(
+  170:         actionError instanceof Error
+  171:           ? actionError.message
+  172:           : "Unable to update the theme.",
+  173:       );
+  174:     } finally {
+  175:       setBusyAction("");
+  176:     }
+  177:   }
+  178:   function updateSelectedTheme(
+  179:     updater: (theme: ThemeConfiguration) => ThemeConfiguration,
+  180:   ) {
+  181:     if (!store || !selectedTheme) {
+  182:       return;
+  183:     }
+  184:     setStore({
+  185:       ...store,
+  186:       themes: store.themes.map((theme) =>
+  187:         theme.id === selectedTheme.id ? updater(theme) : theme,
+  188:       ),
+  189:     });
+  190:   }
+  191:   function reorderSections(sourceSectionId: string, targetSectionId: string) {
+  192:     if (!selectedTheme || sourceSectionId === targetSectionId) {
+  193:       return;
+  194:     }
+  195:     const sortedSections = selectedTheme.sections
+  196:       .slice()
+  197:       .sort((first, second) => first.position - second.position);
+  198:     const sourceIndex = sortedSections.findIndex(
+  199:       (section) => section.id === sourceSectionId,
+  200:     );
+  201:     const targetIndex = sortedSections.findIndex(
+  202:       (section) => section.id === targetSectionId,
+  203:     );
+  204:     if (sourceIndex < 0 || targetIndex < 0) {
+  205:       return;
+  206:     }
+  207:     const [movedSection] = sortedSections.splice(sourceIndex, 1);
+  208:     sortedSections.splice(targetIndex, 0, movedSection);
+  209:     updateSelectedTheme((theme) => ({
+  210:       ...theme,
+  211:       sections: normaliseSectionPositions(sortedSections),
+  212:     }));
+  213:   }
+  214:   function moveSection(sectionId: string, direction: "up" | "down") {
+  215:     if (!selectedTheme) {
+  216:       return;
+  217:     }
+  218:     const sortedSections = selectedTheme.sections
+  219:       .slice()
+  220:       .sort((first, second) => first.position - second.position);
+  221:     const sourceIndex = sortedSections.findIndex((section) => section.id === sectionId);
+  222:     const targetIndex = direction === "up" ? sourceIndex - 1 : sourceIndex + 1;
+  223:     if (sourceIndex < 0 || targetIndex < 0 || targetIndex >= sortedSections.length) {
+  224:       return;
+  225:     }
+  226:     const targetSection = sortedSections[targetIndex];
+  227:     reorderSections(sectionId, targetSection.id);
+  228:   }
+  229:   function handleDragStart(event: DragEvent<HTMLDivElement>, sectionId: string) {
+  230:     setDraggedSectionId(sectionId);
+  231:     event.dataTransfer.effectAllowed = "move";
+  232:     event.dataTransfer.setData("text/plain", sectionId);
+  233:   }
+  234:   function handleDrop(event: DragEvent<HTMLDivElement>, targetSectionId: string) {
+  235:     event.preventDefault();
+  236:     const sourceSectionId = event.dataTransfer.getData("text/plain") || draggedSectionId;
+  237:     reorderSections(sourceSectionId, targetSectionId);
+  238:     setDraggedSectionId("");
+  239:   }
+  240:   async function createTheme() {
+  241:     await runAction("create", {
+  242:       action: "create",
+  243:       niche: selectedNiche,
+  244:     });
+  245:   }
+  246:   async function saveSelectedTheme() {
+  247:     if (!selectedTheme) {
+  248:       return;
+  249:     }
+  250:     await runAction(
+  251:       "save",
+  252:       {
+  253:         action: "save",
+  254:         theme: selectedTheme,
+  255:       },
+  256:       selectedTheme.id,
+  257:     );
+  258:   }
+  259:   async function generateAiTheme() {
+  260:     if (!selectedTheme) {
+  261:       return;
+  262:     }
+  263:     await runAction(
+  264:       "generate",
+  265:       {
+  266:         prompt: aiPrompt,
+  267:         theme: selectedTheme,
+  268:       },
+  269:       undefined,
+  270:       "/api/admin/themes/generate",
+  271:     );
+  272:   }
+  273:   async function activateSelectedTheme() {
+  274:     if (!selectedTheme) {
+  275:       return;
+  276:     }
+  277:     await runAction(
+  278:       "activate",
+  279:       {
+  280:         action: "activate",
+  281:         themeId: selectedTheme.id,
+  282:       },
+  283:       selectedTheme.id,
+  284:     );
+  285:   }
+  286:   async function deleteSelectedTheme() {
+  287:     if (!selectedTheme || selectedTheme.isActive) {
+  288:       return;
+  289:     }
+  290:     const confirmed = window.confirm(`Delete "${selectedTheme.name}" permanently?`);
+  291:     if (!confirmed) {
+  292:       return;
+  293:     }
+  294:     await runAction("delete", {
+  295:       action: "delete",
+  296:       themeId: selectedTheme.id,
+  297:     });
+  298:   }
+  299:   async function backupSelectedTheme() {
+  300:     if (!selectedTheme) {
+  301:       return;
+  302:     }
+  303:     await runAction(
+  304:       "backup",
+  305:       {
+  306:         action: "backup",
+  307:         themeId: selectedTheme.id,
+  308:       },
+  309:       selectedTheme.id,
+  310:     );
+  311:   }
+  312:   async function restoreBackup(backupId: string) {
+  313:     await runAction("restore", {
+  314:       action: "restore",
+  315:       backupId,
+  316:     });
+  317:   }
+  318:   function exportSelectedTheme() {
+  319:     if (!selectedTheme) {
+  320:       return;
+  321:     }
+  322:     const url = URL.createObjectURL(createThemeFile(selectedTheme));
+  323:     const anchor = document.createElement("a");
+  324:     anchor.href = url;
+  325:     anchor.download = `${selectedTheme.name
+  326:       .toLowerCase()
+  327:       .replace(/[^a-z0-9]+/g, "-")}.json`;
+  328:     anchor.click();
+  329:     URL.revokeObjectURL(url);
+  330:   }
+  331:   async function importTheme(event: ChangeEvent<HTMLInputElement>) {
+  332:     const file = event.target.files?.[0];
+  333:     if (!file) {
+  334:       return;
+  335:     }
+  336:     setBusyAction("import");
+  337:     setMessage("");
+  338:     setError("");
+  339:     try {
+  340:       const content = await file.text();
+  341:       const theme = JSON.parse(content) as ThemeConfiguration;
+  342:       if (
+  343:         !theme.name ||
+  344:         !theme.niche ||
+  345:         !theme.colours ||
+  346:         !theme.typography ||
+  347:         !Array.isArray(theme.sections)
+  348:       ) {
+  349:         throw new Error("The selected theme file is invalid.");
+  350:       }
+  351:       await runAction("import", {
+  352:         action: "import",
+  353:         theme,
+  354:       });
+  355:     } catch (importError) {
+  356:       setError(
+  357:         importError instanceof Error
+  358:           ? importError.message
+  359:           : "Unable to import the theme.",
+  360:       );
+  361:     } finally {
+  362:       setBusyAction("");
+  363:       event.target.value = "";
+  364:     }
+  365:   }
+  366:   if (isLoading) {
+  367:     return (
+  368:       <div className="flex min-h-96 items-center justify-center">
+  369:         <LoaderCircle className="text-muted-foreground h-8 w-8 animate-spin" />
+  370:       </div>
+  371:     );
+  372:   }
+  373:   if (!store || !selectedTheme) {
+  374:     return (
+  375:       <div className="border-destructive/40 bg-destructive/5 text-destructive rounded-xl border p-5 text-sm">
+  376:         {error || "No themes are available."}
+  377:       </div>
+  378:     );
+  379:   }
+  380:   const previewWidth =
+  381:     device === "desktop" ? "100%" : device === "tablet" ? "768px" : "390px";
+  382:   const orderedSections = selectedTheme.sections
+  383:     .slice()
+  384:     .sort((first, second) => first.position - second.position);
+  385:   return (
+  386:     <div className="space-y-6">
+  387:       <input
+  388:         ref={importInputRef}
+  389:         type="file"
+  390:         accept="application/json"
+  391:         onChange={(event) => void importTheme(event)}
+  392:         className="hidden"
+  393:       />
+  394:       <section className="border-border bg-background rounded-xl border p-5 shadow-sm">
+  395:         <div className="grid gap-4 xl:grid-cols-[1fr_1fr_auto] xl:items-end">
+  396:           <div>
+  397:             <label className="mb-2 block text-sm font-medium">Current Theme</label>
+  398:             <select
+  399:               value={selectedTheme.id}
+  400:               onChange={(event) => setSelectedThemeId(event.target.value)}
+  401:               className="border-border bg-background w-full rounded-lg border px-3 py-2.5 text-sm"
+  402:             >
+  403:               {store.themes.map((theme) => (
+  404:                 <option key={theme.id} value={theme.id}>
+  405:                   {theme.name}
+  406:                   {theme.isActive ? " — Active" : ""}
+  407:                 </option>
+  408:               ))}
+  409:             </select>
+  410:           </div>
+  411:           <div>
+  412:             <label className="mb-2 block text-sm font-medium">New Theme Niche</label>
+  413:             <div className="flex gap-2">
+  414:               <select
+  415:                 value={selectedNiche}
+  416:                 onChange={(event) => setSelectedNiche(event.target.value as ThemeNiche)}
+  417:                 className="border-border bg-background min-w-0 flex-1 rounded-lg border px-3 py-2.5 text-sm"
+  418:               >
+  419:                 {niches.map((niche) => (
+  420:                   <option key={niche.value} value={niche.value}>
+  421:                     {niche.label}
+  422:                   </option>
+  423:                 ))}
+  424:               </select>
+  425:               <button
+  426:                 type="button"
+  427:                 onClick={() => void createTheme()}
+  428:                 disabled={Boolean(busyAction)}
+  429:                 className="bg-foreground text-background inline-flex items-center gap-2 rounded-lg px-4 py-2.5 text-sm font-medium disabled:opacity-50"
+  430:               >
+  431:                 <Plus className="h-4 w-4" />
+  432:                 Create
+  433:               </button>
+  434:             </div>
+  435:           </div>
+  436:           <div className="flex flex-wrap gap-2">
+  437:             <button
+  438:               type="button"
+  439:               onClick={() => void saveSelectedTheme()}
+  440:               disabled={Boolean(busyAction)}
+  441:               className="border-border hover:bg-muted inline-flex items-center gap-2 rounded-lg border px-3 py-2 text-sm font-medium disabled:opacity-50"
+  442:             >
+  443:               <Save className="h-4 w-4" />
+  444:               Save
+  445:             </button>
+  446:             <button
+  447:               type="button"
+  448:               onClick={() => void activateSelectedTheme()}
+  449:               disabled={Boolean(busyAction) || selectedTheme.isActive}
+  450:               className="border-border hover:bg-muted inline-flex items-center gap-2 rounded-lg border px-3 py-2 text-sm font-medium disabled:opacity-50"
+  451:             >
+  452:               <Check className="h-4 w-4" />
+  453:               Activate
+  454:             </button>
+  455:             <button
+  456:               type="button"
+  457:               onClick={() => void backupSelectedTheme()}
+  458:               disabled={Boolean(busyAction)}
+  459:               className="border-border hover:bg-muted inline-flex items-center gap-2 rounded-lg border px-3 py-2 text-sm font-medium disabled:opacity-50"
+  460:             >
+  461:               <Copy className="h-4 w-4" />
+  462:               Backup
+  463:             </button>
+  464:             <button
+  465:               type="button"
+  466:               onClick={exportSelectedTheme}
+  467:               className="border-border hover:bg-muted inline-flex items-center gap-2 rounded-lg border px-3 py-2 text-sm font-medium"
+  468:             >
+  469:               <Download className="h-4 w-4" />
+  470:               Export
+  471:             </button>
+  472:             <button
+  473:               type="button"
+  474:               onClick={() => importInputRef.current?.click()}
+  475:               disabled={Boolean(busyAction)}
+  476:               className="border-border hover:bg-muted inline-flex items-center gap-2 rounded-lg border px-3 py-2 text-sm font-medium disabled:opacity-50"
+  477:             >
+  478:               <Upload className="h-4 w-4" />
+  479:               Import
+  480:             </button>
+  481:             <button
+  482:               type="button"
+  483:               onClick={() => void deleteSelectedTheme()}
+  484:               disabled={Boolean(busyAction) || selectedTheme.isActive}
+  485:               className="border-border text-destructive hover:bg-muted inline-flex items-center gap-2 rounded-lg border px-3 py-2 text-sm font-medium disabled:opacity-50"
+  486:             >
+  487:               <Trash2 className="h-4 w-4" />
+  488:               Delete
+  489:             </button>
+  490:           </div>
+  491:         </div>
+  492:       </section>
+  493:       <section className="border-border bg-background rounded-xl border p-5 shadow-sm">
+  494:         <div className="flex items-center gap-2">
+  495:           <Sparkles className="h-5 w-5" />
+  496:           <h2 className="font-semibold">AI Theme Generator</h2>
+  497:         </div>
+  498:         <div className="mt-4 flex flex-col gap-3 lg:flex-row">
+  499:           <textarea
+  500:             value={aiPrompt}
+  501:             onChange={(event) => setAiPrompt(event.target.value)}
+  502:             rows={3}
+  503:             placeholder="Describe the colours, typography and layout you want."
+  504:             className="border-border bg-background min-h-24 flex-1 rounded-lg border px-3 py-2.5 text-sm"
+  505:           />
+  506:           <button
+  507:             type="button"
+  508:             onClick={() => void generateAiTheme()}
+  509:             disabled={Boolean(busyAction) || !aiPrompt.trim()}
+  510:             className="bg-foreground text-background inline-flex min-h-12 items-center justify-center gap-2 rounded-lg px-5 py-3 text-sm font-semibold disabled:opacity-50"
+  511:           >
+  512:             {busyAction === "generate" ? (
+  513:               <LoaderCircle className="h-4 w-4 animate-spin" />
+  514:             ) : (
+  515:               <Sparkles className="h-4 w-4" />
+  516:             )}
+  517:             Generate Theme
+  518:           </button>
+  519:         </div>
+  520:       </section>
+  521:       {message ? (
+  522:         <div className="border-border bg-background rounded-lg border px-4 py-3 text-sm">
+  523:           {message}
+  524:         </div>
+  525:       ) : null}
+  526:       {error ? (
+  527:         <div className="border-destructive/40 bg-destructive/5 text-destructive rounded-lg border px-4 py-3 text-sm">
+  528:           {error}
+  529:         </div>
+  530:       ) : null}
+  531:       <div className="grid gap-6 2xl:grid-cols-[430px_minmax(0,1fr)]">
+  532:         <div className="space-y-6">
+  533:           <section className="border-border bg-background rounded-xl border p-5 shadow-sm">
+  534:             <div className="flex items-center gap-2">
+  535:               <Palette className="h-5 w-5" />
+  536:               <h2 className="font-semibold">Theme Settings</h2>
+  537:             </div>
+  538:             <div className="mt-5 space-y-5">
+  539:               <div>
+  540:                 <label className="mb-2 block text-sm font-medium">Theme Name</label>
+  541:                 <input
+  542:                   value={selectedTheme.name}
+  543:                   onChange={(event) =>
+  544:                     updateSelectedTheme((theme) => ({
+  545:                       ...theme,
+  546:                       name: event.target.value,
+  547:                     }))
+  548:                   }
+  549:                   className="border-border bg-background w-full rounded-lg border px-3 py-2.5 text-sm"
+  550:                 />
+  551:               </div>
+  552:               <div>
+  553:                 <label className="mb-2 block text-sm font-medium">Layout</label>
+  554:                 <select
+  555:                   value={selectedTheme.layout}
+  556:                   onChange={(event) =>
+  557:                     updateSelectedTheme((theme) => ({
+  558:                       ...theme,
+  559:                       layout: event.target.value as ThemeConfiguration["layout"],
+  560:                     }))
+  561:                   }
+  562:                   className="border-border bg-background w-full rounded-lg border px-3 py-2.5 text-sm"
+  563:                 >
+  564:                   <option value="editorial">Editorial</option>
+  565:                   <option value="magazine">Magazine</option>
+  566:                   <option value="grid">Grid</option>
+  567:                   <option value="minimal">Minimal</option>
+  568:                   <option value="business">Business</option>
+  569:                   <option value="visual">Visual</option>
+  570:                 </select>
+  571:               </div>
+  572:               <div>
+  573:                 <label className="mb-2 block text-sm font-medium">Navigation Items</label>
+  574:                 <textarea
+  575:                   value={selectedTheme.navigation.join("\n")}
+  576:                   onChange={(event) =>
+  577:                     updateSelectedTheme((theme) => ({
+  578:                       ...theme,
+  579:                       navigation: event.target.value
+  580:                         .split("\n")
+  581:                         .map((item) => item.trim())
+  582:                         .filter(Boolean),
+  583:                     }))
+  584:                   }
+  585:                   rows={7}
+  586:                   className="border-border bg-background w-full rounded-lg border px-3 py-2.5 text-sm"
+  587:                 />
+  588:               </div>
+  589:               <div className="grid grid-cols-2 gap-4">
+  590:                 {Object.entries(selectedTheme.colours).map(
+  591:                   ([colourName, colourValue]) => (
+  592:                     <label key={colourName} className="text-sm font-medium capitalize">
+  593:                       {colourName}
+  594:                       <div className="border-border mt-2 flex items-center gap-2 rounded-lg border p-2">
+  595:                         <input
+  596:                           type="color"
+  597:                           value={colourValue}
+  598:                           onChange={(event) =>
+  599:                             updateSelectedTheme((theme) => ({
+  600:                               ...theme,
+  601:                               colours: {
+  602:                                 ...theme.colours,
+  603:                                 [colourName]: event.target.value,
+  604:                               },
+  605:                             }))
+  606:                           }
+  607:                           className="h-8 w-10 cursor-pointer border-0 bg-transparent"
+  608:                         />
+  609:                         <span className="text-muted-foreground truncate text-xs">
+  610:                           {colourValue}
+  611:                         </span>
+  612:                       </div>
+  613:                     </label>
+  614:                   ),
+  615:                 )}
+  616:               </div>
+  617:               <div className="grid gap-4 sm:grid-cols-2">
+  618:                 <div>
+  619:                   <label className="mb-2 block text-sm font-medium">Heading Font</label>
+  620:                   <input
+  621:                     value={selectedTheme.typography.headingFont}
+  622:                     onChange={(event) =>
+  623:                       updateSelectedTheme((theme) => ({
+  624:                         ...theme,
+  625:                         typography: {
+  626:                           ...theme.typography,
+  627:                           headingFont: event.target.value,
+  628:                         },
+  629:                       }))
+  630:                     }
+  631:                     className="border-border bg-background w-full rounded-lg border px-3 py-2.5 text-sm"
+  632:                   />
+  633:                 </div>
+  634:                 <div>
+  635:                   <label className="mb-2 block text-sm font-medium">Body Font</label>
+  636:                   <input
+  637:                     value={selectedTheme.typography.bodyFont}
+  638:                     onChange={(event) =>
+  639:                       updateSelectedTheme((theme) => ({
+  640:                         ...theme,
+  641:                         typography: {
+  642:                           ...theme.typography,
+  643:                           bodyFont: event.target.value,
+  644:                         },
+  645:                       }))
+  646:                     }
+  647:                     className="border-border bg-background w-full rounded-lg border px-3 py-2.5 text-sm"
+  648:                   />
+  649:                 </div>
+  650:               </div>
+  651:             </div>
+  652:           </section>
+  653:           <section className="border-border bg-background rounded-xl border p-5 shadow-sm">
+  654:             <h2 className="font-semibold">Drag and Drop Homepage Sections</h2>
+  655:             <p className="text-muted-foreground mt-1 text-xs">
+  656:               Drag sections or use the arrow buttons to change homepage positions.
+  657:             </p>
+  658:             <div className="mt-4 space-y-3">
+  659:               {orderedSections.map((section, sectionIndex) => (
+  660:                 <div
+  661:                   key={section.id}
+  662:                   draggable
+  663:                   onDragStart={(event) => handleDragStart(event, section.id)}
+  664:                   onDragOver={(event) => event.preventDefault()}
+  665:                   onDrop={(event) => handleDrop(event, section.id)}
+  666:                   className={`border-border rounded-lg border p-3 ${
+  667:                     draggedSectionId === section.id ? "opacity-50" : ""
+  668:                   }`}
+  669:                 >
+  670:                   <div className="flex items-center gap-2">
+  671:                     <GripVertical className="text-muted-foreground h-5 w-5 cursor-grab" />
+  672:                     <input
+  673:                       type="checkbox"
+  674:                       checked={section.enabled}
+  675:                       onChange={(event) =>
+  676:                         updateSelectedTheme((theme) => ({
+  677:                           ...theme,
+  678:                           sections: theme.sections.map((storedSection) =>
+  679:                             storedSection.id === section.id
+  680:                               ? {
+  681:                                   ...storedSection,
+  682:                                   enabled: event.target.checked,
+  683:                                 }
+  684:                               : storedSection,
+  685:                           ),
+  686:                         }))
+  687:                       }
+  688:                     />
+  689:                     <input
+  690:                       value={section.title}
+  691:                       onChange={(event) =>
+  692:                         updateSelectedTheme((theme) => ({
+  693:                           ...theme,
+  694:                           sections: theme.sections.map((storedSection) =>
+  695:                             storedSection.id === section.id
+  696:                               ? {
+  697:                                   ...storedSection,
+  698:                                   title: event.target.value,
+  699:                                 }
+  700:                               : storedSection,
+  701:                           ),
+  702:                         }))
+  703:                       }
+  704:                       className="border-border bg-background min-w-0 flex-1 rounded-md border px-2 py-1.5 text-sm"
+  705:                     />
+  706:                     <button
+  707:                       type="button"
+  708:                       onClick={() => moveSection(section.id, "up")}
+  709:                       disabled={sectionIndex === 0}
+  710:                       className="border-border rounded-md border p-1.5 disabled:opacity-30"
+  711:                       aria-label="Move section up"
+  712:                     >
+  713:                       <ChevronUp className="h-4 w-4" />
+  714:                     </button>
+  715:                     <button
+  716:                       type="button"
+  717:                       onClick={() => moveSection(section.id, "down")}
+  718:                       disabled={sectionIndex === orderedSections.length - 1}
+  719:                       className="border-border rounded-md border p-1.5 disabled:opacity-30"
+  720:                       aria-label="Move section down"
+  721:                     >
+  722:                       <ChevronDown className="h-4 w-4" />
+  723:                     </button>
+  724:                   </div>
+  725:                 </div>
+  726:               ))}
+  727:             </div>
+  728:           </section>
+  729:           <section className="border-border bg-background rounded-xl border p-5 shadow-sm">
+  730:             <h2 className="font-semibold">Theme Backups</h2>
+  731:             {store.backups.length === 0 ? (
+  732:               <p className="text-muted-foreground mt-3 text-sm">
+  733:                 No theme backups have been created.
+  734:               </p>
+  735:             ) : (
+  736:               <div className="mt-4 space-y-3">
+  737:                 {store.backups.map((backup) => (
+  738:                   <div
+  739:                     key={backup.id}
+  740:                     className="border-border flex items-center justify-between gap-3 rounded-lg border p-3"
+  741:                   >
+  742:                     <div className="min-w-0">
+  743:                       <p className="truncate text-sm font-medium">{backup.name}</p>
+  744:                       <p className="text-muted-foreground mt-1 text-xs">
+  745:                         {new Date(backup.createdAt).toLocaleString()}
+  746:                       </p>
+  747:                     </div>
+  748:                     <button
+  749:                       type="button"
+  750:                       onClick={() => void restoreBackup(backup.id)}
+  751:                       disabled={Boolean(busyAction)}
+  752:                       className="border-border hover:bg-muted inline-flex items-center gap-2 rounded-lg border px-3 py-2 text-xs font-medium disabled:opacity-50"
+  753:                     >
+  754:                       <RefreshCcw className="h-3.5 w-3.5" />
+  755:                       Restore
+  756:                     </button>
+  757:                   </div>
+  758:                 ))}
+  759:               </div>
+  760:             )}
+  761:           </section>
+  762:         </div>
+  763:         <section className="border-border bg-muted/30 overflow-hidden rounded-xl border shadow-sm">
+  764:           <div className="border-border bg-background flex flex-col gap-4 border-b p-4 sm:flex-row sm:items-center sm:justify-between">
+  765:             <div>
+  766:               <h2 className="font-semibold">Live Preview</h2>
+  767:               <p className="text-muted-foreground mt-1 text-xs">
+  768:                 {selectedTheme.name} · Version {selectedTheme.version}
+  769:               </p>
+  770:             </div>
+  771:             <div className="border-border bg-muted inline-flex rounded-lg border p-1">
+  772:               <button
+  773:                 type="button"
+  774:                 onClick={() => setDevice("desktop")}
+  775:                 className={`rounded-md p-2 ${
+  776:                   device === "desktop" ? "bg-background shadow-sm" : ""
+  777:                 }`}
+  778:                 aria-label="Desktop preview"
+  779:               >
+  780:                 <Monitor className="h-4 w-4" />
+  781:               </button>
+  782:               <button
+  783:                 type="button"
+  784:                 onClick={() => setDevice("tablet")}
+  785:                 className={`rounded-md p-2 ${
+  786:                   device === "tablet" ? "bg-background shadow-sm" : ""
+  787:                 }`}
+  788:                 aria-label="Tablet preview"
+  789:               >
+  790:                 <Tablet className="h-4 w-4" />
+  791:               </button>
+  792:               <button
+  793:                 type="button"
+  794:                 onClick={() => setDevice("mobile")}
+  795:                 className={`rounded-md p-2 ${
+  796:                   device === "mobile" ? "bg-background shadow-sm" : ""
+  797:                 }`}
+  798:                 aria-label="Mobile preview"
+  799:               >
+  800:                 <Smartphone className="h-4 w-4" />
+  801:               </button>
+  802:             </div>
+  803:           </div>
+  804:           <div className="overflow-auto p-4 sm:p-6">
+  805:             <div
+  806:               className="mx-auto min-h-[700px] overflow-hidden rounded-xl shadow-xl transition-all"
+  807:               style={{
+  808:                 width: previewWidth,
+  809:                 maxWidth: "100%",
+  810:                 backgroundColor: selectedTheme.colours.background,
+  811:                 color: selectedTheme.colours.foreground,
+  812:                 fontFamily: selectedTheme.typography.bodyFont,
+  813:               }}
+  814:             >
+  815:               <header
+  816:                 className="border-b px-5 py-4"
+  817:                 style={{
+  818:                   borderColor: selectedTheme.colours.border,
+  819:                 }}
+  820:               >
+  821:                 <div className="flex items-center justify-between gap-4">
+  822:                   <h1
+  823:                     className="text-xl font-bold"
+  824:                     style={{
+  825:                       color: selectedTheme.colours.primary,
+  826:                       fontFamily: selectedTheme.typography.headingFont,
+  827:                     }}
+  828:                   >
+  829:                     {selectedTheme.name}
+  830:                   </h1>
+  831:                   <nav className="hidden gap-4 text-xs md:flex">
+  832:                     {selectedTheme.navigation.slice(0, 5).map((item) => (
+  833:                       <span key={item}>{item}</span>
+  834:                     ))}
+  835:                   </nav>
+  836:                 </div>
+  837:               </header>
+  838:               <main className="space-y-8 p-5">
+  839:                 {orderedSections
+  840:                   .filter((section) => section.enabled)
+  841:                   .map((section) => (
+  842:                     <section key={section.id}>
+  843:                       <h2
+  844:                         className="mb-4 text-lg font-bold"
+  845:                         style={{
+  846:                           fontFamily: selectedTheme.typography.headingFont,
+  847:                         }}
+  848:                       >
+  849:                         {section.title}
+  850:                       </h2>
+  851:                       {section.type === "hero" ? (
+  852:                         <div
+  853:                           className="rounded-xl p-8"
+  854:                           style={{
+  855:                             backgroundColor: selectedTheme.colours.primary,
+  856:                             color: selectedTheme.colours.background,
+  857:                           }}
+  858:                         >
+  859:                           <p className="text-xs font-semibold tracking-widest uppercase opacity-80">
+  860:                             Featured Story
+  861:                           </p>
+  862:                           <h3 className="mt-3 max-w-2xl text-3xl font-bold">
+  863:                             Dynamic content designed for the {selectedTheme.niche} niche
+  864:                           </h3>
+  865:                           <p className="mt-4 max-w-xl text-sm opacity-80">
+  866:                             Navigation, sections, colours, typography and layouts follow
+  867:                             the selected active theme.
+  868:                           </p>
+  869:                         </div>
+  870:                       ) : section.type === "newsletter" ? (
+  871:                         <div
+  872:                           className="rounded-xl p-6"
+  873:                           style={{
+  874:                             backgroundColor: selectedTheme.colours.muted,
+  875:                           }}
+  876:                         >
+  877:                           <h3 className="font-bold">Subscribe to the newsletter</h3>
+  878:                           <div className="mt-4 flex gap-2">
+  879:                             <div
+  880:                               className="h-10 flex-1 rounded-lg border"
+  881:                               style={{
+  882:                                 borderColor: selectedTheme.colours.border,
+  883:                                 backgroundColor: selectedTheme.colours.background,
+  884:                               }}
+  885:                             />
+  886:                             <div
+  887:                               className="h-10 w-28 rounded-lg"
+  888:                               style={{
+  889:                                 backgroundColor: selectedTheme.colours.primary,
+  890:                               }}
+  891:                             />
+  892:                           </div>
+  893:                         </div>
+  894:                       ) : (
+  895:                         <div
+  896:                           className={`grid gap-4 ${
+  897:                             selectedTheme.layout === "minimal"
+  898:                               ? "grid-cols-1"
+  899:                               : "sm:grid-cols-2 lg:grid-cols-3"
+  900:                           }`}
+  901:                         >
+  902:                           {Array.from({
+  903:                             length: Math.min(section.articleLimit || 3, 6),
+  904:                           }).map((_, index) => (
+  905:                             <article
+  906:                               key={index}
+  907:                               className="overflow-hidden rounded-xl border"
+  908:                               style={{
+  909:                                 borderColor: selectedTheme.colours.border,
+  910:                               }}
+  911:                             >
+  912:                               <div
+  913:                                 className="aspect-video"
+  914:                                 style={{
+  915:                                   backgroundColor:
+  916:                                     index % 2 === 0
+  917:                                       ? selectedTheme.colours.secondary
+  918:                                       : selectedTheme.colours.accent,
+  919:                                 }}
+  920:                               />
+  921:                               <div className="p-4">
+  922:                                 <p
+  923:                                   className="text-xs font-semibold uppercase"
+  924:                                   style={{
+  925:                                     color: selectedTheme.colours.primary,
+  926:                                   }}
+  927:                                 >
+  928:                                   {selectedTheme.niche}
+  929:                                 </p>
+  930:                                 <h3 className="mt-2 font-bold">
+  931:                                   Example article title for this theme
+  932:                                 </h3>
+  933:                                 <p className="mt-2 text-xs opacity-70">
+  934:                                   Preview article cards using the selected colours and
+  935:                                   layout.
+  936:                                 </p>
+  937:                               </div>
+  938:                             </article>
+  939:                           ))}
+  940:                         </div>
+  941:                       )}
+  942:                     </section>
+  943:                   ))}
+  944:               </main>
+  945:               <footer
+  946:                 className="border-t px-5 py-8 text-center text-xs"
+  947:                 style={{
+  948:                   borderColor: selectedTheme.colours.border,
+  949:                   backgroundColor: selectedTheme.colours.muted,
+  950:                 }}
+  951:               >
+  952:                 Dynamic footer for {selectedTheme.name}
+  953:               </footer>
+  954:             </div>
+  955:           </div>
+  956:         </section>
+  957:       </div>
+  958:     </div>
+  959:   );
+  960: }
+
+============================================================
+FILE: src\components\site\active-theme-style.tsx
+============================================================
+    1: import { getActiveTheme } from "@/lib/theme/theme-store";
+    2: export async function ActiveThemeStyle() {
+    3:   const theme = await getActiveTheme();
+    4:   const css = `
+    5:     :root {
+    6:       --theme-background: ${theme.colours.background};
+    7:       --theme-foreground: ${theme.colours.foreground};
+    8:       --theme-primary: ${theme.colours.primary};
+    9:       --theme-secondary: ${theme.colours.secondary};
+   10:       --theme-accent: ${theme.colours.accent};
+   11:       --theme-muted: ${theme.colours.muted};
+   12:       --theme-border: ${theme.colours.border};
+   13:       --theme-heading-font: "${theme.typography.headingFont}";
+   14:       --theme-body-font: "${theme.typography.bodyFont}";
+   15:     }
+   16:   `;
+   17:   return <style dangerouslySetInnerHTML={{ __html: css }} />;
+   18: }
+
+============================================================
+FILE: src\components\site\dynamic-homepage.tsx
+============================================================
+    1: import Link from "next/link";
+    2: import { getActiveTheme } from "@/lib/theme/theme-store";
+    3: import type { ThemeConfiguration, ThemeSection } from "@/lib/theme/types";
+    4: const fallbackArticles = [
+    5:   {
+    6:     title: "Understanding the Basics of Personal Finance",
+    7:     slug: "understanding-the-basics-of-personal-finance",
+    8:     category: "Finance",
+    9:     description: "Learn practical principles for budgeting, saving and planning.",
+   10:   },
+   11:   {
+   12:     title: "How Artificial Intelligence Processes Information",
+   13:     slug: "how-artificial-intelligence-processes-information",
+   14:     category: "Technology",
+   15:     description: "A clear introduction to modern artificial intelligence systems.",
+   16:   },
+   17:   {
+   18:     title: "Why Scientific Research Uses Controlled Experiments",
+   19:     slug: "why-scientific-research-uses-controlled-experiments",
+   20:     category: "Science",
+   21:     description: "Understand how controlled testing improves research reliability.",
+   22:   },
+   23:   {
+   24:     title: "Building Better Digital Habits",
+   25:     slug: "building-better-digital-habits",
+   26:     category: "Lifestyle",
+   27:     description: "Simple methods for improving focus and reducing digital overload.",
+   28:   },
+   29:   {
+   30:     title: "Technology Trends Shaping the Modern World",
+   31:     slug: "technology-trends-shaping-the-modern-world",
+   32:     category: "Technology",
+   33:     description: "Explore major technologies influencing business and everyday life.",
+   34:   },
+   35:   {
+   36:     title: "A Practical Guide to Lifelong Learning",
+   37:     slug: "a-practical-guide-to-lifelong-learning",
+   38:     category: "Education",
+   39:     description: "Create a sustainable learning system for long-term growth.",
+   40:   },
+   41:   {
+   42:     title: "How Healthy Routines Support Better Performance",
+   43:     slug: "how-healthy-routines-support-better-performance",
+   44:     category: "Health",
+   45:     description: "Improve energy and consistency through practical daily routines.",
+   46:   },
+   47:   {
+   48:     title: "Understanding Global Business Markets",
+   49:     slug: "understanding-global-business-markets",
+   50:     category: "Business",
+   51:     description: "Learn how global markets affect companies and consumers.",
+   52:   },
+   53:   {
+   54:     title: "The Future of Sustainable Agriculture",
+   55:     slug: "the-future-of-sustainable-agriculture",
+   56:     category: "Agriculture",
+   57:     description: "Discover farming methods designed for efficiency and sustainability.",
+   58:   },
+   59: ];
+   60: function createCategorySlug(value: string): string {
+   61:   return value
+   62:     .toLowerCase()
+   63:     .trim()
+   64:     .replace(/&/g, "and")
+   65:     .replace(/[^a-z0-9]+/g, "-")
+   66:     .replace(/^-+|-+$/g, "");
+   67: }
+   68: function ThemeArticleCard({
+   69:   article,
+   70:   theme,
+   71:   index,
+   72: }: {
+   73:   article: (typeof fallbackArticles)[number];
+   74:   theme: ThemeConfiguration;
+   75:   index: number;
+   76: }) {
+   77:   return (
+   78:     <article
+   79:       className="group overflow-hidden rounded-2xl border transition-transform hover:-translate-y-1"
+   80:       style={{
+   81:         borderColor: theme.colours.border,
+   82:         backgroundColor: theme.colours.background,
+   83:       }}
+   84:     >
+   85:       <div
+   86:         className="aspect-[16/9]"
+   87:         style={{
+   88:           background:
+   89:             index % 3 === 0
+   90:               ? `linear-gradient(135deg, ${theme.colours.primary}, ${theme.colours.secondary})`
+   91:               : index % 3 === 1
+   92:                 ? `linear-gradient(135deg, ${theme.colours.secondary}, ${theme.colours.accent})`
+   93:                 : `linear-gradient(135deg, ${theme.colours.accent}, ${theme.colours.primary})`,
+   94:         }}
+   95:       />
+   96:       <div className="p-5">
+   97:         <Link
+   98:           href={`/category/${createCategorySlug(article.category)}`}
+   99:           className="text-xs font-bold tracking-wider uppercase"
+  100:           style={{
+  101:             color: theme.colours.primary,
+  102:           }}
+  103:         >
+  104:           {article.category}
+  105:         </Link>
+  106:         <h3
+  107:           className="mt-3 text-lg leading-snug font-bold"
+  108:           style={{
+  109:             fontFamily: theme.typography.headingFont,
+  110:           }}
+  111:         >
+  112:           <Link href={`/article/${article.slug}`}>{article.title}</Link>
+  113:         </h3>
+  114:         <p className="mt-3 text-sm leading-6 opacity-70">{article.description}</p>
+  115:       </div>
+  116:     </article>
+  117:   );
+  118: }
+  119: function HeroSection({
+  120:   theme,
+  121:   section,
+  122: }: {
+  123:   theme: ThemeConfiguration;
+  124:   section: ThemeSection;
+  125: }) {
+  126:   const primaryArticle = fallbackArticles[0];
+  127:   return (
+  128:     <section className="mx-auto max-w-7xl px-4 pt-10 sm:px-6 lg:px-8">
+  129:       <div
+  130:         className="overflow-hidden rounded-3xl px-6 py-14 sm:px-10 lg:px-14"
+  131:         style={{
+  132:           background: `linear-gradient(135deg, ${theme.colours.primary}, ${theme.colours.secondary})`,
+  133:           color: theme.colours.background,
+  134:         }}
+  135:       >
+  136:         <p className="text-xs font-bold tracking-[0.25em] uppercase opacity-80">
+  137:           {section.title}
+  138:         </p>
+  139:         <h1
+  140:           className="mt-5 max-w-4xl text-4xl leading-tight font-bold sm:text-5xl lg:text-6xl"
+  141:           style={{
+  142:             fontFamily: theme.typography.headingFont,
+  143:           }}
+  144:         >
+  145:           {primaryArticle.title}
+  146:         </h1>
+  147:         <p className="mt-6 max-w-2xl text-base leading-7 opacity-85 sm:text-lg">
+  148:           {primaryArticle.description}
+  149:         </p>
+  150:         <Link
+  151:           href={`/article/${primaryArticle.slug}`}
+  152:           className="mt-8 inline-flex rounded-xl px-5 py-3 text-sm font-bold"
+  153:           style={{
+  154:             backgroundColor: theme.colours.background,
+  155:             color: theme.colours.primary,
+  156:           }}
+  157:         >
+  158:           Read featured article
+  159:         </Link>
+  160:       </div>
+  161:     </section>
+  162:   );
+  163: }
+  164: function ArticleGridSection({
+  165:   theme,
+  166:   section,
+  167:   offset,
+  168: }: {
+  169:   theme: ThemeConfiguration;
+  170:   section: ThemeSection;
+  171:   offset: number;
+  172: }) {
+  173:   const articleLimit = Math.max(1, Math.min(section.articleLimit || 6, 9));
+  174:   const articles = Array.from(
+  175:     {
+  176:       length: articleLimit,
+  177:     },
+  178:     (_, index) => fallbackArticles[(index + offset) % fallbackArticles.length],
+  179:   );
+  180:   return (
+  181:     <section className="mx-auto max-w-7xl px-4 py-10 sm:px-6 lg:px-8">
+  182:       <div className="mb-6 flex items-end justify-between gap-4">
+  183:         <div>
+  184:           <p
+  185:             className="text-xs font-bold tracking-[0.2em] uppercase"
+  186:             style={{
+  187:               color: theme.colours.primary,
+  188:             }}
+  189:           >
+  190:             {theme.niche}
+  191:           </p>
+  192:           <h2
+  193:             className="mt-2 text-3xl font-bold"
+  194:             style={{
+  195:               fontFamily: theme.typography.headingFont,
+  196:             }}
+  197:           >
+  198:             {section.title}
+  199:           </h2>
+  200:         </div>
+  201:         <Link
+  202:           href="/feed"
+  203:           className="text-sm font-semibold"
+  204:           style={{
+  205:             color: theme.colours.primary,
+  206:           }}
+  207:         >
+  208:           View all
+  209:         </Link>
+  210:       </div>
+  211:       <div
+  212:         className={
+  213:           theme.layout === "minimal"
+  214:             ? "grid gap-5"
+  215:             : theme.layout === "editorial"
+  216:               ? "grid gap-5 md:grid-cols-2"
+  217:               : "grid gap-5 sm:grid-cols-2 lg:grid-cols-3"
+  218:         }
+  219:       >
+  220:         {articles.map((article, index) => (
+  221:           <ThemeArticleCard
+  222:             key={`${section.id}-${article.slug}-${index}`}
+  223:             article={article}
+  224:             theme={theme}
+  225:             index={index}
+  226:           />
+  227:         ))}
+  228:       </div>
+  229:     </section>
+  230:   );
+  231: }
+  232: function CategoriesSection({
+  233:   theme,
+  234:   section,
+  235: }: {
+  236:   theme: ThemeConfiguration;
+  237:   section: ThemeSection;
+  238: }) {
+  239:   return (
+  240:     <section className="mx-auto max-w-7xl px-4 py-10 sm:px-6 lg:px-8">
+  241:       <h2
+  242:         className="text-3xl font-bold"
+  243:         style={{
+  244:           fontFamily: theme.typography.headingFont,
+  245:         }}
+  246:       >
+  247:         {section.title}
+  248:       </h2>
+  249:       <div className="mt-6 flex flex-wrap gap-3">
+  250:         {theme.navigation.map((item, index) => (
+  251:           <Link
+  252:             key={`${item}-${index}`}
+  253:             href={`/category/${createCategorySlug(item)}`}
+  254:             className="rounded-full border px-5 py-2.5 text-sm font-semibold transition-transform hover:-translate-y-0.5"
+  255:             style={{
+  256:               borderColor: theme.colours.border,
+  257:               backgroundColor:
+  258:                 index === 0 ? theme.colours.primary : theme.colours.background,
+  259:               color: index === 0 ? theme.colours.background : theme.colours.foreground,
+  260:             }}
+  261:           >
+  262:             {item}
+  263:           </Link>
+  264:         ))}
+  265:       </div>
+  266:     </section>
+  267:   );
+  268: }
+  269: function NewsletterSection({
+  270:   theme,
+  271:   section,
+  272: }: {
+  273:   theme: ThemeConfiguration;
+  274:   section: ThemeSection;
+  275: }) {
+  276:   return (
+  277:     <section className="mx-auto max-w-7xl px-4 py-10 sm:px-6 lg:px-8">
+  278:       <div
+  279:         className="rounded-3xl p-7 sm:p-10"
+  280:         style={{
+  281:           backgroundColor: theme.colours.muted,
+  282:         }}
+  283:       >
+  284:         <h2
+  285:           className="text-3xl font-bold"
+  286:           style={{
+  287:             fontFamily: theme.typography.headingFont,
+  288:           }}
+  289:         >
+  290:           {section.title}
+  291:         </h2>
+  292:         <p className="mt-3 max-w-2xl text-sm leading-6 opacity-70">
+  293:           Receive the latest {theme.niche} articles and important updates directly in your
+  294:           inbox.
+  295:         </p>
+  296:         <form className="mt-6 flex max-w-xl flex-col gap-3 sm:flex-row">
+  297:           <label className="sr-only" htmlFor="newsletter-email">
+  298:             Email address
+  299:           </label>
+  300:           <input
+  301:             id="newsletter-email"
+  302:             type="email"
+  303:             placeholder="Email address"
+  304:             className="min-h-12 flex-1 rounded-xl border px-4 outline-none"
+  305:             style={{
+  306:               borderColor: theme.colours.border,
+  307:               backgroundColor: theme.colours.background,
+  308:             }}
+  309:           />
+  310:           <button
+  311:             type="submit"
+  312:             className="min-h-12 rounded-xl px-6 font-bold"
+  313:             style={{
+  314:               backgroundColor: theme.colours.primary,
+  315:               color: theme.colours.background,
+  316:             }}
+  317:           >
+  318:             Subscribe
+  319:           </button>
+  320:         </form>
+  321:       </div>
+  322:     </section>
+  323:   );
+  324: }
+  325: export async function DynamicHomepage() {
+  326:   const theme = await getActiveTheme();
+  327:   const sections = theme.sections
+  328:     .filter((section) => section.enabled)
+  329:     .slice()
+  330:     .sort((first, second) => first.position - second.position);
+  331:   return (
+  332:     <main
+  333:       style={{
+  334:         backgroundColor: theme.colours.background,
+  335:         color: theme.colours.foreground,
+  336:         fontFamily: theme.typography.bodyFont,
+  337:       }}
+  338:     >
+  339:       {sections.map((section, index) => {
+  340:         if (section.type === "hero") {
+  341:           return <HeroSection key={section.id} theme={theme} section={section} />;
+  342:         }
+  343:         if (section.type === "categories") {
+  344:           return <CategoriesSection key={section.id} theme={theme} section={section} />;
+  345:         }
+  346:         if (section.type === "newsletter") {
+  347:           return <NewsletterSection key={section.id} theme={theme} section={section} />;
+  348:         }
+  349:         return (
+  350:           <ArticleGridSection
+  351:             key={section.id}
+  352:             theme={theme}
+  353:             section={section}
+  354:             offset={index * 2}
+  355:           />
+  356:         );
+  357:       })}
+  358:     </main>
+  359:   );
+  360: }
+  361: export default DynamicHomepage;
+
+============================================================
+FILE: src\components\site\site-header.tsx
+============================================================
+    1: import Link from "next/link";
+    2: import { getActiveTheme } from "@/lib/theme/theme-store";
+    3: function createSlug(value: string): string {
+    4:   return value
+    5:     .toLowerCase()
+    6:     .trim()
+    7:     .replace(/&/g, "and")
+    8:     .replace(/[^a-z0-9]+/g, "-")
+    9:     .replace(/^-+|-+$/g, "");
+   10: }
+   11: export async function SiteHeader() {
+   12:   const theme = await getActiveTheme();
+   13:   return (
+   14:     <header
+   15:       className="sticky top-0 z-40 border-b backdrop-blur-xl"
+   16:       style={{
+   17:         borderColor: theme.colours.border,
+   18:         backgroundColor: `${theme.colours.background}F2`,
+   19:         color: theme.colours.foreground,
+   20:       }}
+   21:     >
+   22:       <div className="mx-auto flex max-w-7xl items-center justify-between gap-5 px-4 py-4 sm:px-6 lg:px-8">
+   23:         <Link
+   24:           href="/"
+   25:           className="min-w-0 text-xl font-bold tracking-tight"
+   26:           style={{
+   27:             color: theme.colours.primary,
+   28:             fontFamily: theme.typography.headingFont,
+   29:           }}
+   30:         >
+   31:           {theme.name}
+   32:         </Link>
+   33:         <nav
+   34:           aria-label="Primary navigation"
+   35:           className="hidden items-center gap-5 lg:flex"
+   36:         >
+   37:           {theme.navigation.slice(0, 7).map((item, index) => (
+   38:             <Link
+   39:               key={`${item}-${index}`}
+   40:               href={index === 0 ? "/" : `/category/${createSlug(item)}`}
+   41:               className="text-sm font-medium transition-opacity hover:opacity-65"
+   42:             >
+   43:               {item}
+   44:             </Link>
+   45:           ))}
+   46:         </nav>
+   47:         <div className="flex items-center gap-2">
+   48:           <Link
+   49:             href="/search"
+   50:             className="rounded-lg border px-3 py-2 text-sm font-medium"
+   51:             style={{
+   52:               borderColor: theme.colours.border,
+   53:             }}
+   54:           >
+   55:             Search
+   56:           </Link>
+   57:           <Link
+   58:             href="/admin/themes"
+   59:             className="rounded-lg px-3 py-2 text-sm font-medium"
+   60:             style={{
+   61:               backgroundColor: theme.colours.primary,
+   62:               color: theme.colours.background,
+   63:             }}
+   64:           >
+   65:             Theme Studio
+   66:           </Link>
+   67:         </div>
+   68:       </div>
+   69:       <nav
+   70:         aria-label="Mobile navigation"
+   71:         className="overflow-x-auto border-t px-4 py-3 lg:hidden"
+   72:         style={{
+   73:           borderColor: theme.colours.border,
+   74:         }}
+   75:       >
+   76:         <div className="flex min-w-max gap-4">
+   77:           {theme.navigation.map((item, index) => (
+   78:             <Link
+   79:               key={`${item}-${index}`}
+   80:               href={index === 0 ? "/" : `/category/${createSlug(item)}`}
+   81:               className="text-xs font-semibold"
+   82:             >
+   83:               {item}
+   84:             </Link>
+   85:           ))}
+   86:         </div>
+   87:       </nav>
+   88:     </header>
+   89:   );
+   90: }
+   91: export default SiteHeader;
+
+============================================================
+FILE: src\components\site\site-footer.tsx
+============================================================
+    1: import Link from "next/link";
+    2: import { getActiveTheme } from "@/lib/theme/theme-store";
+    3: function createSlug(value: string): string {
+    4:   return value
+    5:     .toLowerCase()
+    6:     .trim()
+    7:     .replace(/&/g, "and")
+    8:     .replace(/[^a-z0-9]+/g, "-")
+    9:     .replace(/^-+|-+$/g, "");
+   10: }
+   11: export async function SiteFooter() {
+   12:   const theme = await getActiveTheme();
+   13:   const currentYear = new Date().getFullYear();
+   14:   return (
+   15:     <footer
+   16:       className="mt-16 border-t"
+   17:       style={{
+   18:         borderColor: theme.colours.border,
+   19:         backgroundColor: theme.colours.muted,
+   20:         color: theme.colours.foreground,
+   21:       }}
+   22:     >
+   23:       <div className="mx-auto grid max-w-7xl gap-10 px-4 py-12 sm:px-6 md:grid-cols-3 lg:px-8">
+   24:         <div>
+   25:           <p
+   26:             className="text-xl font-bold"
+   27:             style={{
+   28:               color: theme.colours.primary,
+   29:               fontFamily: theme.typography.headingFont,
+   30:             }}
+   31:           >
+   32:             {theme.name}
+   33:           </p>
+   34:           <p className="mt-3 max-w-sm text-sm leading-6 opacity-75">
+   35:             A dynamic {theme.niche} publication powered by the Knowledge Nest universal
+   36:             website builder.
+   37:           </p>
+   38:         </div>
+   39:         <div>
+   40:           <p className="font-semibold">Explore</p>
+   41:           <div className="mt-4 grid grid-cols-2 gap-3">
+   42:             {theme.navigation.slice(0, 8).map((item, index) => (
+   43:               <Link
+   44:                 key={`${item}-${index}`}
+   45:                 href={index === 0 ? "/" : `/category/${createSlug(item)}`}
+   46:                 className="text-sm opacity-75 transition-opacity hover:opacity-100"
+   47:               >
+   48:                 {item}
+   49:               </Link>
+   50:             ))}
+   51:           </div>
+   52:         </div>
+   53:         <div>
+   54:           <p className="font-semibold">Information</p>
+   55:           <div className="mt-4 grid gap-3 text-sm">
+   56:             <Link href="/about-us">About Us</Link>
+   57:             <Link href="/contact-us">Contact Us</Link>
+   58:             <Link href="/privacy-policy">Privacy Policy</Link>
+   59:             <Link href="/terms-and-conditions">Terms and Conditions</Link>
+   60:           </div>
+   61:         </div>
+   62:       </div>
+   63:       <div
+   64:         className="border-t px-4 py-5 text-center text-xs opacity-75"
+   65:         style={{
+   66:           borderColor: theme.colours.border,
+   67:         }}
+   68:       >
+   69:         © {currentYear} {theme.name}. All rights reserved.
+   70:       </div>
+   71:     </footer>
+   72:   );
+   73: }
+   74: export default SiteFooter;
+
+============================================================
+FILE: src\lib\theme\types.ts
+============================================================
+    1: export type ThemeDevice = "desktop" | "tablet" | "mobile";
+    2: export type ThemeNiche =
+    3:   | "news"
+    4:   | "finance"
+    5:   | "technology"
+    6:   | "ai"
+    7:   | "business"
+    8:   | "education"
+    9:   | "health"
+   10:   | "science"
+   11:   | "fashion"
+   12:   | "beauty"
+   13:   | "cars"
+   14:   | "sports"
+   15:   | "travel"
+   16:   | "food"
+   17:   | "gaming"
+   18:   | "entertainment"
+   19:   | "real-estate"
+   20:   | "agriculture"
+   21:   | "lifestyle"
+   22:   | "general";
+   23: export type ThemeLayout =
+   24:   "editorial" | "magazine" | "grid" | "minimal" | "business" | "visual";
+   25: export type ThemeSectionType =
+   26:   "hero" | "featured" | "latest" | "trending" | "categories" | "newsletter" | "custom";
+   27: export type ThemeColourPalette = {
+   28:   background: string;
+   29:   foreground: string;
+   30:   primary: string;
+   31:   secondary: string;
+   32:   accent: string;
+   33:   muted: string;
+   34:   border: string;
+   35: };
+   36: export type ThemeTypography = {
+   37:   headingFont: string;
+   38:   bodyFont: string;
+   39:   headingWeight: number;
+   40:   bodyWeight: number;
+   41: };
+   42: export type ThemeSection = {
+   43:   id: string;
+   44:   type: ThemeSectionType;
+   45:   title: string;
+   46:   enabled: boolean;
+   47:   position: number;
+   48:   articleLimit: number;
+   49: };
+   50: export type ThemeConfiguration = {
+   51:   id: string;
+   52:   name: string;
+   53:   niche: ThemeNiche;
+   54:   layout: ThemeLayout;
+   55:   version: number;
+   56:   isActive: boolean;
+   57:   colours: ThemeColourPalette;
+   58:   typography: ThemeTypography;
+   59:   sections: ThemeSection[];
+   60:   navigation: string[];
+   61:   createdAt: string;
+   62:   updatedAt: string;
+   63: };
+   64: export type ThemeStore = {
+   65:   activeThemeId: string;
+   66:   themes: ThemeConfiguration[];
+   67:   backups: ThemeBackup[];
+   68: };
+   69: export type ThemeBackup = {
+   70:   id: string;
+   71:   name: string;
+   72:   createdAt: string;
+   73:   theme: ThemeConfiguration;
+   74: };

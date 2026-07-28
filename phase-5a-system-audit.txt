@@ -1,0 +1,1425 @@
+﻿PHASE 5A SYSTEM AUDIT
+Generated: 2026-07-26 16:09:20
+Project: C:\Users\A C\Downloads\knowledge-nest
+
+============================================================
+FILE: package.json
+============================================================
+{
+  "name": "knowledge-nest",
+  "version": "0.1.0",
+  "private": true,
+  "scripts": {
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start",
+    "lint": "eslint",
+    "typecheck": "tsc --noEmit",
+    "format": "prettier --write .",
+    "format:check": "prettier --check .",
+    "db:generate": "drizzle-kit generate",
+    "db:migrate": "drizzle-kit migrate",
+    "db:push": "drizzle-kit push",
+    "db:studio": "drizzle-kit studio"
+  },
+  "dependencies": {
+    "better-auth": "^1.6.24",
+    "class-variance-authority": "^0.7.1",
+    "clsx": "^2.1.1",
+    "date-fns": "^4.4.0",
+    "dotenv": "^17.4.2",
+    "drizzle-orm": "^0.45.2",
+    "lucide-react": "^1.26.0",
+    "next": "16.2.11",
+    "postgres": "^3.4.9",
+    "react": "19.2.4",
+    "react-dom": "19.2.4",
+    "tailwind-merge": "^3.6.0",
+    "zod": "^4.4.3"
+  },
+  "devDependencies": {
+    "@tailwindcss/postcss": "^4",
+    "@types/node": "^20.19.43",
+    "@types/react": "^19",
+    "@types/react-dom": "^19",
+    "drizzle-kit": "^0.31.10",
+    "eslint": "^9",
+    "eslint-config-next": "16.2.11",
+    "prettier": "^3.9.6",
+    "prettier-plugin-tailwindcss": "^0.8.1",
+    "tailwindcss": "^4",
+    "typescript": "^5"
+  }
+}
+
+
+============================================================
+FILE: .env.example
+============================================================
+NEXT_PUBLIC_SITE_NAME="Knowledge Nest"
+NEXT_PUBLIC_SITE_URL="http://localhost:3000"
+DATABASE_URL="postgresql://username:password@localhost:5432/knowledge_nest"
+BETTER_AUTH_SECRET=""
+BETTER_AUTH_URL="http://localhost:3000"
+OPENAI_API_KEY=""
+SEARCH_API_KEY=""
+NEWS_API_KEY=""
+
+
+============================================================
+FILE: drizzle.config.ts
+============================================================
+import { config } from "dotenv";
+import { defineConfig } from "drizzle-kit";
+config({ path: ".env.local" });
+export default defineConfig({
+  dialect: "postgresql",
+  schema: "./src/db/schema/*",
+  out: "./drizzle",
+  dbCredentials: {
+    url:
+      process.env.DATABASE_URL ||
+      "postgresql://username:password@localhost:5432/knowledge_nest",
+  },
+  verbose: true,
+  strict: true,
+});
+
+
+============================================================
+FILE: src\db\index.ts
+============================================================
+import postgres from "postgres";
+import { drizzle } from "drizzle-orm/postgres-js";
+const connectionString = process.env.DATABASE_URL;
+if (!connectionString) {
+  throw new Error("DATABASE_URL is missing.");
+}
+const client = postgres(connectionString);
+export const db = drizzle(client);
+
+
+============================================================
+FILE: src\db\schema\articles.ts
+============================================================
+import {
+  boolean,
+  index,
+  integer,
+  jsonb,
+  pgTable,
+  primaryKey,
+  text,
+  timestamp,
+  uniqueIndex,
+  uuid,
+  varchar,
+} from "drizzle-orm/pg-core";
+import { media } from "./media";
+import { categories, tags } from "./taxonomy";
+import { users } from "./users";
+export const articles = pgTable(
+  "articles",
+  {
+    id: uuid("id").defaultRandom().primaryKey(),
+    authorId: uuid("author_id")
+      .notNull()
+      .references(() => users.id, {
+        onDelete: "restrict",
+      }),
+    categoryId: uuid("category_id").references(() => categories.id, {
+      onDelete: "set null",
+    }),
+    featuredImageId: uuid("featured_image_id").references(() => media.id, {
+      onDelete: "set null",
+    }),
+    title: varchar("title", { length: 255 }).notNull(),
+    slug: varchar("slug", { length: 300 }).notNull(),
+    excerpt: text("excerpt"),
+    content: text("content").notNull(),
+    contentJson: jsonb("content_json").$type<Record<string, unknown>>(),
+    status: varchar("status", { length: 30 }).default("draft").notNull(),
+    seoTitle: varchar("seo_title", { length: 255 }),
+    seoDescription: text("seo_description"),
+    canonicalUrl: text("canonical_url"),
+    focusKeyword: varchar("focus_keyword", { length: 255 }),
+    readingTimeMinutes: integer("reading_time_minutes").default(1).notNull(),
+    viewCount: integer("view_count").default(0).notNull(),
+    isFeatured: boolean("is_featured").default(false).notNull(),
+    scheduledAt: timestamp("scheduled_at", {
+      withTimezone: true,
+    }),
+    publishedAt: timestamp("published_at", {
+      withTimezone: true,
+    }),
+    createdAt: timestamp("created_at", {
+      withTimezone: true,
+    })
+      .defaultNow()
+      .notNull(),
+    updatedAt: timestamp("updated_at", {
+      withTimezone: true,
+    })
+      .defaultNow()
+      .notNull(),
+  },
+  (table) => [
+    uniqueIndex("articles_slug_unique").on(table.slug),
+    index("articles_status_index").on(table.status),
+    index("articles_category_index").on(table.categoryId),
+    index("articles_author_index").on(table.authorId),
+  ],
+);
+export const articleTags = pgTable(
+  "article_tags",
+  {
+    articleId: uuid("article_id")
+      .notNull()
+      .references(() => articles.id, {
+        onDelete: "cascade",
+      }),
+    tagId: uuid("tag_id")
+      .notNull()
+      .references(() => tags.id, {
+        onDelete: "cascade",
+      }),
+  },
+  (table) => [
+    primaryKey({
+      columns: [table.articleId, table.tagId],
+    }),
+  ],
+);
+export const articleRevisions = pgTable(
+  "article_revisions",
+  {
+    id: uuid("id").defaultRandom().primaryKey(),
+    articleId: uuid("article_id")
+      .notNull()
+      .references(() => articles.id, {
+        onDelete: "cascade",
+      }),
+    editedById: uuid("edited_by_id").references(() => users.id, {
+      onDelete: "set null",
+    }),
+    revisionNumber: integer("revision_number").notNull(),
+    title: varchar("title", { length: 255 }).notNull(),
+    content: text("content").notNull(),
+    changeSummary: text("change_summary"),
+    createdAt: timestamp("created_at", {
+      withTimezone: true,
+    })
+      .defaultNow()
+      .notNull(),
+  },
+  (table) => [
+    uniqueIndex("article_revision_unique").on(table.articleId, table.revisionNumber),
+  ],
+);
+
+
+============================================================
+FILE: src\db\schema\taxonomy.ts
+============================================================
+import {
+  boolean,
+  integer,
+  pgTable,
+  text,
+  timestamp,
+  uniqueIndex,
+  uuid,
+  varchar,
+} from "drizzle-orm/pg-core";
+export const categories = pgTable(
+  "categories",
+  {
+    id: uuid("id").defaultRandom().primaryKey(),
+    name: varchar("name", { length: 120 }).notNull(),
+    slug: varchar("slug", { length: 160 }).notNull(),
+    description: text("description"),
+    imageUrl: text("image_url"),
+    isActive: boolean("is_active").default(true).notNull(),
+    sortOrder: integer("sort_order").default(0).notNull(),
+    createdAt: timestamp("created_at", {
+      withTimezone: true,
+    })
+      .defaultNow()
+      .notNull(),
+    updatedAt: timestamp("updated_at", {
+      withTimezone: true,
+    })
+      .defaultNow()
+      .notNull(),
+  },
+  (table) => [uniqueIndex("categories_slug_unique").on(table.slug)],
+);
+export const tags = pgTable(
+  "tags",
+  {
+    id: uuid("id").defaultRandom().primaryKey(),
+    name: varchar("name", { length: 100 }).notNull(),
+    slug: varchar("slug", { length: 140 }).notNull(),
+    description: text("description"),
+    createdAt: timestamp("created_at", {
+      withTimezone: true,
+    })
+      .defaultNow()
+      .notNull(),
+  },
+  (table) => [uniqueIndex("tags_slug_unique").on(table.slug)],
+);
+
+
+============================================================
+FILE: src\db\schema\media.ts
+============================================================
+import {
+  bigint,
+  integer,
+  jsonb,
+  pgTable,
+  text,
+  timestamp,
+  uuid,
+  varchar,
+} from "drizzle-orm/pg-core";
+import { users } from "./users";
+export const media = pgTable("media", {
+  id: uuid("id").defaultRandom().primaryKey(),
+  uploadedById: uuid("uploaded_by_id").references(() => users.id, {
+    onDelete: "set null",
+  }),
+  type: varchar("type", { length: 30 }).notNull(),
+  provider: varchar("provider", { length: 50 }).default("local").notNull(),
+  originalName: varchar("original_name", { length: 255 }).notNull(),
+  fileName: varchar("file_name", { length: 255 }).notNull(),
+  mimeType: varchar("mime_type", { length: 150 }).notNull(),
+  url: text("url").notNull(),
+  storageKey: text("storage_key"),
+  altText: varchar("alt_text", { length: 255 }),
+  title: varchar("title", { length: 255 }),
+  caption: text("caption"),
+  width: integer("width"),
+  height: integer("height"),
+  fileSize: bigint("file_size", { mode: "number" }),
+  metadata: jsonb("metadata").$type<Record<string, unknown>>().default({}).notNull(),
+  createdAt: timestamp("created_at", {
+    withTimezone: true,
+  })
+    .defaultNow()
+    .notNull(),
+  updatedAt: timestamp("updated_at", {
+    withTimezone: true,
+  })
+    .defaultNow()
+    .notNull(),
+});
+
+
+============================================================
+FILE: src\db\schema\index.ts
+============================================================
+export * from "./articles";
+export * from "./media";
+export * from "./settings";
+export * from "./taxonomy";
+export * from "./users";
+
+
+============================================================
+FILE: src\app\admin\page.tsx
+============================================================
+import Link from "next/link";
+import { FileText, FolderTree, ImageIcon, Plus, Settings } from "lucide-react";
+const statistics = [
+  {
+    label: "Total Articles",
+    value: "0",
+    icon: FileText,
+  },
+  {
+    label: "Published Articles",
+    value: "0",
+    icon: FileText,
+  },
+  {
+    label: "Categories",
+    value: "0",
+    icon: FolderTree,
+  },
+  {
+    label: "Media Files",
+    value: "0",
+    icon: ImageIcon,
+  },
+];
+const quickActions = [
+  {
+    label: "Create Article",
+    href: "/admin/articles/new",
+    icon: Plus,
+  },
+  {
+    label: "Manage Categories",
+    href: "/admin/categories",
+    icon: FolderTree,
+  },
+  {
+    label: "Open Media Library",
+    href: "/admin/media",
+    icon: ImageIcon,
+  },
+  {
+    label: "Site Settings",
+    href: "/admin/settings",
+    icon: Settings,
+  },
+];
+export default function AdminDashboardPage() {
+  return (
+    <div className="space-y-8">
+      <div>
+        <h1 className="text-2xl font-bold tracking-tight sm:text-3xl">Dashboard</h1>
+        <p className="text-muted-foreground mt-2 text-sm">
+          Manage website content, media and settings.
+        </p>
+      </div>
+      <section className="grid gap-4 sm:grid-cols-2 xl:grid-cols-4">
+        {statistics.map((item) => {
+          const Icon = item.icon;
+          return (
+            <article
+              key={item.label}
+              className="border-border bg-background rounded-xl border p-5 shadow-sm"
+            >
+              <div className="flex items-center justify-between">
+                <p className="text-muted-foreground text-sm font-medium">{item.label}</p>
+                <Icon className="text-muted-foreground h-5 w-5" />
+              </div>
+              <p className="mt-4 text-3xl font-bold">{item.value}</p>
+            </article>
+          );
+        })}
+      </section>
+      <section className="border-border bg-background rounded-xl border p-5 shadow-sm">
+        <h2 className="text-lg font-semibold">Quick Actions</h2>
+        <div className="mt-4 grid gap-3 sm:grid-cols-2 xl:grid-cols-4">
+          {quickActions.map((action) => {
+            const Icon = action.icon;
+            return (
+              <Link
+                key={action.href}
+                href={action.href}
+                className="border-border hover:bg-muted flex items-center gap-3 rounded-lg border p-4 text-sm font-medium transition-colors"
+              >
+                <Icon className="h-5 w-5" />
+                {action.label}
+              </Link>
+            );
+          })}
+        </div>
+      </section>
+      <section className="border-border bg-background rounded-xl border p-5 shadow-sm">
+        <h2 className="text-lg font-semibold">Recent Articles</h2>
+        <div className="text-muted-foreground mt-6 rounded-lg border border-dashed p-8 text-center text-sm">
+          No articles have been created.
+        </div>
+      </section>
+    </div>
+  );
+}
+
+
+============================================================
+FILE: src\app\admin\articles\page.tsx
+============================================================
+import Link from "next/link";
+import { Plus } from "lucide-react";
+export default function ArticlesPage() {
+  return (
+    <div className="space-y-6">
+      <div className="flex flex-col justify-between gap-4 sm:flex-row sm:items-center">
+        <div>
+          <h1 className="text-2xl font-bold">Articles</h1>
+          <p className="text-muted-foreground mt-1 text-sm">
+            Create, edit and publish website articles.
+          </p>
+        </div>
+        <Link
+          href="/admin/articles/new"
+          className="bg-foreground text-background inline-flex items-center justify-center gap-2 rounded-lg px-4 py-2 text-sm font-medium"
+        >
+          <Plus className="h-4 w-4" />
+          New Article
+        </Link>
+      </div>
+      <div className="border-border bg-background rounded-xl border p-8 text-center shadow-sm">
+        <p className="text-muted-foreground text-sm">No articles are available.</p>
+      </div>
+    </div>
+  );
+}
+
+
+============================================================
+FILE: src\app\admin\articles\new\page.tsx
+============================================================
+import { ArticleEditor } from "@/components/admin/articles/article-editor";
+export default function NewArticlePage() {
+  return <ArticleEditor mode="create" />;
+}
+
+
+============================================================
+FILE: src\app\admin\articles\[id]\edit\page.tsx
+============================================================
+import { ArticleEditor } from "@/components/admin/articles/article-editor";
+export default async function EditArticlePage({
+  params,
+}: {
+  params: Promise<{
+    id: string;
+  }>;
+}) {
+  await params;
+  return <ArticleEditor mode="edit" />;
+}
+
+
+============================================================
+FILE: src\components\admin\articles\article-editor.tsx
+============================================================
+"use client";
+import { useMemo, useState } from "react";
+import Link from "next/link";
+import { ArrowLeft, Eye, ImageIcon, Save, Send, Sparkles } from "lucide-react";
+type ArticleEditorProps = {
+  mode: "create" | "edit";
+};
+const categories = [
+  "Finance",
+  "Science",
+  "Technology",
+  "AI",
+  "Health",
+  "Education",
+  "Business",
+  "History",
+  "Environment",
+  "Space",
+  "Psychology",
+  "General Knowledge",
+];
+function createSlug(value: string) {
+  return value
+    .toLowerCase()
+    .trim()
+    .replace(/[^a-z0-9\s-]/g, "")
+    .replace(/\s+/g, "-")
+    .replace(/-+/g, "-");
+}
+export function ArticleEditor({ mode }: ArticleEditorProps) {
+  const [title, setTitle] = useState("");
+  const [slug, setSlug] = useState("");
+  const [excerpt, setExcerpt] = useState("");
+  const [content, setContent] = useState("");
+  const [category, setCategory] = useState("");
+  const [status, setStatus] = useState("draft");
+  const [featured, setFeatured] = useState(false);
+  const [seoTitle, setSeoTitle] = useState("");
+  const [seoDescription, setSeoDescription] = useState("");
+  const [focusKeyword, setFocusKeyword] = useState("");
+  const wordCount = useMemo(() => {
+    const cleanContent = content.trim();
+    if (!cleanContent) {
+      return 0;
+    }
+    return cleanContent.split(/\s+/).length;
+  }, [content]);
+  const readingTime = Math.max(1, Math.ceil(wordCount / 220));
+  function handleTitleChange(value: string) {
+    setTitle(value);
+    if (mode === "create") {
+      setSlug(createSlug(value));
+    }
+  }
+  function handleSubmit(event: React.FormEvent<HTMLFormElement>) {
+    event.preventDefault();
+  }
+  return (
+    <form onSubmit={handleSubmit} className="space-y-6">
+      <div className="flex flex-col justify-between gap-4 xl:flex-row xl:items-center">
+        <div className="flex items-start gap-3">
+          <Link
+            href="/admin/articles"
+            aria-label="Back to articles"
+            className="border-border hover:bg-muted mt-1 rounded-lg border p-2 transition-colors"
+          >
+            <ArrowLeft className="h-4 w-4" />
+          </Link>
+          <div>
+            <h1 className="text-2xl font-bold tracking-tight sm:text-3xl">
+              {mode === "create" ? "New Article" : "Edit Article"}
+            </h1>
+            <p className="text-muted-foreground mt-1 text-sm">
+              Write, optimize and publish website content.
+            </p>
+          </div>
+        </div>
+        <div className="flex flex-wrap gap-2">
+          <button
+            type="button"
+            className="border-border hover:bg-muted inline-flex items-center gap-2 rounded-lg border px-4 py-2 text-sm font-medium transition-colors"
+          >
+            <Eye className="h-4 w-4" />
+            Preview
+          </button>
+          <button
+            type="submit"
+            className="border-border hover:bg-muted inline-flex items-center gap-2 rounded-lg border px-4 py-2 text-sm font-medium transition-colors"
+          >
+            <Save className="h-4 w-4" />
+            Save Draft
+          </button>
+          <button
+            type="submit"
+            className="bg-foreground text-background inline-flex items-center gap-2 rounded-lg px-4 py-2 text-sm font-medium"
+          >
+            <Send className="h-4 w-4" />
+            Publish
+          </button>
+        </div>
+      </div>
+      <div className="grid gap-6 xl:grid-cols-[minmax(0,1fr)_340px]">
+        <div className="space-y-6">
+          <section className="border-border bg-background rounded-xl border p-5 shadow-sm sm:p-6">
+            <div className="space-y-5">
+              <div>
+                <label
+                  htmlFor="article-title"
+                  className="mb-2 block text-sm font-semibold"
+                >
+                  Article Title
+                </label>
+                <input
+                  id="article-title"
+                  value={title}
+                  onChange={(event) => handleTitleChange(event.target.value)}
+                  placeholder="Enter article title"
+                  required
+                  className="border-border bg-background focus:ring-foreground/20 w-full rounded-lg border px-4 py-3 text-lg font-semibold outline-none focus:ring-4"
+                />
+              </div>
+              <div>
+                <label
+                  htmlFor="article-slug"
+                  className="mb-2 block text-sm font-semibold"
+                >
+                  URL Slug
+                </label>
+                <input
+                  id="article-slug"
+                  value={slug}
+                  onChange={(event) => setSlug(createSlug(event.target.value))}
+                  placeholder="article-url-slug"
+                  required
+                  className="border-border bg-background focus:ring-foreground/20 w-full rounded-lg border px-4 py-2.5 text-sm outline-none focus:ring-4"
+                />
+              </div>
+              <div>
+                <label
+                  htmlFor="article-excerpt"
+                  className="mb-2 block text-sm font-semibold"
+                >
+                  Excerpt
+                </label>
+                <textarea
+                  id="article-excerpt"
+                  value={excerpt}
+                  onChange={(event) => setExcerpt(event.target.value)}
+                  placeholder="Write a concise article summary"
+                  rows={3}
+                  maxLength={500}
+                  className="border-border bg-background focus:ring-foreground/20 w-full resize-y rounded-lg border px-4 py-3 text-sm outline-none focus:ring-4"
+                />
+                <p className="text-muted-foreground mt-2 text-right text-xs">
+                  {excerpt.length}/500
+                </p>
+              </div>
+            </div>
+          </section>
+          <section className="border-border bg-background rounded-xl border shadow-sm">
+            <div className="border-border flex flex-wrap items-center justify-between gap-3 border-b p-4">
+              <div>
+                <h2 className="font-semibold">Article Content</h2>
+                <p className="text-muted-foreground mt-1 text-xs">
+                  {wordCount} words · {readingTime} minute read
+                </p>
+              </div>
+              <button
+                type="button"
+                className="border-border hover:bg-muted inline-flex items-center gap-2 rounded-lg border px-3 py-2 text-xs font-medium transition-colors"
+              >
+                <Sparkles className="h-4 w-4" />
+                AI Assistant
+              </button>
+            </div>
+            <textarea
+              value={content}
+              onChange={(event) => setContent(event.target.value)}
+              placeholder="Start writing the article content..."
+              required
+              rows={22}
+              className="bg-background min-h-[520px] w-full resize-y rounded-b-xl p-5 text-sm leading-7 outline-none sm:p-6"
+            />
+          </section>
+          <section className="border-border bg-background rounded-xl border p-5 shadow-sm sm:p-6">
+            <h2 className="text-lg font-semibold">Search Engine Optimization</h2>
+            <div className="mt-5 space-y-5">
+              <div>
+                <label htmlFor="seo-title" className="mb-2 block text-sm font-medium">
+                  SEO Title
+                </label>
+                <input
+                  id="seo-title"
+                  value={seoTitle}
+                  onChange={(event) => setSeoTitle(event.target.value)}
+                  maxLength={60}
+                  placeholder="Search result title"
+                  className="border-border bg-background focus:ring-foreground/20 w-full rounded-lg border px-4 py-2.5 text-sm outline-none focus:ring-4"
+                />
+                <p className="text-muted-foreground mt-2 text-right text-xs">
+                  {seoTitle.length}/60
+                </p>
+              </div>
+              <div>
+                <label
+                  htmlFor="seo-description"
+                  className="mb-2 block text-sm font-medium"
+                >
+                  Meta Description
+                </label>
+                <textarea
+                  id="seo-description"
+                  value={seoDescription}
+                  onChange={(event) => setSeoDescription(event.target.value)}
+                  maxLength={160}
+                  rows={3}
+                  placeholder="Search result description"
+                  className="border-border bg-background focus:ring-foreground/20 w-full resize-y rounded-lg border px-4 py-3 text-sm outline-none focus:ring-4"
+                />
+                <p className="text-muted-foreground mt-2 text-right text-xs">
+                  {seoDescription.length}/160
+                </p>
+              </div>
+              <div>
+                <label htmlFor="focus-keyword" className="mb-2 block text-sm font-medium">
+                  Focus Keyword
+                </label>
+                <input
+                  id="focus-keyword"
+                  value={focusKeyword}
+                  onChange={(event) => setFocusKeyword(event.target.value)}
+                  placeholder="Primary target keyword"
+                  className="border-border bg-background focus:ring-foreground/20 w-full rounded-lg border px-4 py-2.5 text-sm outline-none focus:ring-4"
+                />
+              </div>
+            </div>
+          </section>
+        </div>
+        <aside className="space-y-6">
+          <section className="border-border bg-background rounded-xl border p-5 shadow-sm">
+            <h2 className="font-semibold">Publishing</h2>
+            <div className="mt-4 space-y-4">
+              <div>
+                <label
+                  htmlFor="article-status"
+                  className="mb-2 block text-sm font-medium"
+                >
+                  Status
+                </label>
+                <select
+                  id="article-status"
+                  value={status}
+                  onChange={(event) => setStatus(event.target.value)}
+                  className="border-border bg-background focus:ring-foreground/20 w-full rounded-lg border px-3 py-2.5 text-sm outline-none focus:ring-4"
+                >
+                  <option value="draft">Draft</option>
+                  <option value="review">In Review</option>
+                  <option value="scheduled">Scheduled</option>
+                  <option value="published">Published</option>
+                  <option value="archived">Archived</option>
+                </select>
+              </div>
+              <label className="flex cursor-pointer items-center gap-3 text-sm">
+                <input
+                  type="checkbox"
+                  checked={featured}
+                  onChange={(event) => setFeatured(event.target.checked)}
+                  className="h-4 w-4 rounded"
+                />
+                Feature on homepage
+              </label>
+            </div>
+          </section>
+          <section className="border-border bg-background rounded-xl border p-5 shadow-sm">
+            <h2 className="font-semibold">Category</h2>
+            <select
+              value={category}
+              onChange={(event) => setCategory(event.target.value)}
+              required
+              className="border-border bg-background focus:ring-foreground/20 mt-4 w-full rounded-lg border px-3 py-2.5 text-sm outline-none focus:ring-4"
+            >
+              <option value="">Select category</option>
+              {categories.map((categoryName) => (
+                <option key={categoryName} value={categoryName}>
+                  {categoryName}
+                </option>
+              ))}
+            </select>
+          </section>
+          <section className="border-border bg-background rounded-xl border p-5 shadow-sm">
+            <h2 className="font-semibold">Featured Image</h2>
+            <button
+              type="button"
+              className="border-border text-muted-foreground hover:bg-muted mt-4 flex min-h-44 w-full flex-col items-center justify-center gap-3 rounded-lg border border-dashed p-5 text-center transition-colors"
+            >
+              <ImageIcon className="h-8 w-8" />
+              <span className="text-sm font-medium">Select from Media Library</span>
+              <span className="text-xs">Recommended size: 1200 × 630 pixels</span>
+            </button>
+          </section>
+          <section className="border-border bg-background rounded-xl border p-5 shadow-sm">
+            <h2 className="font-semibold">Tags</h2>
+            <input
+              type="text"
+              placeholder="Add tags separated by commas"
+              className="border-border bg-background focus:ring-foreground/20 mt-4 w-full rounded-lg border px-3 py-2.5 text-sm outline-none focus:ring-4"
+            />
+          </section>
+        </aside>
+      </div>
+    </form>
+  );
+}
+
+
+============================================================
+FILE: src\components\admin\media\media-library.tsx
+============================================================
+"use client";
+import Image from "next/image";
+import {
+  Check,
+  Copy,
+  FileImage,
+  LoaderCircle,
+  Search,
+  Trash2,
+  Upload,
+  X,
+} from "lucide-react";
+import {
+  type ChangeEvent,
+  type DragEvent,
+  useEffect,
+  useMemo,
+  useRef,
+  useState,
+} from "react";
+type MediaFile = {
+  id: string;
+  name: string;
+  url: string;
+  size: number;
+  type: string;
+  createdAt: string;
+};
+type ApiResponse = {
+  files?: MediaFile[];
+  file?: MediaFile;
+  message?: string;
+};
+const acceptedFileTypes = [
+  "image/jpeg",
+  "image/png",
+  "image/webp",
+  "image/gif",
+  "image/svg+xml",
+];
+const maximumFileSize = 5 * 1024 * 1024;
+function formatFileSize(size: number) {
+  if (size < 1024) {
+    return `${size} B`;
+  }
+  if (size < 1024 * 1024) {
+    return `${(size / 1024).toFixed(1)} KB`;
+  }
+  return `${(size / (1024 * 1024)).toFixed(1)} MB`;
+}
+export function MediaLibrary() {
+  const fileInputRef = useRef<HTMLInputElement>(null);
+  const [files, setFiles] = useState<MediaFile[]>([]);
+  const [searchQuery, setSearchQuery] = useState("");
+  const [isLoading, setIsLoading] = useState(true);
+  const [isUploading, setIsUploading] = useState(false);
+  const [dragActive, setDragActive] = useState(false);
+  const [selectedFile, setSelectedFile] = useState<MediaFile | null>(null);
+  const [copiedFileId, setCopiedFileId] = useState<string | null>(null);
+  const [deletingFileId, setDeletingFileId] = useState<string | null>(null);
+  const [message, setMessage] = useState("");
+  const [error, setError] = useState("");
+  async function loadFiles() {
+    setIsLoading(true);
+    setError("");
+    try {
+      const response = await fetch("/api/admin/media", {
+        cache: "no-store",
+      });
+      const responseData = (await response.json()) as ApiResponse;
+      if (!response.ok) {
+        throw new Error(responseData.message || "Unable to load media files.");
+      }
+      setFiles(responseData.files ?? []);
+    } catch (loadError) {
+      setError(
+        loadError instanceof Error ? loadError.message : "Unable to load media files.",
+      );
+    } finally {
+      setIsLoading(false);
+    }
+  }
+  useEffect(() => {
+    queueMicrotask(() => {
+      void loadFiles();
+    });
+  }, []);
+  const filteredFiles = useMemo(() => {
+    const query = searchQuery.trim().toLowerCase();
+    if (!query) {
+      return files;
+    }
+    return files.filter((file) => file.name.toLowerCase().includes(query));
+  }, [files, searchQuery]);
+  async function uploadFile(file: File) {
+    setMessage("");
+    setError("");
+    if (!acceptedFileTypes.includes(file.type)) {
+      setError("Only JPG, PNG, WebP, GIF and SVG images are allowed.");
+      return;
+    }
+    if (file.size > maximumFileSize) {
+      setError("The selected image exceeds the 5 MB size limit.");
+      return;
+    }
+    setIsUploading(true);
+    try {
+      const formData = new FormData();
+      formData.append("file", file);
+      const response = await fetch("/api/admin/media/upload", {
+        method: "POST",
+        body: formData,
+      });
+      const responseData = (await response.json()) as ApiResponse;
+      if (!response.ok || !responseData.file) {
+        throw new Error(responseData.message || "Unable to upload the image.");
+      }
+      setFiles((currentFiles) => [responseData.file!, ...currentFiles]);
+      setMessage("Image uploaded successfully.");
+    } catch (uploadError) {
+      setError(
+        uploadError instanceof Error
+          ? uploadError.message
+          : "Unable to upload the image.",
+      );
+    } finally {
+      setIsUploading(false);
+      if (fileInputRef.current) {
+        fileInputRef.current.value = "";
+      }
+    }
+  }
+  function handleFileInput(event: ChangeEvent<HTMLInputElement>) {
+    const file = event.target.files?.[0];
+    if (file) {
+      void uploadFile(file);
+    }
+  }
+  function handleDragOver(event: DragEvent<HTMLDivElement>) {
+    event.preventDefault();
+    setDragActive(true);
+  }
+  function handleDragLeave(event: DragEvent<HTMLDivElement>) {
+    event.preventDefault();
+    setDragActive(false);
+  }
+  function handleDrop(event: DragEvent<HTMLDivElement>) {
+    event.preventDefault();
+    setDragActive(false);
+    const file = event.dataTransfer.files?.[0];
+    if (file) {
+      void uploadFile(file);
+    }
+  }
+  async function copyFileUrl(file: MediaFile) {
+    const absoluteUrl = new URL(file.url, window.location.origin).toString();
+    try {
+      await navigator.clipboard.writeText(absoluteUrl);
+      setCopiedFileId(file.id);
+      window.setTimeout(() => {
+        setCopiedFileId(null);
+      }, 2000);
+    } catch {
+      setError("Unable to copy the image URL.");
+    }
+  }
+  async function removeFile(file: MediaFile) {
+    const confirmed = window.confirm(
+      `Delete "${file.name}" permanently from the media library?`,
+    );
+    if (!confirmed) {
+      return;
+    }
+    setDeletingFileId(file.id);
+    setMessage("");
+    setError("");
+    try {
+      const response = await fetch("/api/admin/media/delete", {
+        method: "DELETE",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          fileName: file.name,
+        }),
+      });
+      const responseData = (await response.json()) as ApiResponse;
+      if (!response.ok) {
+        throw new Error(responseData.message || "Unable to delete the image.");
+      }
+      setFiles((currentFiles) =>
+        currentFiles.filter((currentFile) => currentFile.id !== file.id),
+      );
+      if (selectedFile?.id === file.id) {
+        setSelectedFile(null);
+      }
+      setMessage("Image deleted successfully.");
+    } catch (deleteError) {
+      setError(
+        deleteError instanceof Error
+          ? deleteError.message
+          : "Unable to delete the image.",
+      );
+    } finally {
+      setDeletingFileId(null);
+    }
+  }
+  return (
+    <div className="space-y-6">
+      <div
+        onDragOver={handleDragOver}
+        onDragLeave={handleDragLeave}
+        onDrop={handleDrop}
+        className={`border-border bg-background rounded-xl border-2 border-dashed p-6 text-center transition-colors sm:p-10 ${
+          dragActive ? "bg-muted" : ""
+        }`}
+      >
+        <input
+          ref={fileInputRef}
+          type="file"
+          accept={acceptedFileTypes.join(",")}
+          onChange={handleFileInput}
+          disabled={isUploading}
+          className="hidden"
+        />
+        <div className="mx-auto flex max-w-md flex-col items-center">
+          {isUploading ? (
+            <LoaderCircle className="text-muted-foreground h-10 w-10 animate-spin" />
+          ) : (
+            <Upload className="text-muted-foreground h-10 w-10" />
+          )}
+          <h2 className="mt-4 text-lg font-semibold">
+            {isUploading ? "Uploading image" : "Upload Media"}
+          </h2>
+          <p className="text-muted-foreground mt-2 text-sm">
+            Drag and drop an image here or select one from your computer.
+          </p>
+          <button
+            type="button"
+            onClick={() => fileInputRef.current?.click()}
+            disabled={isUploading}
+            className="bg-foreground text-background mt-5 inline-flex items-center gap-2 rounded-lg px-4 py-2.5 text-sm font-medium disabled:cursor-not-allowed disabled:opacity-60"
+          >
+            {isUploading ? (
+              <LoaderCircle className="h-4 w-4 animate-spin" />
+            ) : (
+              <Upload className="h-4 w-4" />
+            )}
+            Select Image
+          </button>
+          <p className="text-muted-foreground mt-3 text-xs">
+            JPG, PNG, WebP, GIF or SVG. Maximum file size: 5 MB.
+          </p>
+        </div>
+      </div>
+      {message ? (
+        <div className="border-border bg-background flex items-center gap-3 rounded-lg border px-4 py-3 text-sm">
+          <Check className="h-4 w-4" />
+          {message}
+        </div>
+      ) : null}
+      {error ? (
+        <div className="border-destructive/40 bg-destructive/5 text-destructive flex items-center gap-3 rounded-lg border px-4 py-3 text-sm">
+          <X className="h-4 w-4" />
+          {error}
+        </div>
+      ) : null}
+      <section className="border-border bg-background overflow-hidden rounded-xl border shadow-sm">
+        <div className="border-border flex flex-col gap-4 border-b p-5 sm:flex-row sm:items-center sm:justify-between">
+          <div>
+            <h2 className="text-lg font-semibold">Media Files</h2>
+            <p className="text-muted-foreground mt-1 text-sm">
+              {files.length} {files.length === 1 ? "file" : "files"}
+            </p>
+          </div>
+          <div className="relative w-full sm:max-w-xs">
+            <Search className="text-muted-foreground absolute top-1/2 left-3 h-4 w-4 -translate-y-1/2" />
+            <input
+              type="search"
+              value={searchQuery}
+              onChange={(event) => setSearchQuery(event.target.value)}
+              placeholder="Search media"
+              className="border-border bg-background focus:ring-foreground/20 w-full rounded-lg border py-2.5 pr-3 pl-10 text-sm outline-none focus:ring-4"
+            />
+          </div>
+        </div>
+        {isLoading ? (
+          <div className="flex min-h-64 items-center justify-center">
+            <LoaderCircle className="text-muted-foreground h-7 w-7 animate-spin" />
+          </div>
+        ) : filteredFiles.length === 0 ? (
+          <div className="text-muted-foreground flex min-h-64 flex-col items-center justify-center p-8 text-center">
+            <FileImage className="h-10 w-10" />
+            <p className="mt-3 text-sm">
+              {searchQuery
+                ? "No matching media files were found."
+                : "No media files have been uploaded."}
+            </p>
+          </div>
+        ) : (
+          <div className="grid gap-4 p-5 sm:grid-cols-2 lg:grid-cols-3 2xl:grid-cols-4">
+            {filteredFiles.map((file) => (
+              <article
+                key={file.id}
+                className="border-border overflow-hidden rounded-xl border"
+              >
+                <button
+                  type="button"
+                  onClick={() => setSelectedFile(file)}
+                  className="bg-muted relative block aspect-video w-full overflow-hidden"
+                >
+                  <Image
+                    src={file.url}
+                    alt={file.name}
+                    fill
+                    unoptimized
+                    className="object-cover"
+                  />
+                </button>
+                <div className="p-4">
+                  <p className="truncate text-sm font-medium" title={file.name}>
+                    {file.name}
+                  </p>
+                  <div className="text-muted-foreground mt-2 flex items-center justify-between gap-3 text-xs">
+                    <span>{formatFileSize(file.size)}</span>
+                    <span>{new Date(file.createdAt).toLocaleDateString()}</span>
+                  </div>
+                  <div className="mt-4 flex gap-2">
+                    <button
+                      type="button"
+                      onClick={() => void copyFileUrl(file)}
+                      className="border-border hover:bg-muted inline-flex flex-1 items-center justify-center gap-2 rounded-lg border px-3 py-2 text-xs font-medium transition-colors"
+                    >
+                      {copiedFileId === file.id ? (
+                        <Check className="h-4 w-4" />
+                      ) : (
+                        <Copy className="h-4 w-4" />
+                      )}
+                      {copiedFileId === file.id ? "Copied" : "Copy URL"}
+                    </button>
+                    <button
+                      type="button"
+                      onClick={() => void removeFile(file)}
+                      disabled={deletingFileId === file.id}
+                      aria-label={`Delete ${file.name}`}
+                      className="border-border text-destructive hover:bg-muted rounded-lg border p-2 transition-colors disabled:cursor-not-allowed disabled:opacity-50"
+                    >
+                      {deletingFileId === file.id ? (
+                        <LoaderCircle className="h-4 w-4 animate-spin" />
+                      ) : (
+                        <Trash2 className="h-4 w-4" />
+                      )}
+                    </button>
+                  </div>
+                </div>
+              </article>
+            ))}
+          </div>
+        )}
+      </section>
+      {selectedFile ? (
+        <div
+          role="dialog"
+          aria-modal="true"
+          aria-label="Media preview"
+          className="fixed inset-0 z-50 flex items-center justify-center bg-black/70 p-4"
+        >
+          <div className="bg-background max-h-[90vh] w-full max-w-4xl overflow-auto rounded-xl shadow-xl">
+            <div className="border-border flex items-center justify-between border-b p-4">
+              <p className="truncate pr-4 text-sm font-semibold">{selectedFile.name}</p>
+              <button
+                type="button"
+                onClick={() => setSelectedFile(null)}
+                aria-label="Close media preview"
+                className="border-border hover:bg-muted rounded-lg border p-2"
+              >
+                <X className="h-4 w-4" />
+              </button>
+            </div>
+            <div className="bg-muted relative min-h-[300px] sm:min-h-[500px]">
+              <Image
+                src={selectedFile.url}
+                alt={selectedFile.name}
+                fill
+                unoptimized
+                className="object-contain"
+              />
+            </div>
+            <div className="flex flex-col gap-3 p-4 sm:flex-row sm:items-center sm:justify-between">
+              <div className="text-muted-foreground text-xs">
+                {formatFileSize(selectedFile.size)} · {selectedFile.type}
+              </div>
+              <button
+                type="button"
+                onClick={() => void copyFileUrl(selectedFile)}
+                className="border-border hover:bg-muted inline-flex items-center justify-center gap-2 rounded-lg border px-4 py-2 text-sm font-medium"
+              >
+                <Copy className="h-4 w-4" />
+                Copy Image URL
+              </button>
+            </div>
+          </div>
+        </div>
+      ) : null}
+    </div>
+  );
+}
+
+
+============================================================
+EXISTING API ROUTES
+============================================================
+
+FILE: src\app\api\admin\media\delete\route.ts
+----------------------------------------
+import { NextResponse } from "next/server";
+import { deleteMediaFile } from "@/lib/media-storage";
+export const runtime = "nodejs";
+type DeleteMediaRequest = {
+  fileName?: unknown;
+};
+export async function DELETE(request: Request) {
+  try {
+    const requestBody = (await request.json()) as DeleteMediaRequest;
+    if (typeof requestBody.fileName !== "string" || !requestBody.fileName.trim()) {
+      return NextResponse.json(
+        {
+          message: "A valid media file name is required.",
+        },
+        {
+          status: 400,
+        },
+      );
+    }
+    await deleteMediaFile(requestBody.fileName.trim());
+    return NextResponse.json({
+      message: "Media file deleted successfully.",
+    });
+  } catch {
+    return NextResponse.json(
+      {
+        message: "Unable to delete the media file.",
+      },
+      {
+        status: 400,
+      },
+    );
+  }
+}
+
+
+FILE: src\app\api\admin\media\route.ts
+----------------------------------------
+import { NextResponse } from "next/server";
+import { listMediaFiles } from "@/lib/media-storage";
+export const runtime = "nodejs";
+export const dynamic = "force-dynamic";
+export async function GET() {
+  try {
+    const files = await listMediaFiles();
+    return NextResponse.json({
+      files,
+    });
+  } catch {
+    return NextResponse.json(
+      {
+        message: "Unable to load media files.",
+      },
+      {
+        status: 500,
+      },
+    );
+  }
+}
+
+
+FILE: src\app\api\admin\media\upload\route.ts
+----------------------------------------
+import { NextResponse } from "next/server";
+import { saveMediaFile } from "@/lib/media-storage";
+export const runtime = "nodejs";
+export async function POST(request: Request) {
+  try {
+    const formData = await request.formData();
+    const uploadedFile = formData.get("file");
+    if (!(uploadedFile instanceof File)) {
+      return NextResponse.json(
+        {
+          message: "A valid image file is required.",
+        },
+        {
+          status: 400,
+        },
+      );
+    }
+    const file = await saveMediaFile(uploadedFile);
+    return NextResponse.json(
+      {
+        file,
+      },
+      {
+        status: 201,
+      },
+    );
+  } catch (error) {
+    const message =
+      error instanceof Error ? error.message : "Unable to upload the image.";
+    return NextResponse.json(
+      {
+        message,
+      },
+      {
+        status: 400,
+      },
+    );
+  }
+}
+
+
+FILE: src\app\api\health\route.ts
+----------------------------------------
+import { NextResponse } from "next/server";
+export function GET() {
+  return NextResponse.json({
+    status: "ok",
+    application: "Knowledge Nest",
+    databaseConfigured: Boolean(process.env.DATABASE_URL?.trim()),
+    timestamp: new Date().toISOString(),
+  });
+}
+
+
+FILE: src\app\api\og\route.tsx
+----------------------------------------
+import { ImageResponse } from "next/og";
+export const runtime = "edge";
+export async function GET(request: Request) {
+  const { searchParams } = new URL(request.url);
+  const title = searchParams.get("title") ?? "Knowledge Nest";
+  return new ImageResponse(
+    <div
+      style={{
+        width: "1200px",
+        height: "630px",
+        display: "flex",
+        flexDirection: "column",
+        justifyContent: "center",
+        padding: "80px",
+        background: "#0f172a",
+        color: "#ffffff",
+      }}
+    >
+      <div
+        style={{
+          fontSize: 28,
+          color: "#93c5fd",
+          marginBottom: 24,
+        }}
+      >
+        Knowledge Nest
+      </div>
+      <div
+        style={{
+          fontSize: 64,
+          fontWeight: 700,
+          lineHeight: 1.15,
+        }}
+      >
+        {title}
+      </div>
+      <div
+        style={{
+          marginTop: 40,
+          fontSize: 28,
+          color: "#cbd5e1",
+        }}
+      >
+        Finance • Science • Technology • Health • Education
+      </div>
+    </div>,
+    {
+      width: 1200,
+      height: 630,
+    },
+  );
+}
+
+
+FILE: src\app\api\search\route.ts
+----------------------------------------
+import { NextResponse } from "next/server";
+import { publicArticles } from "@/data/public-content";
+export async function GET(request: Request) {
+  const { searchParams } = new URL(request.url);
+  const query = searchParams.get("q")?.trim().toLowerCase() ?? "";
+  if (!query) {
+    return NextResponse.json([]);
+  }
+  const results = publicArticles
+    .filter((article) => {
+      const text = [article.title, article.excerpt, article.category.name]
+        .join(" ")
+        .toLowerCase();
+      return text.includes(query);
+    })
+    .slice(0, 10)
+    .map((article) => ({
+      title: article.title,
+      slug: article.slug,
+      excerpt: article.excerpt,
+      category: article.category.name,
+    }));
+  return NextResponse.json(results);
+}
+

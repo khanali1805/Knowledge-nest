@@ -1,0 +1,2331 @@
+﻿**********************
+Windows PowerShell transcript start
+Start time: 20260727005948
+Username: GULZAR-PC\A C
+RunAs User: GULZAR-PC\A C
+Configuration Name: 
+Machine: GULZAR-PC (Microsoft Windows NT 10.0.19045.0)
+Host Application: C:\Windows\System32\WindowsPowerShell\v1.0\powershell.exe -noexit -command try { . "c:\Users\A C\AppData\Local\Programs\Microsoft VS Code\1b6a188127\resources\app\out\vs\workbench\contrib\terminal\common\scripts\shellIntegration.ps1" } catch {}
+Process ID: 7472
+PSVersion: 5.1.19041.7548
+PSEdition: Desktop
+PSCompatibleVersions: 1.0, 2.0, 3.0, 4.0, 5.0, 5.1.19041.7548
+BuildVersion: 10.0.19041.7548
+CLRVersion: 4.0.30319.42000
+WSManStackVersion: 3.0
+PSRemotingProtocolVersion: 2.3
+SerializationVersion: 1.1.0.1
+**********************
+]633;D;0]633;A]633;P;Cwd=C:\x5cUsers\x5cA C\x5cDownloads\x5cknowledge-nestPS C:\Users\A C\Downloads\knowledge-nest> ]633;B
+]633;D]633;A]633;P;Cwd=C:\x5cUsers\x5cA C\x5cDownloads\x5cknowledge-nestPS C:\Users\A C\Downloads\knowledge-nest> ]633;B
+PS>try {
+Missing closing '}' in statement block or type definition.
+>> try {
+    function Invoke-Checked {
+        param(
+            [Parameter(Mandatory)]
+            [string]$Name,
+Missing expression after ','.
+>> try {
+    function Invoke-Checked {
+        param(
+            [Parameter(Mandatory)]
+            [string]$Name,
+            [Parameter(Mandatory)]
+            [scriptblock]$Command
+        )
+Missing closing '}' in statement block or type definition.
+>> try {
+    function Invoke-Checked {
+        param(
+            [Parameter(Mandatory)]
+            [string]$Name,
+            [Parameter(Mandatory)]
+            [scriptblock]$Command
+        )
+        Write-Host ""
+        Write-Host "=== $Name ===" -ForegroundColor Cyan
+Missing closing '}' in statement block or type definition.
+>> try {
+    function Invoke-Checked {
+        param(
+            [Parameter(Mandatory)]
+            [string]$Name,
+            [Parameter(Mandatory)]
+            [scriptblock]$Command
+        )
+        Write-Host ""
+        Write-Host "=== $Name ===" -ForegroundColor Cyan
+        $global:LASTEXITCODE = 0
+        & $Command
+Missing closing '}' in statement block or type definition.
+>> try {
+    function Invoke-Checked {
+        param(
+            [Parameter(Mandatory)]
+            [string]$Name,
+            [Parameter(Mandatory)]
+            [scriptblock]$Command
+        )
+        Write-Host ""
+        Write-Host "=== $Name ===" -ForegroundColor Cyan
+        $global:LASTEXITCODE = 0
+        & $Command
+        if ($LASTEXITCODE -ne 0) {
+            throw "$Name failed with exit code $LASTEXITCODE."
+        }
+Missing closing '}' in statement block or type definition.
+>> try {
+    function Invoke-Checked {
+        param(
+            [Parameter(Mandatory)]
+            [string]$Name,
+            [Parameter(Mandatory)]
+            [scriptblock]$Command
+        )
+        Write-Host ""
+        Write-Host "=== $Name ===" -ForegroundColor Cyan
+        $global:LASTEXITCODE = 0
+        & $Command
+        if ($LASTEXITCODE -ne 0) {
+            throw "$Name failed with exit code $LASTEXITCODE."
+        }
+        Write-Host "$Name PASSED" -ForegroundColor Green
+    }
+Missing closing '}' in statement block or type definition.
+>> try {
+    function Invoke-Checked {
+        param(
+            [Parameter(Mandatory)]
+            [string]$Name,
+            [Parameter(Mandatory)]
+            [scriptblock]$Command
+        )
+        Write-Host ""
+        Write-Host "=== $Name ===" -ForegroundColor Cyan
+        $global:LASTEXITCODE = 0
+        & $Command
+        if ($LASTEXITCODE -ne 0) {
+            throw "$Name failed with exit code $LASTEXITCODE."
+        }
+        Write-Host "$Name PASSED" -ForegroundColor Green
+    }
+    if (-not (Test-Path -LiteralPath $SidebarPath)) {
+        throw "admin-sidebar.tsx file is missing."
+    }
+Missing closing '}' in statement block or type definition.
+>> try {
+    function Invoke-Checked {
+        param(
+            [Parameter(Mandatory)]
+            [string]$Name,
+            [Parameter(Mandatory)]
+            [scriptblock]$Command
+        )
+        Write-Host ""
+        Write-Host "=== $Name ===" -ForegroundColor Cyan
+        $global:LASTEXITCODE = 0
+        & $Command
+        if ($LASTEXITCODE -ne 0) {
+            throw "$Name failed with exit code $LASTEXITCODE."
+        }
+        Write-Host "$Name PASSED" -ForegroundColor Green
+    }
+    if (-not (Test-Path -LiteralPath $SidebarPath)) {
+        throw "admin-sidebar.tsx file is missing."
+    }
+    Copy-Item `
+        -LiteralPath $SidebarPath `
+        -Destination $BackupPath `
+        -Force
+Missing closing '}' in statement block or type definition.
+>> try {
+    function Invoke-Checked {
+        param(
+            [Parameter(Mandatory)]
+            [string]$Name,
+            [Parameter(Mandatory)]
+            [scriptblock]$Command
+        )
+        Write-Host ""
+        Write-Host "=== $Name ===" -ForegroundColor Cyan
+        $global:LASTEXITCODE = 0
+        & $Command
+        if ($LASTEXITCODE -ne 0) {
+            throw "$Name failed with exit code $LASTEXITCODE."
+        }
+        Write-Host "$Name PASSED" -ForegroundColor Green
+    }
+    if (-not (Test-Path -LiteralPath $SidebarPath)) {
+        throw "admin-sidebar.tsx file is missing."
+    }
+    Copy-Item `
+        -LiteralPath $SidebarPath `
+        -Destination $BackupPath `
+        -Force
+    $SidebarContent = Get-Content -LiteralPath $SidebarPath -Raw
+Missing closing '}' in statement block or type definition.
+>> try {
+    function Invoke-Checked {
+        param(
+            [Parameter(Mandatory)]
+            [string]$Name,
+            [Parameter(Mandatory)]
+            [scriptblock]$Command
+        )
+        Write-Host ""
+        Write-Host "=== $Name ===" -ForegroundColor Cyan
+        $global:LASTEXITCODE = 0
+        & $Command
+        if ($LASTEXITCODE -ne 0) {
+            throw "$Name failed with exit code $LASTEXITCODE."
+        }
+        Write-Host "$Name PASSED" -ForegroundColor Green
+    }
+    if (-not (Test-Path -LiteralPath $SidebarPath)) {
+        throw "admin-sidebar.tsx file is missing."
+    }
+    Copy-Item `
+        -LiteralPath $SidebarPath `
+        -Destination $BackupPath `
+        -Force
+    $SidebarContent = Get-Content -LiteralPath $SidebarPath -Raw
+    if ($SidebarContent -notmatch '/admin/themes') {
+        throw "Theme Studio navigation item was not found."
+    }
+Missing closing '}' in statement block or type definition.
+>> try {
+    function Invoke-Checked {
+        param(
+            [Parameter(Mandatory)]
+            [string]$Name,
+            [Parameter(Mandatory)]
+            [scriptblock]$Command
+        )
+        Write-Host ""
+        Write-Host "=== $Name ===" -ForegroundColor Cyan
+        $global:LASTEXITCODE = 0
+        & $Command
+        if ($LASTEXITCODE -ne 0) {
+            throw "$Name failed with exit code $LASTEXITCODE."
+        }
+        Write-Host "$Name PASSED" -ForegroundColor Green
+    }
+    if (-not (Test-Path -LiteralPath $SidebarPath)) {
+        throw "admin-sidebar.tsx file is missing."
+    }
+    Copy-Item `
+        -LiteralPath $SidebarPath `
+        -Destination $BackupPath `
+        -Force
+    $SidebarContent = Get-Content -LiteralPath $SidebarPath -Raw
+    if ($SidebarContent -notmatch '/admin/themes') {
+        throw "Theme Studio navigation item was not found."
+    }
+    if ($SidebarContent -match '<Icon\s+className="h-4 w-4"\s*/>') {
+        $SidebarContent = $SidebarContent.Replace(
+            '<Icon className="h-4 w-4" />',
+            '{Icon ? <Icon className="h-4 w-4" /> : <span className="h-4 w-4" aria-hidden="true" />}'
+        )
+    }
+    elseif ($SidebarContent -match '<Icon\s+className=\{?["'']h-4 w-4["'']\}?\s*/>') {
+        $IconRegex = [regex]::new(
+            '<Icon\s+className=\{?["'']h-4 w-4["'']\}?\s*/>'
+        )
+Missing closing '}' in statement block or type definition.
+>> try {
+    function Invoke-Checked {
+        param(
+            [Parameter(Mandatory)]
+            [string]$Name,
+            [Parameter(Mandatory)]
+            [scriptblock]$Command
+        )
+        Write-Host ""
+        Write-Host "=== $Name ===" -ForegroundColor Cyan
+        $global:LASTEXITCODE = 0
+        & $Command
+        if ($LASTEXITCODE -ne 0) {
+            throw "$Name failed with exit code $LASTEXITCODE."
+        }
+        Write-Host "$Name PASSED" -ForegroundColor Green
+    }
+    if (-not (Test-Path -LiteralPath $SidebarPath)) {
+        throw "admin-sidebar.tsx file is missing."
+    }
+    Copy-Item `
+        -LiteralPath $SidebarPath `
+        -Destination $BackupPath `
+        -Force
+    $SidebarContent = Get-Content -LiteralPath $SidebarPath -Raw
+    if ($SidebarContent -notmatch '/admin/themes') {
+        throw "Theme Studio navigation item was not found."
+    }
+    if ($SidebarContent -match '<Icon\s+className="h-4 w-4"\s*/>') {
+        $SidebarContent = $SidebarContent.Replace(
+            '<Icon className="h-4 w-4" />',
+            '{Icon ? <Icon className="h-4 w-4" /> : <span className="h-4 w-4" aria-hidden="true" />}'
+        )
+    }
+    elseif ($SidebarContent -match '<Icon\s+className=\{?["'']h-4 w-4["'']\}?\s*/>') {
+        $IconRegex = [regex]::new(
+            '<Icon\s+className=\{?["'']h-4 w-4["'']\}?\s*/>'
+        )
+        $SidebarContent = $IconRegex.Replace(
+            $SidebarContent,
+            '{Icon ? <Icon className="h-4 w-4" /> : <span className="h-4 w-4" aria-hidden="true" />}'
+        )
+    }
+    elseif ($SidebarContent -match '<Icon\b') {
+        $IconRegex = [regex]::new(
+            '<Icon\b([^>]*)/>'
+        )
+Missing closing '}' in statement block or type definition.
+>> try {
+    function Invoke-Checked {
+        param(
+            [Parameter(Mandatory)]
+            [string]$Name,
+            [Parameter(Mandatory)]
+            [scriptblock]$Command
+        )
+        Write-Host ""
+        Write-Host "=== $Name ===" -ForegroundColor Cyan
+        $global:LASTEXITCODE = 0
+        & $Command
+        if ($LASTEXITCODE -ne 0) {
+            throw "$Name failed with exit code $LASTEXITCODE."
+        }
+        Write-Host "$Name PASSED" -ForegroundColor Green
+    }
+    if (-not (Test-Path -LiteralPath $SidebarPath)) {
+        throw "admin-sidebar.tsx file is missing."
+    }
+    Copy-Item `
+        -LiteralPath $SidebarPath `
+        -Destination $BackupPath `
+        -Force
+    $SidebarContent = Get-Content -LiteralPath $SidebarPath -Raw
+    if ($SidebarContent -notmatch '/admin/themes') {
+        throw "Theme Studio navigation item was not found."
+    }
+    if ($SidebarContent -match '<Icon\s+className="h-4 w-4"\s*/>') {
+        $SidebarContent = $SidebarContent.Replace(
+            '<Icon className="h-4 w-4" />',
+            '{Icon ? <Icon className="h-4 w-4" /> : <span className="h-4 w-4" aria-hidden="true" />}'
+        )
+    }
+    elseif ($SidebarContent -match '<Icon\s+className=\{?["'']h-4 w-4["'']\}?\s*/>') {
+        $IconRegex = [regex]::new(
+            '<Icon\s+className=\{?["'']h-4 w-4["'']\}?\s*/>'
+        )
+        $SidebarContent = $IconRegex.Replace(
+            $SidebarContent,
+            '{Icon ? <Icon className="h-4 w-4" /> : <span className="h-4 w-4" aria-hidden="true" />}'
+        )
+    }
+    elseif ($SidebarContent -match '<Icon\b') {
+        $IconRegex = [regex]::new(
+            '<Icon\b([^>]*)/>'
+        )
+        $SidebarContent = $IconRegex.Replace(
+            $SidebarContent,
+            '{Icon ? <Icon$1/> : <span className="h-4 w-4" aria-hidden="true" />}'
+        )
+    }
+    else {
+        throw "Icon rendering line was not found in admin-sidebar.tsx."
+    }
+Missing closing '}' in statement block or type definition.
+>> try {
+    function Invoke-Checked {
+        param(
+            [Parameter(Mandatory)]
+            [string]$Name,
+            [Parameter(Mandatory)]
+            [scriptblock]$Command
+        )
+        Write-Host ""
+        Write-Host "=== $Name ===" -ForegroundColor Cyan
+        $global:LASTEXITCODE = 0
+        & $Command
+        if ($LASTEXITCODE -ne 0) {
+            throw "$Name failed with exit code $LASTEXITCODE."
+        }
+        Write-Host "$Name PASSED" -ForegroundColor Green
+    }
+    if (-not (Test-Path -LiteralPath $SidebarPath)) {
+        throw "admin-sidebar.tsx file is missing."
+    }
+    Copy-Item `
+        -LiteralPath $SidebarPath `
+        -Destination $BackupPath `
+        -Force
+    $SidebarContent = Get-Content -LiteralPath $SidebarPath -Raw
+    if ($SidebarContent -notmatch '/admin/themes') {
+        throw "Theme Studio navigation item was not found."
+    }
+    if ($SidebarContent -match '<Icon\s+className="h-4 w-4"\s*/>') {
+        $SidebarContent = $SidebarContent.Replace(
+            '<Icon className="h-4 w-4" />',
+            '{Icon ? <Icon className="h-4 w-4" /> : <span className="h-4 w-4" aria-hidden="true" />}'
+        )
+    }
+    elseif ($SidebarContent -match '<Icon\s+className=\{?["'']h-4 w-4["'']\}?\s*/>') {
+        $IconRegex = [regex]::new(
+            '<Icon\s+className=\{?["'']h-4 w-4["'']\}?\s*/>'
+        )
+        $SidebarContent = $IconRegex.Replace(
+            $SidebarContent,
+            '{Icon ? <Icon className="h-4 w-4" /> : <span className="h-4 w-4" aria-hidden="true" />}'
+        )
+    }
+    elseif ($SidebarContent -match '<Icon\b') {
+        $IconRegex = [regex]::new(
+            '<Icon\b([^>]*)/>'
+        )
+        $SidebarContent = $IconRegex.Replace(
+            $SidebarContent,
+            '{Icon ? <Icon$1/> : <span className="h-4 w-4" aria-hidden="true" />}'
+        )
+    }
+    else {
+        throw "Icon rendering line was not found in admin-sidebar.tsx."
+    }
+    Set-Content `
+        -LiteralPath $SidebarPath `
+        -Value $SidebarContent `
+        -Encoding UTF8
+Missing closing '}' in statement block or type definition.
+>> try {
+    function Invoke-Checked {
+        param(
+            [Parameter(Mandatory)]
+            [string]$Name,
+            [Parameter(Mandatory)]
+            [scriptblock]$Command
+        )
+        Write-Host ""
+        Write-Host "=== $Name ===" -ForegroundColor Cyan
+        $global:LASTEXITCODE = 0
+        & $Command
+        if ($LASTEXITCODE -ne 0) {
+            throw "$Name failed with exit code $LASTEXITCODE."
+        }
+        Write-Host "$Name PASSED" -ForegroundColor Green
+    }
+    if (-not (Test-Path -LiteralPath $SidebarPath)) {
+        throw "admin-sidebar.tsx file is missing."
+    }
+    Copy-Item `
+        -LiteralPath $SidebarPath `
+        -Destination $BackupPath `
+        -Force
+    $SidebarContent = Get-Content -LiteralPath $SidebarPath -Raw
+    if ($SidebarContent -notmatch '/admin/themes') {
+        throw "Theme Studio navigation item was not found."
+    }
+    if ($SidebarContent -match '<Icon\s+className="h-4 w-4"\s*/>') {
+        $SidebarContent = $SidebarContent.Replace(
+            '<Icon className="h-4 w-4" />',
+            '{Icon ? <Icon className="h-4 w-4" /> : <span className="h-4 w-4" aria-hidden="true" />}'
+        )
+    }
+    elseif ($SidebarContent -match '<Icon\s+className=\{?["'']h-4 w-4["'']\}?\s*/>') {
+        $IconRegex = [regex]::new(
+            '<Icon\s+className=\{?["'']h-4 w-4["'']\}?\s*/>'
+        )
+        $SidebarContent = $IconRegex.Replace(
+            $SidebarContent,
+            '{Icon ? <Icon className="h-4 w-4" /> : <span className="h-4 w-4" aria-hidden="true" />}'
+        )
+    }
+    elseif ($SidebarContent -match '<Icon\b') {
+        $IconRegex = [regex]::new(
+            '<Icon\b([^>]*)/>'
+        )
+        $SidebarContent = $IconRegex.Replace(
+            $SidebarContent,
+            '{Icon ? <Icon$1/> : <span className="h-4 w-4" aria-hidden="true" />}'
+        )
+    }
+    else {
+        throw "Icon rendering line was not found in admin-sidebar.tsx."
+    }
+    Set-Content `
+        -LiteralPath $SidebarPath `
+        -Value $SidebarContent `
+        -Encoding UTF8
+    $PackageJson = Get-Content ".\package.json" -Raw | ConvertFrom-Json
+    $Scripts = @($PackageJson.scripts.PSObject.Properties.Name)
+Missing closing '}' in statement block or type definition.
+>> try {
+    function Invoke-Checked {
+        param(
+            [Parameter(Mandatory)]
+            [string]$Name,
+            [Parameter(Mandatory)]
+            [scriptblock]$Command
+        )
+        Write-Host ""
+        Write-Host "=== $Name ===" -ForegroundColor Cyan
+        $global:LASTEXITCODE = 0
+        & $Command
+        if ($LASTEXITCODE -ne 0) {
+            throw "$Name failed with exit code $LASTEXITCODE."
+        }
+        Write-Host "$Name PASSED" -ForegroundColor Green
+    }
+    if (-not (Test-Path -LiteralPath $SidebarPath)) {
+        throw "admin-sidebar.tsx file is missing."
+    }
+    Copy-Item `
+        -LiteralPath $SidebarPath `
+        -Destination $BackupPath `
+        -Force
+    $SidebarContent = Get-Content -LiteralPath $SidebarPath -Raw
+    if ($SidebarContent -notmatch '/admin/themes') {
+        throw "Theme Studio navigation item was not found."
+    }
+    if ($SidebarContent -match '<Icon\s+className="h-4 w-4"\s*/>') {
+        $SidebarContent = $SidebarContent.Replace(
+            '<Icon className="h-4 w-4" />',
+            '{Icon ? <Icon className="h-4 w-4" /> : <span className="h-4 w-4" aria-hidden="true" />}'
+        )
+    }
+    elseif ($SidebarContent -match '<Icon\s+className=\{?["'']h-4 w-4["'']\}?\s*/>') {
+        $IconRegex = [regex]::new(
+            '<Icon\s+className=\{?["'']h-4 w-4["'']\}?\s*/>'
+        )
+        $SidebarContent = $IconRegex.Replace(
+            $SidebarContent,
+            '{Icon ? <Icon className="h-4 w-4" /> : <span className="h-4 w-4" aria-hidden="true" />}'
+        )
+    }
+    elseif ($SidebarContent -match '<Icon\b') {
+        $IconRegex = [regex]::new(
+            '<Icon\b([^>]*)/>'
+        )
+        $SidebarContent = $IconRegex.Replace(
+            $SidebarContent,
+            '{Icon ? <Icon$1/> : <span className="h-4 w-4" aria-hidden="true" />}'
+        )
+    }
+    else {
+        throw "Icon rendering line was not found in admin-sidebar.tsx."
+    }
+    Set-Content `
+        -LiteralPath $SidebarPath `
+        -Value $SidebarContent `
+        -Encoding UTF8
+    $PackageJson = Get-Content ".\package.json" -Raw | ConvertFrom-Json
+    $Scripts = @($PackageJson.scripts.PSObject.Properties.Name)
+    Invoke-Checked "FORMAT WRITE" {
+        if ($Scripts -contains "format") {
+            pnpm run format
+        }
+        else {
+            pnpm exec prettier --write .
+        }
+    }
+Missing closing '}' in statement block or type definition.
+>> try {
+    function Invoke-Checked {
+        param(
+            [Parameter(Mandatory)]
+            [string]$Name,
+            [Parameter(Mandatory)]
+            [scriptblock]$Command
+        )
+        Write-Host ""
+        Write-Host "=== $Name ===" -ForegroundColor Cyan
+        $global:LASTEXITCODE = 0
+        & $Command
+        if ($LASTEXITCODE -ne 0) {
+            throw "$Name failed with exit code $LASTEXITCODE."
+        }
+        Write-Host "$Name PASSED" -ForegroundColor Green
+    }
+    if (-not (Test-Path -LiteralPath $SidebarPath)) {
+        throw "admin-sidebar.tsx file is missing."
+    }
+    Copy-Item `
+        -LiteralPath $SidebarPath `
+        -Destination $BackupPath `
+        -Force
+    $SidebarContent = Get-Content -LiteralPath $SidebarPath -Raw
+    if ($SidebarContent -notmatch '/admin/themes') {
+        throw "Theme Studio navigation item was not found."
+    }
+    if ($SidebarContent -match '<Icon\s+className="h-4 w-4"\s*/>') {
+        $SidebarContent = $SidebarContent.Replace(
+            '<Icon className="h-4 w-4" />',
+            '{Icon ? <Icon className="h-4 w-4" /> : <span className="h-4 w-4" aria-hidden="true" />}'
+        )
+    }
+    elseif ($SidebarContent -match '<Icon\s+className=\{?["'']h-4 w-4["'']\}?\s*/>') {
+        $IconRegex = [regex]::new(
+            '<Icon\s+className=\{?["'']h-4 w-4["'']\}?\s*/>'
+        )
+        $SidebarContent = $IconRegex.Replace(
+            $SidebarContent,
+            '{Icon ? <Icon className="h-4 w-4" /> : <span className="h-4 w-4" aria-hidden="true" />}'
+        )
+    }
+    elseif ($SidebarContent -match '<Icon\b') {
+        $IconRegex = [regex]::new(
+            '<Icon\b([^>]*)/>'
+        )
+        $SidebarContent = $IconRegex.Replace(
+            $SidebarContent,
+            '{Icon ? <Icon$1/> : <span className="h-4 w-4" aria-hidden="true" />}'
+        )
+    }
+    else {
+        throw "Icon rendering line was not found in admin-sidebar.tsx."
+    }
+    Set-Content `
+        -LiteralPath $SidebarPath `
+        -Value $SidebarContent `
+        -Encoding UTF8
+    $PackageJson = Get-Content ".\package.json" -Raw | ConvertFrom-Json
+    $Scripts = @($PackageJson.scripts.PSObject.Properties.Name)
+    Invoke-Checked "FORMAT WRITE" {
+        if ($Scripts -contains "format") {
+            pnpm run format
+        }
+        else {
+            pnpm exec prettier --write .
+        }
+    }
+    Invoke-Checked "FORMAT CHECK" {
+        if ($Scripts -contains "format:check") {
+            pnpm run format:check
+        }
+        else {
+            pnpm exec prettier --check .
+        }
+    }
+Missing closing '}' in statement block or type definition.
+>> try {
+    function Invoke-Checked {
+        param(
+            [Parameter(Mandatory)]
+            [string]$Name,
+            [Parameter(Mandatory)]
+            [scriptblock]$Command
+        )
+        Write-Host ""
+        Write-Host "=== $Name ===" -ForegroundColor Cyan
+        $global:LASTEXITCODE = 0
+        & $Command
+        if ($LASTEXITCODE -ne 0) {
+            throw "$Name failed with exit code $LASTEXITCODE."
+        }
+        Write-Host "$Name PASSED" -ForegroundColor Green
+    }
+    if (-not (Test-Path -LiteralPath $SidebarPath)) {
+        throw "admin-sidebar.tsx file is missing."
+    }
+    Copy-Item `
+        -LiteralPath $SidebarPath `
+        -Destination $BackupPath `
+        -Force
+    $SidebarContent = Get-Content -LiteralPath $SidebarPath -Raw
+    if ($SidebarContent -notmatch '/admin/themes') {
+        throw "Theme Studio navigation item was not found."
+    }
+    if ($SidebarContent -match '<Icon\s+className="h-4 w-4"\s*/>') {
+        $SidebarContent = $SidebarContent.Replace(
+            '<Icon className="h-4 w-4" />',
+            '{Icon ? <Icon className="h-4 w-4" /> : <span className="h-4 w-4" aria-hidden="true" />}'
+        )
+    }
+    elseif ($SidebarContent -match '<Icon\s+className=\{?["'']h-4 w-4["'']\}?\s*/>') {
+        $IconRegex = [regex]::new(
+            '<Icon\s+className=\{?["'']h-4 w-4["'']\}?\s*/>'
+        )
+        $SidebarContent = $IconRegex.Replace(
+            $SidebarContent,
+            '{Icon ? <Icon className="h-4 w-4" /> : <span className="h-4 w-4" aria-hidden="true" />}'
+        )
+    }
+    elseif ($SidebarContent -match '<Icon\b') {
+        $IconRegex = [regex]::new(
+            '<Icon\b([^>]*)/>'
+        )
+        $SidebarContent = $IconRegex.Replace(
+            $SidebarContent,
+            '{Icon ? <Icon$1/> : <span className="h-4 w-4" aria-hidden="true" />}'
+        )
+    }
+    else {
+        throw "Icon rendering line was not found in admin-sidebar.tsx."
+    }
+    Set-Content `
+        -LiteralPath $SidebarPath `
+        -Value $SidebarContent `
+        -Encoding UTF8
+    $PackageJson = Get-Content ".\package.json" -Raw | ConvertFrom-Json
+    $Scripts = @($PackageJson.scripts.PSObject.Properties.Name)
+    Invoke-Checked "FORMAT WRITE" {
+        if ($Scripts -contains "format") {
+            pnpm run format
+        }
+        else {
+            pnpm exec prettier --write .
+        }
+    }
+    Invoke-Checked "FORMAT CHECK" {
+        if ($Scripts -contains "format:check") {
+            pnpm run format:check
+        }
+        else {
+            pnpm exec prettier --check .
+        }
+    }
+    Invoke-Checked "TYPESCRIPT CHECK" {
+        if ($Scripts -contains "typecheck") {
+            pnpm run typecheck
+        }
+        else {
+            pnpm exec tsc --noEmit
+        }
+    }
+Missing closing '}' in statement block or type definition.
+>> try {
+    function Invoke-Checked {
+        param(
+            [Parameter(Mandatory)]
+            [string]$Name,
+            [Parameter(Mandatory)]
+            [scriptblock]$Command
+        )
+        Write-Host ""
+        Write-Host "=== $Name ===" -ForegroundColor Cyan
+        $global:LASTEXITCODE = 0
+        & $Command
+        if ($LASTEXITCODE -ne 0) {
+            throw "$Name failed with exit code $LASTEXITCODE."
+        }
+        Write-Host "$Name PASSED" -ForegroundColor Green
+    }
+    if (-not (Test-Path -LiteralPath $SidebarPath)) {
+        throw "admin-sidebar.tsx file is missing."
+    }
+    Copy-Item `
+        -LiteralPath $SidebarPath `
+        -Destination $BackupPath `
+        -Force
+    $SidebarContent = Get-Content -LiteralPath $SidebarPath -Raw
+    if ($SidebarContent -notmatch '/admin/themes') {
+        throw "Theme Studio navigation item was not found."
+    }
+    if ($SidebarContent -match '<Icon\s+className="h-4 w-4"\s*/>') {
+        $SidebarContent = $SidebarContent.Replace(
+            '<Icon className="h-4 w-4" />',
+            '{Icon ? <Icon className="h-4 w-4" /> : <span className="h-4 w-4" aria-hidden="true" />}'
+        )
+    }
+    elseif ($SidebarContent -match '<Icon\s+className=\{?["'']h-4 w-4["'']\}?\s*/>') {
+        $IconRegex = [regex]::new(
+            '<Icon\s+className=\{?["'']h-4 w-4["'']\}?\s*/>'
+        )
+        $SidebarContent = $IconRegex.Replace(
+            $SidebarContent,
+            '{Icon ? <Icon className="h-4 w-4" /> : <span className="h-4 w-4" aria-hidden="true" />}'
+        )
+    }
+    elseif ($SidebarContent -match '<Icon\b') {
+        $IconRegex = [regex]::new(
+            '<Icon\b([^>]*)/>'
+        )
+        $SidebarContent = $IconRegex.Replace(
+            $SidebarContent,
+            '{Icon ? <Icon$1/> : <span className="h-4 w-4" aria-hidden="true" />}'
+        )
+    }
+    else {
+        throw "Icon rendering line was not found in admin-sidebar.tsx."
+    }
+    Set-Content `
+        -LiteralPath $SidebarPath `
+        -Value $SidebarContent `
+        -Encoding UTF8
+    $PackageJson = Get-Content ".\package.json" -Raw | ConvertFrom-Json
+    $Scripts = @($PackageJson.scripts.PSObject.Properties.Name)
+    Invoke-Checked "FORMAT WRITE" {
+        if ($Scripts -contains "format") {
+            pnpm run format
+        }
+        else {
+            pnpm exec prettier --write .
+        }
+    }
+    Invoke-Checked "FORMAT CHECK" {
+        if ($Scripts -contains "format:check") {
+            pnpm run format:check
+        }
+        else {
+            pnpm exec prettier --check .
+        }
+    }
+    Invoke-Checked "TYPESCRIPT CHECK" {
+        if ($Scripts -contains "typecheck") {
+            pnpm run typecheck
+        }
+        else {
+            pnpm exec tsc --noEmit
+        }
+    }
+    Invoke-Checked "ESLINT" {
+        if ($Scripts -contains "lint") {
+            pnpm run lint -- --max-warnings=0
+        }
+        else {
+            pnpm exec eslint . --max-warnings=0
+        }
+    }
+Missing closing '}' in statement block or type definition.
+>> try {
+    function Invoke-Checked {
+        param(
+            [Parameter(Mandatory)]
+            [string]$Name,
+            [Parameter(Mandatory)]
+            [scriptblock]$Command
+        )
+        Write-Host ""
+        Write-Host "=== $Name ===" -ForegroundColor Cyan
+        $global:LASTEXITCODE = 0
+        & $Command
+        if ($LASTEXITCODE -ne 0) {
+            throw "$Name failed with exit code $LASTEXITCODE."
+        }
+        Write-Host "$Name PASSED" -ForegroundColor Green
+    }
+    if (-not (Test-Path -LiteralPath $SidebarPath)) {
+        throw "admin-sidebar.tsx file is missing."
+    }
+    Copy-Item `
+        -LiteralPath $SidebarPath `
+        -Destination $BackupPath `
+        -Force
+    $SidebarContent = Get-Content -LiteralPath $SidebarPath -Raw
+    if ($SidebarContent -notmatch '/admin/themes') {
+        throw "Theme Studio navigation item was not found."
+    }
+    if ($SidebarContent -match '<Icon\s+className="h-4 w-4"\s*/>') {
+        $SidebarContent = $SidebarContent.Replace(
+            '<Icon className="h-4 w-4" />',
+            '{Icon ? <Icon className="h-4 w-4" /> : <span className="h-4 w-4" aria-hidden="true" />}'
+        )
+    }
+    elseif ($SidebarContent -match '<Icon\s+className=\{?["'']h-4 w-4["'']\}?\s*/>') {
+        $IconRegex = [regex]::new(
+            '<Icon\s+className=\{?["'']h-4 w-4["'']\}?\s*/>'
+        )
+        $SidebarContent = $IconRegex.Replace(
+            $SidebarContent,
+            '{Icon ? <Icon className="h-4 w-4" /> : <span className="h-4 w-4" aria-hidden="true" />}'
+        )
+    }
+    elseif ($SidebarContent -match '<Icon\b') {
+        $IconRegex = [regex]::new(
+            '<Icon\b([^>]*)/>'
+        )
+        $SidebarContent = $IconRegex.Replace(
+            $SidebarContent,
+            '{Icon ? <Icon$1/> : <span className="h-4 w-4" aria-hidden="true" />}'
+        )
+    }
+    else {
+        throw "Icon rendering line was not found in admin-sidebar.tsx."
+    }
+    Set-Content `
+        -LiteralPath $SidebarPath `
+        -Value $SidebarContent `
+        -Encoding UTF8
+    $PackageJson = Get-Content ".\package.json" -Raw | ConvertFrom-Json
+    $Scripts = @($PackageJson.scripts.PSObject.Properties.Name)
+    Invoke-Checked "FORMAT WRITE" {
+        if ($Scripts -contains "format") {
+            pnpm run format
+        }
+        else {
+            pnpm exec prettier --write .
+        }
+    }
+    Invoke-Checked "FORMAT CHECK" {
+        if ($Scripts -contains "format:check") {
+            pnpm run format:check
+        }
+        else {
+            pnpm exec prettier --check .
+        }
+    }
+    Invoke-Checked "TYPESCRIPT CHECK" {
+        if ($Scripts -contains "typecheck") {
+            pnpm run typecheck
+        }
+        else {
+            pnpm exec tsc --noEmit
+        }
+    }
+    Invoke-Checked "ESLINT" {
+        if ($Scripts -contains "lint") {
+            pnpm run lint -- --max-warnings=0
+        }
+        else {
+            pnpm exec eslint . --max-warnings=0
+        }
+    }
+    Invoke-Checked "PRODUCTION BUILD" {
+        if ($Scripts -contains "build") {
+            pnpm run build
+        }
+        else {
+            throw "build script is missing from package.json."
+        }
+    }
+Missing closing '}' in statement block or type definition.
+>> try {
+    function Invoke-Checked {
+        param(
+            [Parameter(Mandatory)]
+            [string]$Name,
+            [Parameter(Mandatory)]
+            [scriptblock]$Command
+        )
+        Write-Host ""
+        Write-Host "=== $Name ===" -ForegroundColor Cyan
+        $global:LASTEXITCODE = 0
+        & $Command
+        if ($LASTEXITCODE -ne 0) {
+            throw "$Name failed with exit code $LASTEXITCODE."
+        }
+        Write-Host "$Name PASSED" -ForegroundColor Green
+    }
+    if (-not (Test-Path -LiteralPath $SidebarPath)) {
+        throw "admin-sidebar.tsx file is missing."
+    }
+    Copy-Item `
+        -LiteralPath $SidebarPath `
+        -Destination $BackupPath `
+        -Force
+    $SidebarContent = Get-Content -LiteralPath $SidebarPath -Raw
+    if ($SidebarContent -notmatch '/admin/themes') {
+        throw "Theme Studio navigation item was not found."
+    }
+    if ($SidebarContent -match '<Icon\s+className="h-4 w-4"\s*/>') {
+        $SidebarContent = $SidebarContent.Replace(
+            '<Icon className="h-4 w-4" />',
+            '{Icon ? <Icon className="h-4 w-4" /> : <span className="h-4 w-4" aria-hidden="true" />}'
+        )
+    }
+    elseif ($SidebarContent -match '<Icon\s+className=\{?["'']h-4 w-4["'']\}?\s*/>') {
+        $IconRegex = [regex]::new(
+            '<Icon\s+className=\{?["'']h-4 w-4["'']\}?\s*/>'
+        )
+        $SidebarContent = $IconRegex.Replace(
+            $SidebarContent,
+            '{Icon ? <Icon className="h-4 w-4" /> : <span className="h-4 w-4" aria-hidden="true" />}'
+        )
+    }
+    elseif ($SidebarContent -match '<Icon\b') {
+        $IconRegex = [regex]::new(
+            '<Icon\b([^>]*)/>'
+        )
+        $SidebarContent = $IconRegex.Replace(
+            $SidebarContent,
+            '{Icon ? <Icon$1/> : <span className="h-4 w-4" aria-hidden="true" />}'
+        )
+    }
+    else {
+        throw "Icon rendering line was not found in admin-sidebar.tsx."
+    }
+    Set-Content `
+        -LiteralPath $SidebarPath `
+        -Value $SidebarContent `
+        -Encoding UTF8
+    $PackageJson = Get-Content ".\package.json" -Raw | ConvertFrom-Json
+    $Scripts = @($PackageJson.scripts.PSObject.Properties.Name)
+    Invoke-Checked "FORMAT WRITE" {
+        if ($Scripts -contains "format") {
+            pnpm run format
+        }
+        else {
+            pnpm exec prettier --write .
+        }
+    }
+    Invoke-Checked "FORMAT CHECK" {
+        if ($Scripts -contains "format:check") {
+            pnpm run format:check
+        }
+        else {
+            pnpm exec prettier --check .
+        }
+    }
+    Invoke-Checked "TYPESCRIPT CHECK" {
+        if ($Scripts -contains "typecheck") {
+            pnpm run typecheck
+        }
+        else {
+            pnpm exec tsc --noEmit
+        }
+    }
+    Invoke-Checked "ESLINT" {
+        if ($Scripts -contains "lint") {
+            pnpm run lint -- --max-warnings=0
+        }
+        else {
+            pnpm exec eslint . --max-warnings=0
+        }
+    }
+    Invoke-Checked "PRODUCTION BUILD" {
+        if ($Scripts -contains "build") {
+            pnpm run build
+        }
+        else {
+            throw "build script is missing from package.json."
+        }
+    }
+    @"
+KNOWLEDGE NEST — PHASE 7 SIDEBAR FIX
+The string is missing the terminator: "@.
+>> try {
+    function Invoke-Checked {
+        param(
+            [Parameter(Mandatory)]
+            [string]$Name,
+            [Parameter(Mandatory)]
+            [scriptblock]$Command
+        )
+        Write-Host ""
+        Write-Host "=== $Name ===" -ForegroundColor Cyan
+        $global:LASTEXITCODE = 0
+        & $Command
+        if ($LASTEXITCODE -ne 0) {
+            throw "$Name failed with exit code $LASTEXITCODE."
+        }
+        Write-Host "$Name PASSED" -ForegroundColor Green
+    }
+    if (-not (Test-Path -LiteralPath $SidebarPath)) {
+        throw "admin-sidebar.tsx file is missing."
+    }
+    Copy-Item `
+        -LiteralPath $SidebarPath `
+        -Destination $BackupPath `
+        -Force
+    $SidebarContent = Get-Content -LiteralPath $SidebarPath -Raw
+    if ($SidebarContent -notmatch '/admin/themes') {
+        throw "Theme Studio navigation item was not found."
+    }
+    if ($SidebarContent -match '<Icon\s+className="h-4 w-4"\s*/>') {
+        $SidebarContent = $SidebarContent.Replace(
+            '<Icon className="h-4 w-4" />',
+            '{Icon ? <Icon className="h-4 w-4" /> : <span className="h-4 w-4" aria-hidden="true" />}'
+        )
+    }
+    elseif ($SidebarContent -match '<Icon\s+className=\{?["'']h-4 w-4["'']\}?\s*/>') {
+        $IconRegex = [regex]::new(
+            '<Icon\s+className=\{?["'']h-4 w-4["'']\}?\s*/>'
+        )
+        $SidebarContent = $IconRegex.Replace(
+            $SidebarContent,
+            '{Icon ? <Icon className="h-4 w-4" /> : <span className="h-4 w-4" aria-hidden="true" />}'
+        )
+    }
+    elseif ($SidebarContent -match '<Icon\b') {
+        $IconRegex = [regex]::new(
+            '<Icon\b([^>]*)/>'
+        )
+        $SidebarContent = $IconRegex.Replace(
+            $SidebarContent,
+            '{Icon ? <Icon$1/> : <span className="h-4 w-4" aria-hidden="true" />}'
+        )
+    }
+    else {
+        throw "Icon rendering line was not found in admin-sidebar.tsx."
+    }
+    Set-Content `
+        -LiteralPath $SidebarPath `
+        -Value $SidebarContent `
+        -Encoding UTF8
+    $PackageJson = Get-Content ".\package.json" -Raw | ConvertFrom-Json
+    $Scripts = @($PackageJson.scripts.PSObject.Properties.Name)
+    Invoke-Checked "FORMAT WRITE" {
+        if ($Scripts -contains "format") {
+            pnpm run format
+        }
+        else {
+            pnpm exec prettier --write .
+        }
+    }
+    Invoke-Checked "FORMAT CHECK" {
+        if ($Scripts -contains "format:check") {
+            pnpm run format:check
+        }
+        else {
+            pnpm exec prettier --check .
+        }
+    }
+    Invoke-Checked "TYPESCRIPT CHECK" {
+        if ($Scripts -contains "typecheck") {
+            pnpm run typecheck
+        }
+        else {
+            pnpm exec tsc --noEmit
+        }
+    }
+    Invoke-Checked "ESLINT" {
+        if ($Scripts -contains "lint") {
+            pnpm run lint -- --max-warnings=0
+        }
+        else {
+            pnpm exec eslint . --max-warnings=0
+        }
+    }
+    Invoke-Checked "PRODUCTION BUILD" {
+        if ($Scripts -contains "build") {
+            pnpm run build
+        }
+        else {
+            throw "build script is missing from package.json."
+        }
+    }
+    @"
+KNOWLEDGE NEST — PHASE 7 SIDEBAR FIX
+Generated: $GeneratedAt
+Project: $ProjectRoot
+The string is missing the terminator: "@.
+>> try {
+    function Invoke-Checked {
+        param(
+            [Parameter(Mandatory)]
+            [string]$Name,
+            [Parameter(Mandatory)]
+            [scriptblock]$Command
+        )
+        Write-Host ""
+        Write-Host "=== $Name ===" -ForegroundColor Cyan
+        $global:LASTEXITCODE = 0
+        & $Command
+        if ($LASTEXITCODE -ne 0) {
+            throw "$Name failed with exit code $LASTEXITCODE."
+        }
+        Write-Host "$Name PASSED" -ForegroundColor Green
+    }
+    if (-not (Test-Path -LiteralPath $SidebarPath)) {
+        throw "admin-sidebar.tsx file is missing."
+    }
+    Copy-Item `
+        -LiteralPath $SidebarPath `
+        -Destination $BackupPath `
+        -Force
+    $SidebarContent = Get-Content -LiteralPath $SidebarPath -Raw
+    if ($SidebarContent -notmatch '/admin/themes') {
+        throw "Theme Studio navigation item was not found."
+    }
+    if ($SidebarContent -match '<Icon\s+className="h-4 w-4"\s*/>') {
+        $SidebarContent = $SidebarContent.Replace(
+            '<Icon className="h-4 w-4" />',
+            '{Icon ? <Icon className="h-4 w-4" /> : <span className="h-4 w-4" aria-hidden="true" />}'
+        )
+    }
+    elseif ($SidebarContent -match '<Icon\s+className=\{?["'']h-4 w-4["'']\}?\s*/>') {
+        $IconRegex = [regex]::new(
+            '<Icon\s+className=\{?["'']h-4 w-4["'']\}?\s*/>'
+        )
+        $SidebarContent = $IconRegex.Replace(
+            $SidebarContent,
+            '{Icon ? <Icon className="h-4 w-4" /> : <span className="h-4 w-4" aria-hidden="true" />}'
+        )
+    }
+    elseif ($SidebarContent -match '<Icon\b') {
+        $IconRegex = [regex]::new(
+            '<Icon\b([^>]*)/>'
+        )
+        $SidebarContent = $IconRegex.Replace(
+            $SidebarContent,
+            '{Icon ? <Icon$1/> : <span className="h-4 w-4" aria-hidden="true" />}'
+        )
+    }
+    else {
+        throw "Icon rendering line was not found in admin-sidebar.tsx."
+    }
+    Set-Content `
+        -LiteralPath $SidebarPath `
+        -Value $SidebarContent `
+        -Encoding UTF8
+    $PackageJson = Get-Content ".\package.json" -Raw | ConvertFrom-Json
+    $Scripts = @($PackageJson.scripts.PSObject.Properties.Name)
+    Invoke-Checked "FORMAT WRITE" {
+        if ($Scripts -contains "format") {
+            pnpm run format
+        }
+        else {
+            pnpm exec prettier --write .
+        }
+    }
+    Invoke-Checked "FORMAT CHECK" {
+        if ($Scripts -contains "format:check") {
+            pnpm run format:check
+        }
+        else {
+            pnpm exec prettier --check .
+        }
+    }
+    Invoke-Checked "TYPESCRIPT CHECK" {
+        if ($Scripts -contains "typecheck") {
+            pnpm run typecheck
+        }
+        else {
+            pnpm exec tsc --noEmit
+        }
+    }
+    Invoke-Checked "ESLINT" {
+        if ($Scripts -contains "lint") {
+            pnpm run lint -- --max-warnings=0
+        }
+        else {
+            pnpm exec eslint . --max-warnings=0
+        }
+    }
+    Invoke-Checked "PRODUCTION BUILD" {
+        if ($Scripts -contains "build") {
+            pnpm run build
+        }
+        else {
+            throw "build script is missing from package.json."
+        }
+    }
+    @"
+KNOWLEDGE NEST — PHASE 7 SIDEBAR FIX
+Generated: $GeneratedAt
+Project: $ProjectRoot
+ERROR CAUSE
+The string is missing the terminator: "@.
+>> try {
+    function Invoke-Checked {
+        param(
+            [Parameter(Mandatory)]
+            [string]$Name,
+            [Parameter(Mandatory)]
+            [scriptblock]$Command
+        )
+        Write-Host ""
+        Write-Host "=== $Name ===" -ForegroundColor Cyan
+        $global:LASTEXITCODE = 0
+        & $Command
+        if ($LASTEXITCODE -ne 0) {
+            throw "$Name failed with exit code $LASTEXITCODE."
+        }
+        Write-Host "$Name PASSED" -ForegroundColor Green
+    }
+    if (-not (Test-Path -LiteralPath $SidebarPath)) {
+        throw "admin-sidebar.tsx file is missing."
+    }
+    Copy-Item `
+        -LiteralPath $SidebarPath `
+        -Destination $BackupPath `
+        -Force
+    $SidebarContent = Get-Content -LiteralPath $SidebarPath -Raw
+    if ($SidebarContent -notmatch '/admin/themes') {
+        throw "Theme Studio navigation item was not found."
+    }
+    if ($SidebarContent -match '<Icon\s+className="h-4 w-4"\s*/>') {
+        $SidebarContent = $SidebarContent.Replace(
+            '<Icon className="h-4 w-4" />',
+            '{Icon ? <Icon className="h-4 w-4" /> : <span className="h-4 w-4" aria-hidden="true" />}'
+        )
+    }
+    elseif ($SidebarContent -match '<Icon\s+className=\{?["'']h-4 w-4["'']\}?\s*/>') {
+        $IconRegex = [regex]::new(
+            '<Icon\s+className=\{?["'']h-4 w-4["'']\}?\s*/>'
+        )
+        $SidebarContent = $IconRegex.Replace(
+            $SidebarContent,
+            '{Icon ? <Icon className="h-4 w-4" /> : <span className="h-4 w-4" aria-hidden="true" />}'
+        )
+    }
+    elseif ($SidebarContent -match '<Icon\b') {
+        $IconRegex = [regex]::new(
+            '<Icon\b([^>]*)/>'
+        )
+        $SidebarContent = $IconRegex.Replace(
+            $SidebarContent,
+            '{Icon ? <Icon$1/> : <span className="h-4 w-4" aria-hidden="true" />}'
+        )
+    }
+    else {
+        throw "Icon rendering line was not found in admin-sidebar.tsx."
+    }
+    Set-Content `
+        -LiteralPath $SidebarPath `
+        -Value $SidebarContent `
+        -Encoding UTF8
+    $PackageJson = Get-Content ".\package.json" -Raw | ConvertFrom-Json
+    $Scripts = @($PackageJson.scripts.PSObject.Properties.Name)
+    Invoke-Checked "FORMAT WRITE" {
+        if ($Scripts -contains "format") {
+            pnpm run format
+        }
+        else {
+            pnpm exec prettier --write .
+        }
+    }
+    Invoke-Checked "FORMAT CHECK" {
+        if ($Scripts -contains "format:check") {
+            pnpm run format:check
+        }
+        else {
+            pnpm exec prettier --check .
+        }
+    }
+    Invoke-Checked "TYPESCRIPT CHECK" {
+        if ($Scripts -contains "typecheck") {
+            pnpm run typecheck
+        }
+        else {
+            pnpm exec tsc --noEmit
+        }
+    }
+    Invoke-Checked "ESLINT" {
+        if ($Scripts -contains "lint") {
+            pnpm run lint -- --max-warnings=0
+        }
+        else {
+            pnpm exec eslint . --max-warnings=0
+        }
+    }
+    Invoke-Checked "PRODUCTION BUILD" {
+        if ($Scripts -contains "build") {
+            pnpm run build
+        }
+        else {
+            throw "build script is missing from package.json."
+        }
+    }
+    @"
+KNOWLEDGE NEST — PHASE 7 SIDEBAR FIX
+Generated: $GeneratedAt
+Project: $ProjectRoot
+ERROR CAUSE
+Theme Studio navigation item did not contain an icon property.
+The sidebar rendered every icon with <Icon />.
+For Theme Studio, Icon became undefined.
+TypeScript therefore rejected Icon as a JSX component.
+The string is missing the terminator: "@.
+>> try {
+    function Invoke-Checked {
+        param(
+            [Parameter(Mandatory)]
+            [string]$Name,
+            [Parameter(Mandatory)]
+            [scriptblock]$Command
+        )
+        Write-Host ""
+        Write-Host "=== $Name ===" -ForegroundColor Cyan
+        $global:LASTEXITCODE = 0
+        & $Command
+        if ($LASTEXITCODE -ne 0) {
+            throw "$Name failed with exit code $LASTEXITCODE."
+        }
+        Write-Host "$Name PASSED" -ForegroundColor Green
+    }
+    if (-not (Test-Path -LiteralPath $SidebarPath)) {
+        throw "admin-sidebar.tsx file is missing."
+    }
+    Copy-Item `
+        -LiteralPath $SidebarPath `
+        -Destination $BackupPath `
+        -Force
+    $SidebarContent = Get-Content -LiteralPath $SidebarPath -Raw
+    if ($SidebarContent -notmatch '/admin/themes') {
+        throw "Theme Studio navigation item was not found."
+    }
+    if ($SidebarContent -match '<Icon\s+className="h-4 w-4"\s*/>') {
+        $SidebarContent = $SidebarContent.Replace(
+            '<Icon className="h-4 w-4" />',
+            '{Icon ? <Icon className="h-4 w-4" /> : <span className="h-4 w-4" aria-hidden="true" />}'
+        )
+    }
+    elseif ($SidebarContent -match '<Icon\s+className=\{?["'']h-4 w-4["'']\}?\s*/>') {
+        $IconRegex = [regex]::new(
+            '<Icon\s+className=\{?["'']h-4 w-4["'']\}?\s*/>'
+        )
+        $SidebarContent = $IconRegex.Replace(
+            $SidebarContent,
+            '{Icon ? <Icon className="h-4 w-4" /> : <span className="h-4 w-4" aria-hidden="true" />}'
+        )
+    }
+    elseif ($SidebarContent -match '<Icon\b') {
+        $IconRegex = [regex]::new(
+            '<Icon\b([^>]*)/>'
+        )
+        $SidebarContent = $IconRegex.Replace(
+            $SidebarContent,
+            '{Icon ? <Icon$1/> : <span className="h-4 w-4" aria-hidden="true" />}'
+        )
+    }
+    else {
+        throw "Icon rendering line was not found in admin-sidebar.tsx."
+    }
+    Set-Content `
+        -LiteralPath $SidebarPath `
+        -Value $SidebarContent `
+        -Encoding UTF8
+    $PackageJson = Get-Content ".\package.json" -Raw | ConvertFrom-Json
+    $Scripts = @($PackageJson.scripts.PSObject.Properties.Name)
+    Invoke-Checked "FORMAT WRITE" {
+        if ($Scripts -contains "format") {
+            pnpm run format
+        }
+        else {
+            pnpm exec prettier --write .
+        }
+    }
+    Invoke-Checked "FORMAT CHECK" {
+        if ($Scripts -contains "format:check") {
+            pnpm run format:check
+        }
+        else {
+            pnpm exec prettier --check .
+        }
+    }
+    Invoke-Checked "TYPESCRIPT CHECK" {
+        if ($Scripts -contains "typecheck") {
+            pnpm run typecheck
+        }
+        else {
+            pnpm exec tsc --noEmit
+        }
+    }
+    Invoke-Checked "ESLINT" {
+        if ($Scripts -contains "lint") {
+            pnpm run lint -- --max-warnings=0
+        }
+        else {
+            pnpm exec eslint . --max-warnings=0
+        }
+    }
+    Invoke-Checked "PRODUCTION BUILD" {
+        if ($Scripts -contains "build") {
+            pnpm run build
+        }
+        else {
+            throw "build script is missing from package.json."
+        }
+    }
+    @"
+KNOWLEDGE NEST — PHASE 7 SIDEBAR FIX
+Generated: $GeneratedAt
+Project: $ProjectRoot
+ERROR CAUSE
+Theme Studio navigation item did not contain an icon property.
+The sidebar rendered every icon with <Icon />.
+For Theme Studio, Icon became undefined.
+TypeScript therefore rejected Icon as a JSX component.
+PERMANENT FIX
+The string is missing the terminator: "@.
+>> try {
+    function Invoke-Checked {
+        param(
+            [Parameter(Mandatory)]
+            [string]$Name,
+            [Parameter(Mandatory)]
+            [scriptblock]$Command
+        )
+        Write-Host ""
+        Write-Host "=== $Name ===" -ForegroundColor Cyan
+        $global:LASTEXITCODE = 0
+        & $Command
+        if ($LASTEXITCODE -ne 0) {
+            throw "$Name failed with exit code $LASTEXITCODE."
+        }
+        Write-Host "$Name PASSED" -ForegroundColor Green
+    }
+    if (-not (Test-Path -LiteralPath $SidebarPath)) {
+        throw "admin-sidebar.tsx file is missing."
+    }
+    Copy-Item `
+        -LiteralPath $SidebarPath `
+        -Destination $BackupPath `
+        -Force
+    $SidebarContent = Get-Content -LiteralPath $SidebarPath -Raw
+    if ($SidebarContent -notmatch '/admin/themes') {
+        throw "Theme Studio navigation item was not found."
+    }
+    if ($SidebarContent -match '<Icon\s+className="h-4 w-4"\s*/>') {
+        $SidebarContent = $SidebarContent.Replace(
+            '<Icon className="h-4 w-4" />',
+            '{Icon ? <Icon className="h-4 w-4" /> : <span className="h-4 w-4" aria-hidden="true" />}'
+        )
+    }
+    elseif ($SidebarContent -match '<Icon\s+className=\{?["'']h-4 w-4["'']\}?\s*/>') {
+        $IconRegex = [regex]::new(
+            '<Icon\s+className=\{?["'']h-4 w-4["'']\}?\s*/>'
+        )
+        $SidebarContent = $IconRegex.Replace(
+            $SidebarContent,
+            '{Icon ? <Icon className="h-4 w-4" /> : <span className="h-4 w-4" aria-hidden="true" />}'
+        )
+    }
+    elseif ($SidebarContent -match '<Icon\b') {
+        $IconRegex = [regex]::new(
+            '<Icon\b([^>]*)/>'
+        )
+        $SidebarContent = $IconRegex.Replace(
+            $SidebarContent,
+            '{Icon ? <Icon$1/> : <span className="h-4 w-4" aria-hidden="true" />}'
+        )
+    }
+    else {
+        throw "Icon rendering line was not found in admin-sidebar.tsx."
+    }
+    Set-Content `
+        -LiteralPath $SidebarPath `
+        -Value $SidebarContent `
+        -Encoding UTF8
+    $PackageJson = Get-Content ".\package.json" -Raw | ConvertFrom-Json
+    $Scripts = @($PackageJson.scripts.PSObject.Properties.Name)
+    Invoke-Checked "FORMAT WRITE" {
+        if ($Scripts -contains "format") {
+            pnpm run format
+        }
+        else {
+            pnpm exec prettier --write .
+        }
+    }
+    Invoke-Checked "FORMAT CHECK" {
+        if ($Scripts -contains "format:check") {
+            pnpm run format:check
+        }
+        else {
+            pnpm exec prettier --check .
+        }
+    }
+    Invoke-Checked "TYPESCRIPT CHECK" {
+        if ($Scripts -contains "typecheck") {
+            pnpm run typecheck
+        }
+        else {
+            pnpm exec tsc --noEmit
+        }
+    }
+    Invoke-Checked "ESLINT" {
+        if ($Scripts -contains "lint") {
+            pnpm run lint -- --max-warnings=0
+        }
+        else {
+            pnpm exec eslint . --max-warnings=0
+        }
+    }
+    Invoke-Checked "PRODUCTION BUILD" {
+        if ($Scripts -contains "build") {
+            pnpm run build
+        }
+        else {
+            throw "build script is missing from package.json."
+        }
+    }
+    @"
+KNOWLEDGE NEST — PHASE 7 SIDEBAR FIX
+Generated: $GeneratedAt
+Project: $ProjectRoot
+ERROR CAUSE
+Theme Studio navigation item did not contain an icon property.
+The sidebar rendered every icon with <Icon />.
+For Theme Studio, Icon became undefined.
+TypeScript therefore rejected Icon as a JSX component.
+PERMANENT FIX
+The sidebar now checks whether Icon exists before rendering it.
+When an icon is missing, a safe placeholder is rendered.
+This prevents the same TypeScript error for any future navigation item
+that does not contain an icon property.
+The string is missing the terminator: "@.
+>> try {
+    function Invoke-Checked {
+        param(
+            [Parameter(Mandatory)]
+            [string]$Name,
+            [Parameter(Mandatory)]
+            [scriptblock]$Command
+        )
+        Write-Host ""
+        Write-Host "=== $Name ===" -ForegroundColor Cyan
+        $global:LASTEXITCODE = 0
+        & $Command
+        if ($LASTEXITCODE -ne 0) {
+            throw "$Name failed with exit code $LASTEXITCODE."
+        }
+        Write-Host "$Name PASSED" -ForegroundColor Green
+    }
+    if (-not (Test-Path -LiteralPath $SidebarPath)) {
+        throw "admin-sidebar.tsx file is missing."
+    }
+    Copy-Item `
+        -LiteralPath $SidebarPath `
+        -Destination $BackupPath `
+        -Force
+    $SidebarContent = Get-Content -LiteralPath $SidebarPath -Raw
+    if ($SidebarContent -notmatch '/admin/themes') {
+        throw "Theme Studio navigation item was not found."
+    }
+    if ($SidebarContent -match '<Icon\s+className="h-4 w-4"\s*/>') {
+        $SidebarContent = $SidebarContent.Replace(
+            '<Icon className="h-4 w-4" />',
+            '{Icon ? <Icon className="h-4 w-4" /> : <span className="h-4 w-4" aria-hidden="true" />}'
+        )
+    }
+    elseif ($SidebarContent -match '<Icon\s+className=\{?["'']h-4 w-4["'']\}?\s*/>') {
+        $IconRegex = [regex]::new(
+            '<Icon\s+className=\{?["'']h-4 w-4["'']\}?\s*/>'
+        )
+        $SidebarContent = $IconRegex.Replace(
+            $SidebarContent,
+            '{Icon ? <Icon className="h-4 w-4" /> : <span className="h-4 w-4" aria-hidden="true" />}'
+        )
+    }
+    elseif ($SidebarContent -match '<Icon\b') {
+        $IconRegex = [regex]::new(
+            '<Icon\b([^>]*)/>'
+        )
+        $SidebarContent = $IconRegex.Replace(
+            $SidebarContent,
+            '{Icon ? <Icon$1/> : <span className="h-4 w-4" aria-hidden="true" />}'
+        )
+    }
+    else {
+        throw "Icon rendering line was not found in admin-sidebar.tsx."
+    }
+    Set-Content `
+        -LiteralPath $SidebarPath `
+        -Value $SidebarContent `
+        -Encoding UTF8
+    $PackageJson = Get-Content ".\package.json" -Raw | ConvertFrom-Json
+    $Scripts = @($PackageJson.scripts.PSObject.Properties.Name)
+    Invoke-Checked "FORMAT WRITE" {
+        if ($Scripts -contains "format") {
+            pnpm run format
+        }
+        else {
+            pnpm exec prettier --write .
+        }
+    }
+    Invoke-Checked "FORMAT CHECK" {
+        if ($Scripts -contains "format:check") {
+            pnpm run format:check
+        }
+        else {
+            pnpm exec prettier --check .
+        }
+    }
+    Invoke-Checked "TYPESCRIPT CHECK" {
+        if ($Scripts -contains "typecheck") {
+            pnpm run typecheck
+        }
+        else {
+            pnpm exec tsc --noEmit
+        }
+    }
+    Invoke-Checked "ESLINT" {
+        if ($Scripts -contains "lint") {
+            pnpm run lint -- --max-warnings=0
+        }
+        else {
+            pnpm exec eslint . --max-warnings=0
+        }
+    }
+    Invoke-Checked "PRODUCTION BUILD" {
+        if ($Scripts -contains "build") {
+            pnpm run build
+        }
+        else {
+            throw "build script is missing from package.json."
+        }
+    }
+    @"
+KNOWLEDGE NEST — PHASE 7 SIDEBAR FIX
+Generated: $GeneratedAt
+Project: $ProjectRoot
+ERROR CAUSE
+Theme Studio navigation item did not contain an icon property.
+The sidebar rendered every icon with <Icon />.
+For Theme Studio, Icon became undefined.
+TypeScript therefore rejected Icon as a JSX component.
+PERMANENT FIX
+The sidebar now checks whether Icon exists before rendering it.
+When an icon is missing, a safe placeholder is rendered.
+This prevents the same TypeScript error for any future navigation item
+that does not contain an icon property.
+VERIFICATION
+The string is missing the terminator: "@.
+>> try {
+    function Invoke-Checked {
+        param(
+            [Parameter(Mandatory)]
+            [string]$Name,
+            [Parameter(Mandatory)]
+            [scriptblock]$Command
+        )
+        Write-Host ""
+        Write-Host "=== $Name ===" -ForegroundColor Cyan
+        $global:LASTEXITCODE = 0
+        & $Command
+        if ($LASTEXITCODE -ne 0) {
+            throw "$Name failed with exit code $LASTEXITCODE."
+        }
+        Write-Host "$Name PASSED" -ForegroundColor Green
+    }
+    if (-not (Test-Path -LiteralPath $SidebarPath)) {
+        throw "admin-sidebar.tsx file is missing."
+    }
+    Copy-Item `
+        -LiteralPath $SidebarPath `
+        -Destination $BackupPath `
+        -Force
+    $SidebarContent = Get-Content -LiteralPath $SidebarPath -Raw
+    if ($SidebarContent -notmatch '/admin/themes') {
+        throw "Theme Studio navigation item was not found."
+    }
+    if ($SidebarContent -match '<Icon\s+className="h-4 w-4"\s*/>') {
+        $SidebarContent = $SidebarContent.Replace(
+            '<Icon className="h-4 w-4" />',
+            '{Icon ? <Icon className="h-4 w-4" /> : <span className="h-4 w-4" aria-hidden="true" />}'
+        )
+    }
+    elseif ($SidebarContent -match '<Icon\s+className=\{?["'']h-4 w-4["'']\}?\s*/>') {
+        $IconRegex = [regex]::new(
+            '<Icon\s+className=\{?["'']h-4 w-4["'']\}?\s*/>'
+        )
+        $SidebarContent = $IconRegex.Replace(
+            $SidebarContent,
+            '{Icon ? <Icon className="h-4 w-4" /> : <span className="h-4 w-4" aria-hidden="true" />}'
+        )
+    }
+    elseif ($SidebarContent -match '<Icon\b') {
+        $IconRegex = [regex]::new(
+            '<Icon\b([^>]*)/>'
+        )
+        $SidebarContent = $IconRegex.Replace(
+            $SidebarContent,
+            '{Icon ? <Icon$1/> : <span className="h-4 w-4" aria-hidden="true" />}'
+        )
+    }
+    else {
+        throw "Icon rendering line was not found in admin-sidebar.tsx."
+    }
+    Set-Content `
+        -LiteralPath $SidebarPath `
+        -Value $SidebarContent `
+        -Encoding UTF8
+    $PackageJson = Get-Content ".\package.json" -Raw | ConvertFrom-Json
+    $Scripts = @($PackageJson.scripts.PSObject.Properties.Name)
+    Invoke-Checked "FORMAT WRITE" {
+        if ($Scripts -contains "format") {
+            pnpm run format
+        }
+        else {
+            pnpm exec prettier --write .
+        }
+    }
+    Invoke-Checked "FORMAT CHECK" {
+        if ($Scripts -contains "format:check") {
+            pnpm run format:check
+        }
+        else {
+            pnpm exec prettier --check .
+        }
+    }
+    Invoke-Checked "TYPESCRIPT CHECK" {
+        if ($Scripts -contains "typecheck") {
+            pnpm run typecheck
+        }
+        else {
+            pnpm exec tsc --noEmit
+        }
+    }
+    Invoke-Checked "ESLINT" {
+        if ($Scripts -contains "lint") {
+            pnpm run lint -- --max-warnings=0
+        }
+        else {
+            pnpm exec eslint . --max-warnings=0
+        }
+    }
+    Invoke-Checked "PRODUCTION BUILD" {
+        if ($Scripts -contains "build") {
+            pnpm run build
+        }
+        else {
+            throw "build script is missing from package.json."
+        }
+    }
+    @"
+KNOWLEDGE NEST — PHASE 7 SIDEBAR FIX
+Generated: $GeneratedAt
+Project: $ProjectRoot
+ERROR CAUSE
+Theme Studio navigation item did not contain an icon property.
+The sidebar rendered every icon with <Icon />.
+For Theme Studio, Icon became undefined.
+TypeScript therefore rejected Icon as a JSX component.
+PERMANENT FIX
+The sidebar now checks whether Icon exists before rendering it.
+When an icon is missing, a safe placeholder is rendered.
+This prevents the same TypeScript error for any future navigation item
+that does not contain an icon property.
+VERIFICATION
+✅ Formatting passed
+✅ TypeScript passed
+✅ ESLint passed with zero warnings
+✅ Production build passed
+The string is missing the terminator: "@.
+>> try {
+    function Invoke-Checked {
+        param(
+            [Parameter(Mandatory)]
+            [string]$Name,
+            [Parameter(Mandatory)]
+            [scriptblock]$Command
+        )
+        Write-Host ""
+        Write-Host "=== $Name ===" -ForegroundColor Cyan
+        $global:LASTEXITCODE = 0
+        & $Command
+        if ($LASTEXITCODE -ne 0) {
+            throw "$Name failed with exit code $LASTEXITCODE."
+        }
+        Write-Host "$Name PASSED" -ForegroundColor Green
+    }
+    if (-not (Test-Path -LiteralPath $SidebarPath)) {
+        throw "admin-sidebar.tsx file is missing."
+    }
+    Copy-Item `
+        -LiteralPath $SidebarPath `
+        -Destination $BackupPath `
+        -Force
+    $SidebarContent = Get-Content -LiteralPath $SidebarPath -Raw
+    if ($SidebarContent -notmatch '/admin/themes') {
+        throw "Theme Studio navigation item was not found."
+    }
+    if ($SidebarContent -match '<Icon\s+className="h-4 w-4"\s*/>') {
+        $SidebarContent = $SidebarContent.Replace(
+            '<Icon className="h-4 w-4" />',
+            '{Icon ? <Icon className="h-4 w-4" /> : <span className="h-4 w-4" aria-hidden="true" />}'
+        )
+    }
+    elseif ($SidebarContent -match '<Icon\s+className=\{?["'']h-4 w-4["'']\}?\s*/>') {
+        $IconRegex = [regex]::new(
+            '<Icon\s+className=\{?["'']h-4 w-4["'']\}?\s*/>'
+        )
+        $SidebarContent = $IconRegex.Replace(
+            $SidebarContent,
+            '{Icon ? <Icon className="h-4 w-4" /> : <span className="h-4 w-4" aria-hidden="true" />}'
+        )
+    }
+    elseif ($SidebarContent -match '<Icon\b') {
+        $IconRegex = [regex]::new(
+            '<Icon\b([^>]*)/>'
+        )
+        $SidebarContent = $IconRegex.Replace(
+            $SidebarContent,
+            '{Icon ? <Icon$1/> : <span className="h-4 w-4" aria-hidden="true" />}'
+        )
+    }
+    else {
+        throw "Icon rendering line was not found in admin-sidebar.tsx."
+    }
+    Set-Content `
+        -LiteralPath $SidebarPath `
+        -Value $SidebarContent `
+        -Encoding UTF8
+    $PackageJson = Get-Content ".\package.json" -Raw | ConvertFrom-Json
+    $Scripts = @($PackageJson.scripts.PSObject.Properties.Name)
+    Invoke-Checked "FORMAT WRITE" {
+        if ($Scripts -contains "format") {
+            pnpm run format
+        }
+        else {
+            pnpm exec prettier --write .
+        }
+    }
+    Invoke-Checked "FORMAT CHECK" {
+        if ($Scripts -contains "format:check") {
+            pnpm run format:check
+        }
+        else {
+            pnpm exec prettier --check .
+        }
+    }
+    Invoke-Checked "TYPESCRIPT CHECK" {
+        if ($Scripts -contains "typecheck") {
+            pnpm run typecheck
+        }
+        else {
+            pnpm exec tsc --noEmit
+        }
+    }
+    Invoke-Checked "ESLINT" {
+        if ($Scripts -contains "lint") {
+            pnpm run lint -- --max-warnings=0
+        }
+        else {
+            pnpm exec eslint . --max-warnings=0
+        }
+    }
+    Invoke-Checked "PRODUCTION BUILD" {
+        if ($Scripts -contains "build") {
+            pnpm run build
+        }
+        else {
+            throw "build script is missing from package.json."
+        }
+    }
+    @"
+KNOWLEDGE NEST — PHASE 7 SIDEBAR FIX
+Generated: $GeneratedAt
+Project: $ProjectRoot
+ERROR CAUSE
+Theme Studio navigation item did not contain an icon property.
+The sidebar rendered every icon with <Icon />.
+For Theme Studio, Icon became undefined.
+TypeScript therefore rejected Icon as a JSX component.
+PERMANENT FIX
+The sidebar now checks whether Icon exists before rendering it.
+When an icon is missing, a safe placeholder is rendered.
+This prevents the same TypeScript error for any future navigation item
+that does not contain an icon property.
+VERIFICATION
+✅ Formatting passed
+✅ TypeScript passed
+✅ ESLint passed with zero warnings
+✅ Production build passed
+STATUS
+The string is missing the terminator: "@.
+>> try {
+    function Invoke-Checked {
+        param(
+            [Parameter(Mandatory)]
+            [string]$Name,
+            [Parameter(Mandatory)]
+            [scriptblock]$Command
+        )
+        Write-Host ""
+        Write-Host "=== $Name ===" -ForegroundColor Cyan
+        $global:LASTEXITCODE = 0
+        & $Command
+        if ($LASTEXITCODE -ne 0) {
+            throw "$Name failed with exit code $LASTEXITCODE."
+        }
+        Write-Host "$Name PASSED" -ForegroundColor Green
+    }
+    if (-not (Test-Path -LiteralPath $SidebarPath)) {
+        throw "admin-sidebar.tsx file is missing."
+    }
+    Copy-Item `
+        -LiteralPath $SidebarPath `
+        -Destination $BackupPath `
+        -Force
+    $SidebarContent = Get-Content -LiteralPath $SidebarPath -Raw
+    if ($SidebarContent -notmatch '/admin/themes') {
+        throw "Theme Studio navigation item was not found."
+    }
+    if ($SidebarContent -match '<Icon\s+className="h-4 w-4"\s*/>') {
+        $SidebarContent = $SidebarContent.Replace(
+            '<Icon className="h-4 w-4" />',
+            '{Icon ? <Icon className="h-4 w-4" /> : <span className="h-4 w-4" aria-hidden="true" />}'
+        )
+    }
+    elseif ($SidebarContent -match '<Icon\s+className=\{?["'']h-4 w-4["'']\}?\s*/>') {
+        $IconRegex = [regex]::new(
+            '<Icon\s+className=\{?["'']h-4 w-4["'']\}?\s*/>'
+        )
+        $SidebarContent = $IconRegex.Replace(
+            $SidebarContent,
+            '{Icon ? <Icon className="h-4 w-4" /> : <span className="h-4 w-4" aria-hidden="true" />}'
+        )
+    }
+    elseif ($SidebarContent -match '<Icon\b') {
+        $IconRegex = [regex]::new(
+            '<Icon\b([^>]*)/>'
+        )
+        $SidebarContent = $IconRegex.Replace(
+            $SidebarContent,
+            '{Icon ? <Icon$1/> : <span className="h-4 w-4" aria-hidden="true" />}'
+        )
+    }
+    else {
+        throw "Icon rendering line was not found in admin-sidebar.tsx."
+    }
+    Set-Content `
+        -LiteralPath $SidebarPath `
+        -Value $SidebarContent `
+        -Encoding UTF8
+    $PackageJson = Get-Content ".\package.json" -Raw | ConvertFrom-Json
+    $Scripts = @($PackageJson.scripts.PSObject.Properties.Name)
+    Invoke-Checked "FORMAT WRITE" {
+        if ($Scripts -contains "format") {
+            pnpm run format
+        }
+        else {
+            pnpm exec prettier --write .
+        }
+    }
+    Invoke-Checked "FORMAT CHECK" {
+        if ($Scripts -contains "format:check") {
+            pnpm run format:check
+        }
+        else {
+            pnpm exec prettier --check .
+        }
+    }
+    Invoke-Checked "TYPESCRIPT CHECK" {
+        if ($Scripts -contains "typecheck") {
+            pnpm run typecheck
+        }
+        else {
+            pnpm exec tsc --noEmit
+        }
+    }
+    Invoke-Checked "ESLINT" {
+        if ($Scripts -contains "lint") {
+            pnpm run lint -- --max-warnings=0
+        }
+        else {
+            pnpm exec eslint . --max-warnings=0
+        }
+    }
+    Invoke-Checked "PRODUCTION BUILD" {
+        if ($Scripts -contains "build") {
+            pnpm run build
+        }
+        else {
+            throw "build script is missing from package.json."
+        }
+    }
+    @"
+KNOWLEDGE NEST — PHASE 7 SIDEBAR FIX
+Generated: $GeneratedAt
+Project: $ProjectRoot
+ERROR CAUSE
+Theme Studio navigation item did not contain an icon property.
+The sidebar rendered every icon with <Icon />.
+For Theme Studio, Icon became undefined.
+TypeScript therefore rejected Icon as a JSX component.
+PERMANENT FIX
+The sidebar now checks whether Icon exists before rendering it.
+When an icon is missing, a safe placeholder is rendered.
+This prevents the same TypeScript error for any future navigation item
+that does not contain an icon property.
+VERIFICATION
+✅ Formatting passed
+✅ TypeScript passed
+✅ ESLint passed with zero warnings
+✅ Production build passed
+STATUS
+Phase 7 completion code is implemented.
+Final Phase 7 marker can now be created after this successful verification.
+The string is missing the terminator: "@.
+>> try {
+    function Invoke-Checked {
+        param(
+            [Parameter(Mandatory)]
+            [string]$Name,
+            [Parameter(Mandatory)]
+            [scriptblock]$Command
+        )
+        Write-Host ""
+        Write-Host "=== $Name ===" -ForegroundColor Cyan
+        $global:LASTEXITCODE = 0
+        & $Command
+        if ($LASTEXITCODE -ne 0) {
+            throw "$Name failed with exit code $LASTEXITCODE."
+        }
+        Write-Host "$Name PASSED" -ForegroundColor Green
+    }
+    if (-not (Test-Path -LiteralPath $SidebarPath)) {
+        throw "admin-sidebar.tsx file is missing."
+    }
+    Copy-Item `
+        -LiteralPath $SidebarPath `
+        -Destination $BackupPath `
+        -Force
+    $SidebarContent = Get-Content -LiteralPath $SidebarPath -Raw
+    if ($SidebarContent -notmatch '/admin/themes') {
+        throw "Theme Studio navigation item was not found."
+    }
+    if ($SidebarContent -match '<Icon\s+className="h-4 w-4"\s*/>') {
+        $SidebarContent = $SidebarContent.Replace(
+            '<Icon className="h-4 w-4" />',
+            '{Icon ? <Icon className="h-4 w-4" /> : <span className="h-4 w-4" aria-hidden="true" />}'
+        )
+    }
+    elseif ($SidebarContent -match '<Icon\s+className=\{?["'']h-4 w-4["'']\}?\s*/>') {
+        $IconRegex = [regex]::new(
+            '<Icon\s+className=\{?["'']h-4 w-4["'']\}?\s*/>'
+        )
+        $SidebarContent = $IconRegex.Replace(
+            $SidebarContent,
+            '{Icon ? <Icon className="h-4 w-4" /> : <span className="h-4 w-4" aria-hidden="true" />}'
+        )
+    }
+    elseif ($SidebarContent -match '<Icon\b') {
+        $IconRegex = [regex]::new(
+            '<Icon\b([^>]*)/>'
+        )
+        $SidebarContent = $IconRegex.Replace(
+            $SidebarContent,
+            '{Icon ? <Icon$1/> : <span className="h-4 w-4" aria-hidden="true" />}'
+        )
+    }
+    else {
+        throw "Icon rendering line was not found in admin-sidebar.tsx."
+    }
+    Set-Content `
+        -LiteralPath $SidebarPath `
+        -Value $SidebarContent `
+        -Encoding UTF8
+    $PackageJson = Get-Content ".\package.json" -Raw | ConvertFrom-Json
+    $Scripts = @($PackageJson.scripts.PSObject.Properties.Name)
+    Invoke-Checked "FORMAT WRITE" {
+        if ($Scripts -contains "format") {
+            pnpm run format
+        }
+        else {
+            pnpm exec prettier --write .
+        }
+    }
+    Invoke-Checked "FORMAT CHECK" {
+        if ($Scripts -contains "format:check") {
+            pnpm run format:check
+        }
+        else {
+            pnpm exec prettier --check .
+        }
+    }
+    Invoke-Checked "TYPESCRIPT CHECK" {
+        if ($Scripts -contains "typecheck") {
+            pnpm run typecheck
+        }
+        else {
+            pnpm exec tsc --noEmit
+        }
+    }
+    Invoke-Checked "ESLINT" {
+        if ($Scripts -contains "lint") {
+            pnpm run lint -- --max-warnings=0
+        }
+        else {
+            pnpm exec eslint . --max-warnings=0
+        }
+    }
+    Invoke-Checked "PRODUCTION BUILD" {
+        if ($Scripts -contains "build") {
+            pnpm run build
+        }
+        else {
+            throw "build script is missing from package.json."
+        }
+    }
+    @"
+KNOWLEDGE NEST — PHASE 7 SIDEBAR FIX
+Generated: $GeneratedAt
+Project: $ProjectRoot
+ERROR CAUSE
+Theme Studio navigation item did not contain an icon property.
+The sidebar rendered every icon with <Icon />.
+For Theme Studio, Icon became undefined.
+TypeScript therefore rejected Icon as a JSX component.
+PERMANENT FIX
+The sidebar now checks whether Icon exists before rendering it.
+When an icon is missing, a safe placeholder is rendered.
+This prevents the same TypeScript error for any future navigation item
+that does not contain an icon property.
+VERIFICATION
+✅ Formatting passed
+✅ TypeScript passed
+✅ ESLint passed with zero warnings
+✅ Production build passed
+STATUS
+Phase 7 completion code is implemented.
+Final Phase 7 marker can now be created after this successful verification.
+Backup: $BackupPath
+Log: $LogPath
+"@ | Set-Content -LiteralPath $ReportPath -Encoding UTF8
+Missing closing '}' in statement block or type definition.
+>> try {
+    function Invoke-Checked {
+        param(
+            [Parameter(Mandatory)]
+            [string]$Name,
+            [Parameter(Mandatory)]
+            [scriptblock]$Command
+        )
+        Write-Host ""
+        Write-Host "=== $Name ===" -ForegroundColor Cyan
+        $global:LASTEXITCODE = 0
+        & $Command
+        if ($LASTEXITCODE -ne 0) {
+            throw "$Name failed with exit code $LASTEXITCODE."
+        }
+        Write-Host "$Name PASSED" -ForegroundColor Green
+    }
+    if (-not (Test-Path -LiteralPath $SidebarPath)) {
+        throw "admin-sidebar.tsx file is missing."
+    }
+    Copy-Item `
+        -LiteralPath $SidebarPath `
+        -Destination $BackupPath `
+        -Force
+    $SidebarContent = Get-Content -LiteralPath $SidebarPath -Raw
+    if ($SidebarContent -notmatch '/admin/themes') {
+        throw "Theme Studio navigation item was not found."
+    }
+    if ($SidebarContent -match '<Icon\s+className="h-4 w-4"\s*/>') {
+        $SidebarContent = $SidebarContent.Replace(
+            '<Icon className="h-4 w-4" />',
+            '{Icon ? <Icon className="h-4 w-4" /> : <span className="h-4 w-4" aria-hidden="true" />}'
+        )
+    }
+    elseif ($SidebarContent -match '<Icon\s+className=\{?["'']h-4 w-4["'']\}?\s*/>') {
+        $IconRegex = [regex]::new(
+            '<Icon\s+className=\{?["'']h-4 w-4["'']\}?\s*/>'
+        )
+        $SidebarContent = $IconRegex.Replace(
+            $SidebarContent,
+            '{Icon ? <Icon className="h-4 w-4" /> : <span className="h-4 w-4" aria-hidden="true" />}'
+        )
+    }
+    elseif ($SidebarContent -match '<Icon\b') {
+        $IconRegex = [regex]::new(
+            '<Icon\b([^>]*)/>'
+        )
+        $SidebarContent = $IconRegex.Replace(
+            $SidebarContent,
+            '{Icon ? <Icon$1/> : <span className="h-4 w-4" aria-hidden="true" />}'
+        )
+    }
+    else {
+        throw "Icon rendering line was not found in admin-sidebar.tsx."
+    }
+    Set-Content `
+        -LiteralPath $SidebarPath `
+        -Value $SidebarContent `
+        -Encoding UTF8
+    $PackageJson = Get-Content ".\package.json" -Raw | ConvertFrom-Json
+    $Scripts = @($PackageJson.scripts.PSObject.Properties.Name)
+    Invoke-Checked "FORMAT WRITE" {
+        if ($Scripts -contains "format") {
+            pnpm run format
+        }
+        else {
+            pnpm exec prettier --write .
+        }
+    }
+    Invoke-Checked "FORMAT CHECK" {
+        if ($Scripts -contains "format:check") {
+            pnpm run format:check
+        }
+        else {
+            pnpm exec prettier --check .
+        }
+    }
+    Invoke-Checked "TYPESCRIPT CHECK" {
+        if ($Scripts -contains "typecheck") {
+            pnpm run typecheck
+        }
+        else {
+            pnpm exec tsc --noEmit
+        }
+    }
+    Invoke-Checked "ESLINT" {
+        if ($Scripts -contains "lint") {
+            pnpm run lint -- --max-warnings=0
+        }
+        else {
+            pnpm exec eslint . --max-warnings=0
+        }
+    }
+    Invoke-Checked "PRODUCTION BUILD" {
+        if ($Scripts -contains "build") {
+            pnpm run build
+        }
+        else {
+            throw "build script is missing from package.json."
+        }
+    }
+    @"
+KNOWLEDGE NEST — PHASE 7 SIDEBAR FIX
+Generated: $GeneratedAt
+Project: $ProjectRoot
+ERROR CAUSE
+Theme Studio navigation item did not contain an icon property.
+The sidebar rendered every icon with <Icon />.
+For Theme Studio, Icon became undefined.
+TypeScript therefore rejected Icon as a JSX component.
+PERMANENT FIX
+The sidebar now checks whether Icon exists before rendering it.
+When an icon is missing, a safe placeholder is rendered.
+This prevents the same TypeScript error for any future navigation item
+that does not contain an icon property.
+VERIFICATION
+✅ Formatting passed
+✅ TypeScript passed
+✅ ESLint passed with zero warnings
+✅ Production build passed
+STATUS
+Phase 7 completion code is implemented.
+Final Phase 7 marker can now be created after this successful verification.
+Backup: $BackupPath
+Log: $LogPath
+"@ | Set-Content -LiteralPath $ReportPath -Encoding UTF8
+    Write-Host ""
+    Write-Host "========================================" -ForegroundColor Green
+    Write-Host "SIDEBAR ICON ERROR PERMANENTLY FIXED" -ForegroundColor Green
+    Write-Host "TYPESCRIPT PASSED" -ForegroundColor Green
+    Write-Host "ESLINT PASSED" -ForegroundColor Green
+    Write-Host "PRODUCTION BUILD PASSED" -ForegroundColor Green
+    Write-Host "REPORT: $ReportPath" -ForegroundColor Green
+    Write-Host "BACKUP: $BackupPath" -ForegroundColor Green
+    Write-Host "LOG: $LogPath" -ForegroundColor Green
+    Write-Host "========================================" -ForegroundColor Green
+}
+catch {
+    Write-Host ""
+    Write-Host "========================================" -ForegroundColor Red
+    Write-Host "SIDEBAR FIX FAILED" -ForegroundColor Red
+    Write-Host $_.Exception.Message -ForegroundColor Red
+    Write-Host "BACKUP: $BackupPath" -ForegroundColor Yellow
+    Write-Host "LOG: $LogPath" -ForegroundColor Yellow
+    Write-Host "========================================" -ForegroundColor Red
+    throw
+}
+finally {
+    Stop-Transcript -ErrorAction SilentlyContinue | Out-Null
+}
+
+=== FORMAT WRITE ===
+
+FORMAT WRITE PASSED
+
+=== FORMAT CHECK ===
+
+FORMAT CHECK PASSED
+
+=== TYPESCRIPT CHECK ===
+
+PS>TerminatingError(): "TYPESCRIPT CHECK failed with exit code 2."
+
+========================================
+SIDEBAR FIX FAILED
+TYPESCRIPT CHECK failed with exit code 2.
+BACKUP: C:\Users\A C\Downloads\knowledge-nest\backups\phase-7-sidebar-fix-20260727-005947\src\components\admin\admin-sidebar.tsx
+LOG: C:\Users\A C\Downloads\knowledge-nest\logs\phase-7-sidebar-fix-20260727-005947.log
+========================================
+**********************
+Windows PowerShell transcript end
+End time: 20260727010019
+**********************

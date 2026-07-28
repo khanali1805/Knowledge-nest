@@ -1,0 +1,9 @@
+﻿PASS | Production server started.
+PASS | Categories API returned 8 categories.
+PASS | Draft article created.
+PASS | Draft persisted with its category.
+PASS | Article published and marked featured.
+PASS | Published state persisted after reload.
+PASS | Published article rendered publicly.
+PASS | Invalid JSON handled safely.
+PASS | Temporary article deleted.

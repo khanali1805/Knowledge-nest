@@ -1,0 +1,1858 @@
+KNOWLEDGE NEST — PHASE 9 IMPLEMENTATION CONTEXT
+Generated: 2026-07-27 13:32:49
+Project: C:\Users\A C\Downloads\knowledge-nest
+
+============================================================
+FILE: src\db\schema\index.ts
+============================================================
+    1: export * from "./articles";
+    2: export * from "./media";
+    3: export * from "./settings";
+    4: export * from "./taxonomy";
+    5: export * from "./users";
+
+============================================================
+FILE: src\db\schema\users.ts
+============================================================
+    1: import { pgTable, uuid, varchar, timestamp } from "drizzle-orm/pg-core";
+    2: export const users = pgTable("users", {
+    3:   id: uuid("id").defaultRandom().primaryKey(),
+    4:   name: varchar("name", { length: 150 }).notNull(),
+    5:   email: varchar("email", { length: 320 }).notNull().unique(),
+    6:   createdAt: timestamp("created_at").defaultNow().notNull(),
+    7: });
+
+============================================================
+FILE: src\db\schema\articles.ts
+============================================================
+    1: import {
+    2:   boolean,
+    3:   index,
+    4:   integer,
+    5:   jsonb,
+    6:   pgTable,
+    7:   primaryKey,
+    8:   text,
+    9:   timestamp,
+   10:   uniqueIndex,
+   11:   uuid,
+   12:   varchar,
+   13: } from "drizzle-orm/pg-core";
+   14: import { media } from "./media";
+   15: import { categories, tags } from "./taxonomy";
+   16: import { users } from "./users";
+   17: export const articles = pgTable(
+   18:   "articles",
+   19:   {
+   20:     id: uuid("id").defaultRandom().primaryKey(),
+   21:     authorId: uuid("author_id").references(() => users.id, {
+   22:       onDelete: "set null",
+   23:     }),
+   24:     categoryId: uuid("category_id").references(() => categories.id, {
+   25:       onDelete: "set null",
+   26:     }),
+   27:     featuredImageId: uuid("featured_image_id").references(() => media.id, {
+   28:       onDelete: "set null",
+   29:     }),
+   30:     title: varchar("title", { length: 255 }).notNull(),
+   31:     slug: varchar("slug", { length: 300 }).notNull(),
+   32:     excerpt: text("excerpt"),
+   33:     content: text("content").notNull(),
+   34:     contentJson: jsonb("content_json").$type<Record<string, unknown>>(),
+   35:     status: varchar("status", { length: 30 }).default("draft").notNull(),
+   36:     seoTitle: varchar("seo_title", { length: 255 }),
+   37:     seoDescription: text("seo_description"),
+   38:     canonicalUrl: text("canonical_url"),
+   39:     focusKeyword: varchar("focus_keyword", { length: 255 }),
+   40:     readingTimeMinutes: integer("reading_time_minutes").default(1).notNull(),
+   41:     viewCount: integer("view_count").default(0).notNull(),
+   42:     isFeatured: boolean("is_featured").default(false).notNull(),
+   43:     scheduledAt: timestamp("scheduled_at", {
+   44:       withTimezone: true,
+   45:     }),
+   46:     publishedAt: timestamp("published_at", {
+   47:       withTimezone: true,
+   48:     }),
+   49:     createdAt: timestamp("created_at", {
+   50:       withTimezone: true,
+   51:     })
+   52:       .defaultNow()
+   53:       .notNull(),
+   54:     updatedAt: timestamp("updated_at", {
+   55:       withTimezone: true,
+   56:     })
+   57:       .defaultNow()
+   58:       .notNull(),
+   59:   },
+   60:   (table) => [
+   61:     uniqueIndex("articles_slug_unique").on(table.slug),
+   62:     index("articles_status_index").on(table.status),
+   63:     index("articles_category_index").on(table.categoryId),
+   64:     index("articles_author_index").on(table.authorId),
+   65:   ],
+   66: );
+   67: export const articleTags = pgTable(
+   68:   "article_tags",
+   69:   {
+   70:     articleId: uuid("article_id")
+   71:       .notNull()
+   72:       .references(() => articles.id, {
+   73:         onDelete: "cascade",
+   74:       }),
+   75:     tagId: uuid("tag_id")
+   76:       .notNull()
+   77:       .references(() => tags.id, {
+   78:         onDelete: "cascade",
+   79:       }),
+   80:   },
+   81:   (table) => [
+   82:     primaryKey({
+   83:       columns: [table.articleId, table.tagId],
+   84:     }),
+   85:   ],
+   86: );
+   87: export const articleRevisions = pgTable(
+   88:   "article_revisions",
+   89:   {
+   90:     id: uuid("id").defaultRandom().primaryKey(),
+   91:     articleId: uuid("article_id")
+   92:       .notNull()
+   93:       .references(() => articles.id, {
+   94:         onDelete: "cascade",
+   95:       }),
+   96:     editedById: uuid("edited_by_id").references(() => users.id, {
+   97:       onDelete: "set null",
+   98:     }),
+   99:     revisionNumber: integer("revision_number").notNull(),
+  100:     title: varchar("title", { length: 255 }).notNull(),
+  101:     content: text("content").notNull(),
+  102:     changeSummary: text("change_summary"),
+  103:     createdAt: timestamp("created_at", {
+  104:       withTimezone: true,
+  105:     })
+  106:       .defaultNow()
+  107:       .notNull(),
+  108:   },
+  109:   (table) => [
+  110:     uniqueIndex("article_revision_unique").on(table.articleId, table.revisionNumber),
+  111:   ],
+  112: );
+
+============================================================
+FILE: src\db\schema\taxonomy.ts
+============================================================
+    1: import {
+    2:   boolean,
+    3:   integer,
+    4:   pgTable,
+    5:   text,
+    6:   timestamp,
+    7:   uniqueIndex,
+    8:   uuid,
+    9:   varchar,
+   10: } from "drizzle-orm/pg-core";
+   11: export const categories = pgTable(
+   12:   "categories",
+   13:   {
+   14:     id: uuid("id").defaultRandom().primaryKey(),
+   15:     name: varchar("name", { length: 120 }).notNull(),
+   16:     slug: varchar("slug", { length: 160 }).notNull(),
+   17:     description: text("description"),
+   18:     imageUrl: text("image_url"),
+   19:     isActive: boolean("is_active").default(true).notNull(),
+   20:     sortOrder: integer("sort_order").default(0).notNull(),
+   21:     createdAt: timestamp("created_at", {
+   22:       withTimezone: true,
+   23:     })
+   24:       .defaultNow()
+   25:       .notNull(),
+   26:     updatedAt: timestamp("updated_at", {
+   27:       withTimezone: true,
+   28:     })
+   29:       .defaultNow()
+   30:       .notNull(),
+   31:   },
+   32:   (table) => [uniqueIndex("categories_slug_unique").on(table.slug)],
+   33: );
+   34: export const tags = pgTable(
+   35:   "tags",
+   36:   {
+   37:     id: uuid("id").defaultRandom().primaryKey(),
+   38:     name: varchar("name", { length: 100 }).notNull(),
+   39:     slug: varchar("slug", { length: 140 }).notNull(),
+   40:     description: text("description"),
+   41:     createdAt: timestamp("created_at", {
+   42:       withTimezone: true,
+   43:     })
+   44:       .defaultNow()
+   45:       .notNull(),
+   46:   },
+   47:   (table) => [uniqueIndex("tags_slug_unique").on(table.slug)],
+   48: );
+
+============================================================
+FILE: src\db\schema\media.ts
+============================================================
+    1: import {
+    2:   bigint,
+    3:   integer,
+    4:   jsonb,
+    5:   pgTable,
+    6:   text,
+    7:   timestamp,
+    8:   uuid,
+    9:   varchar,
+   10: } from "drizzle-orm/pg-core";
+   11: import { users } from "./users";
+   12: export const media = pgTable("media", {
+   13:   id: uuid("id").defaultRandom().primaryKey(),
+   14:   uploadedById: uuid("uploaded_by_id").references(() => users.id, {
+   15:     onDelete: "set null",
+   16:   }),
+   17:   type: varchar("type", { length: 30 }).notNull(),
+   18:   provider: varchar("provider", { length: 50 }).default("local").notNull(),
+   19:   originalName: varchar("original_name", { length: 255 }).notNull(),
+   20:   fileName: varchar("file_name", { length: 255 }).notNull(),
+   21:   mimeType: varchar("mime_type", { length: 150 }).notNull(),
+   22:   url: text("url").notNull(),
+   23:   storageKey: text("storage_key"),
+   24:   altText: varchar("alt_text", { length: 255 }),
+   25:   title: varchar("title", { length: 255 }),
+   26:   caption: text("caption"),
+   27:   width: integer("width"),
+   28:   height: integer("height"),
+   29:   fileSize: bigint("file_size", { mode: "number" }),
+   30:   metadata: jsonb("metadata").$type<Record<string, unknown>>().default({}).notNull(),
+   31:   createdAt: timestamp("created_at", {
+   32:     withTimezone: true,
+   33:   })
+   34:     .defaultNow()
+   35:     .notNull(),
+   36:   updatedAt: timestamp("updated_at", {
+   37:     withTimezone: true,
+   38:   })
+   39:     .defaultNow()
+   40:     .notNull(),
+   41: });
+
+============================================================
+FILE: src\db\schema\settings.ts
+============================================================
+    1: import {
+    2:   boolean,
+    3:   integer,
+    4:   jsonb,
+    5:   pgTable,
+    6:   text,
+    7:   timestamp,
+    8:   uniqueIndex,
+    9:   uuid,
+   10:   varchar,
+   11: } from "drizzle-orm/pg-core";
+   12: import { users } from "./users";
+   13: export const pages = pgTable(
+   14:   "pages",
+   15:   {
+   16:     id: uuid("id").defaultRandom().primaryKey(),
+   17:     authorId: uuid("author_id").references(() => users.id, {
+   18:       onDelete: "set null",
+   19:     }),
+   20:     title: varchar("title", { length: 255 }).notNull(),
+   21:     slug: varchar("slug", { length: 300 }).notNull(),
+   22:     content: text("content").notNull(),
+   23:     contentJson: jsonb("content_json").$type<Record<string, unknown>>(),
+   24:     status: varchar("status", { length: 30 }).default("draft").notNull(),
+   25:     seoTitle: varchar("seo_title", { length: 255 }),
+   26:     seoDescription: text("seo_description"),
+   27:     publishedAt: timestamp("published_at", {
+   28:       withTimezone: true,
+   29:     }),
+   30:     createdAt: timestamp("created_at", {
+   31:       withTimezone: true,
+   32:     })
+   33:       .defaultNow()
+   34:       .notNull(),
+   35:     updatedAt: timestamp("updated_at", {
+   36:       withTimezone: true,
+   37:     })
+   38:       .defaultNow()
+   39:       .notNull(),
+   40:   },
+   41:   (table) => [uniqueIndex("pages_slug_unique").on(table.slug)],
+   42: );
+   43: export const siteSettings = pgTable(
+   44:   "site_settings",
+   45:   {
+   46:     id: uuid("id").defaultRandom().primaryKey(),
+   47:     group: varchar("group", { length: 100 }).default("general").notNull(),
+   48:     key: varchar("key", { length: 150 }).notNull(),
+   49:     value: text("value"),
+   50:     jsonValue: jsonb("json_value").$type<unknown>(),
+   51:     isPublic: boolean("is_public").default(false).notNull(),
+   52:     sortOrder: integer("sort_order").default(0).notNull(),
+   53:     createdAt: timestamp("created_at", {
+   54:       withTimezone: true,
+   55:     })
+   56:       .defaultNow()
+   57:       .notNull(),
+   58:     updatedAt: timestamp("updated_at", {
+   59:       withTimezone: true,
+   60:     })
+   61:       .defaultNow()
+   62:       .notNull(),
+   63:   },
+   64:   (table) => [uniqueIndex("site_settings_key_unique").on(table.key)],
+   65: );
+
+============================================================
+FILE: src\components\admin\articles\article-editor.tsx
+============================================================
+    1: "use client";
+    2: import Link from "next/link";
+    3: import { useRouter } from "next/navigation";
+    4: import {
+    5:   ArrowLeft,
+    6:   Eye,
+    7:   ImageIcon,
+    8:   LoaderCircle,
+    9:   Save,
+   10:   Send,
+   11:   Sparkles,
+   12: } from "lucide-react";
+   13: import { type FormEvent, useEffect, useMemo, useState } from "react";
+   14: type ArticleEditorProps = {
+   15:   mode: "create" | "edit";
+   16:   articleId?: string;
+   17: };
+   18: type ArticleRecord = {
+   19:   id: string;
+   20:   title: string;
+   21:   slug: string;
+   22:   excerpt: string | null;
+   23:   content: string;
+   24:   status: string;
+   25:   isFeatured: boolean;
+   26:   seoTitle: string | null;
+   27:   seoDescription: string | null;
+   28:   focusKeyword: string | null;
+   29:   categoryName: string | null;
+   30: };
+   31: type ApiResponse = {
+   32:   article?: ArticleRecord & {
+   33:     id: string;
+   34:     slug: string;
+   35:     status: string;
+   36:   };
+   37:   message?: string;
+   38: };
+   39: const categoryOptions = [
+   40:   "Finance",
+   41:   "Science",
+   42:   "Technology",
+   43:   "AI",
+   44:   "Health",
+   45:   "Education",
+   46:   "Business",
+   47:   "History",
+   48:   "Environment",
+   49:   "Space",
+   50:   "Psychology",
+   51:   "General Knowledge",
+   52: ];
+   53: function createSlug(value: string) {
+   54:   return value
+   55:     .toLowerCase()
+   56:     .trim()
+   57:     .replace(/[^a-z0-9\s-]/g, "")
+   58:     .replace(/\s+/g, "-")
+   59:     .replace(/-+/g, "-");
+   60: }
+   61: export function ArticleEditor({ mode, articleId }: ArticleEditorProps) {
+   62:   const router = useRouter();
+   63:   const [title, setTitle] = useState("");
+   64:   const [slug, setSlug] = useState("");
+   65:   const [excerpt, setExcerpt] = useState("");
+   66:   const [content, setContent] = useState("");
+   67:   const [category, setCategory] = useState("");
+   68:   const [status, setStatus] = useState("draft");
+   69:   const [featured, setFeatured] = useState(false);
+   70:   const [seoTitle, setSeoTitle] = useState("");
+   71:   const [seoDescription, setSeoDescription] = useState("");
+   72:   const [focusKeyword, setFocusKeyword] = useState("");
+   73:   const [tags, setTags] = useState("");
+   74:   const [isLoading, setIsLoading] = useState(mode === "edit");
+   75:   const [isSaving, setIsSaving] = useState(false);
+   76:   const [message, setMessage] = useState("");
+   77:   const [error, setError] = useState("");
+   78:   useEffect(() => {
+   79:     if (mode !== "edit" || !articleId) {
+   80:       return;
+   81:     }
+   82:     async function loadArticle() {
+   83:       setIsLoading(true);
+   84:       setError("");
+   85:       try {
+   86:         const response = await fetch(`/api/admin/articles/${articleId}`, {
+   87:           cache: "no-store",
+   88:         });
+   89:         const responseData = (await response.json()) as ApiResponse;
+   90:         if (!response.ok || !responseData.article) {
+   91:           throw new Error(responseData.message || "Unable to load the article.");
+   92:         }
+   93:         const article = responseData.article;
+   94:         setTitle(article.title);
+   95:         setSlug(article.slug);
+   96:         setExcerpt(article.excerpt ?? "");
+   97:         setContent(article.content);
+   98:         setCategory(article.categoryName ?? "");
+   99:         setStatus(article.status);
+  100:         setFeatured(article.isFeatured);
+  101:         setSeoTitle(article.seoTitle ?? "");
+  102:         setSeoDescription(article.seoDescription ?? "");
+  103:         setFocusKeyword(article.focusKeyword ?? "");
+  104:       } catch (loadError) {
+  105:         setError(
+  106:           loadError instanceof Error ? loadError.message : "Unable to load the article.",
+  107:         );
+  108:       } finally {
+  109:         setIsLoading(false);
+  110:       }
+  111:     }
+  112:     void loadArticle();
+  113:   }, [articleId, mode]);
+  114:   const wordCount = useMemo(() => {
+  115:     const cleanContent = content.trim();
+  116:     if (!cleanContent) {
+  117:       return 0;
+  118:     }
+  119:     return cleanContent.split(/\s+/).length;
+  120:   }, [content]);
+  121:   const readingTime = Math.max(1, Math.ceil(wordCount / 220));
+  122:   function handleTitleChange(value: string) {
+  123:     setTitle(value);
+  124:     if (mode === "create") {
+  125:       setSlug(createSlug(value));
+  126:     }
+  127:   }
+  128:   async function saveArticle(nextStatus: "draft" | "published") {
+  129:     setMessage("");
+  130:     setError("");
+  131:     if (!title.trim()) {
+  132:       setError("Article title is required.");
+  133:       return;
+  134:     }
+  135:     if (!slug.trim()) {
+  136:       setError("Article URL slug is required.");
+  137:       return;
+  138:     }
+  139:     if (!content.trim()) {
+  140:       setError("Article content is required.");
+  141:       return;
+  142:     }
+  143:     if (!category) {
+  144:       setError("Article category is required.");
+  145:       return;
+  146:     }
+  147:     setIsSaving(true);
+  148:     try {
+  149:       const endpoint =
+  150:         mode === "edit" && articleId
+  151:           ? `/api/admin/articles/${articleId}`
+  152:           : "/api/admin/articles";
+  153:       const response = await fetch(endpoint, {
+  154:         method: mode === "edit" ? "PUT" : "POST",
+  155:         headers: {
+  156:           "Content-Type": "application/json",
+  157:         },
+  158:         body: JSON.stringify({
+  159:           title,
+  160:           slug,
+  161:           excerpt,
+  162:           content,
+  163:           category,
+  164:           status: nextStatus,
+  165:           featured,
+  166:           seoTitle,
+  167:           seoDescription,
+  168:           focusKeyword,
+  169:           tags,
+  170:         }),
+  171:       });
+  172:       const responseData = (await response.json()) as ApiResponse;
+  173:       if (!response.ok || !responseData.article) {
+  174:         throw new Error(responseData.message || "Unable to save the article.");
+  175:       }
+  176:       setStatus(responseData.article.status);
+  177:       setMessage(
+  178:         responseData.message ||
+  179:           (nextStatus === "published"
+  180:             ? "Article published successfully."
+  181:             : "Draft saved successfully."),
+  182:       );
+  183:       if (mode === "create") {
+  184:         router.replace(`/admin/articles/${responseData.article.id}/edit`);
+  185:       }
+  186:       router.refresh();
+  187:     } catch (saveError) {
+  188:       setError(
+  189:         saveError instanceof Error ? saveError.message : "Unable to save the article.",
+  190:       );
+  191:     } finally {
+  192:       setIsSaving(false);
+  193:     }
+  194:   }
+  195:   function handleSubmit(event: FormEvent<HTMLFormElement>) {
+  196:     event.preventDefault();
+  197:   }
+  198:   function openPreview() {
+  199:     if (!slug.trim()) {
+  200:       setError("Enter an article title before opening preview.");
+  201:       return;
+  202:     }
+  203:     window.open(`/article/${slug}`, "_blank", "noopener,noreferrer");
+  204:   }
+  205:   if (isLoading) {
+  206:     return (
+  207:       <div className="flex min-h-80 items-center justify-center">
+  208:         <LoaderCircle className="text-muted-foreground h-8 w-8 animate-spin" />
+  209:       </div>
+  210:     );
+  211:   }
+  212:   return (
+  213:     <form onSubmit={handleSubmit} className="space-y-6">
+  214:       <div className="flex flex-col justify-between gap-4 xl:flex-row xl:items-center">
+  215:         <div className="flex items-start gap-3">
+  216:           <Link
+  217:             href="/admin/articles"
+  218:             aria-label="Back to articles"
+  219:             className="border-border hover:bg-muted mt-1 rounded-lg border p-2 transition-colors"
+  220:           >
+  221:             <ArrowLeft className="h-4 w-4" />
+  222:           </Link>
+  223:           <div>
+  224:             <h1 className="text-2xl font-bold tracking-tight sm:text-3xl">
+  225:               {mode === "create" ? "New Article" : "Edit Article"}
+  226:             </h1>
+  227:             <p className="text-muted-foreground mt-1 text-sm">
+  228:               Write, optimize and publish website content.
+  229:             </p>
+  230:           </div>
+  231:         </div>
+  232:         <div className="flex flex-wrap gap-2">
+  233:           <button
+  234:             type="button"
+  235:             onClick={openPreview}
+  236:             disabled={isSaving}
+  237:             className="border-border hover:bg-muted inline-flex items-center gap-2 rounded-lg border px-4 py-2 text-sm font-medium transition-colors disabled:opacity-50"
+  238:           >
+  239:             <Eye className="h-4 w-4" />
+  240:             Preview
+  241:           </button>
+  242:           <button
+  243:             type="button"
+  244:             onClick={() => void saveArticle("draft")}
+  245:             disabled={isSaving}
+  246:             className="border-border hover:bg-muted inline-flex items-center gap-2 rounded-lg border px-4 py-2 text-sm font-medium transition-colors disabled:cursor-not-allowed disabled:opacity-50"
+  247:           >
+  248:             {isSaving ? (
+  249:               <LoaderCircle className="h-4 w-4 animate-spin" />
+  250:             ) : (
+  251:               <Save className="h-4 w-4" />
+  252:             )}
+  253:             Save Draft
+  254:           </button>
+  255:           <button
+  256:             type="button"
+  257:             onClick={() => void saveArticle("published")}
+  258:             disabled={isSaving}
+  259:             className="bg-foreground text-background inline-flex items-center gap-2 rounded-lg px-4 py-2 text-sm font-medium disabled:cursor-not-allowed disabled:opacity-50"
+  260:           >
+  261:             {isSaving ? (
+  262:               <LoaderCircle className="h-4 w-4 animate-spin" />
+  263:             ) : (
+  264:               <Send className="h-4 w-4" />
+  265:             )}
+  266:             Publish
+  267:           </button>
+  268:         </div>
+  269:       </div>
+  270:       {message ? (
+  271:         <div className="rounded-lg border border-emerald-300 bg-emerald-50 px-4 py-3 text-sm text-emerald-800">
+  272:           {message}
+  273:         </div>
+  274:       ) : null}
+  275:       {error ? (
+  276:         <div className="border-destructive/40 bg-destructive/5 text-destructive rounded-lg border px-4 py-3 text-sm">
+  277:           {error}
+  278:         </div>
+  279:       ) : null}
+  280:       <div className="grid gap-6 xl:grid-cols-[minmax(0,1fr)_340px]">
+  281:         <div className="space-y-6">
+  282:           <section className="border-border bg-background rounded-xl border p-5 shadow-sm sm:p-6">
+  283:             <div className="space-y-5">
+  284:               <div>
+  285:                 <label
+  286:                   htmlFor="article-title"
+  287:                   className="mb-2 block text-sm font-semibold"
+  288:                 >
+  289:                   Article Title
+  290:                 </label>
+  291:                 <input
+  292:                   id="article-title"
+  293:                   value={title}
+  294:                   onChange={(event) => handleTitleChange(event.target.value)}
+  295:                   placeholder="Enter article title"
+  296:                   required
+  297:                   className="border-border bg-background focus:ring-foreground/20 w-full rounded-lg border px-4 py-3 text-lg font-semibold outline-none focus:ring-4"
+  298:                 />
+  299:               </div>
+  300:               <div>
+  301:                 <label
+  302:                   htmlFor="article-slug"
+  303:                   className="mb-2 block text-sm font-semibold"
+  304:                 >
+  305:                   URL Slug
+  306:                 </label>
+  307:                 <input
+  308:                   id="article-slug"
+  309:                   value={slug}
+  310:                   onChange={(event) => setSlug(createSlug(event.target.value))}
+  311:                   placeholder="article-url-slug"
+  312:                   required
+  313:                   className="border-border bg-background focus:ring-foreground/20 w-full rounded-lg border px-4 py-2.5 text-sm outline-none focus:ring-4"
+  314:                 />
+  315:               </div>
+  316:               <div>
+  317:                 <label
+  318:                   htmlFor="article-excerpt"
+  319:                   className="mb-2 block text-sm font-semibold"
+  320:                 >
+  321:                   Excerpt
+  322:                 </label>
+  323:                 <textarea
+  324:                   id="article-excerpt"
+  325:                   value={excerpt}
+  326:                   onChange={(event) => setExcerpt(event.target.value)}
+  327:                   placeholder="Write a concise article summary"
+  328:                   rows={3}
+  329:                   maxLength={500}
+  330:                   className="border-border bg-background focus:ring-foreground/20 w-full resize-y rounded-lg border px-4 py-3 text-sm outline-none focus:ring-4"
+  331:                 />
+  332:                 <p className="text-muted-foreground mt-2 text-right text-xs">
+  333:                   {excerpt.length}/500
+  334:                 </p>
+  335:               </div>
+  336:             </div>
+  337:           </section>
+  338:           <section className="border-border bg-background rounded-xl border shadow-sm">
+  339:             <div className="border-border flex flex-wrap items-center justify-between gap-3 border-b p-4">
+  340:               <div>
+  341:                 <h2 className="font-semibold">Article Content</h2>
+  342:                 <p className="text-muted-foreground mt-1 text-xs">
+  343:                   {wordCount} words · {readingTime} minute read
+  344:                 </p>
+  345:               </div>
+  346:               <button
+  347:                 type="button"
+  348:                 className="border-border hover:bg-muted inline-flex items-center gap-2 rounded-lg border px-3 py-2 text-xs font-medium transition-colors"
+  349:               >
+  350:                 <Sparkles className="h-4 w-4" />
+  351:                 AI Assistant
+  352:               </button>
+  353:             </div>
+  354:             <textarea
+  355:               value={content}
+  356:               onChange={(event) => setContent(event.target.value)}
+  357:               placeholder="Start writing the article content..."
+  358:               required
+  359:               rows={22}
+  360:               className="bg-background min-h-[520px] w-full resize-y rounded-b-xl p-5 text-sm leading-7 outline-none sm:p-6"
+  361:             />
+  362:           </section>
+  363:           <section className="border-border bg-background rounded-xl border p-5 shadow-sm sm:p-6">
+  364:             <h2 className="text-lg font-semibold">Search Engine Optimization</h2>
+  365:             <div className="mt-5 space-y-5">
+  366:               <div>
+  367:                 <label htmlFor="seo-title" className="mb-2 block text-sm font-medium">
+  368:                   SEO Title
+  369:                 </label>
+  370:                 <input
+  371:                   id="seo-title"
+  372:                   value={seoTitle}
+  373:                   onChange={(event) => setSeoTitle(event.target.value)}
+  374:                   maxLength={60}
+  375:                   placeholder="Search result title"
+  376:                   className="border-border bg-background focus:ring-foreground/20 w-full rounded-lg border px-4 py-2.5 text-sm outline-none focus:ring-4"
+  377:                 />
+  378:                 <p className="text-muted-foreground mt-2 text-right text-xs">
+  379:                   {seoTitle.length}/60
+  380:                 </p>
+  381:               </div>
+  382:               <div>
+  383:                 <label
+  384:                   htmlFor="seo-description"
+  385:                   className="mb-2 block text-sm font-medium"
+  386:                 >
+  387:                   Meta Description
+  388:                 </label>
+  389:                 <textarea
+  390:                   id="seo-description"
+  391:                   value={seoDescription}
+  392:                   onChange={(event) => setSeoDescription(event.target.value)}
+  393:                   maxLength={160}
+  394:                   rows={3}
+  395:                   placeholder="Search result description"
+  396:                   className="border-border bg-background focus:ring-foreground/20 w-full resize-y rounded-lg border px-4 py-3 text-sm outline-none focus:ring-4"
+  397:                 />
+  398:                 <p className="text-muted-foreground mt-2 text-right text-xs">
+  399:                   {seoDescription.length}/160
+  400:                 </p>
+  401:               </div>
+  402:               <div>
+  403:                 <label htmlFor="focus-keyword" className="mb-2 block text-sm font-medium">
+  404:                   Focus Keyword
+  405:                 </label>
+  406:                 <input
+  407:                   id="focus-keyword"
+  408:                   value={focusKeyword}
+  409:                   onChange={(event) => setFocusKeyword(event.target.value)}
+  410:                   placeholder="Primary target keyword"
+  411:                   className="border-border bg-background focus:ring-foreground/20 w-full rounded-lg border px-4 py-2.5 text-sm outline-none focus:ring-4"
+  412:                 />
+  413:               </div>
+  414:             </div>
+  415:           </section>
+  416:         </div>
+  417:         <aside className="space-y-6">
+  418:           <section className="border-border bg-background rounded-xl border p-5 shadow-sm">
+  419:             <h2 className="font-semibold">Publishing</h2>
+  420:             <div className="mt-4 space-y-4">
+  421:               <div>
+  422:                 <label
+  423:                   htmlFor="article-status"
+  424:                   className="mb-2 block text-sm font-medium"
+  425:                 >
+  426:                   Status
+  427:                 </label>
+  428:                 <select
+  429:                   id="article-status"
+  430:                   value={status}
+  431:                   onChange={(event) => setStatus(event.target.value)}
+  432:                   className="border-border bg-background focus:ring-foreground/20 w-full rounded-lg border px-3 py-2.5 text-sm outline-none focus:ring-4"
+  433:                 >
+  434:                   <option value="draft">Draft</option>
+  435:                   <option value="review">In Review</option>
+  436:                   <option value="scheduled">Scheduled</option>
+  437:                   <option value="published">Published</option>
+  438:                   <option value="archived">Archived</option>
+  439:                 </select>
+  440:               </div>
+  441:               <label className="flex cursor-pointer items-center gap-3 text-sm">
+  442:                 <input
+  443:                   type="checkbox"
+  444:                   checked={featured}
+  445:                   onChange={(event) => setFeatured(event.target.checked)}
+  446:                   className="h-4 w-4 rounded"
+  447:                 />
+  448:                 Feature on homepage
+  449:               </label>
+  450:             </div>
+  451:           </section>
+  452:           <section className="border-border bg-background rounded-xl border p-5 shadow-sm">
+  453:             <h2 className="font-semibold">Category</h2>
+  454:             <select
+  455:               value={category}
+  456:               onChange={(event) => setCategory(event.target.value)}
+  457:               required
+  458:               className="border-border bg-background focus:ring-foreground/20 mt-4 w-full rounded-lg border px-3 py-2.5 text-sm outline-none focus:ring-4"
+  459:             >
+  460:               <option value="">Select category</option>
+  461:               {categoryOptions.map((categoryName) => (
+  462:                 <option key={categoryName} value={categoryName}>
+  463:                   {categoryName}
+  464:                 </option>
+  465:               ))}
+  466:             </select>
+  467:           </section>
+  468:           <section className="border-border bg-background rounded-xl border p-5 shadow-sm">
+  469:             <h2 className="font-semibold">Featured Image</h2>
+  470:             <button
+  471:               type="button"
+  472:               className="border-border text-muted-foreground hover:bg-muted mt-4 flex min-h-44 w-full flex-col items-center justify-center gap-3 rounded-lg border border-dashed p-5 text-center transition-colors"
+  473:             >
+  474:               <ImageIcon className="h-8 w-8" />
+  475:               <span className="text-sm font-medium">Select from Media Library</span>
+  476:               <span className="text-xs">Recommended size: 1200 × 630 pixels</span>
+  477:             </button>
+  478:           </section>
+  479:           <section className="border-border bg-background rounded-xl border p-5 shadow-sm">
+  480:             <h2 className="font-semibold">Tags</h2>
+  481:             <input
+  482:               type="text"
+  483:               value={tags}
+  484:               onChange={(event) => setTags(event.target.value)}
+  485:               placeholder="Add tags separated by commas"
+  486:               className="border-border bg-background focus:ring-foreground/20 mt-4 w-full rounded-lg border px-3 py-2.5 text-sm outline-none focus:ring-4"
+  487:             />
+  488:           </section>
+  489:         </aside>
+  490:       </div>
+  491:     </form>
+  492:   );
+  493: }
+
+============================================================
+FILE: src\lib\actions\article-actions.ts
+============================================================
+
+============================================================
+FILE: src\lib\articles\validation.ts
+============================================================
+    1: import { z } from "zod";
+    2: export const articleStatusSchema = z.enum([
+    3:   "draft",
+    4:   "review",
+    5:   "scheduled",
+    6:   "published",
+    7:   "archived",
+    8: ]);
+    9: const optionalUuidSchema = z
+   10:   .union([z.uuid(), z.literal(""), z.null()])
+   11:   .optional()
+   12:   .transform((value) => (value ? value : null));
+   13: const optionalTextSchema = z
+   14:   .union([z.string(), z.null()])
+   15:   .optional()
+   16:   .transform((value) => {
+   17:     if (typeof value !== "string") {
+   18:       return null;
+   19:     }
+   20:     const trimmedValue = value.trim();
+   21:     return trimmedValue || null;
+   22:   });
+   23: export const articleInputSchema = z.object({
+   24:   title: z.string().trim().min(3).max(255),
+   25:   slug: z
+   26:     .string()
+   27:     .trim()
+   28:     .min(3)
+   29:     .max(300)
+   30:     .regex(/^[a-z0-9]+(?:-[a-z0-9]+)*$/),
+   31:   excerpt: optionalTextSchema,
+   32:   content: z.string().trim().min(1),
+   33:   categoryId: optionalUuidSchema,
+   34:   featuredImageId: optionalUuidSchema,
+   35:   status: articleStatusSchema.default("draft"),
+   36:   seoTitle: optionalTextSchema,
+   37:   seoDescription: optionalTextSchema,
+   38:   canonicalUrl: optionalTextSchema,
+   39:   focusKeyword: optionalTextSchema,
+   40:   readingTimeMinutes: z.number().int().min(1).max(1000).default(1),
+   41:   isFeatured: z.boolean().default(false),
+   42:   scheduledAt: z
+   43:     .union([z.iso.datetime(), z.literal(""), z.null()])
+   44:     .optional()
+   45:     .transform((value) => (value ? new Date(value) : null)),
+   46: });
+   47: export const articleUpdateSchema = articleInputSchema.partial();
+   48: export type ArticleInput = z.infer<typeof articleInputSchema>;
+   49: export type ArticleUpdate = z.infer<typeof articleUpdateSchema>;
+
+============================================================
+FILE: src\lib\queries\article-queries.ts
+============================================================
+
+============================================================
+FILE: src\lib\repositories\article-repository.ts
+============================================================
+
+============================================================
+FILE: src\lib\services\article-service.ts
+============================================================
+
+============================================================
+FILE: src\lib\validators\article.ts
+============================================================
+
+============================================================
+FILE: src\app\admin\categories\page.tsx
+============================================================
+    1: import { TaxonomyManager } from "@/components/admin/taxonomy/taxonomy-manager";
+    2: const categories = [
+    3:   {
+    4:     id: 1,
+    5:     name: "Finance",
+    6:     slug: "finance",
+    7:     description: "Personal finance, banking, investing and economic topics.",
+    8:     articleCount: 0,
+    9:   },
+   10:   {
+   11:     id: 2,
+   12:     name: "Science",
+   13:     slug: "science",
+   14:     description: "Scientific discoveries, research and explanations.",
+   15:     articleCount: 0,
+   16:   },
+   17:   {
+   18:     id: 3,
+   19:     name: "Technology",
+   20:     slug: "technology",
+   21:     description: "Technology news, guides and digital innovation.",
+   22:     articleCount: 0,
+   23:   },
+   24:   {
+   25:     id: 4,
+   26:     name: "Artificial Intelligence",
+   27:     slug: "artificial-intelligence",
+   28:     description: "Artificial intelligence tools, research and applications.",
+   29:     articleCount: 0,
+   30:   },
+   31:   {
+   32:     id: 5,
+   33:     name: "Health",
+   34:     slug: "health",
+   35:     description: "General health education and wellness information.",
+   36:     articleCount: 0,
+   37:   },
+   38:   {
+   39:     id: 6,
+   40:     name: "Education",
+   41:     slug: "education",
+   42:     description: "Learning resources, study guidance and education updates.",
+   43:     articleCount: 0,
+   44:   },
+   45:   {
+   46:     id: 7,
+   47:     name: "Business",
+   48:     slug: "business",
+   49:     description: "Business strategy, entrepreneurship and market insights.",
+   50:     articleCount: 0,
+   51:   },
+   52:   {
+   53:     id: 8,
+   54:     name: "History",
+   55:     slug: "history",
+   56:     description: "Historical events, people and civilizations.",
+   57:     articleCount: 0,
+   58:   },
+   59:   {
+   60:     id: 9,
+   61:     name: "Environment",
+   62:     slug: "environment",
+   63:     description: "Climate, sustainability and environmental knowledge.",
+   64:     articleCount: 0,
+   65:   },
+   66:   {
+   67:     id: 10,
+   68:     name: "Space",
+   69:     slug: "space",
+   70:     description: "Space exploration, astronomy and the universe.",
+   71:     articleCount: 0,
+   72:   },
+   73:   {
+   74:     id: 11,
+   75:     name: "Psychology",
+   76:     slug: "psychology",
+   77:     description: "Human behavior, thinking and psychology education.",
+   78:     articleCount: 0,
+   79:   },
+   80:   {
+   81:     id: 12,
+   82:     name: "General Knowledge",
+   83:     slug: "general-knowledge",
+   84:     description: "Useful facts and educational general knowledge.",
+   85:     articleCount: 0,
+   86:   },
+   87: ];
+   88: export default function CategoriesPage() {
+   89:   return (
+   90:     <div className="space-y-6">
+   91:       <div>
+   92:         <h1 className="text-2xl font-bold tracking-tight sm:text-3xl">Categories</h1>
+   93:         <p className="text-muted-foreground mt-2 text-sm">
+   94:           Organize articles into primary website sections.
+   95:         </p>
+   96:       </div>
+   97:       <TaxonomyManager type="category" initialItems={categories} />
+   98:     </div>
+   99:   );
+  100: }
+
+============================================================
+FILE: src\app\admin\tags\page.tsx
+============================================================
+    1: import { TaxonomyManager } from "@/components/admin/taxonomy/taxonomy-manager";
+    2: const tags = [
+    3:   {
+    4:     id: 1,
+    5:     name: "Latest",
+    6:     slug: "latest",
+    7:     description: "Recently published and updated content.",
+    8:     articleCount: 0,
+    9:   },
+   10:   {
+   11:     id: 2,
+   12:     name: "Guide",
+   13:     slug: "guide",
+   14:     description: "Detailed educational guides and tutorials.",
+   15:     articleCount: 0,
+   16:   },
+   17:   {
+   18:     id: 3,
+   19:     name: "Explained",
+   20:     slug: "explained",
+   21:     description: "Complex subjects explained clearly.",
+   22:     articleCount: 0,
+   23:   },
+   24: ];
+   25: export default function TagsPage() {
+   26:   return (
+   27:     <div className="space-y-6">
+   28:       <div>
+   29:         <h1 className="text-2xl font-bold tracking-tight sm:text-3xl">Tags</h1>
+   30:         <p className="text-muted-foreground mt-2 text-sm">
+   31:           Add supporting labels for article discovery and organization.
+   32:         </p>
+   33:       </div>
+   34:       <TaxonomyManager type="tag" initialItems={tags} />
+   35:     </div>
+   36:   );
+   37: }
+
+============================================================
+FILE: src\app\admin\media\page.tsx
+============================================================
+    1: import { MediaLibrary } from "@/components/admin/media/media-library";
+    2: export default function MediaPage() {
+    3:   return (
+    4:     <div className="space-y-6">
+    5:       <div>
+    6:         <h1 className="text-2xl font-bold tracking-tight sm:text-3xl">Media Library</h1>
+    7:         <p className="text-muted-foreground mt-2 text-sm">
+    8:           Upload, preview, copy and manage website images.
+    9:         </p>
+   10:       </div>
+   11:       <MediaLibrary />
+   12:     </div>
+   13:   );
+   14: }
+
+============================================================
+FILE: src\components\admin\taxonomy\taxonomy-manager.tsx
+============================================================
+    1: "use client";
+    2: import type { FormEvent } from "react";
+    3: import { useMemo, useState } from "react";
+    4: import { Edit3, Plus, Search, Trash2, X } from "lucide-react";
+    5: type TaxonomyItem = {
+    6:   id: number;
+    7:   name: string;
+    8:   slug: string;
+    9:   description: string;
+   10:   articleCount: number;
+   11: };
+   12: type TaxonomyManagerProps = {
+   13:   type: "category" | "tag";
+   14:   initialItems: TaxonomyItem[];
+   15: };
+   16: function createSlug(value: string) {
+   17:   return value
+   18:     .toLowerCase()
+   19:     .trim()
+   20:     .replace(/[^a-z0-9\s-]/g, "")
+   21:     .replace(/\s+/g, "-")
+   22:     .replace(/-+/g, "-");
+   23: }
+   24: export function TaxonomyManager({ type, initialItems }: TaxonomyManagerProps) {
+   25:   const [items, setItems] = useState<TaxonomyItem[]>(initialItems);
+   26:   const [searchQuery, setSearchQuery] = useState("");
+   27:   const [name, setName] = useState("");
+   28:   const [slug, setSlug] = useState("");
+   29:   const [description, setDescription] = useState("");
+   30:   const [editingId, setEditingId] = useState<number | null>(null);
+   31:   const singularLabel = type === "category" ? "Category" : "Tag";
+   32:   const pluralLabel = type === "category" ? "Categories" : "Tags";
+   33:   const filteredItems = useMemo(() => {
+   34:     const query = searchQuery.trim().toLowerCase();
+   35:     if (!query) {
+   36:       return items;
+   37:     }
+   38:     return items.filter(
+   39:       (item) =>
+   40:         item.name.toLowerCase().includes(query) ||
+   41:         item.slug.toLowerCase().includes(query) ||
+   42:         item.description.toLowerCase().includes(query),
+   43:     );
+   44:   }, [items, searchQuery]);
+   45:   function resetForm() {
+   46:     setName("");
+   47:     setSlug("");
+   48:     setDescription("");
+   49:     setEditingId(null);
+   50:   }
+   51:   function handleNameChange(value: string) {
+   52:     setName(value);
+   53:     if (editingId === null) {
+   54:       setSlug(createSlug(value));
+   55:     }
+   56:   }
+   57:   function handleSubmit(event: FormEvent<HTMLFormElement>) {
+   58:     event.preventDefault();
+   59:     const cleanName = name.trim();
+   60:     const cleanSlug = createSlug(slug || name);
+   61:     const cleanDescription = description.trim();
+   62:     if (!cleanName || !cleanSlug) {
+   63:       return;
+   64:     }
+   65:     const duplicateSlug = items.some(
+   66:       (item) => item.slug === cleanSlug && item.id !== editingId,
+   67:     );
+   68:     if (duplicateSlug) {
+   69:       return;
+   70:     }
+   71:     if (editingId !== null) {
+   72:       setItems((currentItems) =>
+   73:         currentItems.map((item) =>
+   74:           item.id === editingId
+   75:             ? {
+   76:                 ...item,
+   77:                 name: cleanName,
+   78:                 slug: cleanSlug,
+   79:                 description: cleanDescription,
+   80:               }
+   81:             : item,
+   82:         ),
+   83:       );
+   84:     } else {
+   85:       setItems((currentItems) => [
+   86:         ...currentItems,
+   87:         {
+   88:           id: Date.now(),
+   89:           name: cleanName,
+   90:           slug: cleanSlug,
+   91:           description: cleanDescription,
+   92:           articleCount: 0,
+   93:         },
+   94:       ]);
+   95:     }
+   96:     resetForm();
+   97:   }
+   98:   function handleEdit(item: TaxonomyItem) {
+   99:     setEditingId(item.id);
+  100:     setName(item.name);
+  101:     setSlug(item.slug);
+  102:     setDescription(item.description);
+  103:   }
+  104:   function handleDelete(id: number) {
+  105:     setItems((currentItems) => currentItems.filter((item) => item.id !== id));
+  106:     if (editingId === id) {
+  107:       resetForm();
+  108:     }
+  109:   }
+  110:   return (
+  111:     <div className="grid gap-6 xl:grid-cols-[360px_minmax(0,1fr)]">
+  112:       <section className="border-border bg-background h-fit rounded-xl border p-5 shadow-sm">
+  113:         <div className="flex items-center justify-between">
+  114:           <h2 className="text-lg font-semibold">
+  115:             {editingId === null ? `Add ${singularLabel}` : `Edit ${singularLabel}`}
+  116:           </h2>
+  117:           {editingId !== null ? (
+  118:             <button
+  119:               type="button"
+  120:               onClick={resetForm}
+  121:               aria-label="Cancel editing"
+  122:               className="border-border hover:bg-muted rounded-lg border p-2 transition-colors"
+  123:             >
+  124:               <X className="h-4 w-4" />
+  125:             </button>
+  126:           ) : null}
+  127:         </div>
+  128:         <form onSubmit={handleSubmit} className="mt-5 space-y-5">
+  129:           <div>
+  130:             <label htmlFor={`${type}-name`} className="mb-2 block text-sm font-medium">
+  131:               Name
+  132:             </label>
+  133:             <input
+  134:               id={`${type}-name`}
+  135:               value={name}
+  136:               onChange={(event) => handleNameChange(event.target.value)}
+  137:               placeholder={`${singularLabel} name`}
+  138:               required
+  139:               className="border-border bg-background focus:ring-foreground/20 w-full rounded-lg border px-3 py-2.5 text-sm outline-none focus:ring-4"
+  140:             />
+  141:           </div>
+  142:           <div>
+  143:             <label htmlFor={`${type}-slug`} className="mb-2 block text-sm font-medium">
+  144:               Slug
+  145:             </label>
+  146:             <input
+  147:               id={`${type}-slug`}
+  148:               value={slug}
+  149:               onChange={(event) => setSlug(createSlug(event.target.value))}
+  150:               placeholder={`${type}-slug`}
+  151:               required
+  152:               className="border-border bg-background focus:ring-foreground/20 w-full rounded-lg border px-3 py-2.5 text-sm outline-none focus:ring-4"
+  153:             />
+  154:           </div>
+  155:           <div>
+  156:             <label
+  157:               htmlFor={`${type}-description`}
+  158:               className="mb-2 block text-sm font-medium"
+  159:             >
+  160:               Description
+  161:             </label>
+  162:             <textarea
+  163:               id={`${type}-description`}
+  164:               value={description}
+  165:               onChange={(event) => setDescription(event.target.value)}
+  166:               placeholder={`Optional ${type} description`}
+  167:               rows={4}
+  168:               maxLength={500}
+  169:               className="border-border bg-background focus:ring-foreground/20 w-full resize-y rounded-lg border px-3 py-2.5 text-sm outline-none focus:ring-4"
+  170:             />
+  171:             <p className="text-muted-foreground mt-2 text-right text-xs">
+  172:               {description.length}/500
+  173:             </p>
+  174:           </div>
+  175:           <button
+  176:             type="submit"
+  177:             className="bg-foreground text-background inline-flex w-full items-center justify-center gap-2 rounded-lg px-4 py-2.5 text-sm font-medium"
+  178:           >
+  179:             {editingId === null ? (
+  180:               <Plus className="h-4 w-4" />
+  181:             ) : (
+  182:               <Edit3 className="h-4 w-4" />
+  183:             )}
+  184:             {editingId === null ? `Add ${singularLabel}` : `Update ${singularLabel}`}
+  185:           </button>
+  186:         </form>
+  187:       </section>
+  188:       <section className="border-border bg-background overflow-hidden rounded-xl border shadow-sm">
+  189:         <div className="border-border flex flex-col gap-4 border-b p-5 sm:flex-row sm:items-center sm:justify-between">
+  190:           <div>
+  191:             <h2 className="text-lg font-semibold">{pluralLabel}</h2>
+  192:             <p className="text-muted-foreground mt-1 text-sm">
+  193:               {items.length} {items.length === 1 ? singularLabel : pluralLabel}
+  194:             </p>
+  195:           </div>
+  196:           <div className="relative w-full sm:max-w-xs">
+  197:             <Search className="text-muted-foreground absolute top-1/2 left-3 h-4 w-4 -translate-y-1/2" />
+  198:             <input
+  199:               type="search"
+  200:               value={searchQuery}
+  201:               onChange={(event) => setSearchQuery(event.target.value)}
+  202:               placeholder={`Search ${pluralLabel.toLowerCase()}`}
+  203:               className="border-border bg-background focus:ring-foreground/20 w-full rounded-lg border py-2.5 pr-3 pl-10 text-sm outline-none focus:ring-4"
+  204:             />
+  205:           </div>
+  206:         </div>
+  207:         {filteredItems.length === 0 ? (
+  208:           <div className="text-muted-foreground p-10 text-center text-sm">
+  209:             No {pluralLabel.toLowerCase()} found.
+  210:           </div>
+  211:         ) : (
+  212:           <div className="overflow-x-auto">
+  213:             <table className="w-full min-w-[720px] text-left text-sm">
+  214:               <thead className="bg-muted/50 text-muted-foreground">
+  215:                 <tr>
+  216:                   <th className="px-5 py-3 font-medium">Name</th>
+  217:                   <th className="px-5 py-3 font-medium">Slug</th>
+  218:                   <th className="px-5 py-3 font-medium">Description</th>
+  219:                   <th className="px-5 py-3 text-center font-medium">Articles</th>
+  220:                   <th className="px-5 py-3 text-right font-medium">Actions</th>
+  221:                 </tr>
+  222:               </thead>
+  223:               <tbody className="divide-border divide-y">
+  224:                 {filteredItems.map((item) => (
+  225:                   <tr key={item.id} className="hover:bg-muted/30">
+  226:                     <td className="px-5 py-4 font-medium">{item.name}</td>
+  227:                     <td className="text-muted-foreground px-5 py-4">{item.slug}</td>
+  228:                     <td className="text-muted-foreground max-w-xs px-5 py-4">
+  229:                       <p className="line-clamp-2">
+  230:                         {item.description || "No description"}
+  231:                       </p>
+  232:                     </td>
+  233:                     <td className="px-5 py-4 text-center">{item.articleCount}</td>
+  234:                     <td className="px-5 py-4">
+  235:                       <div className="flex justify-end gap-2">
+  236:                         <button
+  237:                           type="button"
+  238:                           onClick={() => handleEdit(item)}
+  239:                           aria-label={`Edit ${item.name}`}
+  240:                           className="border-border hover:bg-muted rounded-lg border p-2 transition-colors"
+  241:                         >
+  242:                           <Edit3 className="h-4 w-4" />
+  243:                         </button>
+  244:                         <button
+  245:                           type="button"
+  246:                           onClick={() => handleDelete(item.id)}
+  247:                           aria-label={`Delete ${item.name}`}
+  248:                           disabled={item.articleCount > 0}
+  249:                           className="border-border text-destructive hover:bg-muted rounded-lg border p-2 transition-colors disabled:cursor-not-allowed disabled:opacity-40"
+  250:                         >
+  251:                           <Trash2 className="h-4 w-4" />
+  252:                         </button>
+  253:                       </div>
+  254:                     </td>
+  255:                   </tr>
+  256:                 ))}
+  257:               </tbody>
+  258:             </table>
+  259:           </div>
+  260:         )}
+  261:       </section>
+  262:     </div>
+  263:   );
+  264: }
+
+============================================================
+FILE: src\components\admin\media\media-library.tsx
+============================================================
+    1: "use client";
+    2: import Image from "next/image";
+    3: import {
+    4:   Check,
+    5:   Copy,
+    6:   FileImage,
+    7:   LoaderCircle,
+    8:   Search,
+    9:   Trash2,
+   10:   Upload,
+   11:   X,
+   12: } from "lucide-react";
+   13: import {
+   14:   type ChangeEvent,
+   15:   type DragEvent,
+   16:   useEffect,
+   17:   useMemo,
+   18:   useRef,
+   19:   useState,
+   20: } from "react";
+   21: type MediaFile = {
+   22:   id: string;
+   23:   name: string;
+   24:   url: string;
+   25:   size: number;
+   26:   type: string;
+   27:   createdAt: string;
+   28: };
+   29: type ApiResponse = {
+   30:   files?: MediaFile[];
+   31:   file?: MediaFile;
+   32:   message?: string;
+   33: };
+   34: const acceptedFileTypes = [
+   35:   "image/jpeg",
+   36:   "image/png",
+   37:   "image/webp",
+   38:   "image/gif",
+   39:   "image/svg+xml",
+   40: ];
+   41: const maximumFileSize = 5 * 1024 * 1024;
+   42: function formatFileSize(size: number) {
+   43:   if (size < 1024) {
+   44:     return `${size} B`;
+   45:   }
+   46:   if (size < 1024 * 1024) {
+   47:     return `${(size / 1024).toFixed(1)} KB`;
+   48:   }
+   49:   return `${(size / (1024 * 1024)).toFixed(1)} MB`;
+   50: }
+   51: export function MediaLibrary() {
+   52:   const fileInputRef = useRef<HTMLInputElement>(null);
+   53:   const [files, setFiles] = useState<MediaFile[]>([]);
+   54:   const [searchQuery, setSearchQuery] = useState("");
+   55:   const [isLoading, setIsLoading] = useState(true);
+   56:   const [isUploading, setIsUploading] = useState(false);
+   57:   const [dragActive, setDragActive] = useState(false);
+   58:   const [selectedFile, setSelectedFile] = useState<MediaFile | null>(null);
+   59:   const [copiedFileId, setCopiedFileId] = useState<string | null>(null);
+   60:   const [deletingFileId, setDeletingFileId] = useState<string | null>(null);
+   61:   const [message, setMessage] = useState("");
+   62:   const [error, setError] = useState("");
+   63:   async function loadFiles() {
+   64:     setIsLoading(true);
+   65:     setError("");
+   66:     try {
+   67:       const response = await fetch("/api/admin/media", {
+   68:         cache: "no-store",
+   69:       });
+   70:       const responseData = (await response.json()) as ApiResponse;
+   71:       if (!response.ok) {
+   72:         throw new Error(responseData.message || "Unable to load media files.");
+   73:       }
+   74:       setFiles(responseData.files ?? []);
+   75:     } catch (loadError) {
+   76:       setError(
+   77:         loadError instanceof Error ? loadError.message : "Unable to load media files.",
+   78:       );
+   79:     } finally {
+   80:       setIsLoading(false);
+   81:     }
+   82:   }
+   83:   useEffect(() => {
+   84:     queueMicrotask(() => {
+   85:       void loadFiles();
+   86:     });
+   87:   }, []);
+   88:   const filteredFiles = useMemo(() => {
+   89:     const query = searchQuery.trim().toLowerCase();
+   90:     if (!query) {
+   91:       return files;
+   92:     }
+   93:     return files.filter((file) => file.name.toLowerCase().includes(query));
+   94:   }, [files, searchQuery]);
+   95:   async function uploadFile(file: File) {
+   96:     setMessage("");
+   97:     setError("");
+   98:     if (!acceptedFileTypes.includes(file.type)) {
+   99:       setError("Only JPG, PNG, WebP, GIF and SVG images are allowed.");
+  100:       return;
+  101:     }
+  102:     if (file.size > maximumFileSize) {
+  103:       setError("The selected image exceeds the 5 MB size limit.");
+  104:       return;
+  105:     }
+  106:     setIsUploading(true);
+  107:     try {
+  108:       const formData = new FormData();
+  109:       formData.append("file", file);
+  110:       const response = await fetch("/api/admin/media/upload", {
+  111:         method: "POST",
+  112:         body: formData,
+  113:       });
+  114:       const responseData = (await response.json()) as ApiResponse;
+  115:       if (!response.ok || !responseData.file) {
+  116:         throw new Error(responseData.message || "Unable to upload the image.");
+  117:       }
+  118:       setFiles((currentFiles) => [responseData.file!, ...currentFiles]);
+  119:       setMessage("Image uploaded successfully.");
+  120:     } catch (uploadError) {
+  121:       setError(
+  122:         uploadError instanceof Error
+  123:           ? uploadError.message
+  124:           : "Unable to upload the image.",
+  125:       );
+  126:     } finally {
+  127:       setIsUploading(false);
+  128:       if (fileInputRef.current) {
+  129:         fileInputRef.current.value = "";
+  130:       }
+  131:     }
+  132:   }
+  133:   function handleFileInput(event: ChangeEvent<HTMLInputElement>) {
+  134:     const file = event.target.files?.[0];
+  135:     if (file) {
+  136:       void uploadFile(file);
+  137:     }
+  138:   }
+  139:   function handleDragOver(event: DragEvent<HTMLDivElement>) {
+  140:     event.preventDefault();
+  141:     setDragActive(true);
+  142:   }
+  143:   function handleDragLeave(event: DragEvent<HTMLDivElement>) {
+  144:     event.preventDefault();
+  145:     setDragActive(false);
+  146:   }
+  147:   function handleDrop(event: DragEvent<HTMLDivElement>) {
+  148:     event.preventDefault();
+  149:     setDragActive(false);
+  150:     const file = event.dataTransfer.files?.[0];
+  151:     if (file) {
+  152:       void uploadFile(file);
+  153:     }
+  154:   }
+  155:   async function copyFileUrl(file: MediaFile) {
+  156:     const absoluteUrl = new URL(file.url, window.location.origin).toString();
+  157:     try {
+  158:       await navigator.clipboard.writeText(absoluteUrl);
+  159:       setCopiedFileId(file.id);
+  160:       window.setTimeout(() => {
+  161:         setCopiedFileId(null);
+  162:       }, 2000);
+  163:     } catch {
+  164:       setError("Unable to copy the image URL.");
+  165:     }
+  166:   }
+  167:   async function removeFile(file: MediaFile) {
+  168:     const confirmed = window.confirm(
+  169:       `Delete "${file.name}" permanently from the media library?`,
+  170:     );
+  171:     if (!confirmed) {
+  172:       return;
+  173:     }
+  174:     setDeletingFileId(file.id);
+  175:     setMessage("");
+  176:     setError("");
+  177:     try {
+  178:       const response = await fetch("/api/admin/media/delete", {
+  179:         method: "DELETE",
+  180:         headers: {
+  181:           "Content-Type": "application/json",
+  182:         },
+  183:         body: JSON.stringify({
+  184:           fileName: file.name,
+  185:         }),
+  186:       });
+  187:       const responseData = (await response.json()) as ApiResponse;
+  188:       if (!response.ok) {
+  189:         throw new Error(responseData.message || "Unable to delete the image.");
+  190:       }
+  191:       setFiles((currentFiles) =>
+  192:         currentFiles.filter((currentFile) => currentFile.id !== file.id),
+  193:       );
+  194:       if (selectedFile?.id === file.id) {
+  195:         setSelectedFile(null);
+  196:       }
+  197:       setMessage("Image deleted successfully.");
+  198:     } catch (deleteError) {
+  199:       setError(
+  200:         deleteError instanceof Error
+  201:           ? deleteError.message
+  202:           : "Unable to delete the image.",
+  203:       );
+  204:     } finally {
+  205:       setDeletingFileId(null);
+  206:     }
+  207:   }
+  208:   return (
+  209:     <div className="space-y-6">
+  210:       <div
+  211:         onDragOver={handleDragOver}
+  212:         onDragLeave={handleDragLeave}
+  213:         onDrop={handleDrop}
+  214:         className={`border-border bg-background rounded-xl border-2 border-dashed p-6 text-center transition-colors sm:p-10 ${
+  215:           dragActive ? "bg-muted" : ""
+  216:         }`}
+  217:       >
+  218:         <input
+  219:           ref={fileInputRef}
+  220:           type="file"
+  221:           accept={acceptedFileTypes.join(",")}
+  222:           onChange={handleFileInput}
+  223:           disabled={isUploading}
+  224:           className="hidden"
+  225:         />
+  226:         <div className="mx-auto flex max-w-md flex-col items-center">
+  227:           {isUploading ? (
+  228:             <LoaderCircle className="text-muted-foreground h-10 w-10 animate-spin" />
+  229:           ) : (
+  230:             <Upload className="text-muted-foreground h-10 w-10" />
+  231:           )}
+  232:           <h2 className="mt-4 text-lg font-semibold">
+  233:             {isUploading ? "Uploading image" : "Upload Media"}
+  234:           </h2>
+  235:           <p className="text-muted-foreground mt-2 text-sm">
+  236:             Drag and drop an image here or select one from your computer.
+  237:           </p>
+  238:           <button
+  239:             type="button"
+  240:             onClick={() => fileInputRef.current?.click()}
+  241:             disabled={isUploading}
+  242:             className="bg-foreground text-background mt-5 inline-flex items-center gap-2 rounded-lg px-4 py-2.5 text-sm font-medium disabled:cursor-not-allowed disabled:opacity-60"
+  243:           >
+  244:             {isUploading ? (
+  245:               <LoaderCircle className="h-4 w-4 animate-spin" />
+  246:             ) : (
+  247:               <Upload className="h-4 w-4" />
+  248:             )}
+  249:             Select Image
+  250:           </button>
+  251:           <p className="text-muted-foreground mt-3 text-xs">
+  252:             JPG, PNG, WebP, GIF or SVG. Maximum file size: 5 MB.
+  253:           </p>
+  254:         </div>
+  255:       </div>
+  256:       {message ? (
+  257:         <div className="border-border bg-background flex items-center gap-3 rounded-lg border px-4 py-3 text-sm">
+  258:           <Check className="h-4 w-4" />
+  259:           {message}
+  260:         </div>
+  261:       ) : null}
+  262:       {error ? (
+  263:         <div className="border-destructive/40 bg-destructive/5 text-destructive flex items-center gap-3 rounded-lg border px-4 py-3 text-sm">
+  264:           <X className="h-4 w-4" />
+  265:           {error}
+  266:         </div>
+  267:       ) : null}
+  268:       <section className="border-border bg-background overflow-hidden rounded-xl border shadow-sm">
+  269:         <div className="border-border flex flex-col gap-4 border-b p-5 sm:flex-row sm:items-center sm:justify-between">
+  270:           <div>
+  271:             <h2 className="text-lg font-semibold">Media Files</h2>
+  272:             <p className="text-muted-foreground mt-1 text-sm">
+  273:               {files.length} {files.length === 1 ? "file" : "files"}
+  274:             </p>
+  275:           </div>
+  276:           <div className="relative w-full sm:max-w-xs">
+  277:             <Search className="text-muted-foreground absolute top-1/2 left-3 h-4 w-4 -translate-y-1/2" />
+  278:             <input
+  279:               type="search"
+  280:               value={searchQuery}
+  281:               onChange={(event) => setSearchQuery(event.target.value)}
+  282:               placeholder="Search media"
+  283:               className="border-border bg-background focus:ring-foreground/20 w-full rounded-lg border py-2.5 pr-3 pl-10 text-sm outline-none focus:ring-4"
+  284:             />
+  285:           </div>
+  286:         </div>
+  287:         {isLoading ? (
+  288:           <div className="flex min-h-64 items-center justify-center">
+  289:             <LoaderCircle className="text-muted-foreground h-7 w-7 animate-spin" />
+  290:           </div>
+  291:         ) : filteredFiles.length === 0 ? (
+  292:           <div className="text-muted-foreground flex min-h-64 flex-col items-center justify-center p-8 text-center">
+  293:             <FileImage className="h-10 w-10" />
+  294:             <p className="mt-3 text-sm">
+  295:               {searchQuery
+  296:                 ? "No matching media files were found."
+  297:                 : "No media files have been uploaded."}
+  298:             </p>
+  299:           </div>
+  300:         ) : (
+  301:           <div className="grid gap-4 p-5 sm:grid-cols-2 lg:grid-cols-3 2xl:grid-cols-4">
+  302:             {filteredFiles.map((file) => (
+  303:               <article
+  304:                 key={file.id}
+  305:                 className="border-border overflow-hidden rounded-xl border"
+  306:               >
+  307:                 <button
+  308:                   type="button"
+  309:                   onClick={() => setSelectedFile(file)}
+  310:                   className="bg-muted relative block aspect-video w-full overflow-hidden"
+  311:                 >
+  312:                   <Image
+  313:                     src={file.url}
+  314:                     alt={file.name}
+  315:                     fill
+  316:                     unoptimized
+  317:                     className="object-cover"
+  318:                   />
+  319:                 </button>
+  320:                 <div className="p-4">
+  321:                   <p className="truncate text-sm font-medium" title={file.name}>
+  322:                     {file.name}
+  323:                   </p>
+  324:                   <div className="text-muted-foreground mt-2 flex items-center justify-between gap-3 text-xs">
+  325:                     <span>{formatFileSize(file.size)}</span>
+  326:                     <span>{new Date(file.createdAt).toLocaleDateString()}</span>
+  327:                   </div>
+  328:                   <div className="mt-4 flex gap-2">
+  329:                     <button
+  330:                       type="button"
+  331:                       onClick={() => void copyFileUrl(file)}
+  332:                       className="border-border hover:bg-muted inline-flex flex-1 items-center justify-center gap-2 rounded-lg border px-3 py-2 text-xs font-medium transition-colors"
+  333:                     >
+  334:                       {copiedFileId === file.id ? (
+  335:                         <Check className="h-4 w-4" />
+  336:                       ) : (
+  337:                         <Copy className="h-4 w-4" />
+  338:                       )}
+  339:                       {copiedFileId === file.id ? "Copied" : "Copy URL"}
+  340:                     </button>
+  341:                     <button
+  342:                       type="button"
+  343:                       onClick={() => void removeFile(file)}
+  344:                       disabled={deletingFileId === file.id}
+  345:                       aria-label={`Delete ${file.name}`}
+  346:                       className="border-border text-destructive hover:bg-muted rounded-lg border p-2 transition-colors disabled:cursor-not-allowed disabled:opacity-50"
+  347:                     >
+  348:                       {deletingFileId === file.id ? (
+  349:                         <LoaderCircle className="h-4 w-4 animate-spin" />
+  350:                       ) : (
+  351:                         <Trash2 className="h-4 w-4" />
+  352:                       )}
+  353:                     </button>
+  354:                   </div>
+  355:                 </div>
+  356:               </article>
+  357:             ))}
+  358:           </div>
+  359:         )}
+  360:       </section>
+  361:       {selectedFile ? (
+  362:         <div
+  363:           role="dialog"
+  364:           aria-modal="true"
+  365:           aria-label="Media preview"
+  366:           className="fixed inset-0 z-50 flex items-center justify-center bg-black/70 p-4"
+  367:         >
+  368:           <div className="bg-background max-h-[90vh] w-full max-w-4xl overflow-auto rounded-xl shadow-xl">
+  369:             <div className="border-border flex items-center justify-between border-b p-4">
+  370:               <p className="truncate pr-4 text-sm font-semibold">{selectedFile.name}</p>
+  371:               <button
+  372:                 type="button"
+  373:                 onClick={() => setSelectedFile(null)}
+  374:                 aria-label="Close media preview"
+  375:                 className="border-border hover:bg-muted rounded-lg border p-2"
+  376:               >
+  377:                 <X className="h-4 w-4" />
+  378:               </button>
+  379:             </div>
+  380:             <div className="bg-muted relative min-h-[300px] sm:min-h-[500px]">
+  381:               <Image
+  382:                 src={selectedFile.url}
+  383:                 alt={selectedFile.name}
+  384:                 fill
+  385:                 unoptimized
+  386:                 className="object-contain"
+  387:               />
+  388:             </div>
+  389:             <div className="flex flex-col gap-3 p-4 sm:flex-row sm:items-center sm:justify-between">
+  390:               <div className="text-muted-foreground text-xs">
+  391:                 {formatFileSize(selectedFile.size)} · {selectedFile.type}
+  392:               </div>
+  393:               <button
+  394:                 type="button"
+  395:                 onClick={() => void copyFileUrl(selectedFile)}
+  396:                 className="border-border hover:bg-muted inline-flex items-center justify-center gap-2 rounded-lg border px-4 py-2 text-sm font-medium"
+  397:               >
+  398:                 <Copy className="h-4 w-4" />
+  399:                 Copy Image URL
+  400:               </button>
+  401:             </div>
+  402:           </div>
+  403:         </div>
+  404:       ) : null}
+  405:     </div>
+  406:   );
+  407: }
+
+============================================================
+FILE: src\app\api\admin\media\route.ts
+============================================================
+    1: import { NextResponse } from "next/server";
+    2: import { listMediaFiles } from "@/lib/media-storage";
+    3: export const runtime = "nodejs";
+    4: export const dynamic = "force-dynamic";
+    5: export async function GET() {
+    6:   try {
+    7:     const files = await listMediaFiles();
+    8:     return NextResponse.json({
+    9:       files,
+   10:     });
+   11:   } catch {
+   12:     return NextResponse.json(
+   13:       {
+   14:         message: "Unable to load media files.",
+   15:       },
+   16:       {
+   17:         status: 500,
+   18:       },
+   19:     );
+   20:   }
+   21: }
+
+============================================================
+FILE: src\app\api\admin\media\upload\route.ts
+============================================================
+    1: import { NextResponse } from "next/server";
+    2: import { saveMediaFile } from "@/lib/media-storage";
+    3: export const runtime = "nodejs";
+    4: export async function POST(request: Request) {
+    5:   try {
+    6:     const formData = await request.formData();
+    7:     const uploadedFile = formData.get("file");
+    8:     if (!(uploadedFile instanceof File)) {
+    9:       return NextResponse.json(
+   10:         {
+   11:           message: "A valid image file is required.",
+   12:         },
+   13:         {
+   14:           status: 400,
+   15:         },
+   16:       );
+   17:     }
+   18:     const file = await saveMediaFile(uploadedFile);
+   19:     return NextResponse.json(
+   20:       {
+   21:         file,
+   22:       },
+   23:       {
+   24:         status: 201,
+   25:       },
+   26:     );
+   27:   } catch (error) {
+   28:     const message =
+   29:       error instanceof Error ? error.message : "Unable to upload the image.";
+   30:     return NextResponse.json(
+   31:       {
+   32:         message,
+   33:       },
+   34:       {
+   35:         status: 400,
+   36:       },
+   37:     );
+   38:   }
+   39: }
+
+============================================================
+FILE: src\app\api\admin\media\delete\route.ts
+============================================================
+    1: import { NextResponse } from "next/server";
+    2: import { deleteMediaFile } from "@/lib/media-storage";
+    3: export const runtime = "nodejs";
+    4: type DeleteMediaRequest = {
+    5:   fileName?: unknown;
+    6: };
+    7: export async function DELETE(request: Request) {
+    8:   try {
+    9:     const requestBody = (await request.json()) as DeleteMediaRequest;
+   10:     if (typeof requestBody.fileName !== "string" || !requestBody.fileName.trim()) {
+   11:       return NextResponse.json(
+   12:         {
+   13:           message: "A valid media file name is required.",
+   14:         },
+   15:         {
+   16:           status: 400,
+   17:         },
+   18:       );
+   19:     }
+   20:     await deleteMediaFile(requestBody.fileName.trim());
+   21:     return NextResponse.json({
+   22:       message: "Media file deleted successfully.",
+   23:     });
+   24:   } catch {
+   25:     return NextResponse.json(
+   26:       {
+   27:         message: "Unable to delete the media file.",
+   28:       },
+   29:       {
+   30:         status: 400,
+   31:       },
+   32:     );
+   33:   }
+   34: }
+
+============================================================
+AUTHENTICATION REFERENCES
+============================================================
+
+============================================================
+DATABASE MIGRATIONS
+============================================================
+drizzle\0000_rapid_chimera.sql
+drizzle\meta\_journal.json
+drizzle\meta\0000_snapshot.json
+
+============================================================
+ENVIRONMENT VARIABLE NAMES
+============================================================
+
+[.env.example]
+NEXT_PUBLIC_SITE_NAME=[VALUE HIDDEN]
+NEXT_PUBLIC_SITE_URL=[VALUE HIDDEN]
+DATABASE_URL=[VALUE HIDDEN]
+BETTER_AUTH_SECRET=[VALUE HIDDEN]
+BETTER_AUTH_URL=[VALUE HIDDEN]
+OPENAI_API_KEY=[VALUE HIDDEN]
+SEARCH_API_KEY=[VALUE HIDDEN]
+NEWS_API_KEY=[VALUE HIDDEN]
+
+[.env.local]
+NEXT_PUBLIC_SITE_NAME=[VALUE HIDDEN]
+NEXT_PUBLIC_SITE_URL=[VALUE HIDDEN]
+DATABASE_URL=[VALUE HIDDEN]
+BETTER_AUTH_SECRET=[VALUE HIDDEN]
+BETTER_AUTH_URL=[VALUE HIDDEN]
+OPENAI_API_KEY=[VALUE HIDDEN]
+SEARCH_API_KEY=[VALUE HIDDEN]
+NEWS_API_KEY=[VALUE HIDDEN]

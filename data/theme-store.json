@@ -1,0 +1,1487 @@
+{
+  "activeThemeId": "general-preset",
+  "themes": [
+    {
+      "id": "general-preset",
+      "name": "Knowledge Nest",
+      "niche": "general",
+      "layout": "magazine",
+      "version": 1,
+      "isActive": true,
+      "colours": {
+        "background": "#ffffff",
+        "foreground": "#0f172a",
+        "primary": "#2563eb",
+        "secondary": "#475569",
+        "accent": "#7c3aed",
+        "muted": "#f1f5f9",
+        "border": "#cbd5e1"
+      },
+      "typography": {
+        "headingFont": "Inter",
+        "bodyFont": "Inter",
+        "headingWeight": 700,
+        "bodyWeight": 400
+      },
+      "sections": [
+        {
+          "id": "hero",
+          "type": "hero",
+          "title": "Top Stories",
+          "enabled": true,
+          "position": 1,
+          "articleLimit": 5
+        },
+        {
+          "id": "featured",
+          "type": "featured",
+          "title": "Featured",
+          "enabled": true,
+          "position": 2,
+          "articleLimit": 6
+        },
+        {
+          "id": "latest",
+          "type": "latest",
+          "title": "Latest Articles",
+          "enabled": true,
+          "position": 3,
+          "articleLimit": 12
+        },
+        {
+          "id": "trending",
+          "type": "trending",
+          "title": "Trending",
+          "enabled": true,
+          "position": 4,
+          "articleLimit": 8
+        },
+        {
+          "id": "newsletter",
+          "type": "newsletter",
+          "title": "Newsletter",
+          "enabled": true,
+          "position": 5,
+          "articleLimit": 1
+        }
+      ],
+      "navigation": [
+        "Latest",
+        "Popular",
+        "Technology",
+        "Business",
+        "Lifestyle"
+      ],
+      "createdAt": "2026-07-28T09:22:15.469Z",
+      "updatedAt": "2026-07-28T09:22:15.469Z"
+    },
+    {
+      "id": "news-preset",
+      "name": "Breaking News",
+      "niche": "news",
+      "layout": "editorial",
+      "version": 1,
+      "isActive": false,
+      "colours": {
+        "background": "#ffffff",
+        "foreground": "#111827",
+        "primary": "#b91c1c",
+        "secondary": "#1f2937",
+        "accent": "#f59e0b",
+        "muted": "#f3f4f6",
+        "border": "#d1d5db"
+      },
+      "typography": {
+        "headingFont": "Inter",
+        "bodyFont": "Inter",
+        "headingWeight": 700,
+        "bodyWeight": 400
+      },
+      "sections": [
+        {
+          "id": "hero",
+          "type": "hero",
+          "title": "Top Stories",
+          "enabled": true,
+          "position": 1,
+          "articleLimit": 5
+        },
+        {
+          "id": "featured",
+          "type": "featured",
+          "title": "Featured",
+          "enabled": true,
+          "position": 2,
+          "articleLimit": 6
+        },
+        {
+          "id": "latest",
+          "type": "latest",
+          "title": "Latest Articles",
+          "enabled": true,
+          "position": 3,
+          "articleLimit": 12
+        },
+        {
+          "id": "trending",
+          "type": "trending",
+          "title": "Trending",
+          "enabled": true,
+          "position": 4,
+          "articleLimit": 8
+        },
+        {
+          "id": "newsletter",
+          "type": "newsletter",
+          "title": "Newsletter",
+          "enabled": true,
+          "position": 5,
+          "articleLimit": 1
+        }
+      ],
+      "navigation": [
+        "Latest",
+        "Politics",
+        "World",
+        "Business",
+        "Sports",
+        "Culture"
+      ],
+      "createdAt": "2026-07-28T09:22:15.482Z",
+      "updatedAt": "2026-07-28T09:22:15.482Z"
+    },
+    {
+      "id": "finance-preset",
+      "name": "Finance Ledger",
+      "niche": "finance",
+      "layout": "business",
+      "version": 1,
+      "isActive": false,
+      "colours": {
+        "background": "#f8fafc",
+        "foreground": "#0f172a",
+        "primary": "#047857",
+        "secondary": "#0f766e",
+        "accent": "#ca8a04",
+        "muted": "#ecfdf5",
+        "border": "#cbd5e1"
+      },
+      "typography": {
+        "headingFont": "Inter",
+        "bodyFont": "Inter",
+        "headingWeight": 700,
+        "bodyWeight": 400
+      },
+      "sections": [
+        {
+          "id": "hero",
+          "type": "hero",
+          "title": "Top Stories",
+          "enabled": true,
+          "position": 1,
+          "articleLimit": 5
+        },
+        {
+          "id": "featured",
+          "type": "featured",
+          "title": "Featured",
+          "enabled": true,
+          "position": 2,
+          "articleLimit": 6
+        },
+        {
+          "id": "latest",
+          "type": "latest",
+          "title": "Latest Articles",
+          "enabled": true,
+          "position": 3,
+          "articleLimit": 12
+        },
+        {
+          "id": "trending",
+          "type": "trending",
+          "title": "Trending",
+          "enabled": true,
+          "position": 4,
+          "articleLimit": 8
+        },
+        {
+          "id": "newsletter",
+          "type": "newsletter",
+          "title": "Newsletter",
+          "enabled": true,
+          "position": 5,
+          "articleLimit": 1
+        }
+      ],
+      "navigation": [
+        "Markets",
+        "Economy",
+        "Investing",
+        "Banking",
+        "Personal Finance"
+      ],
+      "createdAt": "2026-07-28T09:22:15.482Z",
+      "updatedAt": "2026-07-28T09:22:15.482Z"
+    },
+    {
+      "id": "technology-preset",
+      "name": "Technology Grid",
+      "niche": "technology",
+      "layout": "grid",
+      "version": 1,
+      "isActive": false,
+      "colours": {
+        "background": "#020617",
+        "foreground": "#f8fafc",
+        "primary": "#2563eb",
+        "secondary": "#7c3aed",
+        "accent": "#06b6d4",
+        "muted": "#0f172a",
+        "border": "#334155"
+      },
+      "typography": {
+        "headingFont": "Inter",
+        "bodyFont": "Inter",
+        "headingWeight": 700,
+        "bodyWeight": 400
+      },
+      "sections": [
+        {
+          "id": "hero",
+          "type": "hero",
+          "title": "Top Stories",
+          "enabled": true,
+          "position": 1,
+          "articleLimit": 5
+        },
+        {
+          "id": "featured",
+          "type": "featured",
+          "title": "Featured",
+          "enabled": true,
+          "position": 2,
+          "articleLimit": 6
+        },
+        {
+          "id": "latest",
+          "type": "latest",
+          "title": "Latest Articles",
+          "enabled": true,
+          "position": 3,
+          "articleLimit": 12
+        },
+        {
+          "id": "trending",
+          "type": "trending",
+          "title": "Trending",
+          "enabled": true,
+          "position": 4,
+          "articleLimit": 8
+        },
+        {
+          "id": "newsletter",
+          "type": "newsletter",
+          "title": "Newsletter",
+          "enabled": true,
+          "position": 5,
+          "articleLimit": 1
+        }
+      ],
+      "navigation": [
+        "Technology",
+        "AI",
+        "Software",
+        "Hardware",
+        "Cybersecurity"
+      ],
+      "createdAt": "2026-07-28T09:22:15.482Z",
+      "updatedAt": "2026-07-28T09:22:15.482Z"
+    },
+    {
+      "id": "ai-preset",
+      "name": "AI Horizon",
+      "niche": "ai",
+      "layout": "grid",
+      "version": 1,
+      "isActive": false,
+      "colours": {
+        "background": "#09090b",
+        "foreground": "#fafafa",
+        "primary": "#8b5cf6",
+        "secondary": "#ec4899",
+        "accent": "#22d3ee",
+        "muted": "#18181b",
+        "border": "#3f3f46"
+      },
+      "typography": {
+        "headingFont": "Inter",
+        "bodyFont": "Inter",
+        "headingWeight": 700,
+        "bodyWeight": 400
+      },
+      "sections": [
+        {
+          "id": "hero",
+          "type": "hero",
+          "title": "Top Stories",
+          "enabled": true,
+          "position": 1,
+          "articleLimit": 5
+        },
+        {
+          "id": "featured",
+          "type": "featured",
+          "title": "Featured",
+          "enabled": true,
+          "position": 2,
+          "articleLimit": 6
+        },
+        {
+          "id": "latest",
+          "type": "latest",
+          "title": "Latest Articles",
+          "enabled": true,
+          "position": 3,
+          "articleLimit": 12
+        },
+        {
+          "id": "trending",
+          "type": "trending",
+          "title": "Trending",
+          "enabled": true,
+          "position": 4,
+          "articleLimit": 8
+        },
+        {
+          "id": "newsletter",
+          "type": "newsletter",
+          "title": "Newsletter",
+          "enabled": true,
+          "position": 5,
+          "articleLimit": 1
+        }
+      ],
+      "navigation": [
+        "Artificial Intelligence",
+        "Tools",
+        "Research",
+        "Automation",
+        "Robotics"
+      ],
+      "createdAt": "2026-07-28T09:22:15.482Z",
+      "updatedAt": "2026-07-28T09:22:15.482Z"
+    },
+    {
+      "id": "business-preset",
+      "name": "Business Professional",
+      "niche": "business",
+      "layout": "magazine",
+      "version": 1,
+      "isActive": false,
+      "colours": {
+        "background": "#ffffff",
+        "foreground": "#172554",
+        "primary": "#1d4ed8",
+        "secondary": "#334155",
+        "accent": "#f59e0b",
+        "muted": "#eff6ff",
+        "border": "#cbd5e1"
+      },
+      "typography": {
+        "headingFont": "Inter",
+        "bodyFont": "Inter",
+        "headingWeight": 700,
+        "bodyWeight": 400
+      },
+      "sections": [
+        {
+          "id": "hero",
+          "type": "hero",
+          "title": "Top Stories",
+          "enabled": true,
+          "position": 1,
+          "articleLimit": 5
+        },
+        {
+          "id": "featured",
+          "type": "featured",
+          "title": "Featured",
+          "enabled": true,
+          "position": 2,
+          "articleLimit": 6
+        },
+        {
+          "id": "latest",
+          "type": "latest",
+          "title": "Latest Articles",
+          "enabled": true,
+          "position": 3,
+          "articleLimit": 12
+        },
+        {
+          "id": "trending",
+          "type": "trending",
+          "title": "Trending",
+          "enabled": true,
+          "position": 4,
+          "articleLimit": 8
+        },
+        {
+          "id": "newsletter",
+          "type": "newsletter",
+          "title": "Newsletter",
+          "enabled": true,
+          "position": 5,
+          "articleLimit": 1
+        }
+      ],
+      "navigation": [
+        "Business",
+        "Startups",
+        "Leadership",
+        "Marketing",
+        "Careers"
+      ],
+      "createdAt": "2026-07-28T09:22:15.482Z",
+      "updatedAt": "2026-07-28T09:22:15.482Z"
+    },
+    {
+      "id": "education-preset",
+      "name": "Learning Centre",
+      "niche": "education",
+      "layout": "magazine",
+      "version": 1,
+      "isActive": false,
+      "colours": {
+        "background": "#fffbeb",
+        "foreground": "#422006",
+        "primary": "#d97706",
+        "secondary": "#92400e",
+        "accent": "#2563eb",
+        "muted": "#fef3c7",
+        "border": "#fcd34d"
+      },
+      "typography": {
+        "headingFont": "Inter",
+        "bodyFont": "Inter",
+        "headingWeight": 700,
+        "bodyWeight": 400
+      },
+      "sections": [
+        {
+          "id": "hero",
+          "type": "hero",
+          "title": "Top Stories",
+          "enabled": true,
+          "position": 1,
+          "articleLimit": 5
+        },
+        {
+          "id": "featured",
+          "type": "featured",
+          "title": "Featured",
+          "enabled": true,
+          "position": 2,
+          "articleLimit": 6
+        },
+        {
+          "id": "latest",
+          "type": "latest",
+          "title": "Latest Articles",
+          "enabled": true,
+          "position": 3,
+          "articleLimit": 12
+        },
+        {
+          "id": "trending",
+          "type": "trending",
+          "title": "Trending",
+          "enabled": true,
+          "position": 4,
+          "articleLimit": 8
+        },
+        {
+          "id": "newsletter",
+          "type": "newsletter",
+          "title": "Newsletter",
+          "enabled": true,
+          "position": 5,
+          "articleLimit": 1
+        }
+      ],
+      "navigation": [
+        "Education",
+        "Learning",
+        "Courses",
+        "Students",
+        "Teachers"
+      ],
+      "createdAt": "2026-07-28T09:22:15.482Z",
+      "updatedAt": "2026-07-28T09:22:15.482Z"
+    },
+    {
+      "id": "health-preset",
+      "name": "Health Journal",
+      "niche": "health",
+      "layout": "magazine",
+      "version": 1,
+      "isActive": false,
+      "colours": {
+        "background": "#f0fdf4",
+        "foreground": "#14532d",
+        "primary": "#16a34a",
+        "secondary": "#0f766e",
+        "accent": "#0284c7",
+        "muted": "#dcfce7",
+        "border": "#86efac"
+      },
+      "typography": {
+        "headingFont": "Inter",
+        "bodyFont": "Inter",
+        "headingWeight": 700,
+        "bodyWeight": 400
+      },
+      "sections": [
+        {
+          "id": "hero",
+          "type": "hero",
+          "title": "Top Stories",
+          "enabled": true,
+          "position": 1,
+          "articleLimit": 5
+        },
+        {
+          "id": "featured",
+          "type": "featured",
+          "title": "Featured",
+          "enabled": true,
+          "position": 2,
+          "articleLimit": 6
+        },
+        {
+          "id": "latest",
+          "type": "latest",
+          "title": "Latest Articles",
+          "enabled": true,
+          "position": 3,
+          "articleLimit": 12
+        },
+        {
+          "id": "trending",
+          "type": "trending",
+          "title": "Trending",
+          "enabled": true,
+          "position": 4,
+          "articleLimit": 8
+        },
+        {
+          "id": "newsletter",
+          "type": "newsletter",
+          "title": "Newsletter",
+          "enabled": true,
+          "position": 5,
+          "articleLimit": 1
+        }
+      ],
+      "navigation": [
+        "Health",
+        "Fitness",
+        "Nutrition",
+        "Wellness",
+        "Medicine"
+      ],
+      "createdAt": "2026-07-28T09:22:15.482Z",
+      "updatedAt": "2026-07-28T09:22:15.482Z"
+    },
+    {
+      "id": "science-preset",
+      "name": "Science Explorer",
+      "niche": "science",
+      "layout": "magazine",
+      "version": 1,
+      "isActive": false,
+      "colours": {
+        "background": "#f8fafc",
+        "foreground": "#1e1b4b",
+        "primary": "#4338ca",
+        "secondary": "#0369a1",
+        "accent": "#7c3aed",
+        "muted": "#eef2ff",
+        "border": "#c7d2fe"
+      },
+      "typography": {
+        "headingFont": "Inter",
+        "bodyFont": "Inter",
+        "headingWeight": 700,
+        "bodyWeight": 400
+      },
+      "sections": [
+        {
+          "id": "hero",
+          "type": "hero",
+          "title": "Top Stories",
+          "enabled": true,
+          "position": 1,
+          "articleLimit": 5
+        },
+        {
+          "id": "featured",
+          "type": "featured",
+          "title": "Featured",
+          "enabled": true,
+          "position": 2,
+          "articleLimit": 6
+        },
+        {
+          "id": "latest",
+          "type": "latest",
+          "title": "Latest Articles",
+          "enabled": true,
+          "position": 3,
+          "articleLimit": 12
+        },
+        {
+          "id": "trending",
+          "type": "trending",
+          "title": "Trending",
+          "enabled": true,
+          "position": 4,
+          "articleLimit": 8
+        },
+        {
+          "id": "newsletter",
+          "type": "newsletter",
+          "title": "Newsletter",
+          "enabled": true,
+          "position": 5,
+          "articleLimit": 1
+        }
+      ],
+      "navigation": [
+        "Science",
+        "Research",
+        "Space",
+        "Environment",
+        "Innovation"
+      ],
+      "createdAt": "2026-07-28T09:22:15.482Z",
+      "updatedAt": "2026-07-28T09:22:15.482Z"
+    },
+    {
+      "id": "fashion-preset",
+      "name": "Fashion Editorial",
+      "niche": "fashion",
+      "layout": "visual",
+      "version": 1,
+      "isActive": false,
+      "colours": {
+        "background": "#fff7ed",
+        "foreground": "#431407",
+        "primary": "#e11d48",
+        "secondary": "#9f1239",
+        "accent": "#fb7185",
+        "muted": "#ffe4e6",
+        "border": "#fecdd3"
+      },
+      "typography": {
+        "headingFont": "Inter",
+        "bodyFont": "Inter",
+        "headingWeight": 700,
+        "bodyWeight": 400
+      },
+      "sections": [
+        {
+          "id": "hero",
+          "type": "hero",
+          "title": "Top Stories",
+          "enabled": true,
+          "position": 1,
+          "articleLimit": 5
+        },
+        {
+          "id": "featured",
+          "type": "featured",
+          "title": "Featured",
+          "enabled": true,
+          "position": 2,
+          "articleLimit": 6
+        },
+        {
+          "id": "latest",
+          "type": "latest",
+          "title": "Latest Articles",
+          "enabled": true,
+          "position": 3,
+          "articleLimit": 12
+        },
+        {
+          "id": "trending",
+          "type": "trending",
+          "title": "Trending",
+          "enabled": true,
+          "position": 4,
+          "articleLimit": 8
+        },
+        {
+          "id": "newsletter",
+          "type": "newsletter",
+          "title": "Newsletter",
+          "enabled": true,
+          "position": 5,
+          "articleLimit": 1
+        }
+      ],
+      "navigation": [
+        "Fashion",
+        "Clothing",
+        "Trends",
+        "Designers",
+        "Style"
+      ],
+      "createdAt": "2026-07-28T09:22:15.483Z",
+      "updatedAt": "2026-07-28T09:22:15.483Z"
+    },
+    {
+      "id": "beauty-preset",
+      "name": "Beauty Studio",
+      "niche": "beauty",
+      "layout": "visual",
+      "version": 1,
+      "isActive": false,
+      "colours": {
+        "background": "#fdf4ff",
+        "foreground": "#4a044e",
+        "primary": "#c026d3",
+        "secondary": "#db2777",
+        "accent": "#f472b6",
+        "muted": "#fae8ff",
+        "border": "#f5d0fe"
+      },
+      "typography": {
+        "headingFont": "Inter",
+        "bodyFont": "Inter",
+        "headingWeight": 700,
+        "bodyWeight": 400
+      },
+      "sections": [
+        {
+          "id": "hero",
+          "type": "hero",
+          "title": "Top Stories",
+          "enabled": true,
+          "position": 1,
+          "articleLimit": 5
+        },
+        {
+          "id": "featured",
+          "type": "featured",
+          "title": "Featured",
+          "enabled": true,
+          "position": 2,
+          "articleLimit": 6
+        },
+        {
+          "id": "latest",
+          "type": "latest",
+          "title": "Latest Articles",
+          "enabled": true,
+          "position": 3,
+          "articleLimit": 12
+        },
+        {
+          "id": "trending",
+          "type": "trending",
+          "title": "Trending",
+          "enabled": true,
+          "position": 4,
+          "articleLimit": 8
+        },
+        {
+          "id": "newsletter",
+          "type": "newsletter",
+          "title": "Newsletter",
+          "enabled": true,
+          "position": 5,
+          "articleLimit": 1
+        }
+      ],
+      "navigation": [
+        "Beauty",
+        "Skincare",
+        "Makeup",
+        "Hair",
+        "Wellness"
+      ],
+      "createdAt": "2026-07-28T09:22:15.483Z",
+      "updatedAt": "2026-07-28T09:22:15.483Z"
+    },
+    {
+      "id": "cars-preset",
+      "name": "Automotive Performance",
+      "niche": "cars",
+      "layout": "visual",
+      "version": 1,
+      "isActive": false,
+      "colours": {
+        "background": "#09090b",
+        "foreground": "#fafafa",
+        "primary": "#dc2626",
+        "secondary": "#27272a",
+        "accent": "#f97316",
+        "muted": "#18181b",
+        "border": "#3f3f46"
+      },
+      "typography": {
+        "headingFont": "Inter",
+        "bodyFont": "Inter",
+        "headingWeight": 700,
+        "bodyWeight": 400
+      },
+      "sections": [
+        {
+          "id": "hero",
+          "type": "hero",
+          "title": "Top Stories",
+          "enabled": true,
+          "position": 1,
+          "articleLimit": 5
+        },
+        {
+          "id": "featured",
+          "type": "featured",
+          "title": "Featured",
+          "enabled": true,
+          "position": 2,
+          "articleLimit": 6
+        },
+        {
+          "id": "latest",
+          "type": "latest",
+          "title": "Latest Articles",
+          "enabled": true,
+          "position": 3,
+          "articleLimit": 12
+        },
+        {
+          "id": "trending",
+          "type": "trending",
+          "title": "Trending",
+          "enabled": true,
+          "position": 4,
+          "articleLimit": 8
+        },
+        {
+          "id": "newsletter",
+          "type": "newsletter",
+          "title": "Newsletter",
+          "enabled": true,
+          "position": 5,
+          "articleLimit": 1
+        }
+      ],
+      "navigation": [
+        "Cars",
+        "Reviews",
+        "Electric Vehicles",
+        "Performance",
+        "Industry"
+      ],
+      "createdAt": "2026-07-28T09:22:15.483Z",
+      "updatedAt": "2026-07-28T09:22:15.483Z"
+    },
+    {
+      "id": "sports-preset",
+      "name": "Sports Arena",
+      "niche": "sports",
+      "layout": "magazine",
+      "version": 1,
+      "isActive": false,
+      "colours": {
+        "background": "#f8fafc",
+        "foreground": "#052e16",
+        "primary": "#15803d",
+        "secondary": "#166534",
+        "accent": "#eab308",
+        "muted": "#dcfce7",
+        "border": "#86efac"
+      },
+      "typography": {
+        "headingFont": "Inter",
+        "bodyFont": "Inter",
+        "headingWeight": 700,
+        "bodyWeight": 400
+      },
+      "sections": [
+        {
+          "id": "hero",
+          "type": "hero",
+          "title": "Top Stories",
+          "enabled": true,
+          "position": 1,
+          "articleLimit": 5
+        },
+        {
+          "id": "featured",
+          "type": "featured",
+          "title": "Featured",
+          "enabled": true,
+          "position": 2,
+          "articleLimit": 6
+        },
+        {
+          "id": "latest",
+          "type": "latest",
+          "title": "Latest Articles",
+          "enabled": true,
+          "position": 3,
+          "articleLimit": 12
+        },
+        {
+          "id": "trending",
+          "type": "trending",
+          "title": "Trending",
+          "enabled": true,
+          "position": 4,
+          "articleLimit": 8
+        },
+        {
+          "id": "newsletter",
+          "type": "newsletter",
+          "title": "Newsletter",
+          "enabled": true,
+          "position": 5,
+          "articleLimit": 1
+        }
+      ],
+      "navigation": [
+        "Sports",
+        "Football",
+        "Cricket",
+        "Tennis",
+        "Fitness"
+      ],
+      "createdAt": "2026-07-28T09:22:15.483Z",
+      "updatedAt": "2026-07-28T09:22:15.483Z"
+    },
+    {
+      "id": "travel-preset",
+      "name": "Travel Explorer",
+      "niche": "travel",
+      "layout": "magazine",
+      "version": 1,
+      "isActive": false,
+      "colours": {
+        "background": "#ecfeff",
+        "foreground": "#164e63",
+        "primary": "#0891b2",
+        "secondary": "#0369a1",
+        "accent": "#f97316",
+        "muted": "#cffafe",
+        "border": "#67e8f9"
+      },
+      "typography": {
+        "headingFont": "Inter",
+        "bodyFont": "Inter",
+        "headingWeight": 700,
+        "bodyWeight": 400
+      },
+      "sections": [
+        {
+          "id": "hero",
+          "type": "hero",
+          "title": "Top Stories",
+          "enabled": true,
+          "position": 1,
+          "articleLimit": 5
+        },
+        {
+          "id": "featured",
+          "type": "featured",
+          "title": "Featured",
+          "enabled": true,
+          "position": 2,
+          "articleLimit": 6
+        },
+        {
+          "id": "latest",
+          "type": "latest",
+          "title": "Latest Articles",
+          "enabled": true,
+          "position": 3,
+          "articleLimit": 12
+        },
+        {
+          "id": "trending",
+          "type": "trending",
+          "title": "Trending",
+          "enabled": true,
+          "position": 4,
+          "articleLimit": 8
+        },
+        {
+          "id": "newsletter",
+          "type": "newsletter",
+          "title": "Newsletter",
+          "enabled": true,
+          "position": 5,
+          "articleLimit": 1
+        }
+      ],
+      "navigation": [
+        "Travel",
+        "Destinations",
+        "Hotels",
+        "Guides",
+        "Adventure"
+      ],
+      "createdAt": "2026-07-28T09:22:15.483Z",
+      "updatedAt": "2026-07-28T09:22:15.483Z"
+    },
+    {
+      "id": "food-preset",
+      "name": "Food Magazine",
+      "niche": "food",
+      "layout": "magazine",
+      "version": 1,
+      "isActive": false,
+      "colours": {
+        "background": "#fff7ed",
+        "foreground": "#431407",
+        "primary": "#ea580c",
+        "secondary": "#b45309",
+        "accent": "#65a30d",
+        "muted": "#ffedd5",
+        "border": "#fdba74"
+      },
+      "typography": {
+        "headingFont": "Inter",
+        "bodyFont": "Inter",
+        "headingWeight": 700,
+        "bodyWeight": 400
+      },
+      "sections": [
+        {
+          "id": "hero",
+          "type": "hero",
+          "title": "Top Stories",
+          "enabled": true,
+          "position": 1,
+          "articleLimit": 5
+        },
+        {
+          "id": "featured",
+          "type": "featured",
+          "title": "Featured",
+          "enabled": true,
+          "position": 2,
+          "articleLimit": 6
+        },
+        {
+          "id": "latest",
+          "type": "latest",
+          "title": "Latest Articles",
+          "enabled": true,
+          "position": 3,
+          "articleLimit": 12
+        },
+        {
+          "id": "trending",
+          "type": "trending",
+          "title": "Trending",
+          "enabled": true,
+          "position": 4,
+          "articleLimit": 8
+        },
+        {
+          "id": "newsletter",
+          "type": "newsletter",
+          "title": "Newsletter",
+          "enabled": true,
+          "position": 5,
+          "articleLimit": 1
+        }
+      ],
+      "navigation": [
+        "Food",
+        "Recipes",
+        "Restaurants",
+        "Nutrition",
+        "Cooking"
+      ],
+      "createdAt": "2026-07-28T09:22:15.483Z",
+      "updatedAt": "2026-07-28T09:22:15.483Z"
+    },
+    {
+      "id": "gaming-preset",
+      "name": "Gaming Universe",
+      "niche": "gaming",
+      "layout": "magazine",
+      "version": 1,
+      "isActive": false,
+      "colours": {
+        "background": "#020617",
+        "foreground": "#f8fafc",
+        "primary": "#7c3aed",
+        "secondary": "#2563eb",
+        "accent": "#22c55e",
+        "muted": "#0f172a",
+        "border": "#334155"
+      },
+      "typography": {
+        "headingFont": "Inter",
+        "bodyFont": "Inter",
+        "headingWeight": 700,
+        "bodyWeight": 400
+      },
+      "sections": [
+        {
+          "id": "hero",
+          "type": "hero",
+          "title": "Top Stories",
+          "enabled": true,
+          "position": 1,
+          "articleLimit": 5
+        },
+        {
+          "id": "featured",
+          "type": "featured",
+          "title": "Featured",
+          "enabled": true,
+          "position": 2,
+          "articleLimit": 6
+        },
+        {
+          "id": "latest",
+          "type": "latest",
+          "title": "Latest Articles",
+          "enabled": true,
+          "position": 3,
+          "articleLimit": 12
+        },
+        {
+          "id": "trending",
+          "type": "trending",
+          "title": "Trending",
+          "enabled": true,
+          "position": 4,
+          "articleLimit": 8
+        },
+        {
+          "id": "newsletter",
+          "type": "newsletter",
+          "title": "Newsletter",
+          "enabled": true,
+          "position": 5,
+          "articleLimit": 1
+        }
+      ],
+      "navigation": [
+        "Gaming",
+        "PC",
+        "Console",
+        "Mobile",
+        "Esports"
+      ],
+      "createdAt": "2026-07-28T09:22:15.483Z",
+      "updatedAt": "2026-07-28T09:22:15.483Z"
+    },
+    {
+      "id": "entertainment-preset",
+      "name": "Entertainment Daily",
+      "niche": "entertainment",
+      "layout": "magazine",
+      "version": 1,
+      "isActive": false,
+      "colours": {
+        "background": "#18181b",
+        "foreground": "#fafafa",
+        "primary": "#db2777",
+        "secondary": "#7c3aed",
+        "accent": "#f59e0b",
+        "muted": "#27272a",
+        "border": "#52525b"
+      },
+      "typography": {
+        "headingFont": "Inter",
+        "bodyFont": "Inter",
+        "headingWeight": 700,
+        "bodyWeight": 400
+      },
+      "sections": [
+        {
+          "id": "hero",
+          "type": "hero",
+          "title": "Top Stories",
+          "enabled": true,
+          "position": 1,
+          "articleLimit": 5
+        },
+        {
+          "id": "featured",
+          "type": "featured",
+          "title": "Featured",
+          "enabled": true,
+          "position": 2,
+          "articleLimit": 6
+        },
+        {
+          "id": "latest",
+          "type": "latest",
+          "title": "Latest Articles",
+          "enabled": true,
+          "position": 3,
+          "articleLimit": 12
+        },
+        {
+          "id": "trending",
+          "type": "trending",
+          "title": "Trending",
+          "enabled": true,
+          "position": 4,
+          "articleLimit": 8
+        },
+        {
+          "id": "newsletter",
+          "type": "newsletter",
+          "title": "Newsletter",
+          "enabled": true,
+          "position": 5,
+          "articleLimit": 1
+        }
+      ],
+      "navigation": [
+        "Entertainment",
+        "Movies",
+        "Television",
+        "Music",
+        "Celebrities"
+      ],
+      "createdAt": "2026-07-28T09:22:15.483Z",
+      "updatedAt": "2026-07-28T09:22:15.483Z"
+    },
+    {
+      "id": "real-estate-preset",
+      "name": "Property Market",
+      "niche": "real-estate",
+      "layout": "magazine",
+      "version": 1,
+      "isActive": false,
+      "colours": {
+        "background": "#f8fafc",
+        "foreground": "#1e293b",
+        "primary": "#0f766e",
+        "secondary": "#475569",
+        "accent": "#d97706",
+        "muted": "#f1f5f9",
+        "border": "#cbd5e1"
+      },
+      "typography": {
+        "headingFont": "Inter",
+        "bodyFont": "Inter",
+        "headingWeight": 700,
+        "bodyWeight": 400
+      },
+      "sections": [
+        {
+          "id": "hero",
+          "type": "hero",
+          "title": "Top Stories",
+          "enabled": true,
+          "position": 1,
+          "articleLimit": 5
+        },
+        {
+          "id": "featured",
+          "type": "featured",
+          "title": "Featured",
+          "enabled": true,
+          "position": 2,
+          "articleLimit": 6
+        },
+        {
+          "id": "latest",
+          "type": "latest",
+          "title": "Latest Articles",
+          "enabled": true,
+          "position": 3,
+          "articleLimit": 12
+        },
+        {
+          "id": "trending",
+          "type": "trending",
+          "title": "Trending",
+          "enabled": true,
+          "position": 4,
+          "articleLimit": 8
+        },
+        {
+          "id": "newsletter",
+          "type": "newsletter",
+          "title": "Newsletter",
+          "enabled": true,
+          "position": 5,
+          "articleLimit": 1
+        }
+      ],
+      "navigation": [
+        "Real Estate",
+        "Property",
+        "Investment",
+        "Homes",
+        "Commercial"
+      ],
+      "createdAt": "2026-07-28T09:22:15.483Z",
+      "updatedAt": "2026-07-28T09:22:15.483Z"
+    },
+    {
+      "id": "agriculture-preset",
+      "name": "Agriculture Today",
+      "niche": "agriculture",
+      "layout": "magazine",
+      "version": 1,
+      "isActive": false,
+      "colours": {
+        "background": "#f7fee7",
+        "foreground": "#365314",
+        "primary": "#4d7c0f",
+        "secondary": "#3f6212",
+        "accent": "#ca8a04",
+        "muted": "#ecfccb",
+        "border": "#bef264"
+      },
+      "typography": {
+        "headingFont": "Inter",
+        "bodyFont": "Inter",
+        "headingWeight": 700,
+        "bodyWeight": 400
+      },
+      "sections": [
+        {
+          "id": "hero",
+          "type": "hero",
+          "title": "Top Stories",
+          "enabled": true,
+          "position": 1,
+          "articleLimit": 5
+        },
+        {
+          "id": "featured",
+          "type": "featured",
+          "title": "Featured",
+          "enabled": true,
+          "position": 2,
+          "articleLimit": 6
+        },
+        {
+          "id": "latest",
+          "type": "latest",
+          "title": "Latest Articles",
+          "enabled": true,
+          "position": 3,
+          "articleLimit": 12
+        },
+        {
+          "id": "trending",
+          "type": "trending",
+          "title": "Trending",
+          "enabled": true,
+          "position": 4,
+          "articleLimit": 8
+        },
+        {
+          "id": "newsletter",
+          "type": "newsletter",
+          "title": "Newsletter",
+          "enabled": true,
+          "position": 5,
+          "articleLimit": 1
+        }
+      ],
+      "navigation": [
+        "Agriculture",
+        "Farming",
+        "Crops",
+        "Livestock",
+        "Technology"
+      ],
+      "createdAt": "2026-07-28T09:22:15.483Z",
+      "updatedAt": "2026-07-28T09:22:15.483Z"
+    },
+    {
+      "id": "lifestyle-preset",
+      "name": "Modern Lifestyle",
+      "niche": "lifestyle",
+      "layout": "magazine",
+      "version": 1,
+      "isActive": false,
+      "colours": {
+        "background": "#fdf2f8",
+        "foreground": "#500724",
+        "primary": "#be185d",
+        "secondary": "#7e22ce",
+        "accent": "#f59e0b",
+        "muted": "#fce7f3",
+        "border": "#f9a8d4"
+      },
+      "typography": {
+        "headingFont": "Inter",
+        "bodyFont": "Inter",
+        "headingWeight": 700,
+        "bodyWeight": 400
+      },
+      "sections": [
+        {
+          "id": "hero",
+          "type": "hero",
+          "title": "Top Stories",
+          "enabled": true,
+          "position": 1,
+          "articleLimit": 5
+        },
+        {
+          "id": "featured",
+          "type": "featured",
+          "title": "Featured",
+          "enabled": true,
+          "position": 2,
+          "articleLimit": 6
+        },
+        {
+          "id": "latest",
+          "type": "latest",
+          "title": "Latest Articles",
+          "enabled": true,
+          "position": 3,
+          "articleLimit": 12
+        },
+        {
+          "id": "trending",
+          "type": "trending",
+          "title": "Trending",
+          "enabled": true,
+          "position": 4,
+          "articleLimit": 8
+        },
+        {
+          "id": "newsletter",
+          "type": "newsletter",
+          "title": "Newsletter",
+          "enabled": true,
+          "position": 5,
+          "articleLimit": 1
+        }
+      ],
+      "navigation": [
+        "Lifestyle",
+        "Home",
+        "Relationships",
+        "Travel",
+        "Wellness"
+      ],
+      "createdAt": "2026-07-28T09:22:15.483Z",
+      "updatedAt": "2026-07-28T09:22:15.483Z"
+    }
+  ],
+  "backups": []
+}

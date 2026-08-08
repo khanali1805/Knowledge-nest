@@ -5,6 +5,8 @@ import { createAdminSession } from "@/lib/admin-auth";
 import { createAdminJsonResponse, isSameOriginRequest } from "@/lib/admin-security";
 export const runtime = "nodejs";
 export const dynamic = "force-dynamic";
+const MAX_LOGIN_BODY_BYTES = 8 * 1024;
+const FAILED_LOGIN_DELAY_MS = 800;
 const loginSchema = z.object({
   username: z.string().trim().min(1).max(100),
   password: z.string().min(1).max(500),
@@ -17,6 +19,19 @@ function secureTextEqual(suppliedValue: string, expectedValue: string): boolean 
   }
   return timingSafeEqual(suppliedBuffer, expectedBuffer);
 }
+function delay(milliseconds: number): Promise<void> {
+  return new Promise((resolve) => {
+    setTimeout(resolve, milliseconds);
+  });
+}
+function requestBodyIsTooLarge(request: Request): boolean {
+  const rawContentLength = request.headers.get("content-length");
+  if (!rawContentLength) {
+    return false;
+  }
+  const contentLength = Number.parseInt(rawContentLength, 10);
+  return Number.isFinite(contentLength) && contentLength > MAX_LOGIN_BODY_BYTES;
+}
 export async function POST(request: Request) {
   if (!isSameOriginRequest(request)) {
     return createAdminJsonResponse(
@@ -25,6 +40,15 @@ export async function POST(request: Request) {
         message: "Invalid login request.",
       },
       403,
+    );
+  }
+  if (requestBodyIsTooLarge(request)) {
+    return createAdminJsonResponse(
+      {
+        success: false,
+        message: "Invalid login request.",
+      },
+      413,
     );
   }
   const contentType = request.headers.get("content-type") ?? "";
@@ -68,6 +92,7 @@ export async function POST(request: Request) {
       configuredPasswordHash,
     );
     if (!usernameMatches || !passwordMatches) {
+      await delay(FAILED_LOGIN_DELAY_MS);
       return createAdminJsonResponse(
         {
           success: false,

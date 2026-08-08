@@ -70,12 +70,32 @@ export function applyAdminSecurityHeaders(response: NextResponse): NextResponse 
     "Permissions-Policy",
     "camera=(), microphone=(), geolocation=(), payment=()",
   );
+  response.headers.set("Cross-Origin-Opener-Policy", "same-origin");
+  response.headers.set("Cross-Origin-Resource-Policy", "same-origin");
+  if (process.env.NODE_ENV === "production") {
+    response.headers.set(
+      "Strict-Transport-Security",
+      "max-age=31536000; includeSubDomains",
+    );
+  }
   return response;
 }
 export function isSameOriginRequest(request: Request): boolean {
+  const fetchSite = request.headers.get("sec-fetch-site")?.trim().toLowerCase();
+  if (fetchSite === "cross-site") {
+    return false;
+  }
   const originHeader = request.headers.get("origin");
   if (!originHeader) {
-    return true;
+    return (
+      !fetchSite ||
+      fetchSite === "same-origin" ||
+      fetchSite === "same-site" ||
+      fetchSite === "none"
+    );
+  }
+  if (originHeader.trim().toLowerCase() === "null") {
+    return false;
   }
   let suppliedOrigin: URL;
   try {

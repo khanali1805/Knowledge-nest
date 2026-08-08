@@ -1,4 +1,4 @@
-﻿import postgres from "postgres";
+import postgres from "postgres";
 import { drizzle } from "drizzle-orm/postgres-js";
 type Database = ReturnType<typeof drizzle>;
 let database: Database | null = null;
@@ -15,6 +15,10 @@ function getDatabase(): Database {
   const client = postgres(connectionString, {
     prepare: false,
     ssl: "require",
+    max: 1,
+    idle_timeout: 20,
+    connect_timeout: 10,
+    max_lifetime: 60 * 30,
   });
   database = drizzle(client);
   return database;

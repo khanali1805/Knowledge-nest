@@ -3,6 +3,8 @@ import { NextRequest, NextResponse } from "next/server";
 const ADMIN_SESSION_COOKIE = "knowledge_nest_admin_session";
 const ADMIN_LOGIN_PATH = "/admin/login";
 const REQUEST_PATHNAME_HEADER = "x-knowledge-nest-request-pathname";
+const ADMIN_SESSION_ISSUER = "knowledge-nest";
+const ADMIN_SESSION_AUDIENCE = "knowledge-nest-admin";
 const PUBLIC_ADMIN_API_PATHS = new Set([
   "/api/admin/auth/login",
   "/api/admin/auth/logout",
@@ -24,6 +26,8 @@ async function hasValidAdminSession(request: NextRequest): Promise<boolean> {
   try {
     const verification = await jwtVerify(token, secret, {
       algorithms: ["HS256"],
+      issuer: ADMIN_SESSION_ISSUER,
+      audience: ADMIN_SESSION_AUDIENCE,
       subject: "knowledge-nest-admin",
     });
     const username = verification.payload.username;

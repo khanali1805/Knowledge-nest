@@ -1,8 +1,10 @@
-﻿import "server-only";
+import "server-only";
 import { cookies } from "next/headers";
 import { jwtVerify, SignJWT } from "jose";
 export const ADMIN_SESSION_COOKIE = "knowledge_nest_admin_session";
 const SESSION_DURATION_SECONDS = 60 * 60 * 8;
+const ADMIN_SESSION_ISSUER = "knowledge-nest";
+const ADMIN_SESSION_AUDIENCE = "knowledge-nest-admin";
 type AdminSessionPayload = {
   username: string;
 };
@@ -22,6 +24,8 @@ export async function createAdminSession(username: string): Promise<void> {
       alg: "HS256",
       typ: "JWT",
     })
+    .setIssuer(ADMIN_SESSION_ISSUER)
+    .setAudience(ADMIN_SESSION_AUDIENCE)
     .setSubject("knowledge-nest-admin")
     .setIssuedAt()
     .setExpirationTime(Math.floor(expiresAt.getTime() / 1000))
@@ -60,10 +64,19 @@ export async function getAdminSession(): Promise<AdminSessionPayload | null> {
   try {
     const verification = await jwtVerify(token, getSessionSecret(), {
       algorithms: ["HS256"],
+      issuer: ADMIN_SESSION_ISSUER,
+      audience: ADMIN_SESSION_AUDIENCE,
       subject: "knowledge-nest-admin",
     });
     const username = verification.payload.username;
-    if (typeof username !== "string" || !username) {
+    const configuredUsername = process.env.ADMIN_USERNAME;
+    if (
+      typeof username !== "string" ||
+      username.length === 0 ||
+      typeof configuredUsername !== "string" ||
+      configuredUsername.length === 0 ||
+      username !== configuredUsername
+    ) {
       return null;
     }
     return {

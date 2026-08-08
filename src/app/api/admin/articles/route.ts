@@ -15,6 +15,44 @@ type IncomingArticlePayload = Record<string, unknown> & {
   readingTimeMinutes?: unknown;
 };
 class ArticleCategoryError extends Error {}
+function decodeContentImageUrl(value: string): string {
+  return value
+    .replaceAll("&amp;", "&")
+    .replaceAll("&quot;", '"')
+    .replaceAll("&#39;", "'")
+    .replaceAll("&lt;", "<")
+    .replaceAll("&gt;", ">")
+    .trim();
+}
+function getLatestContentImageUrl(content: string): string {
+  const matches = Array.from(content.matchAll(/<img\b[^>]*\bsrc\s*=\s*(["'])(.*?)\1/gi));
+  if (matches.length === 0) {
+    return "";
+  }
+  const latestMatch = matches[matches.length - 1];
+  const rawUrl = latestMatch?.[2] ?? "";
+  return decodeContentImageUrl(rawUrl);
+}
+async function resolveArticleFeaturedImageId(
+  content: string,
+  requestedFeaturedImageId: string | null | undefined,
+): Promise<string | null> {
+  const contentImageUrl = getLatestContentImageUrl(content);
+  if (!contentImageUrl) {
+    return requestedFeaturedImageId ?? null;
+  }
+  const [contentMedia] = await db
+    .select({
+      id: media.id,
+    })
+    .from(media)
+    .where(eq(media.url, contentImageUrl))
+    .limit(1);
+  if (contentMedia?.id) {
+    return contentMedia.id;
+  }
+  return requestedFeaturedImageId ?? null;
+}
 function calculateReadingTime(content: unknown): number {
   if (typeof content !== "string") {
     return 1;
@@ -161,6 +199,10 @@ export async function POST(request: Request) {
     const input = parsedInput.data;
     const now = new Date();
     const publishedAt = input.status === "published" ? now : null;
+    const resolvedFeaturedImageId = await resolveArticleFeaturedImageId(
+      input.content,
+      input.featuredImageId,
+    );
     const [createdArticle] = await db
       .insert(articles)
       .values({
@@ -169,7 +211,7 @@ export async function POST(request: Request) {
         excerpt: input.excerpt,
         content: input.content,
         categoryId: input.categoryId,
-        featuredImageId: input.featuredImageId,
+        featuredImageId: resolvedFeaturedImageId,
         status: input.status,
         seoTitle: input.seoTitle,
         seoDescription: input.seoDescription,

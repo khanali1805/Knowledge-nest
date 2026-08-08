@@ -1,7 +1,6 @@
 import type { Metadata, Viewport } from "next";
 import { headers } from "next/headers";
 import Script from "next/script";
-import { Geist, Geist_Mono } from "next/font/google";
 import { ActiveDesignCode } from "@/components/site/active-design-code";
 import { OrganizationJsonLd } from "@/components/site/seo/organization-json-ld";
 import { WebsiteJsonLd } from "@/components/site/seo/website-json-ld";
@@ -10,14 +9,6 @@ import { getActiveDesignCode } from "@/lib/design-code/store";
 import { getPublicSiteSettings } from "@/lib/settings/site-settings-store";
 import "./globals.css";
 const REQUEST_PATHNAME_HEADER = "x-knowledge-nest-request-pathname";
-const geistSans = Geist({
-  variable: "--font-geist-sans",
-  subsets: ["latin"],
-});
-const geistMono = Geist_Mono({
-  variable: "--font-geist-mono",
-  subsets: ["latin"],
-});
 export async function generateMetadata(): Promise<Metadata> {
   const settings = await getPublicSiteSettings();
   const ogImage = `${settings.siteUrl}/api/og?title=${encodeURIComponent(
@@ -80,7 +71,7 @@ export default async function RootLayout({
   const adsenseClientId = isAdminRequest ? null : getGoogleAdsenseClientId();
   return (
     <html lang={settings.language}>
-      <body className={`${geistSans.variable} ${geistMono.variable} antialiased`}>
+      <body className="antialiased">
         {adsenseClientId ? (
           <Script
             id="google-adsense-loader"

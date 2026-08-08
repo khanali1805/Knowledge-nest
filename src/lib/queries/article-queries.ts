@@ -1,6 +1,6 @@
-﻿import { and, count, desc, eq, ilike, or } from "drizzle-orm";
+import { and, count, desc, eq, exists, ilike, or } from "drizzle-orm";
 import { db } from "@/db";
-import { articles, categories, media } from "@/db/schema";
+import { articles, articleTags, categories, media, tags } from "@/db/schema";
 export type PublishedCategoryRecord = {
   id: string;
   name: string;
@@ -103,9 +103,9 @@ export function getArticleExcerpt(article: PublishedArticleRecord): string {
     ? `${cleanContent.slice(0, 177).trimEnd()}...`
     : cleanContent;
 }
-function createNicheCandidates(niche: string): string[] {
-  const normalizedNiche = niche.trim().toLowerCase();
-  const nicheSlug = createContentSlug(niche);
+function createCategoryCandidates(category: string): string[] {
+  const normalizedCategory = category.trim().toLowerCase();
+  const categorySlug = createContentSlug(category);
   const aliases: Record<string, string[]> = {
     ai: ["ai", "artificial intelligence", "artificial-intelligence", "technology"],
     automobile: ["automobile", "automotive", "cars", "car"],
@@ -129,7 +129,7 @@ function createNicheCandidates(niche: string): string[] {
   };
   return Array.from(
     new Set(
-      [normalizedNiche, nicheSlug, ...(aliases[normalizedNiche] ?? [])]
+      [normalizedCategory, categorySlug, ...(aliases[normalizedCategory] ?? [])]
         .map((candidate) => candidate.trim().toLowerCase())
         .filter(Boolean),
     ),
@@ -156,17 +156,17 @@ export async function getPublishedArticles(
     return [];
   }
 }
-export async function getPublishedArticlesForNiche(
-  niche: string,
+export async function getPublishedArticlesForCategory(
+  category: string,
   limit = 24,
 ): Promise<PublishedArticleRecord[]> {
   const safeLimit = Math.max(1, Math.min(limit, 100));
-  const nicheCandidates = createNicheCandidates(niche);
-  if (nicheCandidates.length === 0) {
+  const categoryCandidates = createCategoryCandidates(category);
+  if (categoryCandidates.length === 0) {
     return [];
   }
   try {
-    const categoryConditions = nicheCandidates.flatMap((candidate) => [
+    const categoryConditions = categoryCandidates.flatMap((candidate) => [
       eq(categories.slug, createContentSlug(candidate)),
       ilike(categories.name, candidate),
     ]);
@@ -322,11 +322,14 @@ export async function searchPublishedArticles(
   limit = 50,
 ): Promise<PublishedArticleRecord[]> {
   const normalizedQuery = query.trim();
+
   if (!normalizedQuery) {
     return [];
   }
+
   const safeLimit = Math.max(1, Math.min(limit, 100));
   const pattern = `%${normalizedQuery}%`;
+
   try {
     return await db
       .select(publishedArticleSelection)
@@ -340,7 +343,19 @@ export async function searchPublishedArticles(
             ilike(articles.title, pattern),
             ilike(articles.excerpt, pattern),
             ilike(articles.content, pattern),
+            ilike(articles.focusKeyword, pattern),
             ilike(categories.name, pattern),
+            exists(
+              db
+                .select({
+                  articleId: articleTags.articleId,
+                })
+                .from(articleTags)
+                .innerJoin(tags, eq(articleTags.tagId, tags.id))
+                .where(
+                  and(eq(articleTags.articleId, articles.id), ilike(tags.name, pattern)),
+                ),
+            ),
           ),
         ),
       )
@@ -362,10 +377,13 @@ export async function searchPaginatedPublishedArticles(
   const normalizedQuery = query.trim();
   const safePage = normalizePage(page);
   const safePageSize = normalizePageSize(pageSize);
+
   if (!normalizedQuery) {
     return createPaginationResult([], 0, 1, safePageSize);
   }
+
   const pattern = `%${normalizedQuery}%`;
+
   try {
     const conditions = and(
       eq(articles.status, "published"),
@@ -373,9 +391,22 @@ export async function searchPaginatedPublishedArticles(
         ilike(articles.title, pattern),
         ilike(articles.excerpt, pattern),
         ilike(articles.content, pattern),
+        ilike(articles.focusKeyword, pattern),
         ilike(categories.name, pattern),
+        exists(
+          db
+            .select({
+              articleId: articleTags.articleId,
+            })
+            .from(articleTags)
+            .innerJoin(tags, eq(articleTags.tagId, tags.id))
+            .where(
+              and(eq(articleTags.articleId, articles.id), ilike(tags.name, pattern)),
+            ),
+        ),
       ),
     );
+
     const [countRow] = await db
       .select({
         total: count(articles.id),
@@ -383,10 +414,12 @@ export async function searchPaginatedPublishedArticles(
       .from(articles)
       .leftJoin(categories, eq(articles.categoryId, categories.id))
       .where(conditions);
+
     const total = Number(countRow?.total ?? 0);
     const totalPages = Math.max(1, Math.ceil(total / safePageSize));
     const resolvedPage = Math.min(safePage, totalPages);
     const offset = (resolvedPage - 1) * safePageSize;
+
     const paginatedArticles = await db
       .select(publishedArticleSelection)
       .from(articles)
@@ -400,6 +433,7 @@ export async function searchPaginatedPublishedArticles(
       )
       .limit(safePageSize)
       .offset(offset);
+
     return createPaginationResult(paginatedArticles, total, resolvedPage, safePageSize);
   } catch {
     return createPaginationResult([], 0, 1, safePageSize);

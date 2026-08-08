@@ -1,10 +1,10 @@
-﻿import { SettingsForm } from "@/components/admin/settings/settings-form";
+import { SettingsForm } from "@/components/admin/settings/settings-form";
 import { getSiteSettings } from "@/lib/settings/site-settings-store";
 export const dynamic = "force-dynamic";
 export default async function SettingsPage() {
   const settings = await getSiteSettings();
   return (
-    <div className="space-y-6">
+    <div className="space-y-6 sm:space-y-8">
       <div>
         <h1 className="text-2xl font-bold tracking-tight sm:text-3xl">Settings</h1>
         <p className="text-muted-foreground mt-2 text-sm">

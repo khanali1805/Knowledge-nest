@@ -1,4 +1,4 @@
-﻿import {
+import {
   boolean,
   index,
   integer,
@@ -84,6 +84,21 @@ export const articleTags = pgTable(
     }),
   ],
 );
+export type ArticleRevisionSnapshot = {
+  title: string;
+  slug: string;
+  excerpt: string;
+  content: string;
+  categoryId: string;
+  status: string;
+  isFeatured: boolean;
+  seoTitle: string;
+  seoDescription: string;
+  focusKeyword: string;
+  tags: string;
+  featuredImageId: string;
+  readingTimeMinutes: number;
+};
 export const articleRevisions = pgTable(
   "article_revisions",
   {
@@ -99,6 +114,12 @@ export const articleRevisions = pgTable(
     revisionNumber: integer("revision_number").notNull(),
     title: varchar("title", { length: 255 }).notNull(),
     content: text("content").notNull(),
+    snapshot: jsonb("snapshot").$type<ArticleRevisionSnapshot>(),
+    reason: varchar("reason", {
+      length: 30,
+    })
+      .default("manual")
+      .notNull(),
     changeSummary: text("change_summary"),
     createdAt: timestamp("created_at", {
       withTimezone: true,
@@ -108,5 +129,38 @@ export const articleRevisions = pgTable(
   },
   (table) => [
     uniqueIndex("article_revision_unique").on(table.articleId, table.revisionNumber),
+    index("article_revisions_article_index").on(table.articleId),
+    index("article_revisions_created_index").on(table.createdAt),
+  ],
+);
+export const articleEditLocks = pgTable(
+  "article_edit_locks",
+  {
+    articleId: uuid("article_id")
+      .primaryKey()
+      .references(() => articles.id, {
+        onDelete: "cascade",
+      }),
+    ownerUsername: varchar("owner_username", {
+      length: 150,
+    }).notNull(),
+    lockToken: uuid("lock_token").defaultRandom().notNull(),
+    acquiredAt: timestamp("acquired_at", {
+      withTimezone: true,
+    })
+      .defaultNow()
+      .notNull(),
+    heartbeatAt: timestamp("heartbeat_at", {
+      withTimezone: true,
+    })
+      .defaultNow()
+      .notNull(),
+    expiresAt: timestamp("expires_at", {
+      withTimezone: true,
+    }).notNull(),
+  },
+  (table) => [
+    uniqueIndex("article_edit_locks_token_unique").on(table.lockToken),
+    index("article_edit_locks_expiry_index").on(table.expiresAt),
   ],
 );

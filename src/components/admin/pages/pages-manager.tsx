@@ -1,4 +1,4 @@
-﻿"use client";
+"use client";
 import Link from "next/link";
 import { Edit3, Eye, FileText, LoaderCircle, Plus, Search, Trash2 } from "lucide-react";
 import { useMemo, useState } from "react";
@@ -65,7 +65,7 @@ export function PagesManager({ initialPages }: PagesManagerProps) {
     }
   }
   return (
-    <div className="space-y-6">
+    <div className="space-y-6 sm:space-y-8">
       {message ? (
         <div className="rounded-lg border border-emerald-300 bg-emerald-50 px-4 py-3 text-sm text-emerald-800">
           {message}

@@ -1,7 +1,7 @@
-﻿"use client";
+"use client";
 import { Search, X } from "lucide-react";
 import { useRouter } from "next/navigation";
-import { type FormEvent, useState } from "react";
+import { type FormEvent, useId, useState } from "react";
 type SiteSearchFormProps = {
   initialQuery?: string;
   compact?: boolean;
@@ -11,7 +11,9 @@ export function SiteSearchForm({
   compact = false,
 }: SiteSearchFormProps) {
   const router = useRouter();
+  const generatedId = useId();
   const [query, setQuery] = useState(initialQuery);
+  const inputId = `site-search-${generatedId.replace(/:/g, "")}`;
   function handleSubmit(event: FormEvent<HTMLFormElement>) {
     event.preventDefault();
     const normalizedQuery = query.trim();
@@ -31,13 +33,13 @@ export function SiteSearchForm({
       onSubmit={handleSubmit}
       className={compact ? "w-full" : "mx-auto w-full max-w-2xl"}
     >
-      <label htmlFor={compact ? "header-search" : "page-search"} className="sr-only">
+      <label htmlFor={inputId} className="sr-only">
         Search articles
       </label>
       <div className="relative">
         <Search className="text-muted-foreground absolute top-1/2 left-3 h-4 w-4 -translate-y-1/2" />
         <input
-          id={compact ? "header-search" : "page-search"}
+          id={inputId}
           type="search"
           value={query}
           onChange={(event) => setQuery(event.target.value)}

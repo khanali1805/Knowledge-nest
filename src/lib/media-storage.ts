@@ -1,105 +1,184 @@
-﻿import { randomUUID } from "crypto";
-import { mkdir, readdir, stat, unlink, writeFile } from "fs/promises";
+import { randomUUID } from "crypto";
+import { mkdir, stat, unlink, writeFile } from "fs/promises";
 import path from "path";
+import { eq, or } from "drizzle-orm";
+import sharp from "sharp";
+import { db } from "@/db";
+import { media } from "@/db/schema";
 const uploadDirectory = path.join(process.cwd(), "public", "uploads");
-const allowedMimeTypes = new Set([
-  "image/jpeg",
-  "image/png",
-  "image/webp",
-  "image/gif",
-  "image/svg+xml",
-]);
-const maximumFileSize = 5 * 1024 * 1024;
+const allowedMimeTypes = new Set(["image/jpeg", "image/png", "image/webp"]);
+const maximumFileSize = 10 * 1024 * 1024;
+export const ARTICLE_IMAGE_WIDTH = 1600;
+export const ARTICLE_IMAGE_HEIGHT = 900;
+export const ARTICLE_IMAGE_ASPECT_RATIO = ARTICLE_IMAGE_WIDTH / ARTICLE_IMAGE_HEIGHT;
 export type MediaFile = {
   id: string;
   name: string;
+  originalName: string;
+  fileName: string;
   url: string;
   size: number;
   type: string;
+  mimeType: string;
+  altText: string | null;
+  width: number | null;
+  height: number | null;
   createdAt: string;
 };
-function sanitizeFileName(fileName: string) {
-  const extension = path.extname(fileName).toLowerCase();
-  const baseName = path
-    .basename(fileName, extension)
+function sanitizeBaseName(fileName: string) {
+  return path
+    .basename(fileName, path.extname(fileName))
     .toLowerCase()
     .replace(/[^a-z0-9]+/g, "-")
     .replace(/^-+|-+$/g, "")
     .slice(0, 80);
-  return `${baseName || "image"}-${randomUUID()}${extension}`;
 }
-function getMimeType(fileName: string) {
-  const extension = path.extname(fileName).toLowerCase();
-  const mimeTypes: Record<string, string> = {
-    ".jpg": "image/jpeg",
-    ".jpeg": "image/jpeg",
-    ".png": "image/png",
-    ".webp": "image/webp",
-    ".gif": "image/gif",
-    ".svg": "image/svg+xml",
+function createStoredFileName(fileName: string) {
+  const baseName = sanitizeBaseName(fileName);
+  return `${baseName || "image"}-${randomUUID()}.webp`;
+}
+function toMediaFile(record: typeof media.$inferSelect): MediaFile {
+  return {
+    id: record.id,
+    name: record.originalName,
+    originalName: record.originalName,
+    fileName: record.fileName,
+    url: record.url,
+    size: record.fileSize ?? 0,
+    type: record.mimeType,
+    mimeType: record.mimeType,
+    altText: record.altText,
+    width: record.width,
+    height: record.height,
+    createdAt: record.createdAt.toISOString(),
   };
-  return mimeTypes[extension] ?? "application/octet-stream";
 }
 export async function ensureUploadDirectory() {
-  await mkdir(uploadDirectory, { recursive: true });
+  await mkdir(uploadDirectory, {
+    recursive: true,
+  });
 }
 export async function listMediaFiles(): Promise<MediaFile[]> {
-  await ensureUploadDirectory();
-  const directoryEntries = await readdir(uploadDirectory, {
-    withFileTypes: true,
-  });
-  const files = await Promise.all(
-    directoryEntries
-      .filter((entry) => entry.isFile() && entry.name !== ".gitkeep")
-      .map(async (entry) => {
-        const filePath = path.join(uploadDirectory, entry.name);
-        const fileStats = await stat(filePath);
-        return {
-          id: entry.name,
-          name: entry.name,
-          url: `/uploads/${encodeURIComponent(entry.name)}`,
-          size: fileStats.size,
-          type: getMimeType(entry.name),
-          createdAt: fileStats.birthtime.toISOString(),
-        };
-      }),
-  );
-  return files.sort(
-    (firstFile, secondFile) =>
-      new Date(secondFile.createdAt).getTime() - new Date(firstFile.createdAt).getTime(),
-  );
+  const records = await db.select().from(media).orderBy(media.createdAt);
+  return records
+    .map(toMediaFile)
+    .sort(
+      (firstFile, secondFile) =>
+        new Date(secondFile.createdAt).getTime() -
+        new Date(firstFile.createdAt).getTime(),
+    );
 }
 export async function saveMediaFile(file: File): Promise<MediaFile> {
   if (!allowedMimeTypes.has(file.type)) {
-    throw new Error("Only JPG, PNG, WebP, GIF and SVG images are allowed.");
+    throw new Error("Only JPG, PNG and WebP images are supported.");
   }
   if (file.size <= 0) {
-    throw new Error("The selected file is empty.");
+    throw new Error("The selected image is empty.");
   }
   if (file.size > maximumFileSize) {
-    throw new Error("The selected file exceeds the 5 MB size limit.");
+    throw new Error("The selected image exceeds the 10 MB upload limit.");
+  }
+  const originalBuffer = Buffer.from(await file.arrayBuffer());
+  const inputImage = sharp(originalBuffer, {
+    failOn: "error",
+  });
+  const originalMetadata = await inputImage.metadata();
+  if (!originalMetadata.width || !originalMetadata.height) {
+    throw new Error("Image dimensions could not be detected.");
+  }
+  const processedBuffer = await sharp(originalBuffer, {
+    failOn: "error",
+  })
+    .rotate()
+    .resize(ARTICLE_IMAGE_WIDTH, ARTICLE_IMAGE_HEIGHT, {
+      fit: "cover",
+      position: "centre",
+      withoutEnlargement: false,
+    })
+    .webp({
+      quality: 88,
+      effort: 4,
+    })
+    .toBuffer();
+  const processedMetadata = await sharp(processedBuffer).metadata();
+  if (
+    processedMetadata.width !== ARTICLE_IMAGE_WIDTH ||
+    processedMetadata.height !== ARTICLE_IMAGE_HEIGHT
+  ) {
+    throw new Error(
+      "Image normalization failed to produce the required 1600x900 dimensions.",
+    );
   }
   await ensureUploadDirectory();
-  const storedFileName = sanitizeFileName(file.name);
+  const storedFileName = createStoredFileName(file.name);
   const filePath = path.join(uploadDirectory, storedFileName);
-  const fileBuffer = Buffer.from(await file.arrayBuffer());
-  await writeFile(filePath, fileBuffer, {
+  await writeFile(filePath, processedBuffer, {
     flag: "wx",
   });
-  const fileStats = await stat(filePath);
-  return {
-    id: storedFileName,
-    name: storedFileName,
-    url: `/uploads/${encodeURIComponent(storedFileName)}`,
-    size: fileStats.size,
-    type: file.type,
-    createdAt: fileStats.birthtime.toISOString(),
-  };
+  try {
+    const fileStats = await stat(filePath);
+    const encodedFileName = encodeURIComponent(storedFileName);
+    const cleanTitle = path.basename(file.name, path.extname(file.name)).slice(0, 255);
+    const [createdRecord] = await db
+      .insert(media)
+      .values({
+        type: "image",
+        provider: "local",
+        originalName: file.name.slice(0, 255),
+        fileName: storedFileName,
+        mimeType: "image/webp",
+        url: `/uploads/${encodedFileName}`,
+        storageKey: storedFileName,
+        altText: cleanTitle,
+        title: cleanTitle,
+        width: ARTICLE_IMAGE_WIDTH,
+        height: ARTICLE_IMAGE_HEIGHT,
+        fileSize: fileStats.size,
+        metadata: {
+          normalized: true,
+          articleImage: true,
+          originalMimeType: file.type,
+          originalWidth: originalMetadata.width,
+          originalHeight: originalMetadata.height,
+          outputWidth: ARTICLE_IMAGE_WIDTH,
+          outputHeight: ARTICLE_IMAGE_HEIGHT,
+          aspectRatio: "16:9",
+          cropMode: "cover-centre",
+          outputFormat: "webp",
+        },
+      })
+      .returning();
+    if (!createdRecord) {
+      throw new Error("The media database record was not created.");
+    }
+    return toMediaFile(createdRecord);
+  } catch (error) {
+    await unlink(filePath).catch(() => undefined);
+    throw error;
+  }
 }
-export async function deleteMediaFile(fileName: string) {
-  const cleanFileName = path.basename(fileName);
-  if (!cleanFileName || cleanFileName !== fileName) {
-    throw new Error("Invalid media file name.");
+export async function deleteMediaFile(identifier: string) {
+  const cleanIdentifier = identifier.trim();
+  if (!cleanIdentifier) {
+    throw new Error("A valid media identifier is required.");
+  }
+  const [record] = await db
+    .select()
+    .from(media)
+    .where(
+      or(
+        eq(media.id, cleanIdentifier),
+        eq(media.fileName, cleanIdentifier),
+        eq(media.originalName, cleanIdentifier),
+      ),
+    )
+    .limit(1);
+  if (!record) {
+    throw new Error("Media file was not found.");
+  }
+  const cleanFileName = path.basename(record.fileName);
+  if (!cleanFileName || cleanFileName !== record.fileName) {
+    throw new Error("Invalid media file path.");
   }
   const filePath = path.join(uploadDirectory, cleanFileName);
   const relativePath = path.relative(uploadDirectory, filePath);
@@ -110,5 +189,38 @@ export async function deleteMediaFile(fileName: string) {
   ) {
     throw new Error("Invalid media file path.");
   }
-  await unlink(filePath);
+  const deletedRecords = await db.delete(media).where(eq(media.id, record.id)).returning({
+    id: media.id,
+  });
+  if (deletedRecords.length === 0) {
+    throw new Error("Media database record was not deleted.");
+  }
+  let fileRemoved = false;
+  for (let attempt = 1; attempt <= 5; attempt += 1) {
+    try {
+      await unlink(filePath);
+      fileRemoved = true;
+      break;
+    } catch (error) {
+      const fileError = error as NodeJS.ErrnoException;
+      if (fileError.code === "ENOENT") {
+        fileRemoved = true;
+        break;
+      }
+      const retryable =
+        fileError.code === "EBUSY" ||
+        fileError.code === "EPERM" ||
+        fileError.code === "EACCES";
+      if (!retryable || attempt === 5) {
+        break;
+      }
+      await new Promise<void>((resolve) => {
+        setTimeout(resolve, attempt * 150);
+      });
+    }
+  }
+  return {
+    id: record.id,
+    fileRemoved,
+  };
 }

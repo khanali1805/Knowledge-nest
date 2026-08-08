@@ -24,9 +24,9 @@ html {
 body {
   min-height: 100vh;
   margin: 0;
-  background: var(--theme-background, var(--background));
-  color: var(--theme-foreground, var(--foreground));
-  font-family: var(--theme-body-font, Arial, Helvetica, sans-serif);
+  background: var(--knowledge-nest-design-background, var(--background));
+  color: var(--knowledge-nest-design-foreground, var(--foreground));
+  font-family: var(--knowledge-nest-design-body-font, Arial, Helvetica, sans-serif);
   text-rendering: optimizeLegibility;
 }
 button,
@@ -52,11 +52,11 @@ h3,
 h4,
 h5,
 h6 {
-  font-family: var(--theme-heading-font, Arial, Helvetica, sans-serif);
+  font-family: var(--knowledge-nest-design-heading-font, Arial, Helvetica, sans-serif);
 }
 ::selection {
-  background: var(--theme-primary, #2563eb);
-  color: var(--theme-background, #ffffff);
+  background: var(--knowledge-nest-design-primary, #2563eb);
+  color: var(--knowledge-nest-design-background, #ffffff);
 }
 :focus-visible {
   outline: 2px solid currentColor;
@@ -94,4 +94,210 @@ h6 {
     animation-duration: 0.01ms !important;
     animation-iteration-count: 1 !important;
   }
+}
+/* PHASE_10_STEP_2_RICH_EDITOR */
+.article-rich-editor {
+  min-height: 520px;
+  color: #172033;
+}
+.article-rich-editor p {
+  margin: 0.8rem 0;
+}
+.article-rich-editor h1,
+.article-rich-editor h2,
+.article-rich-editor h3,
+.article-rich-editor h4,
+.article-rich-editor h5,
+.article-rich-editor h6 {
+  margin-top: 1.5rem;
+  margin-bottom: 0.75rem;
+  font-weight: 800;
+  line-height: 1.25;
+}
+.article-rich-editor h1 {
+  font-size: 2.25rem;
+}
+.article-rich-editor h2 {
+  font-size: 1.875rem;
+}
+.article-rich-editor h3 {
+  font-size: 1.5rem;
+}
+.article-rich-editor h4 {
+  font-size: 1.25rem;
+}
+.article-rich-editor h5 {
+  font-size: 1.125rem;
+}
+.article-rich-editor h6 {
+  font-size: 1rem;
+}
+.article-rich-editor ul {
+  margin: 1rem 0;
+  list-style: disc;
+  padding-left: 1.75rem;
+}
+.article-rich-editor ol {
+  margin: 1rem 0;
+  list-style: decimal;
+  padding-left: 1.75rem;
+}
+.article-rich-editor blockquote {
+  margin: 1.25rem 0;
+  border-left: 4px solid #64748b;
+  background: #f8fafc;
+  padding: 1rem 1.25rem;
+  font-style: italic;
+}
+.article-rich-editor pre {
+  overflow-x: auto;
+  border-radius: 0.75rem;
+  background: #0f172a;
+  padding: 1rem;
+  color: #f8fafc;
+}
+.article-rich-editor table {
+  margin: 1.5rem 0;
+  width: 100%;
+  border-collapse: collapse;
+}
+.article-rich-editor th,
+.article-rich-editor td {
+  border: 1px solid #cbd5e1;
+  padding: 0.75rem;
+  text-align: left;
+  vertical-align: top;
+}
+.article-rich-editor th {
+  background: #f1f5f9;
+  font-weight: 700;
+}
+.article-rich-editor img {
+  margin: 1.5rem auto;
+  max-width: 100%;
+  border-radius: 0.75rem;
+}
+.article-rich-editor a {
+  color: #2563eb;
+  text-decoration: underline;
+}
+.article-rich-editor p.is-editor-empty:first-child::before {
+  pointer-events: none;
+  float: left;
+  height: 0;
+  color: #94a3b8;
+  content: attr(data-placeholder);
+}
+.published-article-content {
+  color: var(--foreground);
+  font-size: 1.075rem;
+  line-height: 1.9;
+}
+.published-article-content p {
+  margin: 1.2rem 0;
+}
+.published-article-content h1,
+.published-article-content h2,
+.published-article-content h3,
+.published-article-content h4,
+.published-article-content h5,
+.published-article-content h6 {
+  margin-top: 2.25rem;
+  margin-bottom: 1rem;
+  font-weight: 800;
+  line-height: 1.25;
+  letter-spacing: -0.025em;
+}
+.published-article-content h1 {
+  font-size: 2.5rem;
+}
+.published-article-content h2 {
+  font-size: 2rem;
+}
+.published-article-content h3 {
+  font-size: 1.6rem;
+}
+.published-article-content h4 {
+  font-size: 1.3rem;
+}
+.published-article-content h5 {
+  font-size: 1.15rem;
+}
+.published-article-content h6 {
+  font-size: 1rem;
+}
+.published-article-content strong,
+.published-article-content b {
+  font-weight: 800;
+}
+.published-article-content ul {
+  margin: 1.25rem 0;
+  list-style: disc;
+  padding-left: 2rem;
+}
+.published-article-content ol {
+  margin: 1.25rem 0;
+  list-style: decimal;
+  padding-left: 2rem;
+}
+.published-article-content li {
+  margin: 0.45rem 0;
+}
+.published-article-content blockquote {
+  margin: 1.75rem 0;
+  border-left: 4px solid currentColor;
+  background: color-mix(in srgb, currentColor 5%, transparent);
+  padding: 1rem 1.5rem;
+  font-style: italic;
+}
+.published-article-content pre {
+  margin: 1.5rem 0;
+  overflow-x: auto;
+  border-radius: 0.9rem;
+  background: #0f172a;
+  padding: 1.25rem;
+  color: #f8fafc;
+}
+.published-article-content code {
+  border-radius: 0.25rem;
+  background: #e2e8f0;
+  padding: 0.15rem 0.35rem;
+  color: #0f172a;
+}
+.published-article-content pre code {
+  background: transparent;
+  padding: 0;
+  color: inherit;
+}
+.published-article-content table {
+  margin: 1.75rem 0;
+  width: 100%;
+  border-collapse: collapse;
+}
+.published-article-content th,
+.published-article-content td {
+  border: 1px solid var(--border);
+  padding: 0.85rem;
+  text-align: left;
+  vertical-align: top;
+}
+.published-article-content th {
+  background: var(--muted);
+  font-weight: 800;
+}
+.published-article-content img {
+  margin: 2rem auto;
+  height: auto;
+  max-width: 100%;
+  border-radius: 1rem;
+}
+.published-article-content a {
+  color: #2563eb;
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+.published-article-content hr {
+  margin: 2.5rem 0;
+  border: 0;
+  border-top: 1px solid var(--border);
 }

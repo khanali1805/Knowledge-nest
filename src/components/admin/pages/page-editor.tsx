@@ -1,4 +1,4 @@
-﻿"use client";
+"use client";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { ArrowLeft, Eye, LoaderCircle, Save, Send } from "lucide-react";
@@ -159,7 +159,7 @@ export function PageEditor({ mode, pageId }: PageEditorProps) {
     );
   }
   return (
-    <form onSubmit={handleSubmit} className="space-y-6">
+    <form onSubmit={handleSubmit} className="space-y-6 sm:space-y-8">
       <div className="flex flex-col justify-between gap-4 xl:flex-row xl:items-center">
         <div className="flex items-start gap-3">
           <Link
@@ -205,7 +205,7 @@ export function PageEditor({ mode, pageId }: PageEditorProps) {
             type="button"
             onClick={() => void savePage("published")}
             disabled={isSaving}
-            className="bg-foreground text-background inline-flex items-center gap-2 rounded-lg px-4 py-2 text-sm font-medium disabled:cursor-not-allowed disabled:opacity-50"
+            className="bg-foreground text-background inline-flex items-center gap-2 rounded-xl px-4 py-2.5 text-sm font-semibold disabled:cursor-not-allowed disabled:opacity-50"
           >
             {isSaving ? (
               <LoaderCircle className="h-4 w-4 animate-spin" />
@@ -227,8 +227,8 @@ export function PageEditor({ mode, pageId }: PageEditorProps) {
         </div>
       ) : null}
       <div className="grid gap-6 xl:grid-cols-[minmax(0,1fr)_340px]">
-        <div className="space-y-6">
-          <section className="border-border bg-background rounded-xl border p-5 shadow-sm sm:p-6">
+        <div className="space-y-6 sm:space-y-8">
+          <section className="border-border bg-background rounded-2xl border p-5 shadow-sm sm:p-6">
             <div className="space-y-5">
               <div>
                 <label htmlFor="page-title" className="mb-2 block text-sm font-semibold">
@@ -277,7 +277,7 @@ export function PageEditor({ mode, pageId }: PageEditorProps) {
               className="bg-background min-h-[520px] w-full resize-y rounded-b-xl p-5 text-sm leading-7 outline-none disabled:opacity-50 sm:p-6"
             />
           </section>
-          <section className="border-border bg-background rounded-xl border p-5 shadow-sm sm:p-6">
+          <section className="border-border bg-background rounded-2xl border p-5 shadow-sm sm:p-6">
             <h2 className="text-lg font-semibold">Search Engine Optimization</h2>
             <div className="mt-5 space-y-5">
               <div>
@@ -324,8 +324,8 @@ export function PageEditor({ mode, pageId }: PageEditorProps) {
             </div>
           </section>
         </div>
-        <aside className="space-y-6">
-          <section className="border-border bg-background rounded-xl border p-5 shadow-sm">
+        <aside className="space-y-6 sm:space-y-8">
+          <section className="border-border bg-background rounded-2xl border p-5 shadow-sm sm:p-6">
             <h2 className="font-semibold">Publishing</h2>
             <div className="mt-4">
               <label htmlFor="page-status" className="mb-2 block text-sm font-medium">
@@ -343,7 +343,7 @@ export function PageEditor({ mode, pageId }: PageEditorProps) {
               </select>
             </div>
           </section>
-          <section className="border-border bg-background rounded-xl border p-5 shadow-sm">
+          <section className="border-border bg-background rounded-2xl border p-5 shadow-sm sm:p-6">
             <h2 className="font-semibold">Page URL</h2>
             <p className="text-muted-foreground mt-3 text-sm break-all">
               /page/{slug || "page-url-slug"}

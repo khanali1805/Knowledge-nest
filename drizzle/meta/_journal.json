@@ -8,6 +8,41 @@
       "when": 1785084481905,
       "tag": "0000_rapid_chimera",
       "breakpoints": true
+    },
+    {
+      "idx": 1,
+      "version": "7",
+      "when": 1785691413200,
+      "tag": "0001_phase10_step4_server_revisions",
+      "breakpoints": true
+    },
+    {
+      "idx": 2,
+      "version": "7",
+      "when": 1785694102858,
+      "tag": "0002_phase10_step5_article_edit_locks",
+      "breakpoints": true
+    },
+    {
+      "idx": 3,
+      "version": "7",
+      "when": 1785698228942,
+      "tag": "0003_phase10_step6_collaboration_audit",
+      "breakpoints": true
+    },
+    {
+      "idx": 4,
+      "version": "7",
+      "when": 1785748705948,
+      "tag": "0004_phase10_step8_notifications_retention",
+      "breakpoints": true
+    },
+    {
+      "idx": 5,
+      "version": "7",
+      "when": 1785767745998,
+      "tag": "0005_phase10_step9_notification_delivery",
+      "breakpoints": true
     }
   ]
 }

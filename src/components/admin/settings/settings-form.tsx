@@ -1,4 +1,4 @@
-﻿"use client";
+"use client";
 import { LoaderCircle, Save } from "lucide-react";
 import { type FormEvent, useState } from "react";
 import { readApiResponse } from "@/lib/http/read-api-response";
@@ -79,7 +79,7 @@ export function SettingsForm({ initialSettings }: SettingsFormProps) {
     }
   }
   return (
-    <form onSubmit={handleSubmit} className="space-y-6">
+    <form onSubmit={handleSubmit} className="space-y-6 sm:space-y-8">
       {message ? (
         <div className="rounded-lg border border-emerald-300 bg-emerald-50 px-4 py-3 text-sm text-emerald-800">
           {message}

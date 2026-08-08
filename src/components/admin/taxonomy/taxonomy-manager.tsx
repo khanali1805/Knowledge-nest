@@ -1,4 +1,4 @@
-﻿"use client";
+"use client";
 import type { FormEvent } from "react";
 import { useMemo, useState } from "react";
 import { Edit3, LoaderCircle, Plus, Search, Trash2, X } from "lucide-react";
@@ -163,7 +163,7 @@ export function TaxonomyManager({ type, initialItems }: TaxonomyManagerProps) {
     }
   }
   return (
-    <div className="space-y-6">
+    <div className="space-y-6 sm:space-y-8">
       {message ? (
         <div className="rounded-lg border border-emerald-300 bg-emerald-50 px-4 py-3 text-sm text-emerald-800">
           {message}
@@ -175,7 +175,7 @@ export function TaxonomyManager({ type, initialItems }: TaxonomyManagerProps) {
         </div>
       ) : null}
       <div className="grid gap-6 xl:grid-cols-[360px_minmax(0,1fr)]">
-        <section className="border-border bg-background h-fit rounded-xl border p-5 shadow-sm">
+        <section className="border-border bg-background h-fit rounded-2xl border p-5 shadow-sm sm:p-6">
           <div className="flex items-center justify-between">
             <h2 className="text-lg font-semibold">
               {editingId === null ? `Add ${singularLabel}` : `Edit ${singularLabel}`}

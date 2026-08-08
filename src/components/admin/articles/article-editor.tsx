@@ -1,4 +1,5 @@
 "use client";
+import Image from "next/image";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import {
@@ -6,6 +7,8 @@ import {
   Eye,
   ImageIcon,
   LoaderCircle,
+  Search,
+  X,
   Save,
   Send,
   Sparkles,
@@ -50,6 +53,33 @@ type CategoriesApiResponse = {
   categories?: CategoryOption[];
   message?: string;
 };
+type GeneratedArticle = {
+  title: string;
+  excerpt: string;
+  content: string;
+  seoTitle: string;
+  seoDescription: string;
+  focusKeyword: string;
+};
+type ArticleAiApiResponse = {
+  article?: GeneratedArticle;
+  message?: string;
+};
+type MediaFile = {
+  id: string;
+  name: string;
+  originalName?: string;
+  fileName?: string;
+  url: string;
+  size: number;
+  type: string;
+  altText?: string | null;
+  createdAt: string;
+};
+type MediaApiResponse = {
+  files?: MediaFile[];
+  message?: string;
+};
 function createSlug(value: string) {
   return value
     .toLowerCase()
@@ -73,8 +103,16 @@ export function ArticleEditor({ mode, articleId }: ArticleEditorProps) {
   const [seoDescription, setSeoDescription] = useState("");
   const [focusKeyword, setFocusKeyword] = useState("");
   const [tags, setTags] = useState("");
+  const [featuredImageId, setFeaturedImageId] = useState("");
+  const [featuredImageUrl, setFeaturedImageUrl] = useState("");
+  const [featuredImageAlt, setFeaturedImageAlt] = useState("");
+  const [mediaFiles, setMediaFiles] = useState<MediaFile[]>([]);
+  const [mediaSearch, setMediaSearch] = useState("");
+  const [isMediaPickerOpen, setIsMediaPickerOpen] = useState(false);
+  const [isLoadingMedia, setIsLoadingMedia] = useState(false);
   const [isLoading, setIsLoading] = useState(mode === "edit");
   const [isSaving, setIsSaving] = useState(false);
+  const [isGenerating, setIsGenerating] = useState(false);
   const [message, setMessage] = useState("");
   const [error, setError] = useState("");
   useEffect(() => {
@@ -95,9 +133,7 @@ export function ArticleEditor({ mode, articleId }: ArticleEditorProps) {
       } catch (loadError) {
         if (isMounted) {
           setError(
-            loadError instanceof Error
-              ? loadError.message
-              : "Unable to load categories.",
+            loadError instanceof Error ? loadError.message : "Unable to load categories.",
           );
         }
       } finally {
@@ -137,6 +173,9 @@ export function ArticleEditor({ mode, articleId }: ArticleEditorProps) {
         setSeoTitle(article.seoTitle ?? "");
         setSeoDescription(article.seoDescription ?? "");
         setFocusKeyword(article.focusKeyword ?? "");
+        setFeaturedImageId(article.featuredImageId ?? "");
+        setFeaturedImageUrl(article.featuredImageUrl ?? "");
+        setFeaturedImageAlt(article.featuredImageAlt ?? "");
       } catch (loadError) {
         setError(
           loadError instanceof Error ? loadError.message : "Unable to load the article.",
@@ -203,6 +242,7 @@ export function ArticleEditor({ mode, articleId }: ArticleEditorProps) {
           seoTitle,
           seoDescription,
           focusKeyword,
+          featuredImageId,
           tags,
         }),
       });
@@ -235,6 +275,90 @@ export function ArticleEditor({ mode, articleId }: ArticleEditorProps) {
       setIsSaving(false);
     }
   }
+  async function generateWithAi() {
+    const instruction = window.prompt(
+      "Describe the article you want the AI Assistant to create or improve:",
+      title.trim() ? `Write a complete, useful article about "${title.trim()}".` : "",
+    );
+    if (instruction === null) {
+      return;
+    }
+    if (instruction.trim().length < 10) {
+      setError("AI instruction must contain at least 10 characters.");
+      return;
+    }
+    setMessage("");
+    setError("");
+    setIsGenerating(true);
+    try {
+      const response = await fetch("/api/admin/articles/generate", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          prompt: instruction,
+          title,
+          existingContent: content,
+          focusKeyword,
+        }),
+      });
+      const responseData = await readApiResponse<ArticleAiApiResponse>(response);
+      if (!response.ok || !responseData.article) {
+        throw new Error(responseData.message || "Unable to generate article content.");
+      }
+      const generatedArticle = responseData.article;
+      setTitle(generatedArticle.title);
+      setSlug(createSlug(generatedArticle.title));
+      setExcerpt(generatedArticle.excerpt);
+      setContent(generatedArticle.content);
+      setSeoTitle(generatedArticle.seoTitle);
+      setSeoDescription(generatedArticle.seoDescription);
+      setFocusKeyword(generatedArticle.focusKeyword);
+      setMessage(responseData.message || "AI article content generated successfully.");
+    } catch (generationError) {
+      setError(
+        generationError instanceof Error
+          ? generationError.message
+          : "Unable to generate article content.",
+      );
+    } finally {
+      setIsGenerating(false);
+    }
+  }
+  async function openMediaPicker() {
+    setIsMediaPickerOpen(true);
+    setIsLoadingMedia(true);
+    setError("");
+    try {
+      const response = await fetch("/api/admin/media", {
+        cache: "no-store",
+      });
+      const responseData = await readApiResponse<MediaApiResponse>(response);
+      if (!response.ok) {
+        throw new Error(responseData.message || "Unable to load media files.");
+      }
+      setMediaFiles(responseData.files ?? []);
+    } catch (mediaError) {
+      setError(
+        mediaError instanceof Error ? mediaError.message : "Unable to load media files.",
+      );
+    } finally {
+      setIsLoadingMedia(false);
+    }
+  }
+  function selectFeaturedImage(file: MediaFile) {
+    setFeaturedImageId(file.id);
+    setFeaturedImageUrl(file.url);
+    setFeaturedImageAlt(file.altText || file.name);
+    setIsMediaPickerOpen(false);
+    setMediaSearch("");
+  }
+  function removeFeaturedImage() {
+    setFeaturedImageId("");
+    setFeaturedImageUrl("");
+    setFeaturedImageAlt("");
+  }
   function handleSubmit(event: FormEvent<HTMLFormElement>) {
     event.preventDefault();
   }
@@ -253,7 +377,7 @@ export function ArticleEditor({ mode, articleId }: ArticleEditorProps) {
     );
   }
   return (
-    <form onSubmit={handleSubmit} className="space-y-6">
+    <form onSubmit={handleSubmit} className="space-y-6 sm:space-y-8">
       <div className="flex flex-col justify-between gap-4 xl:flex-row xl:items-center">
         <div className="flex items-start gap-3">
           <Link
@@ -299,7 +423,7 @@ export function ArticleEditor({ mode, articleId }: ArticleEditorProps) {
             type="button"
             onClick={() => void saveArticle("published")}
             disabled={isSaving}
-            className="bg-foreground text-background inline-flex items-center gap-2 rounded-lg px-4 py-2 text-sm font-medium disabled:cursor-not-allowed disabled:opacity-50"
+            className="bg-foreground text-background inline-flex items-center gap-2 rounded-xl px-4 py-2.5 text-sm font-semibold disabled:cursor-not-allowed disabled:opacity-50"
           >
             {isSaving ? (
               <LoaderCircle className="h-4 w-4 animate-spin" />
@@ -321,8 +445,8 @@ export function ArticleEditor({ mode, articleId }: ArticleEditorProps) {
         </div>
       ) : null}
       <div className="grid gap-6 xl:grid-cols-[minmax(0,1fr)_340px]">
-        <div className="space-y-6">
-          <section className="border-border bg-background rounded-xl border p-5 shadow-sm sm:p-6">
+        <div className="space-y-6 sm:space-y-8">
+          <section className="border-border bg-background rounded-2xl border p-5 shadow-sm sm:p-6">
             <div className="space-y-5">
               <div>
                 <label
@@ -383,15 +507,21 @@ export function ArticleEditor({ mode, articleId }: ArticleEditorProps) {
               <div>
                 <h2 className="font-semibold">Article Content</h2>
                 <p className="text-muted-foreground mt-1 text-xs">
-                  {wordCount} words · {readingTime} minute read
+                  {wordCount} words Â· {readingTime} minute read
                 </p>
               </div>
               <button
                 type="button"
-                className="border-border hover:bg-muted inline-flex items-center gap-2 rounded-lg border px-3 py-2 text-xs font-medium transition-colors"
+                onClick={() => void generateWithAi()}
+                disabled={isGenerating || isSaving}
+                className="border-border hover:bg-muted inline-flex items-center gap-2 rounded-lg border px-3 py-2 text-xs font-medium transition-colors disabled:cursor-not-allowed disabled:opacity-50"
               >
-                <Sparkles className="h-4 w-4" />
-                AI Assistant
+                {isGenerating ? (
+                  <LoaderCircle className="h-4 w-4 animate-spin" />
+                ) : (
+                  <Sparkles className="h-4 w-4" />
+                )}
+                {isGenerating ? "Generating..." : "AI Assistant"}
               </button>
             </div>
             <textarea
@@ -403,7 +533,7 @@ export function ArticleEditor({ mode, articleId }: ArticleEditorProps) {
               className="bg-background min-h-[520px] w-full resize-y rounded-b-xl p-5 text-sm leading-7 outline-none sm:p-6"
             />
           </section>
-          <section className="border-border bg-background rounded-xl border p-5 shadow-sm sm:p-6">
+          <section className="border-border bg-background rounded-2xl border p-5 shadow-sm sm:p-6">
             <h2 className="text-lg font-semibold">Search Engine Optimization</h2>
             <div className="mt-5 space-y-5">
               <div>
@@ -457,8 +587,8 @@ export function ArticleEditor({ mode, articleId }: ArticleEditorProps) {
             </div>
           </section>
         </div>
-        <aside className="space-y-6">
-          <section className="border-border bg-background rounded-xl border p-5 shadow-sm">
+        <aside className="space-y-6 sm:space-y-8">
+          <section className="border-border bg-background rounded-2xl border p-5 shadow-sm sm:p-6">
             <h2 className="font-semibold">Publishing</h2>
             <div className="mt-4 space-y-4">
               <div>
@@ -492,7 +622,7 @@ export function ArticleEditor({ mode, articleId }: ArticleEditorProps) {
               </label>
             </div>
           </section>
-          <section className="border-border bg-background rounded-xl border p-5 shadow-sm">
+          <section className="border-border bg-background rounded-2xl border p-5 shadow-sm sm:p-6">
             <h2 className="font-semibold">Category</h2>
             <select
               value={categoryId}
@@ -515,18 +645,56 @@ export function ArticleEditor({ mode, articleId }: ArticleEditorProps) {
               ))}
             </select>
           </section>
-          <section className="border-border bg-background rounded-xl border p-5 shadow-sm">
-            <h2 className="font-semibold">Featured Image</h2>
-            <button
-              type="button"
-              className="border-border text-muted-foreground hover:bg-muted mt-4 flex min-h-44 w-full flex-col items-center justify-center gap-3 rounded-lg border border-dashed p-5 text-center transition-colors"
-            >
-              <ImageIcon className="h-8 w-8" />
-              <span className="text-sm font-medium">Select from Media Library</span>
-              <span className="text-xs">Recommended size: 1200 × 630 pixels</span>
-            </button>
+          <section className="border-border bg-background rounded-2xl border p-5 shadow-sm sm:p-6">
+            <div className="flex items-center justify-between gap-3">
+              <h2 className="font-semibold">Featured Image</h2>
+              {featuredImageId ? (
+                <button
+                  type="button"
+                  onClick={removeFeaturedImage}
+                  className="text-muted-foreground hover:text-foreground inline-flex items-center gap-1 text-xs"
+                >
+                  <X className="h-3.5 w-3.5" />
+                  Remove
+                </button>
+              ) : null}
+            </div>
+            {featuredImageUrl ? (
+              <button
+                type="button"
+                onClick={() => void openMediaPicker()}
+                className="border-border bg-muted relative mt-4 block aspect-[1200/630] w-full overflow-hidden rounded-lg border"
+              >
+                <Image
+                  src={featuredImageUrl}
+                  alt={featuredImageAlt || "Featured image"}
+                  fill
+                  unoptimized
+                  className="object-cover"
+                />
+              </button>
+            ) : (
+              <button
+                type="button"
+                onClick={() => void openMediaPicker()}
+                className="border-border text-muted-foreground hover:bg-muted mt-4 flex min-h-44 w-full flex-col items-center justify-center gap-3 rounded-lg border border-dashed p-5 text-center transition-colors"
+              >
+                <ImageIcon className="h-8 w-8" />
+                <span className="text-sm font-medium">Select from Media Library</span>
+                <span className="text-xs">Recommended size: 1200 × 630 pixels</span>
+              </button>
+            )}
+            {featuredImageUrl ? (
+              <button
+                type="button"
+                onClick={() => void openMediaPicker()}
+                className="border-border hover:bg-muted mt-3 w-full rounded-lg border px-3 py-2 text-xs font-medium transition-colors"
+              >
+                Change Featured Image
+              </button>
+            ) : null}
           </section>
-          <section className="border-border bg-background rounded-xl border p-5 shadow-sm">
+          <section className="border-border bg-background rounded-2xl border p-5 shadow-sm sm:p-6">
             <h2 className="font-semibold">Tags</h2>
             <input
               type="text"
@@ -538,6 +706,96 @@ export function ArticleEditor({ mode, articleId }: ArticleEditorProps) {
           </section>
         </aside>
       </div>
+      {isMediaPickerOpen ? (
+        <div
+          role="dialog"
+          aria-modal="true"
+          aria-label="Select featured image"
+          className="fixed inset-0 z-50 flex items-center justify-center bg-black/60 p-4"
+        >
+          <div className="bg-background flex max-h-[85vh] w-full max-w-5xl flex-col overflow-hidden rounded-xl shadow-2xl">
+            <div className="border-border flex items-center justify-between gap-4 border-b p-4 sm:p-5">
+              <div>
+                <h2 className="text-lg font-semibold">Media Library</h2>
+                <p className="text-muted-foreground mt-1 text-sm">
+                  Select an image for this article.
+                </p>
+              </div>
+              <button
+                type="button"
+                onClick={() => {
+                  setIsMediaPickerOpen(false);
+                  setMediaSearch("");
+                }}
+                aria-label="Close media library"
+                className="border-border hover:bg-muted rounded-lg border p-2"
+              >
+                <X className="h-4 w-4" />
+              </button>
+            </div>
+            <div className="border-border border-b p-4 sm:p-5">
+              <div className="relative">
+                <Search className="text-muted-foreground absolute top-1/2 left-3 h-4 w-4 -translate-y-1/2" />
+                <input
+                  type="search"
+                  value={mediaSearch}
+                  onChange={(event) => setMediaSearch(event.target.value)}
+                  placeholder="Search media files"
+                  className="border-border bg-background focus:ring-foreground/20 w-full rounded-lg border py-2.5 pr-3 pl-10 text-sm outline-none focus:ring-4"
+                />
+              </div>
+            </div>
+            <div className="min-h-72 flex-1 overflow-y-auto p-4 sm:p-5">
+              {isLoadingMedia ? (
+                <div className="flex min-h-72 items-center justify-center">
+                  <LoaderCircle className="text-muted-foreground h-7 w-7 animate-spin" />
+                </div>
+              ) : mediaFiles.length === 0 ? (
+                <div className="text-muted-foreground flex min-h-72 flex-col items-center justify-center text-center">
+                  <ImageIcon className="h-10 w-10" />
+                  <p className="mt-3 text-sm">No media files have been uploaded.</p>
+                  <Link
+                    href="/admin/media"
+                    className="border-border hover:bg-muted mt-4 rounded-lg border px-4 py-2 text-sm font-medium"
+                  >
+                    Open Media Library
+                  </Link>
+                </div>
+              ) : (
+                <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+                  {mediaFiles
+                    .filter((file) =>
+                      file.name.toLowerCase().includes(mediaSearch.trim().toLowerCase()),
+                    )
+                    .map((file) => (
+                      <button
+                        key={file.id}
+                        type="button"
+                        onClick={() => selectFeaturedImage(file)}
+                        className={`border-border overflow-hidden rounded-xl border text-left transition-shadow hover:shadow-md ${
+                          featuredImageId === file.id ? "ring-foreground ring-2" : ""
+                        }`}
+                      >
+                        <div className="bg-muted relative aspect-video">
+                          <Image
+                            src={file.url}
+                            alt={file.altText || file.name}
+                            fill
+                            unoptimized
+                            className="object-cover"
+                          />
+                        </div>
+                        <div className="p-3">
+                          <p className="truncate text-sm font-medium">{file.name}</p>
+                        </div>
+                      </button>
+                    ))}
+                </div>
+              )}
+            </div>
+          </div>
+        </div>
+      ) : null}
     </form>
   );
 }

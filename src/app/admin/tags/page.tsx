@@ -1,4 +1,4 @@
-﻿import { eq, sql } from "drizzle-orm";
+import { eq, sql } from "drizzle-orm";
 import {
   TaxonomyManager,
   type TaxonomyItem,
@@ -21,7 +21,7 @@ export default async function TagsPage() {
     .orderBy(tags.name);
   const initialItems: TaxonomyItem[] = tagRows;
   return (
-    <div className="space-y-6">
+    <div className="space-y-6 sm:space-y-8">
       <div>
         <h1 className="text-2xl font-bold tracking-tight sm:text-3xl">Tags</h1>
         <p className="text-muted-foreground mt-2 text-sm">

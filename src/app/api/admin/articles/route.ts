@@ -1,8 +1,9 @@
-﻿import { desc, eq, ilike } from "drizzle-orm";
+import { desc, eq, ilike } from "drizzle-orm";
 import { NextResponse } from "next/server";
 import { db } from "@/db";
 import { articles, categories, media } from "@/db/schema";
 import { articleInputSchema } from "@/lib/articles/validation";
+import { revalidateArticlePublishingPaths } from "@/lib/article-publication-cache";
 export const runtime = "nodejs";
 export const dynamic = "force-dynamic";
 type IncomingArticlePayload = Record<string, unknown> & {
@@ -129,6 +130,9 @@ export async function POST(request: Request) {
     try {
       requestBody = await request.json();
     } catch {
+      // PHASE_10_ARTICLE_REVALIDATION
+      revalidateArticlePublishingPaths();
+
       return NextResponse.json(
         {
           message: "The article request body must contain valid JSON.",
@@ -141,6 +145,9 @@ export async function POST(request: Request) {
     const normalisedInput = await normaliseArticlePayload(requestBody);
     const parsedInput = articleInputSchema.safeParse(normalisedInput);
     if (!parsedInput.success) {
+      // PHASE_10_ARTICLE_REVALIDATION
+      revalidateArticlePublishingPaths();
+
       return NextResponse.json(
         {
           message: "Article validation failed.",
@@ -178,6 +185,9 @@ export async function POST(request: Request) {
     if (!createdArticle) {
       throw new Error("The article was not created.");
     }
+    // PHASE_10_ARTICLE_REVALIDATION
+    revalidateArticlePublishingPaths();
+
     return NextResponse.json(
       {
         article: createdArticle,

@@ -1,72 +1,78 @@
 "use client";
-import Link from "next/link";
 import { usePathname } from "next/navigation";
 import {
+  Bell,
+  Code2,
   ExternalLink,
-  FileText,
   Files,
+  FileText,
   FolderOpen,
   Image,
   LayoutDashboard,
-  Palette,
+  type LucideIcon,
   Settings,
   Tags,
   X,
-  type LucideIcon,
 } from "lucide-react";
+import Link from "next/link";
 type NavigationItem = {
   href: string;
   label: string;
   description: string;
   icon: LucideIcon;
 };
-type AdminSidebarProps = Readonly<{
-  mobile?: boolean;
-  onClose?: () => void;
-  onNavigate?: () => void;
-}>;
+type AdminSidebarProps = {
+  isMobileOpen?: boolean;
+  onMobileClose?: () => void;
+};
 const navigation: NavigationItem[] = [
+  {
+    href: "/admin/design-code",
+    label: "Design Studio",
+    description: "Validate, preview and activate website designs",
+    icon: Code2,
+  },
   {
     href: "/admin",
     label: "Dashboard",
-    description: "Workspace overview",
+    description: "Overview and activity",
     icon: LayoutDashboard,
   },
   {
     href: "/admin/articles",
     label: "Articles",
-    description: "Write and publish",
+    description: "Create and manage content",
     icon: FileText,
   },
   {
     href: "/admin/categories",
     label: "Categories",
-    description: "Organise content",
+    description: "Organize your articles",
     icon: FolderOpen,
   },
   {
     href: "/admin/tags",
     label: "Tags",
-    description: "Manage taxonomy",
+    description: "Manage article tags",
     icon: Tags,
   },
   {
     href: "/admin/media",
     label: "Media",
-    description: "Images and uploads",
+    description: "Images and uploaded files",
     icon: Image,
   },
   {
     href: "/admin/pages",
     label: "Pages",
-    description: "Static information",
+    description: "Manage website pages",
     icon: Files,
   },
   {
-    href: "/admin/themes",
-    label: "Theme Studio",
-    description: "Design and preview",
-    icon: Palette,
+    href: "/admin/notifications",
+    label: "Notifications",
+    description: "Alerts and audit retention",
+    icon: Bell,
   },
   {
     href: "/admin/settings",
@@ -81,51 +87,45 @@ function isNavigationItemActive(pathname: string, href: string): boolean {
   }
   return pathname === href || pathname.startsWith(`${href}/`);
 }
-export function AdminSidebar({ mobile = false, onClose, onNavigate }: AdminSidebarProps) {
+export function AdminSidebar({ isMobileOpen = false, onMobileClose }: AdminSidebarProps) {
   const pathname = usePathname();
   return (
     <aside
-      aria-label="Administration sidebar"
       className={[
-        "border-border bg-background shrink-0 border-r",
-        mobile
-          ? "relative z-10 block h-full w-full shadow-2xl"
-          : "hidden min-h-screen w-72 lg:block",
+        "border-border bg-background fixed inset-y-0 left-0 z-50 flex w-72 flex-col border-r shadow-xl transition-transform duration-300 lg:translate-x-0 lg:shadow-none",
+        isMobileOpen ? "translate-x-0" : "-translate-x-full",
       ].join(" ")}
     >
-      <div
-        className={
-          mobile ? "flex h-full flex-col" : "sticky top-0 flex h-screen flex-col"
-        }
-      >
-        <div className="border-border flex min-h-20 items-center justify-between gap-3 border-b px-5">
-          <Link
-            href="/admin"
-            onClick={onNavigate}
-            className="group min-w-0 rounded-lg focus-visible:outline-none"
-          >
-            <span className="block truncate text-lg font-black tracking-tight">
-              Knowledge Nest
+      <div className="border-border flex h-16 items-center justify-between border-b px-5 lg:h-[72px]">
+        <Link href="/admin" className="group min-w-0" onClick={onMobileClose}>
+          <div className="flex items-center gap-3">
+            <span className="bg-foreground text-background inline-flex h-10 w-10 shrink-0 items-center justify-center rounded-xl text-sm font-black shadow-sm">
+              KN
             </span>
-            <span className="text-muted-foreground block text-xs">
-              Administration workspace
+            <span className="min-w-0">
+              <span className="block truncate text-base font-bold tracking-tight">
+                Knowledge Nest
+              </span>
+              <span className="text-muted-foreground block truncate text-xs">
+                Administration
+              </span>
             </span>
-          </Link>
-          {mobile ? (
-            <button
-              type="button"
-              onClick={onClose}
-              aria-label="Close navigation"
-              className="border-border hover:bg-muted inline-flex h-10 w-10 shrink-0 items-center justify-center rounded-xl border transition"
-            >
-              <X className="h-5 w-5" />
-            </button>
-          ) : null}
-        </div>
-        <nav
-          aria-label="Admin navigation"
-          className="flex-1 space-y-1.5 overflow-y-auto p-3"
+          </div>
+        </Link>
+        <button
+          type="button"
+          aria-label="Close admin navigation"
+          className="border-border hover:bg-muted inline-flex h-9 w-9 items-center justify-center rounded-lg border transition-colors lg:hidden"
+          onClick={onMobileClose}
         >
+          <X className="h-4 w-4" aria-hidden="true" />
+        </button>
+      </div>
+      <div className="flex-1 overflow-y-auto px-3 py-5">
+        <p className="text-muted-foreground mb-2 px-3 text-[11px] font-bold tracking-[0.16em] uppercase">
+          Workspace
+        </p>
+        <nav aria-label="Admin navigation" className="space-y-1">
           {navigation.map((item) => {
             const Icon = item.icon;
             const isActive = isNavigationItemActive(pathname, item.href);
@@ -133,18 +133,18 @@ export function AdminSidebar({ mobile = false, onClose, onNavigate }: AdminSideb
               <Link
                 key={item.href}
                 href={item.href}
-                onClick={onNavigate}
+                onClick={onMobileClose}
                 aria-current={isActive ? "page" : undefined}
                 className={[
-                  "group flex min-h-14 items-center gap-3 rounded-xl px-3 py-2.5 transition-all focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:outline-none",
+                  "group flex items-center gap-3 rounded-xl border px-3 py-3 transition-all",
                   isActive
-                    ? "bg-foreground text-background shadow-sm"
-                    : "text-muted-foreground hover:bg-muted hover:text-foreground",
+                    ? "border-border bg-foreground text-background shadow-sm"
+                    : "text-muted-foreground hover:border-border hover:bg-muted/70 hover:text-foreground border-transparent",
                 ].join(" ")}
               >
                 <span
                   className={[
-                    "inline-flex h-9 w-9 shrink-0 items-center justify-center rounded-lg",
+                    "inline-flex h-9 w-9 shrink-0 items-center justify-center rounded-lg transition-colors",
                     isActive ? "bg-background/15" : "bg-muted group-hover:bg-background",
                   ].join(" ")}
                 >
@@ -156,7 +156,7 @@ export function AdminSidebar({ mobile = false, onClose, onNavigate }: AdminSideb
                   </span>
                   <span
                     className={[
-                      "block truncate text-[11px]",
+                      "block truncate text-xs",
                       isActive ? "text-background/70" : "text-muted-foreground",
                     ].join(" ")}
                   >
@@ -167,16 +167,18 @@ export function AdminSidebar({ mobile = false, onClose, onNavigate }: AdminSideb
             );
           })}
         </nav>
-        <div className="border-border border-t p-3">
-          <Link
-            href="/"
-            onClick={onNavigate}
-            className="border-border text-muted-foreground hover:bg-muted hover:text-foreground flex min-h-11 items-center justify-between rounded-xl border px-3 text-sm font-semibold transition"
-          >
-            <span>View public website</span>
-            <ExternalLink className="h-4 w-4" />
-          </Link>
-        </div>
+      </div>
+      <div className="border-border border-t p-3">
+        <Link
+          href="/"
+          target="_blank"
+          rel="noreferrer"
+          className="text-muted-foreground hover:bg-muted hover:text-foreground flex items-center justify-between rounded-xl px-3 py-3 text-sm font-medium transition-colors"
+          onClick={onMobileClose}
+        >
+          <span>View public website</span>
+          <ExternalLink className="h-4 w-4" aria-hidden="true" />
+        </Link>
       </div>
     </aside>
   );

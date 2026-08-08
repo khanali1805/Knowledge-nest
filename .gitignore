@@ -39,3 +39,36 @@ yarn-error.log*
 # typescript
 *.tsbuildinfo
 next-env.d.ts
+.env
+.env.local
+.env*.local
+
+.vercel
+
+# Knowledge Nest local development / audit artifacts
+/backups/
+/reports/
+/logs/
+/test-results/
+/.chatgpt-phase7/
+/.phase-6-collection/
+/.phase5-backup/
+/.runtime-verification/
+/.tools/
+/.verification-backups/
+/.verification-logs/
+/phase26-backup/
+/phase8-final-inspection-*/
+*.zip
+*.bak
+*.log
+*-backup
+*.phase*-backup
+/STOP-LIVE-TESTING.ps1
+/phase-6-collection-error-*.txt
+/PHASE*-*.txt
+/phase32-*.txt
+/phase33-*.txt
+/phase34-*.txt
+/phase35-*.txt
+/.stage-5-cleanup-*.ts

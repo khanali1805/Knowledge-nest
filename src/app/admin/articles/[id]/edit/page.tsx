@@ -1,4 +1,9 @@
-﻿import { ArticleEditor } from "@/components/admin/articles/article-editor";
+import { eq } from "drizzle-orm";
+import { notFound } from "next/navigation";
+import { ArticleEditorForm } from "@/components/admin/article-editor-form";
+import { db } from "@/db";
+import { articles } from "@/db/schema";
+export const dynamic = "force-dynamic";
 export default async function EditArticlePage({
   params,
 }: {
@@ -7,5 +12,39 @@ export default async function EditArticlePage({
   }>;
 }) {
   const { id } = await params;
-  return <ArticleEditor mode="edit" articleId={id} />;
+  const [article] = await db
+    .select({
+      id: articles.id,
+      title: articles.title,
+      slug: articles.slug,
+      excerpt: articles.excerpt,
+      content: articles.content,
+      categoryId: articles.categoryId,
+      status: articles.status,
+      isFeatured: articles.isFeatured,
+      seoTitle: articles.seoTitle,
+      seoDescription: articles.seoDescription,
+      focusKeyword: articles.focusKeyword,
+      featuredImageId: articles.featuredImageId,
+      updatedAt: articles.updatedAt,
+    })
+    .from(articles)
+    .where(eq(articles.id, id))
+    .limit(1);
+  if (!article) {
+    notFound();
+  }
+  return (
+    <main className="mx-auto max-w-7xl px-4 py-10 sm:px-6 lg:px-8">
+      <div className="mb-8">
+        <p className="text-sm font-bold tracking-[0.18em] text-slate-500 uppercase">
+          Articles
+        </p>
+        <h1 className="mt-2 text-3xl font-black tracking-tight text-slate-950">
+          Edit Article
+        </h1>
+      </div>
+      <ArticleEditorForm mode="edit" initialArticle={article} />
+    </main>
+  );
 }

@@ -1,4 +1,4 @@
-﻿import { desc } from "drizzle-orm";
+import { desc } from "drizzle-orm";
 import { PagesManager, type WebsitePage } from "@/components/admin/pages/pages-manager";
 import { db } from "@/db";
 import { pages } from "@/db/schema";
@@ -18,7 +18,7 @@ export default async function PagesPage() {
     .orderBy(desc(pages.updatedAt));
   const initialPages: WebsitePage[] = pageRows;
   return (
-    <div className="space-y-6">
+    <div className="space-y-6 sm:space-y-8">
       <div>
         <h1 className="text-2xl font-bold tracking-tight sm:text-3xl">Pages</h1>
         <p className="text-muted-foreground mt-2 text-sm">

@@ -1,4 +1,4 @@
-﻿"use client";
+"use client";
 import Image from "next/image";
 import {
   Check,
@@ -181,7 +181,7 @@ export function MediaLibrary() {
           "Content-Type": "application/json",
         },
         body: JSON.stringify({
-          fileName: file.name,
+          id: file.id,
         }),
       });
       const responseData = (await response.json()) as ApiResponse;
@@ -206,7 +206,7 @@ export function MediaLibrary() {
     }
   }
   return (
-    <div className="space-y-6">
+    <div className="space-y-6 sm:space-y-8">
       <div
         onDragOver={handleDragOver}
         onDragLeave={handleDragLeave}

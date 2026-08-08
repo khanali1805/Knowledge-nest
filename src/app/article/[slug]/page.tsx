@@ -3,10 +3,13 @@ import Image from "next/image";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import { Clock } from "lucide-react";
+import sanitizeHtml from "sanitize-html";
+import { GoogleAdSenseUnit } from "@/components/site/google-adsense-unit";
 import { SiteFooter } from "@/components/site/site-footer";
 import { SiteHeader } from "@/components/site/site-header";
 import { ArticleJsonLd } from "@/components/site/seo/article-json-ld";
 import { BreadcrumbJsonLd } from "@/components/site/seo/breadcrumb-json-ld";
+import { getGoogleAdsenseArticleSlot, getGoogleAdsenseClientId } from "@/lib/adsense";
 import {
   createContentSlug,
   getArticleExcerpt,
@@ -18,19 +21,77 @@ type ArticlePageProps = {
   }>;
 };
 export const dynamic = "force-dynamic";
-function getContentParagraphs(content: string): string[] {
-  const textContent = content
-    .replace(/<\/p>/gi, "\n\n")
-    .replace(/<br\s*\/?>/gi, "\n")
-    .replace(/<[^>]*>/g, " ")
-    .replace(/&nbsp;/g, " ")
-    .replace(/&amp;/g, "&")
-    .replace(/&quot;/g, '"')
-    .replace(/&#39;/g, "'");
-  return textContent
-    .split(/\n{2,}/)
-    .map((paragraph) => paragraph.replace(/\s+/g, " ").trim())
-    .filter(Boolean);
+function sanitizeArticleContent(content: string): string {
+  return sanitizeHtml(content, {
+    allowedTags: [
+      "p",
+      "br",
+      "strong",
+      "b",
+      "em",
+      "i",
+      "u",
+      "s",
+      "strike",
+      "h1",
+      "h2",
+      "h3",
+      "h4",
+      "h5",
+      "h6",
+      "ul",
+      "ol",
+      "li",
+      "blockquote",
+      "pre",
+      "code",
+      "hr",
+      "a",
+      "img",
+      "table",
+      "thead",
+      "tbody",
+      "tr",
+      "th",
+      "td",
+      "mark",
+      "span",
+    ],
+    allowedAttributes: {
+      a: ["href", "target", "rel", "title"],
+      img: ["src", "alt", "title", "width", "height", "class"],
+      p: ["style", "class"],
+      h1: ["style", "class"],
+      h2: ["style", "class"],
+      h3: ["style", "class"],
+      h4: ["style", "class"],
+      h5: ["style", "class"],
+      h6: ["style", "class"],
+      span: ["style", "class"],
+      mark: ["style", "class"],
+      table: ["class"],
+      th: ["colspan", "rowspan", "style"],
+      td: ["colspan", "rowspan", "style"],
+    },
+    allowedStyles: {
+      "*": {
+        color: [/^#[0-9a-fA-F]{3,8}$/, /^rgb\(/, /^rgba\(/],
+        "background-color": [/^#[0-9a-fA-F]{3,8}$/, /^rgb\(/, /^rgba\(/],
+        "text-align": [/^left$/, /^right$/, /^center$/, /^justify$/],
+        "font-family": [/^[a-zA-Z0-9 ,"'-]+$/],
+      },
+    },
+    allowedSchemes: ["http", "https", "mailto"],
+    transformTags: {
+      a: sanitizeHtml.simpleTransform(
+        "a",
+        {
+          rel: "noopener noreferrer",
+        },
+        true,
+      ),
+    },
+  });
 }
 export async function generateMetadata({ params }: ArticlePageProps): Promise<Metadata> {
   const { slug } = await params;
@@ -67,16 +128,6 @@ export async function generateMetadata({ params }: ArticlePageProps): Promise<Me
           }
         : {}),
     },
-    twitter: {
-      card: article.featuredImageUrl ? "summary_large_image" : "summary",
-      title: article.title,
-      description: excerpt,
-      ...(article.featuredImageUrl
-        ? {
-            images: [article.featuredImageUrl],
-          }
-        : {}),
-    },
   };
 }
 export default async function ArticlePage({ params }: ArticlePageProps) {
@@ -89,7 +140,9 @@ export default async function ArticlePage({ params }: ArticlePageProps) {
   const categoryName = article.categoryName ?? "Articles";
   const categorySlug = article.categorySlug ?? createContentSlug(categoryName);
   const publishedAt = article.publishedAt ?? article.updatedAt;
-  const paragraphs = getContentParagraphs(article.content);
+  const safeContent = sanitizeArticleContent(article.content);
+  const adsenseClientId = getGoogleAdsenseClientId();
+  const adsenseArticleSlot = getGoogleAdsenseArticleSlot();
   return (
     <>
       <ArticleJsonLd
@@ -162,15 +215,24 @@ export default async function ArticlePage({ params }: ArticlePageProps) {
             </div>
           ) : null}
           <div className="mx-auto max-w-4xl px-4 py-12 sm:px-6 lg:px-8">
-            <div className="space-y-6 text-base leading-8 sm:text-lg">
-              {paragraphs.length > 0 ? (
-                paragraphs.map((paragraph, index) => (
-                  <p key={`${article.id}-${index}`}>{paragraph}</p>
-                ))
-              ) : (
-                <p>{excerpt}</p>
-              )}
-            </div>
+            <div
+              className="published-article-content"
+              dangerouslySetInnerHTML={{
+                __html: safeContent || `<p>${excerpt}</p>`,
+              }}
+            />
+            {adsenseClientId && adsenseArticleSlot ? (
+              <div
+                className="mt-10 border-y border-slate-200 py-6"
+                aria-label="Advertisement"
+              >
+                <GoogleAdSenseUnit
+                  client={adsenseClientId}
+                  slot={adsenseArticleSlot}
+                  className="min-h-[90px] w-full"
+                />
+              </div>
+            ) : null}
             <div className="border-border mt-12 border-t pt-8">
               <Link
                 href={`/category/${categorySlug}`}

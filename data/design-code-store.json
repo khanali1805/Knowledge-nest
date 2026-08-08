@@ -1,0 +1,47 @@
+{
+  "draftName": "Knowledge Nest Default",
+  "draftCode": ":root {\n  --knowledge-nest-design-accent: #2563eb;\n  --knowledge-nest-design-radius: 1rem;\n}",
+  "activeRevision": {
+    "id": "32c93654-0e40-4c97-b98e-fe0936736448",
+    "name": "Knowledge Nest Default",
+    "code": ":root {\n  --knowledge-nest-design-accent: #2563eb;\n  --knowledge-nest-design-radius: 1rem;\n}",
+    "checksum": "5a78528d0bbf985bbf01564dad5ce09b941a0eea1dc659b3266978249f441a96",
+    "createdAt": "2026-08-06T17:59:07.906Z",
+    "activatedAt": "2026-08-06T17:59:07.906Z"
+  },
+  "lastValidRevision": {
+    "id": "5db3026b-2e2b-4783-96dd-adca955e359c",
+    "name": "Phase 7 Test Design 20260806-225602",
+    "code": ":root {\n  --knowledge-nest-phase-seven-marker: \"KN-PHASE-7-20260806-225602\";\n  --knowledge-nest-design-accent: #1d4ed8;\n}\n.design-preview-title {\n  letter-spacing: 0.02em;\n}",
+    "checksum": "9c08462ce47da660835633e109377fc4c412de34a511717fffa0e1071cf063b8",
+    "createdAt": "2026-08-06T17:59:05.429Z",
+    "activatedAt": "2026-08-06T17:59:05.429Z"
+  },
+  "history": [
+    {
+      "id": "32c93654-0e40-4c97-b98e-fe0936736448",
+      "name": "Knowledge Nest Default",
+      "code": ":root {\n  --knowledge-nest-design-accent: #2563eb;\n  --knowledge-nest-design-radius: 1rem;\n}",
+      "checksum": "5a78528d0bbf985bbf01564dad5ce09b941a0eea1dc659b3266978249f441a96",
+      "createdAt": "2026-08-06T17:59:07.906Z",
+      "activatedAt": "2026-08-06T17:59:07.906Z"
+    },
+    {
+      "id": "5db3026b-2e2b-4783-96dd-adca955e359c",
+      "name": "Phase 7 Test Design 20260806-225602",
+      "code": ":root {\n  --knowledge-nest-phase-seven-marker: \"KN-PHASE-7-20260806-225602\";\n  --knowledge-nest-design-accent: #1d4ed8;\n}\n.design-preview-title {\n  letter-spacing: 0.02em;\n}",
+      "checksum": "9c08462ce47da660835633e109377fc4c412de34a511717fffa0e1071cf063b8",
+      "createdAt": "2026-08-06T17:59:05.429Z",
+      "activatedAt": "2026-08-06T17:59:05.429Z"
+    },
+    {
+      "id": "33e59efa-095b-4041-9dc7-9c48afff707d",
+      "name": "Knowledge Nest Default",
+      "code": ":root {\n  --knowledge-nest-design-accent: #2563eb;\n  --knowledge-nest-design-radius: 1rem;\n}",
+      "checksum": "5a78528d0bbf985bbf01564dad5ce09b941a0eea1dc659b3266978249f441a96",
+      "createdAt": "2026-08-06T17:59:05.362Z",
+      "activatedAt": "2026-08-06T17:59:05.362Z"
+    }
+  ],
+  "updatedAt": "2026-08-06T17:59:07.906Z"
+}

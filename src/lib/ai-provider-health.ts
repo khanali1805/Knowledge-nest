@@ -18,6 +18,7 @@ export type AIProviderHealth = {
   status: AIProviderConnectionStatus;
   message: string;
   verifiedAt: string;
+  responseTimeMilliseconds: number;
 };
 type ProviderConfiguration = {
   id: AIProviderId;
@@ -144,6 +145,7 @@ async function verifyProvider(
   provider: ProviderConfiguration,
 ): Promise<AIProviderHealth> {
   const verifiedAt = new Date().toISOString();
+  const startedAt = Date.now();
   const apiKey = readEnvironmentValue(provider.keyVariable);
   const model = readEnvironmentValue(provider.modelVariable) ?? provider.fallbackModel;
   if (!apiKey) {
@@ -155,6 +157,7 @@ async function verifyProvider(
       status: "missing",
       message: `${provider.keyVariable} missing hai.`,
       verifiedAt,
+      responseTimeMilliseconds: Date.now() - startedAt,
     };
   }
   const controller = new AbortController();
@@ -177,6 +180,7 @@ async function verifyProvider(
         status: "connected",
         message: "API connection successful.",
         verifiedAt,
+        responseTimeMilliseconds: Date.now() - startedAt,
       };
     }
     return {
@@ -187,6 +191,7 @@ async function verifyProvider(
       status: getFailureStatus(response.status),
       message: await readResponseMessage(response),
       verifiedAt,
+      responseTimeMilliseconds: Date.now() - startedAt,
     };
   } catch (error) {
     if (error instanceof Error && error.name === "AbortError") {
@@ -198,6 +203,7 @@ async function verifyProvider(
         status: "timeout",
         message: "Provider verification timeout.",
         verifiedAt,
+        responseTimeMilliseconds: Date.now() - startedAt,
       };
     }
     return {
@@ -208,6 +214,7 @@ async function verifyProvider(
       status: "network-error",
       message: error instanceof Error ? error.message : "Provider network error.",
       verifiedAt,
+      responseTimeMilliseconds: Date.now() - startedAt,
     };
   } finally {
     clearTimeout(timeout);

@@ -1,4 +1,40 @@
 import "server-only";
+const DELIVERY_TIMEOUT_MS = 15_000;
+const DELIVERY_MAX_ATTEMPTS = 2;
+const DELIVERY_RETRY_DELAY_MS = 500;
+function delay(milliseconds: number): Promise<void> {
+  return new Promise((resolve) => {
+    setTimeout(resolve, milliseconds);
+  });
+}
+function shouldRetryStatus(status: number): boolean {
+  return status === 408 || status === 425 || status === 429 || status >= 500;
+}
+async function fetchDelivery(input: string | URL, init: RequestInit): Promise<Response> {
+  let lastError: unknown | undefined;
+  for (let attempt = 1; attempt <= DELIVERY_MAX_ATTEMPTS; attempt += 1) {
+    try {
+      const response = await fetch(input, {
+        ...init,
+        signal: AbortSignal.timeout(DELIVERY_TIMEOUT_MS),
+      });
+      if (
+        response.ok ||
+        !shouldRetryStatus(response.status) ||
+        attempt === DELIVERY_MAX_ATTEMPTS
+      ) {
+        return response;
+      }
+    } catch (error) {
+      lastError = error;
+      if (attempt === DELIVERY_MAX_ATTEMPTS) {
+        throw error;
+      }
+    }
+    await delay(DELIVERY_RETRY_DELAY_MS * attempt);
+  }
+  throw lastError ?? new Error("Notification delivery failed.");
+}
 import {
   generateCollaborationAlerts,
   runAuditRetentionCleanup,
@@ -46,7 +82,7 @@ async function deliverEmail(
     throw new Error("NOTIFICATION_EMAIL_ENDPOINT configured nahi hai.");
   }
   const emailToken = process.env.NOTIFICATION_EMAIL_TOKEN?.trim();
-  const response = await fetch(emailEndpoint, {
+  const response = await fetchDelivery(emailEndpoint, {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
@@ -66,10 +102,7 @@ async function deliverEmail(
     cache: "no-store",
   });
   if (!response.ok) {
-    const responseText = await response.text();
-    throw new Error(
-      `Email delivery fail hui (${response.status}): ${responseText.slice(0, 500)}`,
-    );
+    throw new Error(`Email delivery fail hui (${response.status}).`);
   }
   let responseBody: unknown = null;
   try {
@@ -99,7 +132,7 @@ async function deliverWebhook(
   if (!["http:", "https:"].includes(parsedUrl.protocol)) {
     throw new Error("Webhook URL protocol allowed nahi hai.");
   }
-  const response = await fetch(parsedUrl, {
+  const response = await fetchDelivery(parsedUrl, {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
@@ -114,13 +147,9 @@ async function deliverWebhook(
       sentAt: new Date().toISOString(),
     }),
     cache: "no-store",
-    signal: AbortSignal.timeout(15_000),
   });
   if (!response.ok) {
-    const responseText = await response.text();
-    throw new Error(
-      `Webhook delivery fail hui (${response.status}): ${responseText.slice(0, 500)}`,
-    );
+    throw new Error(`Webhook delivery fail hui (${response.status}).`);
   }
   return {
     source: "webhook_delivery",

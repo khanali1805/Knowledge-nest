@@ -1,5 +1,6 @@
 import type { Metadata, Viewport } from "next";
 import { headers } from "next/headers";
+import { Analytics } from "@vercel/analytics/react";
 import Script from "next/script";
 import { ActiveDesignCode } from "@/components/site/active-design-code";
 import { OrganizationJsonLd } from "@/components/site/seo/organization-json-ld";
@@ -89,6 +90,7 @@ export default async function RootLayout({
           <ActiveDesignCode code={activeDesignCode} />
         ) : null}
         {children}
+        <Analytics />
       </body>
     </html>
   );

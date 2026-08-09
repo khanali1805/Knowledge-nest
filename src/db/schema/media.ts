@@ -1,4 +1,5 @@
-﻿import {
+import {
+  customType,
   bigint,
   integer,
   jsonb,
@@ -9,6 +10,15 @@
   varchar,
 } from "drizzle-orm/pg-core";
 import { users } from "./users";
+
+const postgresBytea = customType<{
+  data: Buffer;
+  driverData: Buffer;
+}>({
+  dataType() {
+    return "bytea";
+  },
+});
 export const media = pgTable("media", {
   id: uuid("id").defaultRandom().primaryKey(),
   uploadedById: uuid("uploaded_by_id").references(() => users.id, {
@@ -21,6 +31,7 @@ export const media = pgTable("media", {
   mimeType: varchar("mime_type", { length: 150 }).notNull(),
   url: text("url").notNull(),
   storageKey: text("storage_key"),
+  fileData: postgresBytea("file_data"),
   altText: varchar("alt_text", { length: 255 }),
   title: varchar("title", { length: 255 }),
   caption: text("caption"),

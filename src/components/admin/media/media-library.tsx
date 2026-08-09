@@ -18,6 +18,12 @@ import {
   useRef,
   useState,
 } from "react";
+import {
+  ACCEPTED_IMAGE_TYPES,
+  MAXIMUM_ORIGINAL_IMAGE_SIZE,
+  prepareImageForUpload,
+  readJsonResponse,
+} from "@/lib/client-image-upload";
 type MediaFile = {
   id: string;
   name: string;
@@ -31,25 +37,6 @@ type ApiResponse = {
   file?: MediaFile;
   message?: string;
 };
-const acceptedFileTypes = ["image/jpeg", "image/png", "image/webp"];
-const maximumFileSize = 4 * 1024 * 1024;
-async function readApiResponse(response: Response): Promise<ApiResponse> {
-  const responseText = await response.text();
-  if (!responseText.trim()) {
-    if (!response.ok) {
-      throw new Error(`Media request failed with HTTP ${response.status}.`);
-    }
-    return {};
-  }
-  try {
-    return JSON.parse(responseText) as ApiResponse;
-  } catch {
-    const contentType = response.headers.get("content-type") ?? "";
-    throw new Error(
-      `Media API returned HTTP ${response.status} with an unexpected ${contentType || "non-JSON"} response.`,
-    );
-  }
-}
 function formatFileSize(size: number) {
   if (size < 1024) {
     return `${size} B`;
@@ -78,7 +65,7 @@ export function MediaLibrary() {
       const response = await fetch("/api/admin/media", {
         cache: "no-store",
       });
-      const responseData = await readApiResponse(response);
+      const responseData = await readJsonResponse<ApiResponse>(response);
       if (!response.ok) {
         throw new Error(responseData.message || "Unable to load media files.");
       }
@@ -106,23 +93,26 @@ export function MediaLibrary() {
   async function uploadFile(file: File) {
     setMessage("");
     setError("");
-    if (!acceptedFileTypes.includes(file.type)) {
+    if (
+      !ACCEPTED_IMAGE_TYPES.includes(file.type as (typeof ACCEPTED_IMAGE_TYPES)[number])
+    ) {
       setError("Only JPG, PNG and WebP images are allowed.");
       return;
     }
-    if (file.size > maximumFileSize) {
-      setError("The selected image exceeds the 4 MB size limit.");
+    if (file.size > MAXIMUM_ORIGINAL_IMAGE_SIZE) {
+      setError("The selected image exceeds the 10 MB selection limit.");
       return;
     }
     setIsUploading(true);
     try {
+      const preparedFile = await prepareImageForUpload(file);
       const formData = new FormData();
-      formData.append("file", file);
+      formData.append("file", preparedFile);
       const response = await fetch("/api/admin/media/upload", {
         method: "POST",
         body: formData,
       });
-      const responseData = await readApiResponse(response);
+      const responseData = await readJsonResponse<ApiResponse>(response);
       if (!response.ok || !responseData.file) {
         throw new Error(responseData.message || "Unable to upload the image.");
       }
@@ -195,7 +185,7 @@ export function MediaLibrary() {
           id: file.id,
         }),
       });
-      const responseData = await readApiResponse(response);
+      const responseData = await readJsonResponse<ApiResponse>(response);
       if (!response.ok) {
         throw new Error(responseData.message || "Unable to delete the image.");
       }
@@ -229,7 +219,7 @@ export function MediaLibrary() {
         <input
           ref={fileInputRef}
           type="file"
-          accept={acceptedFileTypes.join(",")}
+          accept={ACCEPTED_IMAGE_TYPES.join(",")}
           onChange={handleFileInput}
           disabled={isUploading}
           className="hidden"
@@ -260,7 +250,8 @@ export function MediaLibrary() {
             Select Image
           </button>
           <p className="text-muted-foreground mt-3 text-xs">
-            JPG, PNG or WebP. Maximum file size: 4 MB.
+            JPG, PNG or WebP. Images are optimized to 1600x900 before upload. Maximum
+            selection size: 10 MB.
           </p>
         </div>
       </div>

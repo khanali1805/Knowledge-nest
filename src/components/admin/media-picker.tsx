@@ -4,6 +4,7 @@
 "use client";
 import { useCallback, useEffect, useRef, useState } from "react";
 import type { MediaRecord } from "@/lib/media-store";
+import { prepareImageForUpload, readJsonResponse } from "@/lib/client-image-upload";
 type MediaPickerProps = {
   open: boolean;
   selectedUrl: string;
@@ -54,7 +55,7 @@ export function MediaPicker({ open, selectedUrl, onClose, onSelect }: MediaPicke
             cache: "no-store",
           },
         );
-        const result = (await response.json()) as MediaListResponse;
+        const result = await readJsonResponse<MediaListResponse>(response);
         if (!response.ok || !result.success) {
           setMessage(result.message || "Unable to load media.");
           return;
@@ -93,15 +94,16 @@ export function MediaPicker({ open, selectedUrl, onClose, onSelect }: MediaPicke
     setUploadProgress(10);
     setMessage("");
     try {
+      const preparedFile = await prepareImageForUpload(file);
       const formData = new FormData();
-      formData.append("file", file);
+      formData.append("file", preparedFile);
       setUploadProgress(35);
       const response = await fetch("/api/admin/media", {
         method: "POST",
         body: formData,
       });
       setUploadProgress(75);
-      const result = (await response.json()) as MediaUploadResponse;
+      const result = await readJsonResponse<MediaUploadResponse>(response);
       if (!response.ok || !result.success || !result.media) {
         setMessage(result.message || "Unable to upload image.");
         return;
@@ -160,7 +162,7 @@ export function MediaPicker({ open, selectedUrl, onClose, onSelect }: MediaPicke
               <input
                 ref={fileInputRef}
                 type="file"
-                accept="image/jpeg,image/png,image/webp,image/gif"
+                accept="image/jpeg,image/png,image/webp"
                 className="hidden"
                 onChange={(event) => {
                   const file = event.target.files?.[0];

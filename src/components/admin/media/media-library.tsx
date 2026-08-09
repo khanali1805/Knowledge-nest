@@ -31,14 +31,25 @@ type ApiResponse = {
   file?: MediaFile;
   message?: string;
 };
-const acceptedFileTypes = [
-  "image/jpeg",
-  "image/png",
-  "image/webp",
-  "image/gif",
-  "image/svg+xml",
-];
-const maximumFileSize = 5 * 1024 * 1024;
+const acceptedFileTypes = ["image/jpeg", "image/png", "image/webp"];
+const maximumFileSize = 4 * 1024 * 1024;
+async function readApiResponse(response: Response): Promise<ApiResponse> {
+  const responseText = await response.text();
+  if (!responseText.trim()) {
+    if (!response.ok) {
+      throw new Error(`Media request failed with HTTP ${response.status}.`);
+    }
+    return {};
+  }
+  try {
+    return JSON.parse(responseText) as ApiResponse;
+  } catch {
+    const contentType = response.headers.get("content-type") ?? "";
+    throw new Error(
+      `Media API returned HTTP ${response.status} with an unexpected ${contentType || "non-JSON"} response.`,
+    );
+  }
+}
 function formatFileSize(size: number) {
   if (size < 1024) {
     return `${size} B`;
@@ -67,7 +78,7 @@ export function MediaLibrary() {
       const response = await fetch("/api/admin/media", {
         cache: "no-store",
       });
-      const responseData = (await response.json()) as ApiResponse;
+      const responseData = await readApiResponse(response);
       if (!response.ok) {
         throw new Error(responseData.message || "Unable to load media files.");
       }
@@ -96,11 +107,11 @@ export function MediaLibrary() {
     setMessage("");
     setError("");
     if (!acceptedFileTypes.includes(file.type)) {
-      setError("Only JPG, PNG, WebP, GIF and SVG images are allowed.");
+      setError("Only JPG, PNG and WebP images are allowed.");
       return;
     }
     if (file.size > maximumFileSize) {
-      setError("The selected image exceeds the 5 MB size limit.");
+      setError("The selected image exceeds the 4 MB size limit.");
       return;
     }
     setIsUploading(true);
@@ -111,7 +122,7 @@ export function MediaLibrary() {
         method: "POST",
         body: formData,
       });
-      const responseData = (await response.json()) as ApiResponse;
+      const responseData = await readApiResponse(response);
       if (!response.ok || !responseData.file) {
         throw new Error(responseData.message || "Unable to upload the image.");
       }
@@ -184,7 +195,7 @@ export function MediaLibrary() {
           id: file.id,
         }),
       });
-      const responseData = (await response.json()) as ApiResponse;
+      const responseData = await readApiResponse(response);
       if (!response.ok) {
         throw new Error(responseData.message || "Unable to delete the image.");
       }
@@ -249,7 +260,7 @@ export function MediaLibrary() {
             Select Image
           </button>
           <p className="text-muted-foreground mt-3 text-xs">
-            JPG, PNG, WebP, GIF or SVG. Maximum file size: 5 MB.
+            JPG, PNG or WebP. Maximum file size: 4 MB.
           </p>
         </div>
       </div>

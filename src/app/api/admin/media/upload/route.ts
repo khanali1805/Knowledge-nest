@@ -1,4 +1,4 @@
-﻿import { NextResponse } from "next/server";
+import { NextResponse } from "next/server";
 import { saveMediaFile } from "@/lib/media-storage";
 export const runtime = "nodejs";
 export const dynamic = "force-dynamic";
@@ -9,6 +9,7 @@ export async function POST(request: Request) {
     if (!(uploadedFile instanceof File)) {
       return NextResponse.json(
         {
+          success: false,
           message: "A valid image file is required.",
         },
         {
@@ -19,7 +20,9 @@ export async function POST(request: Request) {
     const file = await saveMediaFile(uploadedFile);
     return NextResponse.json(
       {
+        success: true,
         file,
+        media: file,
         message: "Image uploaded successfully.",
       },
       {
@@ -27,12 +30,16 @@ export async function POST(request: Request) {
       },
     );
   } catch (error) {
+    const message =
+      error instanceof Error ? error.message : "Unable to upload the image.";
+    const configurationFailure = message.includes("BLOB_READ_WRITE_TOKEN");
     return NextResponse.json(
       {
-        message: error instanceof Error ? error.message : "Unable to upload the image.",
+        success: false,
+        message,
       },
       {
-        status: 400,
+        status: configurationFailure ? 503 : 400,
       },
     );
   }

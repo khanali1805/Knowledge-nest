@@ -1,13 +1,14 @@
 import { randomUUID } from "crypto";
 import { mkdir, stat, unlink, writeFile } from "fs/promises";
 import path from "path";
+import { del, put } from "@vercel/blob";
 import { eq, or } from "drizzle-orm";
 import sharp from "sharp";
 import { db } from "@/db";
 import { media } from "@/db/schema";
-const uploadDirectory = path.join(process.cwd(), "public", "uploads");
+const localUploadDirectory = path.join(process.cwd(), "public", "uploads");
 const allowedMimeTypes = new Set(["image/jpeg", "image/png", "image/webp"]);
-const maximumFileSize = 10 * 1024 * 1024;
+const maximumFileSize = 4 * 1024 * 1024;
 export const ARTICLE_IMAGE_WIDTH = 1600;
 export const ARTICLE_IMAGE_HEIGHT = 900;
 export const ARTICLE_IMAGE_ASPECT_RATIO = ARTICLE_IMAGE_WIDTH / ARTICLE_IMAGE_HEIGHT;
@@ -25,7 +26,14 @@ export type MediaFile = {
   height: number | null;
   createdAt: string;
 };
-function sanitizeBaseName(fileName: string) {
+function getBlobToken(): string | null {
+  const token = process.env.BLOB_READ_WRITE_TOKEN?.trim();
+  return token || null;
+}
+function shouldUseLocalStorage(): boolean {
+  return process.env.NODE_ENV !== "production" && !getBlobToken();
+}
+function sanitizeBaseName(fileName: string): string {
   return path
     .basename(fileName, path.extname(fileName))
     .toLowerCase()
@@ -33,7 +41,7 @@ function sanitizeBaseName(fileName: string) {
     .replace(/^-+|-+$/g, "")
     .slice(0, 80);
 }
-function createStoredFileName(fileName: string) {
+function createStoredFileName(fileName: string): string {
   const baseName = sanitizeBaseName(fileName);
   return `${baseName || "image"}-${randomUUID()}.webp`;
 }
@@ -53,8 +61,8 @@ function toMediaFile(record: typeof media.$inferSelect): MediaFile {
     createdAt: record.createdAt.toISOString(),
   };
 }
-export async function ensureUploadDirectory() {
-  await mkdir(uploadDirectory, {
+async function ensureLocalUploadDirectory(): Promise<void> {
+  await mkdir(localUploadDirectory, {
     recursive: true,
   });
 }
@@ -76,13 +84,12 @@ export async function saveMediaFile(file: File): Promise<MediaFile> {
     throw new Error("The selected image is empty.");
   }
   if (file.size > maximumFileSize) {
-    throw new Error("The selected image exceeds the 10 MB upload limit.");
+    throw new Error("The selected image exceeds the 4 MB upload limit.");
   }
   const originalBuffer = Buffer.from(await file.arrayBuffer());
-  const inputImage = sharp(originalBuffer, {
+  const originalMetadata = await sharp(originalBuffer, {
     failOn: "error",
-  });
-  const originalMetadata = await inputImage.metadata();
+  }).metadata();
   if (!originalMetadata.width || !originalMetadata.height) {
     throw new Error("Image dimensions could not be detected.");
   }
@@ -109,34 +116,66 @@ export async function saveMediaFile(file: File): Promise<MediaFile> {
       "Image normalization failed to produce the required 1600x900 dimensions.",
     );
   }
-  await ensureUploadDirectory();
   const storedFileName = createStoredFileName(file.name);
-  const filePath = path.join(uploadDirectory, storedFileName);
-  await writeFile(filePath, processedBuffer, {
-    flag: "wx",
-  });
-  try {
+  const cleanTitle = path.basename(file.name, path.extname(file.name)).slice(0, 255);
+  let provider = "local";
+  let url = "";
+  let storageKey = storedFileName;
+  let physicalFilePath: string | null = null;
+  let uploadedBlobUrl: string | null = null;
+  if (shouldUseLocalStorage()) {
+    await ensureLocalUploadDirectory();
+    const filePath = path.join(localUploadDirectory, storedFileName);
+    await writeFile(filePath, processedBuffer, {
+      flag: "wx",
+    });
     const fileStats = await stat(filePath);
-    const encodedFileName = encodeURIComponent(storedFileName);
-    const cleanTitle = path.basename(file.name, path.extname(file.name)).slice(0, 255);
+    if (fileStats.size <= 0) {
+      await unlink(filePath).catch(() => undefined);
+      throw new Error("Local image write verification failed.");
+    }
+    physicalFilePath = filePath;
+    provider = "local";
+    url = `/uploads/${encodeURIComponent(storedFileName)}`;
+  } else {
+    const token = getBlobToken();
+    if (!token) {
+      throw new Error(
+        "Media storage is not configured. BLOB_READ_WRITE_TOKEN is missing from the production environment.",
+      );
+    }
+    const blob = await put(`knowledge-nest/media/${storedFileName}`, processedBuffer, {
+      access: "public",
+      addRandomSuffix: false,
+      contentType: "image/webp",
+      cacheControlMaxAge: 31536000,
+      token,
+    });
+    provider = "vercel-blob";
+    url = blob.url;
+    storageKey = blob.pathname;
+    uploadedBlobUrl = blob.url;
+  }
+  try {
     const [createdRecord] = await db
       .insert(media)
       .values({
         type: "image",
-        provider: "local",
+        provider,
         originalName: file.name.slice(0, 255),
         fileName: storedFileName,
         mimeType: "image/webp",
-        url: `/uploads/${encodedFileName}`,
-        storageKey: storedFileName,
+        url,
+        storageKey,
         altText: cleanTitle,
         title: cleanTitle,
         width: ARTICLE_IMAGE_WIDTH,
         height: ARTICLE_IMAGE_HEIGHT,
-        fileSize: fileStats.size,
+        fileSize: processedBuffer.length,
         metadata: {
           normalized: true,
           articleImage: true,
+          storageProvider: provider,
           originalMimeType: file.type,
           originalWidth: originalMetadata.width,
           originalHeight: originalMetadata.height,
@@ -153,11 +192,24 @@ export async function saveMediaFile(file: File): Promise<MediaFile> {
     }
     return toMediaFile(createdRecord);
   } catch (error) {
-    await unlink(filePath).catch(() => undefined);
+    if (uploadedBlobUrl) {
+      const token = getBlobToken();
+      if (token) {
+        await del(uploadedBlobUrl, {
+          token,
+        }).catch(() => undefined);
+      }
+    }
+    if (physicalFilePath) {
+      await unlink(physicalFilePath).catch(() => undefined);
+    }
     throw error;
   }
 }
-export async function deleteMediaFile(identifier: string) {
+export async function deleteMediaFile(identifier: string): Promise<{
+  id: string;
+  fileRemoved: boolean;
+}> {
   const cleanIdentifier = identifier.trim();
   if (!cleanIdentifier) {
     throw new Error("A valid media identifier is required.");
@@ -176,48 +228,64 @@ export async function deleteMediaFile(identifier: string) {
   if (!record) {
     throw new Error("Media file was not found.");
   }
-  const cleanFileName = path.basename(record.fileName);
-  if (!cleanFileName || cleanFileName !== record.fileName) {
-    throw new Error("Invalid media file path.");
-  }
-  const filePath = path.join(uploadDirectory, cleanFileName);
-  const relativePath = path.relative(uploadDirectory, filePath);
+  let fileRemoved = false;
   if (
-    relativePath.startsWith("..") ||
-    path.isAbsolute(relativePath) ||
-    cleanFileName === ".gitkeep"
+    record.provider === "vercel-blob" ||
+    record.url.includes(".blob.vercel-storage.com/")
   ) {
-    throw new Error("Invalid media file path.");
+    const token = getBlobToken();
+    if (!token) {
+      throw new Error(
+        "Media deletion is not configured. BLOB_READ_WRITE_TOKEN is missing from the production environment.",
+      );
+    }
+    await del(record.url, {
+      token,
+    });
+    fileRemoved = true;
+  } else {
+    const cleanFileName = path.basename(record.fileName);
+    if (!cleanFileName || cleanFileName !== record.fileName) {
+      throw new Error("Invalid media file path.");
+    }
+    const filePath = path.join(localUploadDirectory, cleanFileName);
+    const relativePath = path.relative(localUploadDirectory, filePath);
+    if (
+      relativePath.startsWith("..") ||
+      path.isAbsolute(relativePath) ||
+      cleanFileName === ".gitkeep"
+    ) {
+      throw new Error("Invalid media file path.");
+    }
+    for (let attempt = 1; attempt <= 5; attempt += 1) {
+      try {
+        await unlink(filePath);
+        fileRemoved = true;
+        break;
+      } catch (error) {
+        const fileError = error as NodeJS.ErrnoException;
+        if (fileError.code === "ENOENT") {
+          fileRemoved = true;
+          break;
+        }
+        const retryable =
+          fileError.code === "EBUSY" ||
+          fileError.code === "EPERM" ||
+          fileError.code === "EACCES";
+        if (!retryable || attempt === 5) {
+          break;
+        }
+        await new Promise<void>((resolve) => {
+          setTimeout(resolve, attempt * 150);
+        });
+      }
+    }
   }
   const deletedRecords = await db.delete(media).where(eq(media.id, record.id)).returning({
     id: media.id,
   });
   if (deletedRecords.length === 0) {
     throw new Error("Media database record was not deleted.");
-  }
-  let fileRemoved = false;
-  for (let attempt = 1; attempt <= 5; attempt += 1) {
-    try {
-      await unlink(filePath);
-      fileRemoved = true;
-      break;
-    } catch (error) {
-      const fileError = error as NodeJS.ErrnoException;
-      if (fileError.code === "ENOENT") {
-        fileRemoved = true;
-        break;
-      }
-      const retryable =
-        fileError.code === "EBUSY" ||
-        fileError.code === "EPERM" ||
-        fileError.code === "EACCES";
-      if (!retryable || attempt === 5) {
-        break;
-      }
-      await new Promise<void>((resolve) => {
-        setTimeout(resolve, attempt * 150);
-      });
-    }
   }
   return {
     id: record.id,

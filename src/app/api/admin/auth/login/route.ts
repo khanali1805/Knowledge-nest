@@ -3,10 +3,17 @@ import bcrypt from "bcryptjs";
 import { z } from "zod";
 import { createAdminSession } from "@/lib/admin-auth";
 import { createAdminJsonResponse, isSameOriginRequest } from "@/lib/admin-security";
+import {
+  consumeRateLimit,
+  getRateLimitHeaders,
+  getRequestClientAddress,
+} from "@/lib/rate-limit";
 export const runtime = "nodejs";
 export const dynamic = "force-dynamic";
 const MAX_LOGIN_BODY_BYTES = 8 * 1024;
 const FAILED_LOGIN_DELAY_MS = 800;
+const LOGIN_RATE_LIMIT = 8;
+const LOGIN_RATE_WINDOW_MS = 15 * 60 * 1000;
 const loginSchema = z.object({
   username: z.string().trim().min(1).max(100),
   password: z.string().min(1).max(500),
@@ -29,10 +36,29 @@ function requestBodyIsTooLarge(request: Request): boolean {
   if (!rawContentLength) {
     return false;
   }
+  if (!/^\d+$/.test(rawContentLength.trim())) {
+    return true;
+  }
   const contentLength = Number.parseInt(rawContentLength, 10);
-  return Number.isFinite(contentLength) && contentLength > MAX_LOGIN_BODY_BYTES;
+  return !Number.isFinite(contentLength) || contentLength > MAX_LOGIN_BODY_BYTES;
 }
 export async function POST(request: Request) {
+  const clientAddress = getRequestClientAddress(request);
+  const rateLimit = consumeRateLimit({
+    key: `admin-login:${clientAddress}`,
+    limit: LOGIN_RATE_LIMIT,
+    windowMilliseconds: LOGIN_RATE_WINDOW_MS,
+  });
+  if (!rateLimit.allowed) {
+    return createAdminJsonResponse(
+      {
+        success: false,
+        message: "Too many login attempts. Please try again later.",
+      },
+      429,
+      getRateLimitHeaders(rateLimit),
+    );
+  }
   if (!isSameOriginRequest(request)) {
     return createAdminJsonResponse(
       {
@@ -40,6 +66,7 @@ export async function POST(request: Request) {
         message: "Invalid login request.",
       },
       403,
+      getRateLimitHeaders(rateLimit),
     );
   }
   if (requestBodyIsTooLarge(request)) {
@@ -49,6 +76,7 @@ export async function POST(request: Request) {
         message: "Invalid login request.",
       },
       413,
+      getRateLimitHeaders(rateLimit),
     );
   }
   const contentType = request.headers.get("content-type") ?? "";
@@ -59,6 +87,7 @@ export async function POST(request: Request) {
         message: "Invalid login request.",
       },
       415,
+      getRateLimitHeaders(rateLimit),
     );
   }
   try {
@@ -71,6 +100,7 @@ export async function POST(request: Request) {
           message: "Invalid login request.",
         },
         400,
+        getRateLimitHeaders(rateLimit),
       );
     }
     const configuredUsername = process.env.ADMIN_USERNAME;
@@ -84,6 +114,7 @@ export async function POST(request: Request) {
           message: "Admin authentication is unavailable.",
         },
         500,
+        getRateLimitHeaders(rateLimit),
       );
     }
     const usernameMatches = secureTextEqual(parsedBody.data.username, configuredUsername);
@@ -99,12 +130,17 @@ export async function POST(request: Request) {
           message: "Incorrect username or password.",
         },
         401,
+        getRateLimitHeaders(rateLimit),
       );
     }
     await createAdminSession(configuredUsername);
-    return createAdminJsonResponse({
-      success: true,
-    });
+    return createAdminJsonResponse(
+      {
+        success: true,
+      },
+      200,
+      getRateLimitHeaders(rateLimit),
+    );
   } catch {
     return createAdminJsonResponse(
       {
@@ -112,6 +148,7 @@ export async function POST(request: Request) {
         message: "Unable to complete login.",
       },
       500,
+      getRateLimitHeaders(rateLimit),
     );
   }
 }

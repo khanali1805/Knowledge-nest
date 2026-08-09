@@ -117,10 +117,15 @@ export function isSameOriginRequest(request: Request): boolean {
     originsMatch(candidateOrigin, suppliedOrigin),
   );
 }
-export function createAdminJsonResponse(body: unknown, status = 200): NextResponse {
+export function createAdminJsonResponse(
+  body: unknown,
+  status = 200,
+  headers?: HeadersInit,
+): NextResponse {
   return applyAdminSecurityHeaders(
     NextResponse.json(body, {
       status,
+      headers,
     }),
   );
 }

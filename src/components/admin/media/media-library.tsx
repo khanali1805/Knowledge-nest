@@ -251,7 +251,7 @@ export function MediaLibrary() {
           </button>
           <p className="text-muted-foreground mt-3 text-xs">
             JPG, PNG or WebP. Images are optimized to 1600x900 before upload. Maximum
-            selection size: 10 MB.
+            selection size: 20 MB.
           </p>
         </div>
       </div>

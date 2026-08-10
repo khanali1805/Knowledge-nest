@@ -115,8 +115,10 @@ export function MediaPicker({ open, selectedUrl, onClose, onSelect }: MediaPicke
       ]);
       setSelectedMedia(result.media);
       setMessage(result.message || "Image uploaded successfully.");
-    } catch {
-      setMessage("Unable to upload image.");
+    } catch (uploadError) {
+      setMessage(
+        uploadError instanceof Error ? uploadError.message : "Unable to upload image.",
+      );
     } finally {
       window.setTimeout(() => {
         setIsUploading(false);

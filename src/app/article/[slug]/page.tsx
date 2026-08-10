@@ -93,6 +93,20 @@ function sanitizeArticleContent(content: string): string {
     },
   });
 }
+function removeDuplicateFeaturedImage(
+  content: string,
+  featuredImageUrl: string | null,
+): string {
+  if (!featuredImageUrl) {
+    return content;
+  }
+  const escapedUrl = featuredImageUrl.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
+  const matchingImagePattern = new RegExp(
+    `<(?:p[^>]*>\\s*)?<img\\b[^>]*\\bsrc=(["'])${escapedUrl}\\1[^>]*>\\s*(?:<\\/p>)?`,
+    "i",
+  );
+  return content.replace(matchingImagePattern, "");
+}
 export async function generateMetadata({ params }: ArticlePageProps): Promise<Metadata> {
   const { slug } = await params;
   const article = await getPublishedArticleBySlug(slug);
@@ -140,7 +154,11 @@ export default async function ArticlePage({ params }: ArticlePageProps) {
   const categoryName = article.categoryName ?? "Articles";
   const categorySlug = article.categorySlug ?? createContentSlug(categoryName);
   const publishedAt = article.publishedAt ?? article.updatedAt;
-  const safeContent = sanitizeArticleContent(article.content);
+  const contentWithoutDuplicateFeaturedImage = removeDuplicateFeaturedImage(
+    article.content,
+    article.featuredImageUrl,
+  );
+  const safeContent = sanitizeArticleContent(contentWithoutDuplicateFeaturedImage);
   const adsenseClientId = getGoogleAdsenseClientId();
   const adsenseArticleSlot = getGoogleAdsenseArticleSlot();
   return (

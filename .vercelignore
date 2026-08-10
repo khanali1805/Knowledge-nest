@@ -1,0 +1,14 @@
+backups/
+_handoff/
+*.zip
+*.7z
+*.rar
+*.log
+*.tmp
+*.bak
+coverage/
+playwright-report/
+test-results/
+knowledge-nest-media-*/
+knowledge-nest-step*/
+.chatgpt-*/

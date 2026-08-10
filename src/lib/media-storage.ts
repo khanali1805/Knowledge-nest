@@ -1,5 +1,3 @@
-import { randomUUID } from "crypto";
-import path from "path";
 import { eq, or } from "drizzle-orm";
 import sharp from "sharp";
 import { db } from "@/db";
@@ -39,21 +37,6 @@ type MediaMetadataRecord = {
   height: number | null;
   createdAt: Date;
 };
-
-function sanitizeBaseName(fileName: string) {
-  return path
-    .basename(fileName, path.extname(fileName))
-    .toLowerCase()
-    .replace(/[^a-z0-9]+/g, "-")
-    .replace(/^-+|-+$/g, "")
-    .slice(0, 80);
-}
-
-function createStoredFileName(fileName: string) {
-  const baseName = sanitizeBaseName(fileName);
-  return `${baseName || "image"}-${randomUUID()}.webp`;
-}
-
 function toMediaFile(record: MediaMetadataRecord): MediaFile {
   return {
     id: record.id,
@@ -96,7 +79,6 @@ export async function listMediaFiles(): Promise<MediaFile[]> {
         new Date(firstFile.createdAt).getTime(),
     );
 }
-
 export async function saveMediaFile(file: File): Promise<MediaFile> {
   if (!allowedMimeTypes.has(file.type)) {
     throw new Error("Only JPG, PNG and WebP images are supported.");
@@ -107,49 +89,49 @@ export async function saveMediaFile(file: File): Promise<MediaFile> {
   if (file.size > maximumFileSize) {
     throw new Error("The prepared image exceeds the 4 MB server upload limit.");
   }
-
   const originalBuffer = Buffer.from(await file.arrayBuffer());
+  if (originalBuffer.length === 0) {
+    throw new Error("The uploaded image contains no data.");
+  }
   const inputImage = sharp(originalBuffer, {
     failOn: "error",
-  });
+    limitInputPixels: 80_000_000,
+  }).rotate();
   const originalMetadata = await inputImage.metadata();
-
   if (!originalMetadata.width || !originalMetadata.height) {
     throw new Error("Image dimensions could not be detected.");
   }
-
-  const processedBuffer = await sharp(originalBuffer, {
-    failOn: "error",
-  })
-    .rotate()
-    .resize(ARTICLE_IMAGE_WIDTH, ARTICLE_IMAGE_HEIGHT, {
-      fit: "cover",
-      position: "centre",
-      withoutEnlargement: false,
-    })
+  const processed = await inputImage
     .webp({
       quality: 88,
       effort: 4,
+      smartSubsample: true,
     })
-    .toBuffer();
-
-  const processedMetadata = await sharp(processedBuffer).metadata();
-
-  if (
-    processedMetadata.width !== ARTICLE_IMAGE_WIDTH ||
-    processedMetadata.height !== ARTICLE_IMAGE_HEIGHT
-  ) {
-    throw new Error(
-      "Image normalization failed to produce the required 1600x900 dimensions.",
-    );
+    .toBuffer({
+      resolveWithObject: true,
+    });
+  const processedBuffer = processed.data;
+  const outputWidth = processed.info.width ?? originalMetadata.width;
+  const outputHeight = processed.info.height ?? originalMetadata.height;
+  if (processedBuffer.length <= 0) {
+    throw new Error("Server image processing produced an empty image.");
   }
-
-  const id = randomUUID();
-  const storedFileName = createStoredFileName(file.name);
-  const cleanTitle = path.basename(file.name, path.extname(file.name)).slice(0, 255);
+  if (processedBuffer.length > maximumFileSize) {
+    throw new Error("The processed image exceeds the 4 MB server storage limit.");
+  }
+  const id = crypto.randomUUID();
+  const baseName =
+    file.name
+      .replace(/\.[^.]+$/, "")
+      .replace(/[^a-zA-Z0-9._-]+/g, "-")
+      .replace(/-+/g, "-")
+      .replace(/^-|-$/g, "")
+      .slice(0, 180) || "image";
+  const storedFileName = `${baseName}-${id}.webp`;
   const url = `/api/media/${id}`;
-
-  const [createdRecord] = await db
+  const cleanTitle =
+    baseName.replace(/[-_]+/g, " ").trim().slice(0, 255) || "Article image";
+  const [record] = await db
     .insert(media)
     .values({
       id,
@@ -163,8 +145,8 @@ export async function saveMediaFile(file: File): Promise<MediaFile> {
       fileData: processedBuffer,
       altText: cleanTitle,
       title: cleanTitle,
-      width: ARTICLE_IMAGE_WIDTH,
-      height: ARTICLE_IMAGE_HEIGHT,
+      width: outputWidth,
+      height: outputHeight,
       fileSize: processedBuffer.length,
       metadata: {
         normalized: true,
@@ -173,12 +155,14 @@ export async function saveMediaFile(file: File): Promise<MediaFile> {
         originalMimeType: file.type,
         originalWidth: originalMetadata.width,
         originalHeight: originalMetadata.height,
-        outputWidth: ARTICLE_IMAGE_WIDTH,
-        outputHeight: ARTICLE_IMAGE_HEIGHT,
-        aspectRatio: "16:9",
-        cropMode: "cover-centre",
+        outputWidth,
+        outputHeight,
+        aspectRatio: `${outputWidth}:${outputHeight}`,
+        cropMode: "none",
+        orientationPreserved: true,
         outputFormat: "webp",
       },
+      updatedAt: new Date(),
     })
     .returning({
       id: media.id,
@@ -192,12 +176,23 @@ export async function saveMediaFile(file: File): Promise<MediaFile> {
       height: media.height,
       createdAt: media.createdAt,
     });
-
-  if (!createdRecord) {
-    throw new Error("The media database record was not created.");
+  if (!record) {
+    throw new Error("Media database insert did not return a record.");
   }
-
-  return toMediaFile(createdRecord);
+  return {
+    id: record.id,
+    name: record.originalName,
+    originalName: record.originalName,
+    fileName: record.fileName,
+    url: record.url,
+    size: record.fileSize ?? processedBuffer.length,
+    type: record.mimeType,
+    mimeType: record.mimeType,
+    altText: record.altText ?? "",
+    width: record.width ?? outputWidth,
+    height: record.height ?? outputHeight,
+    createdAt: record.createdAt.toISOString(),
+  };
 }
 
 export async function deleteMediaFile(identifier: string) {

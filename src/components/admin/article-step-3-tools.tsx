@@ -1,4 +1,6 @@
 "use client";
+
+import { prepareImageForUpload } from "@/lib/client-image-upload";
 import {
   Check,
   Clock3,
@@ -230,8 +232,9 @@ export function ArticleStep3Tools({
     setMessage("");
     setError("");
     try {
+      const preparedFile = await prepareImageForUpload(selectedFile);
       const formData = new FormData();
-      formData.append("file", selectedFile);
+      formData.append("file", preparedFile);
       const response = await fetch("/api/admin/media/upload", {
         method: "POST",
         body: formData,

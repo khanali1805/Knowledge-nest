@@ -2,21 +2,39 @@ import { NextResponse } from "next/server";
 import { saveMediaFile } from "@/lib/media-storage";
 export const runtime = "nodejs";
 export const dynamic = "force-dynamic";
+export const maxDuration = 30;
+function jsonError(message: string, status: number) {
+  return NextResponse.json(
+    {
+      success: false,
+      message,
+    },
+    {
+      status,
+      headers: {
+        "Cache-Control": "no-store",
+      },
+    },
+  );
+}
 export async function POST(request: Request) {
+  let formData: FormData;
   try {
-    const formData = await request.formData();
-    const uploadedFile = formData.get("file");
-    if (!(uploadedFile instanceof File)) {
-      return NextResponse.json(
-        {
-          success: false,
-          message: "A valid image file is required.",
-        },
-        {
-          status: 400,
-        },
-      );
-    }
+    formData = await request.formData();
+  } catch {
+    return jsonError("The image upload request could not be read.", 400);
+  }
+  const uploadedFile = formData.get("file");
+  if (!(uploadedFile instanceof File)) {
+    return jsonError("A valid image file is required.", 400);
+  }
+  if (uploadedFile.size <= 0) {
+    return jsonError("The selected image is empty.", 400);
+  }
+  if (uploadedFile.size > 3 * 1024 * 1024) {
+    return jsonError("The prepared image exceeds the production upload limit.", 413);
+  }
+  try {
     const file = await saveMediaFile(uploadedFile);
     return NextResponse.json(
       {
@@ -27,20 +45,15 @@ export async function POST(request: Request) {
       },
       {
         status: 201,
+        headers: {
+          "Cache-Control": "no-store",
+        },
       },
     );
   } catch (error) {
     const message =
       error instanceof Error ? error.message : "Unable to upload the image.";
-    const configurationFailure = message.includes("BLOB_READ_WRITE_TOKEN");
-    return NextResponse.json(
-      {
-        success: false,
-        message,
-      },
-      {
-        status: configurationFailure ? 503 : 400,
-      },
-    );
+    const status = message.toLowerCase().includes("exceed") ? 413 : 500;
+    return jsonError(message, status);
   }
 }

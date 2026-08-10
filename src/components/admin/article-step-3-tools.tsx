@@ -1,6 +1,6 @@
 "use client";
 
-import { prepareImageForUpload } from "@/lib/client-image-upload";
+import { prepareImageForUpload, readJsonResponse } from "@/lib/client-image-upload";
 import {
   Check,
   Clock3,
@@ -234,12 +234,12 @@ export function ArticleStep3Tools({
     try {
       const preparedFile = await prepareImageForUpload(selectedFile);
       const formData = new FormData();
-      formData.append("file", preparedFile);
+      formData.append("file", preparedFile.file);
       const response = await fetch("/api/admin/media/upload", {
         method: "POST",
         body: formData,
       });
-      const result = (await response.json()) as UploadResponse;
+      const result = (await readJsonResponse(response)) as UploadResponse;
       if (!response.ok) {
         throw new Error(result.message ?? "Image upload nahi hui.");
       }

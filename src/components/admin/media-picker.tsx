@@ -96,7 +96,7 @@ export function MediaPicker({ open, selectedUrl, onClose, onSelect }: MediaPicke
     try {
       const preparedFile = await prepareImageForUpload(file);
       const formData = new FormData();
-      formData.append("file", preparedFile);
+      formData.append("file", preparedFile.file);
       setUploadProgress(35);
       const response = await fetch("/api/admin/media", {
         method: "POST",

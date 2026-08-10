@@ -107,7 +107,7 @@ export function MediaLibrary() {
     try {
       const preparedFile = await prepareImageForUpload(file);
       const formData = new FormData();
-      formData.append("file", preparedFile);
+      formData.append("file", preparedFile.file);
       const response = await fetch("/api/admin/media/upload", {
         method: "POST",
         body: formData,

@@ -1,5 +1,4 @@
 import { eq, or } from "drizzle-orm";
-import sharp from "sharp";
 import { db } from "@/db";
 import { media } from "@/db/schema";
 
@@ -89,35 +88,12 @@ export async function saveMediaFile(file: File): Promise<MediaFile> {
   if (file.size > maximumFileSize) {
     throw new Error("The prepared image exceeds the 4 MB server upload limit.");
   }
-  const originalBuffer = Buffer.from(await file.arrayBuffer());
-  if (originalBuffer.length === 0) {
+  const processedBuffer = Buffer.from(await file.arrayBuffer());
+  if (processedBuffer.length === 0) {
     throw new Error("The uploaded image contains no data.");
   }
-  const inputImage = sharp(originalBuffer, {
-    failOn: "error",
-    limitInputPixels: 80_000_000,
-  }).rotate();
-  const originalMetadata = await inputImage.metadata();
-  if (!originalMetadata.width || !originalMetadata.height) {
-    throw new Error("Image dimensions could not be detected.");
-  }
-  const processed = await inputImage
-    .webp({
-      quality: 88,
-      effort: 4,
-      smartSubsample: true,
-    })
-    .toBuffer({
-      resolveWithObject: true,
-    });
-  const processedBuffer = processed.data;
-  const outputWidth = processed.info.width ?? originalMetadata.width;
-  const outputHeight = processed.info.height ?? originalMetadata.height;
-  if (processedBuffer.length <= 0) {
-    throw new Error("Server image processing produced an empty image.");
-  }
   if (processedBuffer.length > maximumFileSize) {
-    throw new Error("The processed image exceeds the 4 MB server storage limit.");
+    throw new Error("The prepared image exceeds the 4 MB server storage limit.");
   }
   const id = crypto.randomUUID();
   const baseName =
@@ -139,28 +115,20 @@ export async function saveMediaFile(file: File): Promise<MediaFile> {
       provider: "neon-postgres",
       originalName: file.name.slice(0, 255),
       fileName: storedFileName,
-      mimeType: "image/webp",
+      mimeType: file.type || "image/webp",
       url,
       storageKey: id,
       fileData: processedBuffer,
       altText: cleanTitle,
       title: cleanTitle,
-      width: outputWidth,
-      height: outputHeight,
       fileSize: processedBuffer.length,
       metadata: {
-        normalized: true,
+        normalizedClientSide: true,
         articleImage: true,
         storage: "neon-postgres-bytea",
-        originalMimeType: file.type,
-        originalWidth: originalMetadata.width,
-        originalHeight: originalMetadata.height,
-        outputWidth,
-        outputHeight,
-        aspectRatio: `${outputWidth}:${outputHeight}`,
-        cropMode: "none",
-        orientationPreserved: true,
-        outputFormat: "webp",
+        serverImageProcessing: false,
+        serverProcessor: "none",
+        outputFormat: file.type || "image/webp",
       },
       updatedAt: new Date(),
     })
@@ -189,8 +157,8 @@ export async function saveMediaFile(file: File): Promise<MediaFile> {
     type: record.mimeType,
     mimeType: record.mimeType,
     altText: record.altText ?? "",
-    width: record.width ?? outputWidth,
-    height: record.height ?? outputHeight,
+    width: record.width,
+    height: record.height,
     createdAt: record.createdAt.toISOString(),
   };
 }

@@ -42,6 +42,7 @@ export async function generateMetadata({
   const page = normalizePage(resolvedSearchParams.page);
   const pageSuffix = page > 1 ? ` - Page ${page}` : "";
   const title = `${category.name} Articles${pageSuffix}`;
+  const ogImage = `${settings.siteUrl}/api/og?title=${encodeURIComponent(title)}`;
   const description =
     category.description ??
     `Browse published ${category.name.toLowerCase()} articles on ${settings.siteName}.`;
@@ -59,11 +60,20 @@ export async function generateMetadata({
       title,
       description,
       url: canonical,
+      images: [
+        {
+          url: ogImage,
+          width: 1200,
+          height: 630,
+          alt: title,
+        },
+      ],
     },
     twitter: {
       card: "summary_large_image",
       title,
       description,
+      images: [ogImage],
     },
   };
 }

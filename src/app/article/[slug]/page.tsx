@@ -10,6 +10,7 @@ import { SiteHeader } from "@/components/site/site-header";
 import { ArticleJsonLd } from "@/components/site/seo/article-json-ld";
 import { BreadcrumbJsonLd } from "@/components/site/seo/breadcrumb-json-ld";
 import { getGoogleAdsenseArticleSlot, getGoogleAdsenseClientId } from "@/lib/adsense";
+import { getPublicSiteSettings } from "@/lib/settings/site-settings-store";
 import {
   createContentSlug,
   getArticleExcerpt,
@@ -116,6 +117,10 @@ export async function generateMetadata({ params }: ArticlePageProps): Promise<Me
     };
   }
   const excerpt = getArticleExcerpt(article);
+  const settings = await getPublicSiteSettings();
+  const socialImage =
+    article.featuredImageUrl ||
+    `${settings.siteUrl}/api/og?title=${encodeURIComponent(article.title)}`;
   const publishedAt = article.publishedAt ?? article.updatedAt;
   return {
     title: article.title,
@@ -131,26 +136,18 @@ export async function generateMetadata({ params }: ArticlePageProps): Promise<Me
       publishedTime: publishedAt.toISOString(),
       modifiedTime: article.updatedAt.toISOString(),
       section: article.categoryName ?? "Articles",
-      ...(article.featuredImageUrl
-        ? {
-            images: [
-              {
-                url: article.featuredImageUrl,
-                alt: article.featuredImageAlt || article.title,
-              },
-            ],
-          }
-        : {}),
+      images: [
+        {
+          url: socialImage,
+          alt: article.featuredImageAlt || article.title,
+        },
+      ],
     },
     twitter: {
       card: "summary_large_image",
       title: article.title,
       description: excerpt,
-      ...(article.featuredImageUrl
-        ? {
-            images: [article.featuredImageUrl],
-          }
-        : {}),
+      images: [socialImage],
     },
   };
 }

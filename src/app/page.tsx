@@ -6,6 +6,7 @@ export const dynamic = "force-dynamic";
 export async function generateMetadata(): Promise<Metadata> {
   const settings = await getPublicSiteSettings();
   const siteName = settings.siteName?.trim() || "Knowledge Nest";
+  const ogImage = `${settings.siteUrl}/api/og?title=${encodeURIComponent(siteName)}`;
   const description =
     settings.tagline?.trim() ||
     "Trusted knowledge, useful information, educational articles and insights across technology, science, business, health, finance and general knowledge.";
@@ -23,11 +24,20 @@ export async function generateMetadata(): Promise<Metadata> {
       siteName,
       title: siteName,
       description,
+      images: [
+        {
+          url: ogImage,
+          width: 1200,
+          height: 630,
+          alt: siteName,
+        },
+      ],
     },
     twitter: {
       card: "summary_large_image",
       title: siteName,
       description,
+      images: [ogImage],
     },
   };
 }

@@ -65,6 +65,7 @@ export async function generateMetadata(): Promise<Metadata> {
         },
       ],
       shortcut: "/favicon.ico",
+      apple: "/apple-icon.png",
     },
     manifest: "/manifest.webmanifest",
   };

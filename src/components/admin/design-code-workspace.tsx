@@ -15,7 +15,7 @@ import {
   XCircle,
   Zap,
 } from "lucide-react";
-import { useMemo, useState } from "react";
+import { useCallback, useRef, useState } from "react";
 import type {
   DesignCodeStore,
   DesignCodeValidationResult,
@@ -36,12 +36,80 @@ const previewWidths: Record<PreviewDevice, string> = {
   tablet: "768px",
   mobile: "390px",
 };
+const previewTargets = [
+  {
+    label: "Homepage",
+    path: "/",
+  },
+  {
+    label: "Latest Articles",
+    path: "/latest",
+  },
+  {
+    label: "Featured Articles",
+    path: "/featured",
+  },
+  {
+    label: "Search",
+    path: "/search",
+  },
+  {
+    label: "Article - Skin Confidence",
+    path: "/article/expert-guide-to-skin-confidence-feeling-beautiful-in-a-filtered-world",
+  },
+  {
+    label: "Category - Beauty & Skincare",
+    path: "/category/beauty-skincare",
+  },
+  {
+    label: "Category - Women's Fashion & Style",
+    path: "/category/womens-fashion-style",
+  },
+  {
+    label: "Category - Health, Fitness & Wellness",
+    path: "/category/health-fitness-wellness",
+  },
+  {
+    label: "Category - Travel & Lifestyle",
+    path: "/category/travel-lifestyle",
+  },
+  {
+    label: "About Us",
+    path: "/about-us",
+  },
+  {
+    label: "Contact Us",
+    path: "/contact-us",
+  },
+  {
+    label: "Privacy Policy",
+    path: "/privacy-policy",
+  },
+  {
+    label: "Terms and Conditions",
+    path: "/terms-and-conditions",
+  },
+  {
+    label: "Disclaimer",
+    path: "/disclaimer",
+  },
+  {
+    label: "RSS Feed Page",
+    path: "/feed",
+  },
+  {
+    label: "HTML Sitemap",
+    path: "/sitemap-page",
+  },
+] as const;
 export function DesignCodeWorkspace({ initialStore }: DesignCodeWorkspaceProps) {
   const [store, setStore] = useState(initialStore);
   const [name, setName] = useState(initialStore.draftName);
   const [code, setCode] = useState(initialStore.draftCode);
   const [previewCode, setPreviewCode] = useState(initialStore.activeRevision.code);
   const [previewDevice, setPreviewDevice] = useState<PreviewDevice>("desktop");
+  const [previewPath, setPreviewPath] = useState("/");
+  const previewFrameRef = useRef<HTMLIFrameElement | null>(null);
   const [validation, setValidation] = useState<DesignCodeValidationResult | null>(null);
   const [loadingAction, setLoadingAction] = useState<DesignAction | null>(null);
   const [message, setMessage] = useState("");
@@ -97,99 +165,69 @@ export function DesignCodeWorkspace({ initialStore }: DesignCodeWorkspaceProps) 
       setLoadingAction(null);
     }
   }
-  const previewDocument = useMemo(
-    () => `<!doctype html>
-<html lang="en">
-<head>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width,initial-scale=1">
-<style>
-* {
-  box-sizing: border-box;
-}
-body {
-  margin: 0;
-  padding: 18px;
-  background: #f8fafc;
-  color: #0f172a;
-  font-family: Arial, sans-serif;
-}
-.design-preview-root {
-  border: 1px solid #cbd5e1;
-  border-radius: 18px;
-  background: #ffffff;
-  padding: 20px;
-}
-.design-preview-header,
-.design-preview-card,
-.design-preview-footer {
-  border: 1px solid #cbd5e1;
-  border-radius: 14px;
-  padding: 16px;
-}
-.design-preview-grid {
-  display: grid;
-  grid-template-columns: repeat(2, minmax(0, 1fr));
-  gap: 12px;
-  margin: 16px 0;
-}
-.design-preview-button {
-  border: 0;
-  border-radius: 10px;
-  padding: 10px 16px;
-  background: #0f172a;
-  color: #ffffff;
-  font-weight: 700;
-}
-@media (max-width: 600px) {
-  .design-preview-grid {
-    grid-template-columns: 1fr;
-  }
-}
-${previewCode}
-</style>
-</head>
-<body>
-<main class="design-preview-root">
-  <header class="design-preview-header">
-    <small>KNOWLEDGE NEST</small>
-    <h1 class="design-preview-title">
-      Discover useful knowledge
-    </h1>
-    <p>
-      Preview your design safely before activation.
-    </p>
-  </header>
-  <section class="design-preview-grid">
-    <article class="design-preview-card">
-      <small>TECHNOLOGY</small>
-      <h2>Modern article card</h2>
-      <p>
-        Published content stays independent from visual design.
-      </p>
-    </article>
-    <article class="design-preview-card">
-      <small>KNOWLEDGE</small>
-      <h2>Safe design replacement</h2>
-      <p>
-        Invalid executable code cannot become active.
-      </p>
-    </article>
-  </section>
-  <button
-    class="design-preview-button"
-    type="button"
-  >
-    Read article
-  </button>
-  <footer class="design-preview-footer">
-    Responsive footer preview
-  </footer>
-</main>
-</body>
-</html>`,
+  const applyPreviewCode = useCallback(
+    (previewCss?: string) => {
+      const iframe = previewFrameRef.current;
+      if (!iframe) {
+        return;
+      }
+      try {
+        const previewDocument = iframe.contentDocument;
+        if (!previewDocument?.head) {
+          return;
+        }
+        const existingStyle = previewDocument.getElementById(
+          "knowledge-nest-design-studio-preview",
+        );
+        if (existingStyle) {
+          existingStyle.remove();
+        }
+        const style = previewDocument.createElement("style");
+        style.id = "knowledge-nest-design-studio-preview";
+        style.textContent = previewCss ?? previewCode;
+        previewDocument.head.appendChild(style);
+      } catch {
+        setError("Unable to apply Design Studio CSS inside the website preview.");
+      }
+    },
     [previewCode],
   );
+  async function previewDraft() {
+    setLoadingAction("validate");
+    setMessage("");
+    setError("");
+    try {
+      const response = await fetch("/api/admin/design-code", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          action: "validate",
+          name,
+          code,
+        }),
+      });
+      const payload = (await response.json()) as DesignCodeApiResponse;
+      if (payload.validation) {
+        setValidation(payload.validation);
+      }
+      if (!response.ok || !payload.validation?.valid) {
+        throw new Error(payload.message || "Design code validation failed.");
+      }
+      setPreviewCode(code);
+      applyPreviewCode(code);
+      setMessage("Preview updated. The design is not active on the public website.");
+    } catch (operationError) {
+      setError(
+        operationError instanceof Error
+          ? operationError.message
+          : "Unable to preview this design.",
+      );
+    } finally {
+      setLoadingAction(null);
+    }
+  }
   return (
     <div className="space-y-6">
       <section className="border-border rounded-2xl border p-6">
@@ -238,6 +276,15 @@ ${previewCode}
             />
           </label>
           <div className="mt-5 flex flex-wrap gap-2">
+            <button
+              type="button"
+              onClick={() => void previewDraft()}
+              disabled={loadingAction !== null}
+              className="border-border inline-flex h-10 items-center gap-2 rounded-xl border px-4 text-sm font-bold"
+            >
+              <Eye className="h-4 w-4" />
+              Preview Design
+            </button>
             <button
               type="button"
               onClick={() => void runAction("save")}
@@ -307,7 +354,29 @@ ${previewCode}
           <section className="border-border rounded-2xl border p-6">
             <div className="flex items-center gap-2">
               <Eye className="h-5 w-5" />
-              <h2 className="font-black">Responsive Preview</h2>
+              <div>
+                <h2 className="font-black">Real Website Preview</h2>
+                <p className="text-muted-foreground mt-1 text-xs">
+                  Preview the draft design across real public website pages without
+                  activating or publishing it.
+                </p>
+              </div>
+            </div>
+            <div className="mt-4">
+              <label className="block text-xs font-bold">
+                Preview page
+                <select
+                  value={previewPath}
+                  onChange={(event) => setPreviewPath(event.target.value)}
+                  className="border-border bg-background mt-2 h-10 w-full rounded-xl border px-3 text-sm"
+                >
+                  {previewTargets.map((target) => (
+                    <option key={target.path} value={target.path}>
+                      {target.label}
+                    </option>
+                  ))}
+                </select>
+              </label>
             </div>
             <div className="mt-4 flex flex-wrap gap-2">
               <button
@@ -337,14 +406,15 @@ ${previewCode}
             </div>
             <div className="mt-4 overflow-auto rounded-xl bg-slate-100 p-3">
               <iframe
-                title="Design preview"
-                sandbox=""
-                srcDoc={previewDocument}
+                ref={previewFrameRef}
+                title="Knowledge Nest live design preview"
+                src={previewPath}
+                onLoad={() => applyPreviewCode()}
                 style={{
                   width: previewWidths[previewDevice],
                   maxWidth: "100%",
                 }}
-                className="mx-auto h-[540px] rounded-xl border bg-white"
+                className="mx-auto h-[700px] rounded-xl border bg-white"
               />
             </div>
           </section>

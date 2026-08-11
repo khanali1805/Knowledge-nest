@@ -1,12 +1,11 @@
 import "server-only";
 import { randomUUID } from "node:crypto";
-import { promises as fs } from "node:fs";
-import path from "node:path";
+import { desc, eq } from "drizzle-orm";
+import { db } from "@/db";
+import { designCodeRevisions, designCodeState } from "@/db/schema";
 import type { DesignCodeRevision, DesignCodeStore } from "@/lib/design-code/types";
 import { validateDesignCode } from "@/lib/design-code/validation";
-const DATA_DIRECTORY = path.join(process.cwd(), "data");
-const STORE_PATH = path.join(DATA_DIRECTORY, "design-code-store.json");
-const RECOVERY_PATH = path.join(DATA_DIRECTORY, "design-code-store.last-valid.json");
+const DESIGN_STATE_ID = "knowledge-nest-design";
 const MAXIMUM_HISTORY_LENGTH = 30;
 const MAXIMUM_STORED_CODE_LENGTH = 100_000;
 export const DEFAULT_DESIGN_CODE = `
@@ -40,6 +39,7 @@ h6 {
   color: #ffffff;
 }
 `.trim();
+type RevisionRow = typeof designCodeRevisions.$inferSelect;
 function createRevision(
   name: string,
   code: string,
@@ -59,13 +59,53 @@ function createRevision(
     activatedAt,
   };
 }
-function createInitialStore(): DesignCodeStore {
+function rowToRevision(row: RevisionRow): DesignCodeRevision {
+  return {
+    id: row.id,
+    name: row.name,
+    code: row.code,
+    checksum: row.checksum,
+    createdAt: row.createdAt.toISOString(),
+    activatedAt: row.activatedAt ? row.activatedAt.toISOString() : null,
+  };
+}
+async function loadRevision(id: string | null): Promise<DesignCodeRevision | null> {
+  if (!id) {
+    return null;
+  }
+  const [row] = await db
+    .select()
+    .from(designCodeRevisions)
+    .where(eq(designCodeRevisions.id, id))
+    .limit(1);
+  return row ? rowToRevision(row) : null;
+}
+async function createInitialDatabaseStore(): Promise<DesignCodeStore> {
   const now = new Date().toISOString();
   const revision = createRevision(
     "Knowledge Nest Modern Default",
     DEFAULT_DESIGN_CODE,
     now,
   );
+  await db.transaction(async (transaction) => {
+    await transaction.insert(designCodeRevisions).values({
+      id: revision.id,
+      name: revision.name,
+      code: revision.code,
+      checksum: revision.checksum,
+      isActive: true,
+      createdAt: new Date(revision.createdAt),
+      activatedAt: revision.activatedAt ? new Date(revision.activatedAt) : null,
+    });
+    await transaction.insert(designCodeState).values({
+      id: DESIGN_STATE_ID,
+      draftName: revision.name,
+      draftCode: revision.code,
+      activeRevisionId: revision.id,
+      lastValidRevisionId: revision.id,
+      updatedAt: new Date(now),
+    });
+  });
   return {
     draftName: revision.name,
     draftCode: revision.code,
@@ -75,123 +115,38 @@ function createInitialStore(): DesignCodeStore {
     updatedAt: now,
   };
 }
-function normaliseRevision(value: unknown): DesignCodeRevision | null {
-  if (!value || typeof value !== "object" || Array.isArray(value)) {
-    return null;
+export async function readDesignCodeStore(): Promise<DesignCodeStore> {
+  const [state] = await db
+    .select()
+    .from(designCodeState)
+    .where(eq(designCodeState.id, DESIGN_STATE_ID))
+    .limit(1);
+  if (!state) {
+    return createInitialDatabaseStore();
   }
-  const revision = value as Partial<DesignCodeRevision>;
-  if (typeof revision.code !== "string") {
-    return null;
+  const [activeRevision, lastValidRevision, historyRows] = await Promise.all([
+    loadRevision(state.activeRevisionId),
+    loadRevision(state.lastValidRevisionId),
+    db
+      .select()
+      .from(designCodeRevisions)
+      .orderBy(desc(designCodeRevisions.createdAt))
+      .limit(MAXIMUM_HISTORY_LENGTH),
+  ]);
+  if (!activeRevision) {
+    throw new Error("Design Studio active revision is missing from database.");
   }
-  const safeCode = revision.code.slice(0, MAXIMUM_STORED_CODE_LENGTH).trim();
-  const validation = validateDesignCode(safeCode);
-  if (!validation.valid || !validation.checksum) {
-    return null;
+  if (!lastValidRevision) {
+    throw new Error("Design Studio last valid revision is missing from database.");
   }
   return {
-    id: typeof revision.id === "string" && revision.id ? revision.id : randomUUID(),
-    name:
-      typeof revision.name === "string"
-        ? revision.name.trim().slice(0, 120) || "Untitled Design"
-        : "Untitled Design",
-    code: safeCode,
-    checksum: validation.checksum,
-    createdAt:
-      typeof revision.createdAt === "string"
-        ? revision.createdAt
-        : new Date().toISOString(),
-    activatedAt: typeof revision.activatedAt === "string" ? revision.activatedAt : null,
-  };
-}
-function normaliseStore(value: unknown): DesignCodeStore | null {
-  if (!value || typeof value !== "object" || Array.isArray(value)) {
-    return null;
-  }
-  const input = value as Partial<DesignCodeStore>;
-  const activeRevision = normaliseRevision(input.activeRevision);
-  const lastValidRevision = normaliseRevision(input.lastValidRevision) ?? activeRevision;
-  if (!activeRevision || !lastValidRevision) {
-    return null;
-  }
-  const history = Array.isArray(input.history)
-    ? input.history
-        .map((revision) => normaliseRevision(revision))
-        .filter((revision): revision is DesignCodeRevision => revision !== null)
-        .slice(0, MAXIMUM_HISTORY_LENGTH)
-    : [];
-  return {
-    draftName:
-      typeof input.draftName === "string"
-        ? input.draftName.trim().slice(0, 120) || activeRevision.name
-        : activeRevision.name,
-    draftCode:
-      typeof input.draftCode === "string"
-        ? input.draftCode.slice(0, MAXIMUM_STORED_CODE_LENGTH)
-        : activeRevision.code,
+    draftName: state.draftName,
+    draftCode: state.draftCode,
     activeRevision,
     lastValidRevision,
-    history: history.length > 0 ? history : [activeRevision],
-    updatedAt:
-      typeof input.updatedAt === "string" ? input.updatedAt : new Date().toISOString(),
+    history: historyRows.map(rowToRevision),
+    updatedAt: state.updatedAt.toISOString(),
   };
-}
-async function fileExists(filePath: string): Promise<boolean> {
-  try {
-    await fs.access(filePath);
-    return true;
-  } catch {
-    return false;
-  }
-}
-async function readStoreFile(filePath: string): Promise<DesignCodeStore | null> {
-  try {
-    const content = await fs.readFile(filePath, "utf8");
-    return normaliseStore(JSON.parse(content) as unknown);
-  } catch {
-    return null;
-  }
-}
-async function writeStore(store: DesignCodeStore): Promise<void> {
-  await fs.mkdir(DATA_DIRECTORY, {
-    recursive: true,
-  });
-  const normalisedStore = normaliseStore(store);
-  if (!normalisedStore) {
-    throw new Error("Design Studio store validation failed.");
-  }
-  const temporaryPath = path.join(
-    DATA_DIRECTORY,
-    `design-code-store.${process.pid}.${Date.now()}.${randomUUID()}.pending.json`,
-  );
-  try {
-    await fs.writeFile(temporaryPath, JSON.stringify(normalisedStore, null, 2), "utf8");
-    if (await fileExists(STORE_PATH)) {
-      const currentStore = await readStoreFile(STORE_PATH);
-      if (currentStore) {
-        await fs.copyFile(STORE_PATH, RECOVERY_PATH);
-      }
-    }
-    await fs.copyFile(temporaryPath, STORE_PATH);
-    await fs.copyFile(STORE_PATH, RECOVERY_PATH);
-  } finally {
-    await fs.rm(temporaryPath, {
-      force: true,
-    });
-  }
-}
-export async function readDesignCodeStore(): Promise<DesignCodeStore> {
-  const primaryStore = await readStoreFile(STORE_PATH);
-  if (primaryStore) {
-    return primaryStore;
-  }
-  const recoveredStore = await readStoreFile(RECOVERY_PATH);
-  if (recoveredStore) {
-    await writeStore(recoveredStore);
-    return recoveredStore;
-  }
-  const initialStore = createInitialStore();
-  await writeStore(initialStore);
-  return initialStore;
 }
 export async function saveDesignCodeDraft(input: {
   name: string;
@@ -204,12 +159,17 @@ export async function saveDesignCodeDraft(input: {
   if (!validation.valid) {
     throw new Error(validation.errors[0] ?? "Design code validation failed.");
   }
-  const store = await readDesignCodeStore();
-  store.draftName = input.name.trim().slice(0, 120) || "Untitled Design";
-  store.draftCode = input.code.slice(0, MAXIMUM_STORED_CODE_LENGTH).trim();
-  store.updatedAt = new Date().toISOString();
-  await writeStore(store);
-  return store;
+  const draftName = input.name.trim().slice(0, 120) || "Untitled Design";
+  const draftCode = input.code.slice(0, MAXIMUM_STORED_CODE_LENGTH).trim();
+  await db
+    .update(designCodeState)
+    .set({
+      draftName,
+      draftCode,
+      updatedAt: new Date(),
+    })
+    .where(eq(designCodeState.id, DESIGN_STATE_ID));
+  return readDesignCodeStore();
 }
 export async function activateDesignCode(input: {
   name: string;
@@ -221,86 +181,164 @@ export async function activateDesignCode(input: {
   }
   const store = await readDesignCodeStore();
   const now = new Date().toISOString();
-  const previousActiveRevision = store.activeRevision;
   const revision = createRevision(input.name, input.code, now);
-  store.draftName = revision.name;
-  store.draftCode = revision.code;
-  store.lastValidRevision = previousActiveRevision;
-  store.activeRevision = revision;
-  store.history = [
-    revision,
-    ...store.history.filter(
-      (historyRevision) => historyRevision.checksum !== revision.checksum,
-    ),
-  ].slice(0, MAXIMUM_HISTORY_LENGTH);
-  store.updatedAt = now;
-  await writeStore(store);
-  return store;
+  await db.transaction(async (transaction) => {
+    await transaction
+      .update(designCodeRevisions)
+      .set({
+        isActive: false,
+      })
+      .where(eq(designCodeRevisions.isActive, true));
+    await transaction.insert(designCodeRevisions).values({
+      id: revision.id,
+      name: revision.name,
+      code: revision.code,
+      checksum: revision.checksum,
+      isActive: true,
+      createdAt: new Date(revision.createdAt),
+      activatedAt: revision.activatedAt ? new Date(revision.activatedAt) : null,
+    });
+    await transaction
+      .update(designCodeState)
+      .set({
+        draftName: revision.name,
+        draftCode: revision.code,
+        activeRevisionId: revision.id,
+        lastValidRevisionId: store.activeRevision.id,
+        updatedAt: new Date(now),
+      })
+      .where(eq(designCodeState.id, DESIGN_STATE_ID));
+  });
+  return readDesignCodeStore();
 }
 export async function rollbackDesignCode(): Promise<DesignCodeStore> {
   const store = await readDesignCodeStore();
-  const previousRevision = normaliseRevision(store.lastValidRevision);
-  if (!previousRevision) {
-    throw new Error("No valid previous design is available for rollback.");
-  }
-  const currentRevision = store.activeRevision;
+  const previousRevision = store.lastValidRevision;
   const now = new Date().toISOString();
-  const restoredRevision: DesignCodeRevision = {
-    ...previousRevision,
-    id: randomUUID(),
-    createdAt: now,
-    activatedAt: now,
-  };
-  store.activeRevision = restoredRevision;
-  store.lastValidRevision = currentRevision;
-  store.draftName = restoredRevision.name;
-  store.draftCode = restoredRevision.code;
-  store.history = [restoredRevision, ...store.history].slice(0, MAXIMUM_HISTORY_LENGTH);
-  store.updatedAt = now;
-  await writeStore(store);
-  return store;
+  const restoredRevision = createRevision(
+    previousRevision.name,
+    previousRevision.code,
+    now,
+  );
+  await db.transaction(async (transaction) => {
+    await transaction
+      .update(designCodeRevisions)
+      .set({
+        isActive: false,
+      })
+      .where(eq(designCodeRevisions.isActive, true));
+    await transaction.insert(designCodeRevisions).values({
+      id: restoredRevision.id,
+      name: restoredRevision.name,
+      code: restoredRevision.code,
+      checksum: restoredRevision.checksum,
+      isActive: true,
+      createdAt: new Date(restoredRevision.createdAt),
+      activatedAt: restoredRevision.activatedAt
+        ? new Date(restoredRevision.activatedAt)
+        : null,
+    });
+    await transaction
+      .update(designCodeState)
+      .set({
+        draftName: restoredRevision.name,
+        draftCode: restoredRevision.code,
+        activeRevisionId: restoredRevision.id,
+        lastValidRevisionId: store.activeRevision.id,
+        updatedAt: new Date(now),
+      })
+      .where(eq(designCodeState.id, DESIGN_STATE_ID));
+  });
+  return readDesignCodeStore();
 }
 export async function restoreDesignCodeRevision(
   revisionId: string,
 ): Promise<DesignCodeStore> {
   const store = await readDesignCodeStore();
-  const selectedRevision = store.history.find((revision) => revision.id === revisionId);
-  if (!selectedRevision) {
+  const [selectedRow] = await db
+    .select()
+    .from(designCodeRevisions)
+    .where(eq(designCodeRevisions.id, revisionId))
+    .limit(1);
+  if (!selectedRow) {
     throw new Error("Selected design revision was not found.");
   }
-  const previousActiveRevision = store.activeRevision;
+  const selectedRevision = rowToRevision(selectedRow);
   const now = new Date().toISOString();
   const restoredRevision = createRevision(
     `${selectedRevision.name} Restored`,
     selectedRevision.code,
     now,
   );
-  store.lastValidRevision = previousActiveRevision;
-  store.activeRevision = restoredRevision;
-  store.draftName = restoredRevision.name;
-  store.draftCode = restoredRevision.code;
-  store.history = [restoredRevision, ...store.history].slice(0, MAXIMUM_HISTORY_LENGTH);
-  store.updatedAt = now;
-  await writeStore(store);
-  return store;
+  await db.transaction(async (transaction) => {
+    await transaction
+      .update(designCodeRevisions)
+      .set({
+        isActive: false,
+      })
+      .where(eq(designCodeRevisions.isActive, true));
+    await transaction.insert(designCodeRevisions).values({
+      id: restoredRevision.id,
+      name: restoredRevision.name,
+      code: restoredRevision.code,
+      checksum: restoredRevision.checksum,
+      isActive: true,
+      createdAt: new Date(restoredRevision.createdAt),
+      activatedAt: restoredRevision.activatedAt
+        ? new Date(restoredRevision.activatedAt)
+        : null,
+    });
+    await transaction
+      .update(designCodeState)
+      .set({
+        draftName: restoredRevision.name,
+        draftCode: restoredRevision.code,
+        activeRevisionId: restoredRevision.id,
+        lastValidRevisionId: store.activeRevision.id,
+        updatedAt: new Date(now),
+      })
+      .where(eq(designCodeState.id, DESIGN_STATE_ID));
+  });
+  return readDesignCodeStore();
 }
 export async function resetDesignCode(): Promise<DesignCodeStore> {
   const store = await readDesignCodeStore();
-  const previousActiveRevision = store.activeRevision;
   const now = new Date().toISOString();
   const defaultRevision = createRevision(
     "Knowledge Nest Modern Default",
     DEFAULT_DESIGN_CODE,
     now,
   );
-  store.lastValidRevision = previousActiveRevision;
-  store.activeRevision = defaultRevision;
-  store.draftName = defaultRevision.name;
-  store.draftCode = defaultRevision.code;
-  store.history = [defaultRevision, ...store.history].slice(0, MAXIMUM_HISTORY_LENGTH);
-  store.updatedAt = now;
-  await writeStore(store);
-  return store;
+  await db.transaction(async (transaction) => {
+    await transaction
+      .update(designCodeRevisions)
+      .set({
+        isActive: false,
+      })
+      .where(eq(designCodeRevisions.isActive, true));
+    await transaction.insert(designCodeRevisions).values({
+      id: defaultRevision.id,
+      name: defaultRevision.name,
+      code: defaultRevision.code,
+      checksum: defaultRevision.checksum,
+      isActive: true,
+      createdAt: new Date(defaultRevision.createdAt),
+      activatedAt: defaultRevision.activatedAt
+        ? new Date(defaultRevision.activatedAt)
+        : null,
+    });
+    await transaction
+      .update(designCodeState)
+      .set({
+        draftName: defaultRevision.name,
+        draftCode: defaultRevision.code,
+        activeRevisionId: defaultRevision.id,
+        lastValidRevisionId: store.activeRevision.id,
+        updatedAt: new Date(now),
+      })
+      .where(eq(designCodeState.id, DESIGN_STATE_ID));
+  });
+  return readDesignCodeStore();
 }
 export async function getActiveDesignCode(): Promise<string> {
   const store = await readDesignCodeStore();

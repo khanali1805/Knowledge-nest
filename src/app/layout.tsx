@@ -12,6 +12,7 @@ import "./globals.css";
 const REQUEST_PATHNAME_HEADER = "x-knowledge-nest-request-pathname";
 export async function generateMetadata(): Promise<Metadata> {
   const settings = await getPublicSiteSettings();
+  const adsenseClientId = getGoogleAdsenseClientId();
   const ogImage = `${settings.siteUrl}/api/og?title=${encodeURIComponent(
     settings.siteName,
   )}`;
@@ -68,6 +69,13 @@ export async function generateMetadata(): Promise<Metadata> {
       apple: "/apple-icon.png",
     },
     manifest: "/manifest.webmanifest",
+    ...(adsenseClientId
+      ? {
+          other: {
+            "google-adsense-account": adsenseClientId,
+          },
+        }
+      : {}),
   };
 }
 export const viewport: Viewport = {

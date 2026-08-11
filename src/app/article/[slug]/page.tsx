@@ -142,6 +142,16 @@ export async function generateMetadata({ params }: ArticlePageProps): Promise<Me
           }
         : {}),
     },
+    twitter: {
+      card: "summary_large_image",
+      title: article.title,
+      description: excerpt,
+      ...(article.featuredImageUrl
+        ? {
+            images: [article.featuredImageUrl],
+          }
+        : {}),
+    },
   };
 }
 export default async function ArticlePage({ params }: ArticlePageProps) {

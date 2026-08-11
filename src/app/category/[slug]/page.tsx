@@ -1,4 +1,4 @@
-﻿import type { Metadata } from "next";
+import type { Metadata } from "next";
 import { notFound, redirect } from "next/navigation";
 import { ArticleCard } from "@/components/site/article-card";
 import { Pagination } from "@/components/site/pagination";
@@ -59,6 +59,11 @@ export async function generateMetadata({
       title,
       description,
       url: canonical,
+    },
+    twitter: {
+      card: "summary_large_image",
+      title,
+      description,
     },
   };
 }

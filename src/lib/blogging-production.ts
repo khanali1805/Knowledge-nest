@@ -1,3 +1,4 @@
+import { getSiteUrl } from "@/lib/site-url";
 export type BloggingArticle = {
   id: string;
   title: string;
@@ -49,14 +50,20 @@ export function formatArticleDate(value: string | null): string {
   }).format(date);
 }
 export function createWebsiteStructuredData() {
+  const siteUrl = getSiteUrl();
   return {
     "@context": "https://schema.org",
     "@type": "WebSite",
+    "@id": `${siteUrl}/#website`,
     name: "Knowledge Nest",
-    url: "/",
+    alternateName: ["KnowledgeNest", "Knowledge Nest Website"],
+    url: siteUrl,
     potentialAction: {
       "@type": "SearchAction",
-      target: "/search?q={search_term_string}",
+      target: {
+        "@type": "EntryPoint",
+        urlTemplate: `${siteUrl}/search?q={search_term_string}`,
+      },
       "query-input": "required name=search_term_string",
     },
   };

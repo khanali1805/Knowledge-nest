@@ -22,6 +22,13 @@ export async function generateMetadata(): Promise<Metadata> {
       template: `%s | ${settings.siteName}`,
     },
     description: settings.tagline,
+    applicationName: settings.siteName,
+    alternates: {
+      canonical: "/",
+    },
+    category: "education",
+    creator: settings.siteName,
+    publisher: settings.siteName,
     robots: {
       index: settings.indexSite,
       follow: settings.indexSite,
@@ -47,7 +54,17 @@ export async function generateMetadata(): Promise<Metadata> {
       images: [ogImage],
     },
     icons: {
-      icon: "/icon.svg",
+      icon: [
+        {
+          url: "/favicon.ico",
+          type: "image/x-icon",
+        },
+        {
+          url: "/icon.svg",
+          type: "image/svg+xml",
+        },
+      ],
+      shortcut: "/favicon.ico",
     },
     manifest: "/manifest.webmanifest",
   };

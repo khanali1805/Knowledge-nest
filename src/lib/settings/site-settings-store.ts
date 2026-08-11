@@ -1,7 +1,8 @@
-﻿import { asc, eq, inArray } from "drizzle-orm";
+import { asc, eq, inArray } from "drizzle-orm";
 import { db } from "@/db";
 import { siteSettings } from "@/db/schema";
 import type { SiteSettingsInput } from "@/lib/settings/validation";
+import { getSiteUrl } from "@/lib/site-url";
 export const SITE_SETTING_KEYS = [
   "siteName",
   "tagline",
@@ -16,7 +17,7 @@ export type SiteSettingKey = (typeof SITE_SETTING_KEYS)[number];
 export const defaultSiteSettings: SiteSettingsInput = {
   siteName: "Knowledge Nest",
   tagline: "Trusted knowledge for everyone.",
-  siteUrl: "http://localhost:3000",
+  siteUrl: getSiteUrl(),
   adminEmail: "admin@example.com",
   postsPerPage: 12,
   language: "en",

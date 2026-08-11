@@ -5,11 +5,30 @@ import { getPublicSiteSettings } from "@/lib/settings/site-settings-store";
 export const dynamic = "force-dynamic";
 export async function generateMetadata(): Promise<Metadata> {
   const settings = await getPublicSiteSettings();
+  const siteName = settings.siteName?.trim() || "Knowledge Nest";
+  const description =
+    settings.tagline?.trim() ||
+    "Trusted knowledge, useful information, educational articles and insights across technology, science, business, health, finance and general knowledge.";
   return {
-    title: settings.siteName?.trim() || "Knowledge Nest",
-    description:
-      settings.tagline?.trim() ||
-      "Useful knowledge, stories and information from every category.",
+    title: {
+      absolute: siteName,
+    },
+    description,
+    alternates: {
+      canonical: "/",
+    },
+    openGraph: {
+      type: "website",
+      url: "/",
+      siteName,
+      title: siteName,
+      description,
+    },
+    twitter: {
+      card: "summary_large_image",
+      title: siteName,
+      description,
+    },
   };
 }
 export default async function HomePage() {

@@ -9,13 +9,13 @@ type PinterestArticle = {
 };
 type PinterestTrackingPanelProps = {
   articles: PinterestArticle[];
-  siteUrl: string;
 };
 type CopiedTimes = Record<string, number>;
 const COPY_STATUS_DURATION_MS = 60 * 60 * 1000;
 const STORAGE_KEY = "knowledge-nest:pinterest-copied-links:v1";
-function getTrackingUrl(siteUrl: string, article: PinterestArticle) {
-  const url = new URL(`/article/${encodeURIComponent(article.slug)}`, siteUrl);
+const PINTEREST_SITE_URL = "https://www.knowledgenest.site";
+function getTrackingUrl(article: PinterestArticle) {
+  const url = new URL(`/article/${encodeURIComponent(article.slug)}`, PINTEREST_SITE_URL);
   url.searchParams.set("utm_source", "pinterest");
   url.searchParams.set("utm_medium", "social");
   url.searchParams.set("utm_campaign", "knowledge_nest");
@@ -27,6 +27,13 @@ function formatRemainingTime(milliseconds: number) {
   const minutes = Math.floor(totalSeconds / 60);
   const seconds = totalSeconds % 60;
   return `${String(minutes).padStart(2, "0")}:${String(seconds).padStart(2, "0")}`;
+}
+function getCurrentTimestamp(): Promise<number> {
+  return new Promise((resolve) => {
+    window.setTimeout(() => {
+      resolve(Date.now());
+    }, 0);
+  });
 }
 async function copyText(value: string) {
   if (navigator.clipboard?.writeText) {
@@ -80,10 +87,7 @@ function saveCopiedTimes(value: CopiedTimes) {
     // A storage failure must not block copying the article URL.
   }
 }
-export function PinterestTrackingPanel({
-  articles,
-  siteUrl,
-}: PinterestTrackingPanelProps) {
+export function PinterestTrackingPanel({ articles }: PinterestTrackingPanelProps) {
   const [isOpen, setIsOpen] = useState(false);
   const [copiedTimes, setCopiedTimes] = useState<CopiedTimes>({});
   const [currentTime, setCurrentTime] = useState(() => Date.now());
@@ -131,9 +135,9 @@ export function PinterestTrackingPanel({
     }
     setCopyError("");
     try {
-      const trackingUrl = getTrackingUrl(siteUrl, article);
+      const trackingUrl = getTrackingUrl(article);
       await copyText(trackingUrl);
-      const copiedAt = currentTime;
+      const copiedAt = await getCurrentTimestamp();
       setCurrentTime(copiedAt);
       setCopiedTimes((current) => {
         const next = {
@@ -216,7 +220,7 @@ export function PinterestTrackingPanel({
                       onClick={() => void handleCopy(article)}
                       className={`inline-flex min-h-10 shrink-0 items-center justify-center gap-2 rounded-lg px-4 text-sm font-bold transition ${
                         isCopied
-                          ? "border border-emerald-300 bg-emerald-50 text-emerald-700"
+                          ? "cursor-pointer border border-emerald-300 bg-emerald-50 text-emerald-700 hover:bg-emerald-100"
                           : isPublished
                             ? "bg-slate-950 text-white hover:bg-slate-800"
                             : "cursor-not-allowed border border-slate-200 bg-slate-100 text-slate-400"

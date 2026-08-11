@@ -3,7 +3,6 @@ import { count, desc, eq } from "drizzle-orm";
 import { PinterestTrackingPanel } from "@/components/admin/pinterest-tracking-panel";
 import { db } from "@/db";
 import { articles, categories, media } from "@/db/schema";
-import { getSiteUrl } from "@/lib/site-url";
 export const dynamic = "force-dynamic";
 type DashboardMetric = {
   label: string;
@@ -80,7 +79,6 @@ export default async function AdminDashboardPage() {
   const publishedArticles = Number(publishedArticleRows[0]?.value ?? 0);
   const totalCategories = Number(categoryRows[0]?.value ?? 0);
   const totalMedia = Number(mediaRows[0]?.value ?? 0);
-  const siteUrl = getSiteUrl();
   const metrics: DashboardMetric[] = [
     {
       label: "Total Articles",
@@ -140,7 +138,7 @@ export default async function AdminDashboardPage() {
           </Link>
         ))}
       </section>
-      <PinterestTrackingPanel articles={pinterestArticles} siteUrl={siteUrl} />
+      <PinterestTrackingPanel articles={pinterestArticles} />
       <section className="rounded-2xl border border-slate-200 bg-white shadow-sm">
         <div className="flex flex-col gap-3 border-b border-slate-200 px-5 py-5 sm:flex-row sm:items-center sm:justify-between">
           <div>

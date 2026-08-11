@@ -301,3 +301,19 @@ h6 {
   border: 0;
   border-top: 1px solid var(--border);
 }
+/*
+ * AdSense responsive layout:
+ * Keep ad units available for Google to request ads normally.
+ * Collapse only after Google marks the unit as unfilled.
+ */
+ins.adsbygoogle[data-ad-status="unfilled"] {
+  display: none !important;
+}
+.adsense-section:has(ins.adsbygoogle[data-ad-status="unfilled"]) {
+  margin-top: 0 !important;
+  margin-bottom: 0 !important;
+  padding-top: 0 !important;
+  padding-bottom: 0 !important;
+  border-top-width: 0 !important;
+  border-bottom-width: 0 !important;
+}

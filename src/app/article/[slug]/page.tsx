@@ -248,13 +248,13 @@ export default async function ArticlePage({ params }: ArticlePageProps) {
             />
             {adsenseClientId && adsenseArticleSlot ? (
               <div
-                className="mt-10 border-y border-slate-200 py-6"
+                className="adsense-section mt-10 border-y border-slate-200 py-6"
                 aria-label="Advertisement"
               >
                 <GoogleAdSenseUnit
                   client={adsenseClientId}
                   slot={adsenseArticleSlot}
-                  className="min-h-[90px] w-full"
+                  className="w-full"
                 />
               </div>
             ) : null}

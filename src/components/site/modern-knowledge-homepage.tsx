@@ -166,13 +166,13 @@ export async function ModernKnowledgeHomepage() {
         ) : null}
         {adsenseClientId && adsenseHomeSlot ? (
           <section
-            className="mx-auto max-w-7xl px-4 pb-10 sm:px-6 lg:px-8"
+            className="adsense-section mx-auto max-w-7xl px-4 sm:px-6 lg:px-8"
             aria-label="Advertisement"
           >
             <GoogleAdSenseUnit
               client={adsenseClientId}
               slot={adsenseHomeSlot}
-              className="min-h-[90px] w-full"
+              className="w-full"
             />
           </section>
         ) : null}

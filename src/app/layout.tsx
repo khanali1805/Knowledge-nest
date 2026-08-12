@@ -61,8 +61,9 @@ export async function generateMetadata(): Promise<Metadata> {
           type: "image/x-icon",
         },
         {
-          url: "/icon.svg",
-          type: "image/svg+xml",
+          url: "/brand/knowledge-nest-icon-64.png",
+          type: "image/png",
+          sizes: "64x64",
         },
       ],
       shortcut: "/favicon.ico",

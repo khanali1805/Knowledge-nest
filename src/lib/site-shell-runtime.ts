@@ -21,7 +21,7 @@ export async function getSiteShellLayout(): Promise<SiteShellLayout> {
   const settings = await getPublicSiteSettings();
   return {
     websiteName: settings.siteName?.trim() || "Knowledge Nest",
-    logoUrl: "",
+    logoUrl: "/brand/knowledge-nest-mark-512.png",
     primaryColour: "#0f172a",
     secondaryColour: "#334155",
     accentColour: "#2563eb",

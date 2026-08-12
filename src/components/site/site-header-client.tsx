@@ -61,7 +61,7 @@ export function SiteHeaderClient({ layout }: SiteHeaderClientProps) {
               loading="lazy"
               src={layout.logoUrl}
               alt={layout.websiteName}
-              className="h-11 w-11 shrink-0 rounded-xl object-cover"
+              className="h-12 w-12 shrink-0 object-contain sm:h-14 sm:w-14"
             />
           ) : (
             <span className="flex h-11 w-11 shrink-0 items-center justify-center rounded-xl bg-[var(--site-primary)] text-lg font-black text-white">

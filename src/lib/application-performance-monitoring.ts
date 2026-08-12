@@ -1,5 +1,3 @@
-import { performance } from "node:perf_hooks";
-
 type MonitoringFields = Record<string, unknown>;
 
 type MonitoringLevel = "info" | "warn" | "error";

@@ -9,6 +9,17 @@ import {
   getGlobalHomepageContent,
   type PublishedArticleRecord,
 } from "@/lib/public-content-runtime";
+/* HOMEPAGE_CATEGORY_ICONS */
+const homepageCategoryIcons: Record<string, string> = {
+  "beauty-skincare": "/icons/categories/beauty-skincare.png",
+  "food-recipes": "/icons/categories/food-recipes.png",
+  "health-fitness-wellness": "/icons/categories/health-fitness-wellness.png",
+  "home-dcor-organization": "/icons/categories/home-decor-organization.png",
+  "money-career": "/icons/categories/money-career.png",
+  "relationships-family": "/icons/categories/relationships-family.png",
+  "travel-lifestyle": "/icons/categories/travel-lifestyle.png",
+  "womens-fashion-style": "/icons/categories/womens-fashion-style.png",
+};
 function formatDate(date: Date | null): string {
   if (!date) {
     return "";
@@ -87,75 +98,146 @@ export async function ModernKnowledgeHomepage() {
     <>
       <SiteHeader />
       <main className="min-h-screen bg-slate-50 text-slate-950">
-        <section className="border-b border-slate-200 bg-white">
-          <div className="mx-auto grid max-w-7xl gap-8 px-4 py-14 sm:px-6 lg:grid-cols-[minmax(0,1.35fr)_minmax(280px,0.65fr)] lg:px-8 lg:py-20">
-            <div>
-              <p className="text-sm font-black tracking-[0.24em] text-blue-700 uppercase">
-                Knowledge • Stories • Information
-              </p>
-              <h1 className="mt-5 max-w-4xl text-4xl leading-tight font-black tracking-tight sm:text-5xl lg:text-6xl">
-                {siteName}
-              </h1>
-              <p className="mt-6 max-w-3xl text-lg leading-8 text-slate-600">{tagline}</p>
-              <div className="mt-8 flex flex-wrap gap-3">
-                <Link
-                  href="/latest"
-                  className="rounded-xl bg-slate-950 px-6 py-3 text-sm font-bold text-white transition hover:bg-blue-700"
-                >
-                  Browse latest articles
-                </Link>
-                <Link
-                  href="/featured"
-                  className="rounded-xl border border-slate-300 bg-white px-6 py-3 text-sm font-bold transition hover:border-blue-700 hover:text-blue-700"
-                >
-                  Featured stories
-                </Link>
-              </div>
-            </div>
-            <div className="rounded-3xl bg-gradient-to-br from-slate-950 via-blue-950 to-blue-700 p-7 text-white shadow-xl">
-              <p className="text-xs font-bold tracking-[0.2em] text-blue-200 uppercase">
-                Explore categories
-              </p>
-              <div className="mt-5 flex flex-wrap gap-2">
-                {categories.map((category) => (
+        <section
+          id="knowledge-nest-home-hero"
+          className="border-b border-violet-100 bg-white"
+        >
+          <div
+            id="knowledge-nest-home-hero-inner"
+            className="mx-auto max-w-7xl px-4 py-10 sm:px-6 sm:py-12 lg:px-8 lg:py-14"
+          >
+            <div className="knowledge-nest-home-hero-layout grid gap-6 lg:grid-cols-[minmax(0,1.08fr)_minmax(380px,0.92fr)] lg:items-stretch">
+              <div className="min-w-0">
+                <p className="text-sm font-black tracking-[0.24em] text-blue-700 uppercase">
+                  Knowledge • Stories • Information
+                </p>
+                <h1 className="mt-5 max-w-4xl text-4xl leading-tight font-black tracking-tight sm:text-5xl lg:text-6xl">
+                  {siteName}
+                </h1>
+                <p className="mt-6 max-w-3xl text-lg leading-8 text-slate-600">
+                  {tagline}
+                </p>
+                <div className="mt-8 flex flex-wrap gap-3">
                   <Link
-                    key={category.id}
-                    href={`/category/${category.slug}`}
-                    className="rounded-full border border-white/20 bg-white/10 px-4 py-2 text-sm font-semibold transition hover:bg-white hover:text-slate-950"
+                    href="/latest"
+                    className="rounded-xl bg-slate-950 px-6 py-3 text-sm font-bold text-white transition hover:bg-blue-700"
                   >
-                    {category.name}
+                    Browse latest articles
                   </Link>
-                ))}
+                  <Link
+                    href="/featured"
+                    className="rounded-xl border border-slate-300 bg-white px-6 py-3 text-sm font-bold transition hover:border-blue-700 hover:text-blue-700"
+                  >
+                    Featured stories
+                  </Link>
+                </div>
+                <div
+                  id="knowledge-nest-category-panel"
+                  className="knowledge-nest-category-landscape mt-8 rounded-3xl p-4 sm:p-5"
+                >
+                  <div className="knowledge-nest-category-landscape-panel">
+                    <p
+                      id="knowledge-nest-category-title"
+                      className="knowledge-nest-category-landscape-title text-xs font-bold tracking-[0.2em] text-blue-200 uppercase"
+                    >
+                      Explore categories
+                    </p>
+                    <div
+                      id="knowledge-nest-category-grid"
+                      className="knowledge-nest-category-landscape-grid mt-5 grid grid-cols-2 gap-3 sm:grid-cols-4"
+                    >
+                      {categories.map((category) => {
+                        const categoryIcon = homepageCategoryIcons[category.slug];
+                        return (
+                          <Link
+                            key={category.id}
+                            href={`/category/${category.slug}`}
+                            className="knowledge-nest-category-shortcut flex min-w-0 flex-col items-center justify-center gap-2 rounded-2xl border border-white/20 bg-white/10 px-2 py-3 text-center text-sm font-semibold text-white transition hover:-translate-y-0.5 hover:bg-white/15"
+                          >
+                            {categoryIcon ? (
+                              <img
+                                src={categoryIcon}
+                                alt=""
+                                width={82}
+                                height={82}
+                                loading="lazy"
+                                aria-hidden="true"
+                                className="knowledge-nest-category-icon"
+                              />
+                            ) : null}
+                            <span className="knowledge-nest-category-name">
+                              {category.name}
+                            </span>
+                          </Link>
+                        );
+                      })}
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div
+                className="knowledge-nest-hero-woman relative flex min-h-[320px] items-end justify-center overflow-visible sm:min-h-[420px] lg:min-h-[560px]"
+                aria-hidden="true"
+              >
+                <div className="knowledge-nest-flower-scene">
+                  <span className="knowledge-nest-orbit knowledge-nest-orbit-one" />
+                  <span className="knowledge-nest-orbit knowledge-nest-orbit-two" />
+                  <span className="knowledge-nest-flower flower-one" />
+                  <span className="knowledge-nest-flower flower-two" />
+                  <span className="knowledge-nest-flower flower-three" />
+                  <span className="knowledge-nest-flower flower-four" />
+                  <span className="knowledge-nest-flower flower-five" />
+                  <span className="knowledge-nest-flower flower-six" />
+                  <span className="knowledge-nest-flower flower-seven" />
+                  <span className="knowledge-nest-flower flower-eight" />
+                  <span className="knowledge-nest-flower flower-nine" />
+                  <span className="knowledge-nest-flower flower-ten" />
+                  <span className="knowledge-nest-sparkle sparkle-one" />
+                  <span className="knowledge-nest-sparkle sparkle-two" />
+                  <span className="knowledge-nest-sparkle sparkle-three" />
+                  <span className="knowledge-nest-sparkle sparkle-four" />
+                  <span className="knowledge-nest-sparkle sparkle-five" />
+                  <span className="knowledge-nest-sparkle sparkle-six" />
+                  <span className="knowledge-nest-ground-glow" />
+                </div>
+                {/* KNOWLEDGE_NEST_HERO_WOMAN */}
+                <img
+                  src="/images/homepage/knowledge-nest-hero-woman.png"
+                  alt=""
+                  width={1024}
+                  height={1536}
+                  className="knowledge-nest-hero-woman-image h-auto w-auto max-w-full object-contain object-bottom"
+                />
               </div>
             </div>
           </div>
         </section>
         {featuredArticle ? (
           <section className="mx-auto max-w-7xl px-4 py-12 sm:px-6 lg:px-8">
-            <div className="overflow-hidden rounded-3xl bg-slate-950 text-white shadow-2xl">
+            <div className="overflow-hidden rounded-3xl border border-violet-100 bg-white text-slate-950 shadow-lg">
               <div className="grid lg:grid-cols-2">
-                <div className="relative min-h-72 bg-gradient-to-br from-blue-800 to-slate-950">
+                <div className="relative min-h-64 bg-violet-50 sm:min-h-72 lg:min-h-[380px]">
                   {featuredArticle.featuredImageUrl ? (
                     <img
                       src={featuredArticle.featuredImageUrl}
                       alt={featuredArticle.featuredImageAlt || featuredArticle.title}
-                      className="absolute inset-0 h-full w-full object-cover opacity-70"
+                      className="absolute inset-0 h-full w-full object-cover"
                     />
                   ) : null}
                 </div>
                 <div className="flex flex-col justify-center p-7 sm:p-10 lg:p-14">
-                  <p className="text-xs font-black tracking-[0.22em] text-blue-300 uppercase">
+                  <p className="text-xs font-black tracking-[0.22em] text-violet-600 uppercase">
                     Featured article
                   </p>
                   <h2 className="mt-5 text-3xl leading-tight font-black sm:text-4xl">
                     {featuredArticle.title}
                   </h2>
-                  <p className="mt-5 line-clamp-4 leading-7 text-white/70">
+                  <p className="mt-5 line-clamp-4 leading-7 text-slate-600">
                     {getArticleExcerpt(featuredArticle)}
                   </p>
                   <Link
                     href={`/article/${featuredArticle.slug}`}
-                    className="mt-8 inline-flex w-fit rounded-xl bg-white px-5 py-3 text-sm font-bold text-slate-950 transition hover:bg-blue-100"
+                    className="mt-8 inline-flex w-fit rounded-xl bg-violet-600 px-5 py-3 text-sm font-bold text-white transition hover:bg-violet-700"
                   >
                     Read complete article
                   </Link>

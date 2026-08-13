@@ -6,6 +6,7 @@ import { Clock } from "lucide-react";
 import sanitizeHtml from "sanitize-html";
 import { GoogleAdSenseUnit } from "@/components/site/google-adsense-unit";
 import { SiteFooter } from "@/components/site/site-footer";
+import { ArticleCard } from "@/components/site/article-card";
 import { SiteHeader } from "@/components/site/site-header";
 import { ArticleJsonLd } from "@/components/site/seo/article-json-ld";
 import { BreadcrumbJsonLd } from "@/components/site/seo/breadcrumb-json-ld";
@@ -15,6 +16,7 @@ import {
   createContentSlug,
   getArticleExcerpt,
   getPublishedArticleBySlug,
+  getPublishedArticlesByCategory,
 } from "@/lib/queries/article-queries";
 type ArticlePageProps = {
   params: Promise<{
@@ -160,6 +162,11 @@ export default async function ArticlePage({ params }: ArticlePageProps) {
   if (!article) {
     notFound();
   }
+  const relatedArticles = article.categoryId
+    ? (await getPublishedArticlesByCategory(article.categoryId, 4))
+        .filter((candidate) => candidate.id !== article.id)
+        .slice(0, 3)
+    : [];
   const excerpt = getArticleExcerpt(article);
   const categoryName = article.categoryName ?? "Articles";
   const categorySlug = article.categorySlug ?? createContentSlug(categoryName);
@@ -262,12 +269,27 @@ export default async function ArticlePage({ params }: ArticlePageProps) {
               </div>
             ) : null}
             <div className="border-border mt-12 border-t pt-8">
-              <Link
-                href={`/category/${categorySlug}`}
-                className="text-sm font-semibold hover:underline"
-              >
-                More from {categoryName}
-              </Link>
+              <div className="flex flex-wrap items-end justify-between gap-4">
+                <div>
+                  <p className="text-muted-foreground text-sm font-semibold tracking-wide uppercase">
+                    Continue reading
+                  </p>
+                  <h2 className="mt-2 text-2xl font-bold">More from {categoryName}</h2>
+                </div>
+                <Link
+                  href={`/category/${categorySlug}`}
+                  className="text-sm font-semibold hover:underline"
+                >
+                  View all {categoryName}
+                </Link>
+              </div>
+              {relatedArticles.length > 0 ? (
+                <div className="mt-6 grid gap-6 md:grid-cols-2 xl:grid-cols-3">
+                  {relatedArticles.map((relatedArticle) => (
+                    <ArticleCard key={relatedArticle.id} article={relatedArticle} />
+                  ))}
+                </div>
+              ) : null}
             </div>
           </div>
         </article>

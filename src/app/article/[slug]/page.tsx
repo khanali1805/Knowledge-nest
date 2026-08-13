@@ -162,11 +162,23 @@ export default async function ArticlePage({ params }: ArticlePageProps) {
   if (!article) {
     notFound();
   }
-  const relatedArticles = article.categoryId
-    ? (await getPublishedArticlesByCategory(article.categoryId, 4))
-        .filter((candidate) => candidate.id !== article.id)
-        .slice(0, 3)
+  const categoryArticles = article.categoryId
+    ? await getPublishedArticlesByCategory(article.categoryId, 100)
     : [];
+  const currentArticleIndex = categoryArticles.findIndex(
+    (candidate) => candidate.id === article.id,
+  );
+  const relatedArticleCount = Math.min(3, Math.max(0, categoryArticles.length - 1));
+  const relatedArticles =
+    currentArticleIndex >= 0
+      ? Array.from({ length: relatedArticleCount }, (_, offset) => {
+          const relatedIndex =
+            (currentArticleIndex + offset + 1) % categoryArticles.length;
+          return categoryArticles[relatedIndex];
+        })
+      : categoryArticles
+          .filter((candidate) => candidate.id !== article.id)
+          .slice(0, relatedArticleCount);
   const excerpt = getArticleExcerpt(article);
   const categoryName = article.categoryName ?? "Articles";
   const categorySlug = article.categorySlug ?? createContentSlug(categoryName);

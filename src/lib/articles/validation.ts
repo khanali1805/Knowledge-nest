@@ -1,4 +1,4 @@
-﻿import { z } from "zod";
+import { z } from "zod";
 export const articleStatusSchema = z.enum([
   "draft",
   "review",
@@ -20,6 +20,31 @@ const optionalTextSchema = z
     const trimmedValue = value.trim();
     return trimmedValue || null;
   });
+const articleTagsInputSchema = z
+  .union([z.string(), z.array(z.string()), z.null()])
+  .optional()
+  .transform((value) => {
+    const rawTags = Array.isArray(value)
+      ? value
+      : typeof value === "string"
+        ? value.split(",")
+        : [];
+    const tagsByKey = new Map<string, string>();
+    for (const rawTag of rawTags) {
+      const cleanTag = rawTag.trim();
+      if (!cleanTag) {
+        continue;
+      }
+      if (cleanTag.length > 100) {
+        throw new Error("Each article tag must be 100 characters or fewer.");
+      }
+      const key = cleanTag.toLowerCase();
+      if (!tagsByKey.has(key)) {
+        tagsByKey.set(key, cleanTag);
+      }
+    }
+    return Array.from(tagsByKey.values());
+  });
 export const articleInputSchema = z.object({
   title: z.string().trim().min(3).max(255),
   slug: z
@@ -37,6 +62,7 @@ export const articleInputSchema = z.object({
   seoDescription: optionalTextSchema,
   canonicalUrl: optionalTextSchema,
   focusKeyword: optionalTextSchema,
+  tags: articleTagsInputSchema,
   readingTimeMinutes: z.number().int().min(1).max(1000).default(1),
   isFeatured: z.boolean().default(false),
   scheduledAt: z

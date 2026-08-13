@@ -1,3 +1,4 @@
+import { cache } from "react";
 import { and, count, desc, eq, exists, ilike, or } from "drizzle-orm";
 import { db } from "@/db";
 import { articles, articleTags, categories, media, tags } from "@/db/schema";
@@ -15,6 +16,10 @@ export type PublishedArticleRecord = {
   slug: string;
   excerpt: string | null;
   content: string;
+  seoTitle: string | null;
+  seoDescription: string | null;
+  canonicalUrl: string | null;
+  focusKeyword: string | null;
   categoryId: string | null;
   categoryName: string | null;
   categorySlug: string | null;
@@ -39,6 +44,10 @@ const publishedArticleSelection = {
   slug: articles.slug,
   excerpt: articles.excerpt,
   content: articles.content,
+  seoTitle: articles.seoTitle,
+  seoDescription: articles.seoDescription,
+  canonicalUrl: articles.canonicalUrl,
+  focusKeyword: articles.focusKeyword,
   categoryId: categories.id,
   categoryName: categories.name,
   categorySlug: categories.slug,
@@ -135,7 +144,7 @@ function createCategoryCandidates(category: string): string[] {
     ),
   );
 }
-export async function getPublishedArticles(
+async function getPublishedArticlesUncached(
   limit = 100,
 ): Promise<PublishedArticleRecord[]> {
   const safeLimit = Math.max(1, Math.min(limit, 500));
@@ -156,6 +165,7 @@ export async function getPublishedArticles(
     return [];
   }
 }
+export const getPublishedArticles = cache(getPublishedArticlesUncached);
 export async function getPublishedArticlesForCategory(
   category: string,
   limit = 24,

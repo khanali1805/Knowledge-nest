@@ -1,9 +1,12 @@
-﻿import type { Metadata } from "next";
+import type { Metadata } from "next";
 import { InformationPageLayout } from "@/components/site/legal/information-page-layout";
 import { InformationSection } from "@/components/site/legal/information-section";
 export const metadata: Metadata = {
-  title: "About Us | Knowledge Nest",
+  title: "About Us",
   description: "Learn about Knowledge Nest and its educational publishing purpose.",
+  alternates: {
+    canonical: "/about-us",
+  },
 };
 export default function AboutUsPage() {
   return (

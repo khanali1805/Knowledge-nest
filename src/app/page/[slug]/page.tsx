@@ -1,4 +1,4 @@
-﻿import type { Metadata } from "next";
+import type { Metadata } from "next";
 import { and, eq } from "drizzle-orm";
 import { notFound } from "next/navigation";
 import { SiteFooter } from "@/components/site/site-footer";
@@ -30,6 +30,9 @@ export async function generateMetadata({ params }: PublicPageProps): Promise<Met
   return {
     title: page.seoTitle || page.title,
     description: page.seoDescription || undefined,
+    alternates: {
+      canonical: `/page/${page.slug}`,
+    },
   };
 }
 export default async function PublicPage({ params }: PublicPageProps) {

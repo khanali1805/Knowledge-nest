@@ -24,9 +24,7 @@ export async function generateMetadata(): Promise<Metadata> {
     },
     description: settings.tagline,
     applicationName: settings.siteName,
-    alternates: {
-      canonical: "/",
-    },
+
     category: "education",
     creator: settings.siteName,
     publisher: settings.siteName,
@@ -57,8 +55,9 @@ export async function generateMetadata(): Promise<Metadata> {
     icons: {
       icon: [
         {
-          url: "/favicon.ico",
-          type: "image/x-icon",
+          url: "/brand/knowledge-nest-favicon-32.png",
+          type: "image/png",
+          sizes: "32x32",
         },
         {
           url: "/brand/knowledge-nest-icon-64.png",
@@ -66,8 +65,8 @@ export async function generateMetadata(): Promise<Metadata> {
           sizes: "64x64",
         },
       ],
-      shortcut: "/favicon.ico",
-      apple: "/apple-icon.png",
+      shortcut: "/brand/knowledge-nest-favicon-32.png",
+      apple: "/brand/knowledge-nest-icon-192.png",
     },
     manifest: "/manifest.webmanifest",
     ...(adsenseClientId

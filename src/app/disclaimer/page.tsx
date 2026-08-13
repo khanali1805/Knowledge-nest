@@ -1,10 +1,13 @@
-﻿import type { Metadata } from "next";
+import type { Metadata } from "next";
 import { InformationPageLayout } from "@/components/site/legal/information-page-layout";
 import { InformationSection } from "@/components/site/legal/information-section";
 export const metadata: Metadata = {
-  title: "Disclaimer | Knowledge Nest",
+  title: "Disclaimer",
   description:
     "Read the Knowledge Nest disclaimer regarding educational content and professional advice.",
+  alternates: {
+    canonical: "/disclaimer",
+  },
 };
 export default function DisclaimerPage() {
   return (

@@ -1,10 +1,13 @@
-﻿import type { Metadata } from "next";
+import type { Metadata } from "next";
 import { SiteFooter } from "@/components/site/site-footer";
 import { SiteHeader } from "@/components/site/site-header";
 import { SitemapLinks } from "@/components/site/sitemap/sitemap-links";
 export const metadata: Metadata = {
-  title: "HTML Sitemap | Knowledge Nest",
+  title: "HTML Sitemap",
   description: "Browse all important pages on Knowledge Nest.",
+  alternates: {
+    canonical: "/sitemap-page",
+  },
 };
 export default function SitemapPage() {
   return (

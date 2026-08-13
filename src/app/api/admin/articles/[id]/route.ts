@@ -1,11 +1,46 @@
-import { eq } from "drizzle-orm";
+import { asc, eq } from "drizzle-orm";
 import { NextResponse } from "next/server";
 import { db } from "@/db";
-import { articles, categories, media } from "@/db/schema";
+import { articles, articleTags, categories, media, tags } from "@/db/schema";
 import { articleInputSchema } from "@/lib/articles/validation";
 import { revalidateArticlePublishingPaths } from "@/lib/article-publication-cache";
 export const runtime = "nodejs";
 export const dynamic = "force-dynamic";
+class ArticleTagError extends Error {}
+type NormalizedArticleTag = {
+  name: string;
+  slug: string;
+};
+function createArticleTagSlug(value: string): string {
+  return value
+    .toLowerCase()
+    .trim()
+    .replace(/&/g, "and")
+    .replace(/[^a-z0-9]+/g, "-")
+    .replace(/^-+|-+$/g, "")
+    .slice(0, 140)
+    .replace(/-+$/g, "");
+}
+function normalizeArticleTags(inputTags: string[]): NormalizedArticleTag[] {
+  const tagsBySlug = new Map<string, NormalizedArticleTag>();
+  for (const inputTag of inputTags) {
+    const name = inputTag.trim();
+    if (!name) {
+      continue;
+    }
+    const slug = createArticleTagSlug(name);
+    if (!slug) {
+      throw new ArticleTagError(`Tag "${name}" cannot produce a valid URL slug.`);
+    }
+    if (!tagsBySlug.has(slug)) {
+      tagsBySlug.set(slug, {
+        name,
+        slug,
+      });
+    }
+  }
+  return Array.from(tagsBySlug.values());
+}
 type RouteContext = {
   params: Promise<{
     id: string;
@@ -87,8 +122,19 @@ export async function GET(_request: Request, context: RouteContext) {
         },
       );
     }
+    const articleTagRows = await db
+      .select({
+        name: tags.name,
+      })
+      .from(articleTags)
+      .innerJoin(tags, eq(articleTags.tagId, tags.id))
+      .where(eq(articleTags.articleId, id))
+      .orderBy(asc(tags.name));
     return NextResponse.json({
-      article,
+      article: {
+        ...article,
+        tags: articleTagRows.map((tag) => tag.name),
+      },
     });
   } catch (error) {
     return NextResponse.json(
@@ -180,28 +226,83 @@ export async function PATCH(request: Request, context: RouteContext) {
       input.content,
       input.featuredImageId,
     );
-    const [updatedArticle] = await db
-      .update(articles)
-      .set({
-        title: input.title,
-        slug: input.slug,
-        excerpt: input.excerpt,
-        content: input.content,
-        categoryId: input.categoryId,
-        featuredImageId: resolvedFeaturedImageId,
-        status: input.status,
-        seoTitle: input.seoTitle,
-        seoDescription: input.seoDescription,
-        canonicalUrl: input.canonicalUrl,
-        focusKeyword: input.focusKeyword,
-        readingTimeMinutes: input.readingTimeMinutes,
-        isFeatured: input.isFeatured,
-        scheduledAt: input.scheduledAt,
-        publishedAt,
-        updatedAt: now,
-      })
-      .where(eq(articles.id, id))
-      .returning();
+    // SEO_5B_ARTICLE_TAG_WIRING
+    const normalizedTags = normalizeArticleTags(input.tags);
+    const updatedArticle = await db.transaction(async (transaction) => {
+      const [article] = await transaction
+        .update(articles)
+        .set({
+          title: input.title,
+          slug: input.slug,
+          excerpt: input.excerpt,
+          content: input.content,
+          categoryId: input.categoryId,
+          featuredImageId: resolvedFeaturedImageId,
+          status: input.status,
+          seoTitle: input.seoTitle,
+          seoDescription: input.seoDescription,
+          canonicalUrl: input.canonicalUrl,
+          focusKeyword: input.focusKeyword,
+          readingTimeMinutes: input.readingTimeMinutes,
+          isFeatured: input.isFeatured,
+          scheduledAt: input.scheduledAt,
+          publishedAt,
+          updatedAt: now,
+        })
+        .where(eq(articles.id, id))
+        .returning();
+      if (!article) {
+        throw new Error("Article update nahi hua.");
+      }
+      await transaction.delete(articleTags).where(eq(articleTags.articleId, id));
+      for (const tagInput of normalizedTags) {
+        const [existingTag] = await transaction
+          .select({
+            id: tags.id,
+          })
+          .from(tags)
+          .where(eq(tags.slug, tagInput.slug))
+          .limit(1);
+        let tagId = existingTag?.id;
+        if (!tagId) {
+          const [insertedTag] = await transaction
+            .insert(tags)
+            .values({
+              name: tagInput.name,
+              slug: tagInput.slug,
+              description: null,
+            })
+            .onConflictDoNothing({
+              target: tags.slug,
+            })
+            .returning({
+              id: tags.id,
+            });
+          tagId = insertedTag?.id;
+          if (!tagId) {
+            const [concurrentTag] = await transaction
+              .select({
+                id: tags.id,
+              })
+              .from(tags)
+              .where(eq(tags.slug, tagInput.slug))
+              .limit(1);
+            tagId = concurrentTag?.id;
+          }
+        }
+        if (!tagId) {
+          throw new ArticleTagError(`Unable to resolve tag "${tagInput.name}".`);
+        }
+        await transaction
+          .insert(articleTags)
+          .values({
+            articleId: id,
+            tagId,
+          })
+          .onConflictDoNothing();
+      }
+      return article;
+    });
     if (!updatedArticle) {
       throw new Error("Article update nahi hua.");
     }
@@ -217,9 +318,11 @@ export async function PATCH(request: Request, context: RouteContext) {
     const message = error instanceof Error ? error.message : "Article update nahi hua.";
     const normalisedMessage = message.toLowerCase();
     const status =
-      normalisedMessage.includes("unique") || normalisedMessage.includes("duplicate")
-        ? 409
-        : 500;
+      error instanceof ArticleTagError
+        ? 400
+        : normalisedMessage.includes("unique") || normalisedMessage.includes("duplicate")
+          ? 409
+          : 500;
     return NextResponse.json(
       {
         message:

@@ -7,6 +7,9 @@ export const dynamic = "force-dynamic";
 export const metadata: Metadata = {
   title: "Featured Articles",
   description: "Browse featured Knowledge Nest articles from every category.",
+  alternates: {
+    canonical: "/featured",
+  },
 };
 export default async function FeaturedPage() {
   const publishedArticles = await getPublishedArticles(100);

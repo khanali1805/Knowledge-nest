@@ -14,8 +14,8 @@ export default async function manifest(): Promise<MetadataRoute.Manifest> {
     icons: [
       {
         src: "/brand/knowledge-nest-mark-512.png",
-        sizes: "any",
-        type: "image/svg+xml",
+        sizes: "512x512",
+        type: "image/png",
       },
     ],
   };

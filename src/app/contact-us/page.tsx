@@ -1,10 +1,13 @@
-﻿import type { Metadata } from "next";
+import type { Metadata } from "next";
 import { InformationPageLayout } from "@/components/site/legal/information-page-layout";
 import { InformationSection } from "@/components/site/legal/information-section";
 export const metadata: Metadata = {
-  title: "Contact Us | Knowledge Nest",
+  title: "Contact Us",
   description:
     "Contact Knowledge Nest regarding website content, corrections or general questions.",
+  alternates: {
+    canonical: "/contact-us",
+  },
 };
 export default function ContactUsPage() {
   return (

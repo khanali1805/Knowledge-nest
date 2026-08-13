@@ -1,4 +1,4 @@
-﻿import type { Metadata } from "next";
+import type { Metadata } from "next";
 import { ArticleCard } from "@/components/site/article-card";
 import { Pagination } from "@/components/site/pagination";
 import { SiteSearchForm } from "@/components/site/search/site-search-form";
@@ -39,6 +39,9 @@ export async function generateMetadata({
   return {
     title,
     description: `Search published articles on ${settings.siteName}.`,
+    alternates: {
+      canonical: "/search",
+    },
     robots: {
       index: false,
       follow: true,

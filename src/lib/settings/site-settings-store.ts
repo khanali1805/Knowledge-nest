@@ -1,3 +1,4 @@
+import { cache } from "react";
 import { asc, eq, inArray } from "drizzle-orm";
 import { db } from "@/db";
 import { siteSettings } from "@/db/schema";
@@ -71,13 +72,13 @@ export async function getSiteSettings(): Promise<SiteSettingsInput> {
     .orderBy(asc(siteSettings.sortOrder), asc(siteSettings.key));
   return createSettingsFromRows(rows);
 }
-export async function getPublicSiteSettings(): Promise<SiteSettingsInput> {
+export const getPublicSiteSettings = cache(async (): Promise<SiteSettingsInput> => {
   try {
     return await getSiteSettings();
   } catch {
     return defaultSiteSettings;
   }
-}
+});
 export async function saveSiteSettings(
   input: SiteSettingsInput,
 ): Promise<SiteSettingsInput> {

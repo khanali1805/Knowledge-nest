@@ -30,6 +30,7 @@ type ArticleRecord = {
   seoTitle: string | null;
   seoDescription: string | null;
   focusKeyword: string | null;
+  tags?: string[];
   categoryId: string | null;
   categoryName: string | null;
   featuredImageId?: string | null;
@@ -173,6 +174,7 @@ export function ArticleEditor({ mode, articleId }: ArticleEditorProps) {
         setSeoTitle(article.seoTitle ?? "");
         setSeoDescription(article.seoDescription ?? "");
         setFocusKeyword(article.focusKeyword ?? "");
+        setTags(Array.isArray(article.tags) ? article.tags.join(", ") : "");
         setFeaturedImageId(article.featuredImageId ?? "");
         setFeaturedImageUrl(article.featuredImageUrl ?? "");
         setFeaturedImageAlt(article.featuredImageAlt ?? "");

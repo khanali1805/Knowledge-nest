@@ -1,6 +1,5 @@
 import type { Metadata } from "next";
 import { ModernKnowledgeHomepage } from "@/components/site/modern-knowledge-homepage";
-import { getPublishedArticles } from "@/lib/queries/article-queries";
 import { getPublicSiteSettings } from "@/lib/settings/site-settings-store";
 export const dynamic = "force-dynamic";
 export async function generateMetadata(): Promise<Metadata> {
@@ -48,6 +47,5 @@ export default async function HomePage() {
    * The query guarantees that the homepage route is connected to
    * the published-article database layer rather than legacy content.
    */
-  await getPublishedArticles();
   return <ModernKnowledgeHomepage />;
 }

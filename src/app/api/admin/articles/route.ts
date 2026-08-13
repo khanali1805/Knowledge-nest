@@ -1,7 +1,7 @@
 import { desc, eq, ilike } from "drizzle-orm";
 import { NextResponse } from "next/server";
 import { db } from "@/db";
-import { articles, categories, media } from "@/db/schema";
+import { articles, articleTags, categories, media, tags } from "@/db/schema";
 import { articleInputSchema } from "@/lib/articles/validation";
 import { revalidateArticlePublishingPaths } from "@/lib/article-publication-cache";
 export const runtime = "nodejs";
@@ -15,6 +15,41 @@ type IncomingArticlePayload = Record<string, unknown> & {
   readingTimeMinutes?: unknown;
 };
 class ArticleCategoryError extends Error {}
+class ArticleTagError extends Error {}
+type NormalizedArticleTag = {
+  name: string;
+  slug: string;
+};
+function createArticleTagSlug(value: string): string {
+  return value
+    .toLowerCase()
+    .trim()
+    .replace(/&/g, "and")
+    .replace(/[^a-z0-9]+/g, "-")
+    .replace(/^-+|-+$/g, "")
+    .slice(0, 140)
+    .replace(/-+$/g, "");
+}
+function normalizeArticleTags(inputTags: string[]): NormalizedArticleTag[] {
+  const tagsBySlug = new Map<string, NormalizedArticleTag>();
+  for (const inputTag of inputTags) {
+    const name = inputTag.trim();
+    if (!name) {
+      continue;
+    }
+    const slug = createArticleTagSlug(name);
+    if (!slug) {
+      throw new ArticleTagError(`Tag "${name}" cannot produce a valid URL slug.`);
+    }
+    if (!tagsBySlug.has(slug)) {
+      tagsBySlug.set(slug, {
+        name,
+        slug,
+      });
+    }
+  }
+  return Array.from(tagsBySlug.values());
+}
 function decodeContentImageUrl(value: string): string {
   return value
     .replaceAll("&amp;", "&")
@@ -104,7 +139,7 @@ async function normaliseArticlePayload(
 }
 function createErrorResponse(error: unknown, fallbackMessage: string) {
   const message = error instanceof Error ? error.message : fallbackMessage;
-  if (error instanceof ArticleCategoryError) {
+  if (error instanceof ArticleCategoryError || error instanceof ArticleTagError) {
     return NextResponse.json(
       {
         message,
@@ -203,31 +238,84 @@ export async function POST(request: Request) {
       input.content,
       input.featuredImageId,
     );
-    const [createdArticle] = await db
-      .insert(articles)
-      .values({
-        title: input.title,
-        slug: input.slug,
-        excerpt: input.excerpt,
-        content: input.content,
-        categoryId: input.categoryId,
-        featuredImageId: resolvedFeaturedImageId,
-        status: input.status,
-        seoTitle: input.seoTitle,
-        seoDescription: input.seoDescription,
-        canonicalUrl: input.canonicalUrl,
-        focusKeyword: input.focusKeyword,
-        readingTimeMinutes: input.readingTimeMinutes,
-        isFeatured: input.isFeatured,
-        scheduledAt: input.scheduledAt,
-        publishedAt,
-        updatedAt: now,
-      })
-      .returning();
+    // SEO_5B_ARTICLE_TAG_WIRING
+    const normalizedTags = normalizeArticleTags(input.tags);
+    const createdArticle = await db.transaction(async (transaction) => {
+      const [article] = await transaction
+        .insert(articles)
+        .values({
+          title: input.title,
+          slug: input.slug,
+          excerpt: input.excerpt,
+          content: input.content,
+          categoryId: input.categoryId,
+          featuredImageId: resolvedFeaturedImageId,
+          status: input.status,
+          seoTitle: input.seoTitle,
+          seoDescription: input.seoDescription,
+          canonicalUrl: input.canonicalUrl,
+          focusKeyword: input.focusKeyword,
+          readingTimeMinutes: input.readingTimeMinutes,
+          isFeatured: input.isFeatured,
+          scheduledAt: input.scheduledAt,
+          publishedAt,
+          updatedAt: now,
+        })
+        .returning();
+      if (!article) {
+        throw new Error("The article was not created.");
+      }
+      for (const tagInput of normalizedTags) {
+        const [existingTag] = await transaction
+          .select({
+            id: tags.id,
+          })
+          .from(tags)
+          .where(eq(tags.slug, tagInput.slug))
+          .limit(1);
+        let tagId = existingTag?.id;
+        if (!tagId) {
+          const [insertedTag] = await transaction
+            .insert(tags)
+            .values({
+              name: tagInput.name,
+              slug: tagInput.slug,
+              description: null,
+            })
+            .onConflictDoNothing({
+              target: tags.slug,
+            })
+            .returning({
+              id: tags.id,
+            });
+          tagId = insertedTag?.id;
+          if (!tagId) {
+            const [concurrentTag] = await transaction
+              .select({
+                id: tags.id,
+              })
+              .from(tags)
+              .where(eq(tags.slug, tagInput.slug))
+              .limit(1);
+            tagId = concurrentTag?.id;
+          }
+        }
+        if (!tagId) {
+          throw new ArticleTagError(`Unable to resolve tag "${tagInput.name}".`);
+        }
+        await transaction
+          .insert(articleTags)
+          .values({
+            articleId: article.id,
+            tagId,
+          })
+          .onConflictDoNothing();
+      }
+      return article;
+    });
     if (!createdArticle) {
       throw new Error("The article was not created.");
-    }
-    // PHASE_10_ARTICLE_REVALIDATION
+    } // PHASE_10_ARTICLE_REVALIDATION
     revalidateArticlePublishingPaths();
 
     return NextResponse.json(

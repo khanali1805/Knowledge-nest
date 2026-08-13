@@ -7,6 +7,9 @@ export const dynamic = "force-dynamic";
 export const metadata: Metadata = {
   title: "Latest Articles",
   description: "Browse the latest published Knowledge Nest articles from every category.",
+  alternates: {
+    canonical: "/latest",
+  },
 };
 export default async function LatestPage() {
   const articles = await getPublishedArticles(100);

@@ -1,10 +1,13 @@
-﻿import type { Metadata } from "next";
+import type { Metadata } from "next";
 import { InformationPageLayout } from "@/components/site/legal/information-page-layout";
 import { InformationSection } from "@/components/site/legal/information-section";
 export const metadata: Metadata = {
-  title: "Terms and Conditions | Knowledge Nest",
+  title: "Terms and Conditions",
   description:
     "Read the terms and conditions governing use of the Knowledge Nest website.",
+  alternates: {
+    canonical: "/terms-and-conditions",
+  },
 };
 export default function TermsAndConditionsPage() {
   return (

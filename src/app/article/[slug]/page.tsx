@@ -117,22 +117,25 @@ export async function generateMetadata({ params }: ArticlePageProps): Promise<Me
     };
   }
   const excerpt = getArticleExcerpt(article);
+  const seoTitle = article.seoTitle?.trim() || article.title;
+  const seoDescription = article.seoDescription?.trim() || excerpt;
+  const canonicalUrl = article.canonicalUrl?.trim() || `/article/${article.slug}`;
   const settings = await getPublicSiteSettings();
   const socialImage =
     article.featuredImageUrl ||
     `${settings.siteUrl}/api/og?title=${encodeURIComponent(article.title)}`;
   const publishedAt = article.publishedAt ?? article.updatedAt;
   return {
-    title: article.title,
-    description: excerpt,
+    title: seoTitle,
+    description: seoDescription,
     alternates: {
-      canonical: `/article/${article.slug}`,
+      canonical: canonicalUrl,
     },
     openGraph: {
       type: "article",
-      title: article.title,
-      description: excerpt,
-      url: `/article/${article.slug}`,
+      title: seoTitle,
+      description: seoDescription,
+      url: canonicalUrl,
       publishedTime: publishedAt.toISOString(),
       modifiedTime: article.updatedAt.toISOString(),
       section: article.categoryName ?? "Articles",
@@ -145,8 +148,8 @@ export async function generateMetadata({ params }: ArticlePageProps): Promise<Me
     },
     twitter: {
       card: "summary_large_image",
-      title: article.title,
-      description: excerpt,
+      title: seoTitle,
+      description: seoDescription,
       images: [socialImage],
     },
   };

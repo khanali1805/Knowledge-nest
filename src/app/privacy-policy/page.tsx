@@ -1,10 +1,13 @@
-﻿import type { Metadata } from "next";
+import type { Metadata } from "next";
 import { InformationPageLayout } from "@/components/site/legal/information-page-layout";
 import { InformationSection } from "@/components/site/legal/information-section";
 export const metadata: Metadata = {
-  title: "Privacy Policy | Knowledge Nest",
+  title: "Privacy Policy",
   description:
     "Read the Knowledge Nest privacy policy and learn how website information may be handled.",
+  alternates: {
+    canonical: "/privacy-policy",
+  },
 };
 export default function PrivacyPolicyPage() {
   return (

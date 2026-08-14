@@ -25,16 +25,42 @@ function calculateScore(title: string, content: string) {
   }
   return Math.min(score, 100);
 }
+function cleanSeoEnding(value: string): string {
+  return value
+    .replace(/[,:;.!?-]+$/g, "")
+    .replace(/\b(?:and|or|with|for|to|of|the|a|an|in|on|at|by)$/i, "")
+    .replace(/[,:;.!?-]+$/g, "")
+    .trim();
+}
+
+function fitSeoText(value: string, maxLength: number): string {
+  const normalized = value.replace(/\s+/g, " ").trim();
+  if (normalized.length <= maxLength) {
+    return normalized;
+  }
+  const candidate = normalized.slice(0, maxLength + 1);
+  const lastSpace = candidate.lastIndexOf(" ");
+  if (lastSpace >= Math.floor(maxLength * 0.7)) {
+    return cleanSeoEnding(candidate.slice(0, lastSpace));
+  }
+  return cleanSeoEnding(normalized.slice(0, maxLength));
+}
 export function optimizeAISEO(request: SEOOptimizationRequest): SEOOptimizationResult {
   const keyword =
     request.focusKeyword?.trim() ||
     request.title.toLowerCase().split(" ").slice(0, 3).join(" ");
   const score = calculateScore(request.title, request.content);
+  const cleanTitle = request.title.replace(/\s+/g, " ").trim();
+  const metaTitle = fitSeoText(`${cleanTitle}: Complete Guide`, 60);
+  const metaDescription = fitSeoText(
+    `Explore ${cleanTitle} with practical tips, useful guidance, expert insights and clear steps designed to help you make informed decisions with confidence.`,
+    160,
+  );
   return {
     score,
     suggestedTitle: `${request.title} - Complete Guide`,
-    metaTitle: `${request.title} | Knowledge Nest`,
-    metaDescription: `Discover complete information about ${request.title} with expert insights, guides and useful knowledge.`,
+    metaTitle,
+    metaDescription,
     keywords: [
       keyword,
       request.category || "",

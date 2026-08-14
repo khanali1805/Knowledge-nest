@@ -20,6 +20,24 @@ const optionalTextSchema = z
     const trimmedValue = value.trim();
     return trimmedValue || null;
   });
+const optionalSeoTitleSchema = z
+  .union([z.string().trim().max(60), z.null()])
+  .optional()
+  .transform((value) => {
+    if (typeof value !== "string") {
+      return null;
+    }
+    return value || null;
+  });
+const optionalSeoDescriptionSchema = z
+  .union([z.string().trim().max(160), z.null()])
+  .optional()
+  .transform((value) => {
+    if (typeof value !== "string") {
+      return null;
+    }
+    return value || null;
+  });
 const articleTagsInputSchema = z
   .union([z.string(), z.array(z.string()), z.null()])
   .optional()
@@ -45,7 +63,7 @@ const articleTagsInputSchema = z
     }
     return Array.from(tagsByKey.values());
   });
-export const articleInputSchema = z.object({
+const articleBaseSchema = z.object({
   title: z.string().trim().min(3).max(255),
   slug: z
     .string()
@@ -58,8 +76,8 @@ export const articleInputSchema = z.object({
   categoryId: optionalUuidSchema,
   featuredImageId: optionalUuidSchema,
   status: articleStatusSchema.default("draft"),
-  seoTitle: optionalTextSchema,
-  seoDescription: optionalTextSchema,
+  seoTitle: optionalSeoTitleSchema,
+  seoDescription: optionalSeoDescriptionSchema,
   canonicalUrl: optionalTextSchema,
   focusKeyword: optionalTextSchema,
   tags: articleTagsInputSchema,
@@ -70,6 +88,29 @@ export const articleInputSchema = z.object({
     .optional()
     .transform((value) => (value ? new Date(value) : null)),
 });
-export const articleUpdateSchema = articleInputSchema.partial();
+
+export const articleInputSchema = articleBaseSchema.superRefine((value, context) => {
+  if (value.status !== "published") {
+    return;
+  }
+  const seoTitleLength = value.seoTitle?.length ?? 0;
+  const seoDescriptionLength = value.seoDescription?.length ?? 0;
+  if (seoTitleLength < 30 || seoTitleLength > 60) {
+    context.addIssue({
+      code: "custom",
+      path: ["seoTitle"],
+      message: "Published articles require an SEO title between 30 and 60 characters.",
+    });
+  }
+  if (seoDescriptionLength < 120 || seoDescriptionLength > 160) {
+    context.addIssue({
+      code: "custom",
+      path: ["seoDescription"],
+      message:
+        "Published articles require an SEO description between 120 and 160 characters.",
+    });
+  }
+});
+export const articleUpdateSchema = articleBaseSchema.partial();
 export type ArticleInput = z.infer<typeof articleInputSchema>;
 export type ArticleUpdate = z.infer<typeof articleUpdateSchema>;

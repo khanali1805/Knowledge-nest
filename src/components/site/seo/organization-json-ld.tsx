@@ -11,7 +11,7 @@ export function OrganizationJsonLd({ settings }: OrganizationJsonLdProps) {
         "@type": "Organization",
         name: settings.siteName,
         url: settings.siteUrl,
-        logo: `${settings.siteUrl}/icon.svg`,
+        logo: `${settings.siteUrl}/brand/knowledge-nest-icon-192.png`,
       }}
     />
   );

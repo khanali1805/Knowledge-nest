@@ -64,9 +64,18 @@ export async function generateMetadata(): Promise<Metadata> {
           type: "image/png",
           sizes: "64x64",
         },
+        {
+          url: "/brand/knowledge-nest-icon-192.png",
+          type: "image/png",
+          sizes: "192x192",
+        },
       ],
       shortcut: "/brand/knowledge-nest-favicon-32.png",
-      apple: "/brand/knowledge-nest-icon-192.png",
+      apple: {
+        url: "/brand/knowledge-nest-icon-192.png",
+        type: "image/png",
+        sizes: "192x192",
+      },
     },
     manifest: "/manifest.webmanifest",
     ...(adsenseClientId

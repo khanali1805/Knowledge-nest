@@ -5,7 +5,7 @@ export const dynamic = "force-dynamic";
 export async function generateMetadata(): Promise<Metadata> {
   const settings = await getPublicSiteSettings();
   const siteName = settings.siteName?.trim() || "Knowledge Nest";
-  const ogImage = `${settings.siteUrl}/api/og?title=${encodeURIComponent(siteName)}`;
+  const ogImage = `${settings.siteUrl}/api/og?kind=home&title=${encodeURIComponent(siteName)}`;
   const description =
     settings.tagline?.trim() ||
     "Trusted knowledge, useful information, educational articles and insights across technology, science, business, health, finance and general knowledge.";

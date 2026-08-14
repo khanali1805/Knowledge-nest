@@ -42,7 +42,9 @@ export async function generateMetadata({
   const page = normalizePage(resolvedSearchParams.page);
   const pageSuffix = page > 1 ? ` - Page ${page}` : "";
   const title = `${category.name} Articles${pageSuffix}`;
-  const ogImage = `${settings.siteUrl}/api/og?title=${encodeURIComponent(title)}`;
+  const ogImage = `${settings.siteUrl}/api/og?kind=category&category=${encodeURIComponent(
+    category.slug,
+  )}&title=${encodeURIComponent(title)}`;
   const description =
     category.description ??
     `Browse published ${category.name.toLowerCase()} articles on ${settings.siteName}.`;

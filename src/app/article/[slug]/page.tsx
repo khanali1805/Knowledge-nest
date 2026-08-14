@@ -128,7 +128,9 @@ export async function generateMetadata({ params }: ArticlePageProps): Promise<Me
     `${settings.siteUrl}/api/og?title=${encodeURIComponent(article.title)}`;
   const publishedAt = article.publishedAt ?? article.updatedAt;
   return {
-    title: seoTitle,
+    title: {
+      absolute: seoTitle,
+    },
     description: seoDescription,
     alternates: {
       canonical: canonicalUrl,

@@ -17,6 +17,7 @@ import { ArticleJsonLd } from "@/components/site/seo/article-json-ld";
 import { BreadcrumbJsonLd } from "@/components/site/seo/breadcrumb-json-ld";
 import { getGoogleAdsenseArticleSlot, getGoogleAdsenseClientId } from "@/lib/adsense";
 import { getPublicSiteSettings } from "@/lib/settings/site-settings-store";
+import { CategoryUtilityPanel } from "@/components/site/tools/category-utility-panel";
 import {
   createContentSlug,
   getArticleExcerpt,
@@ -307,6 +308,9 @@ export default async function ArticlePage({ params }: ArticlePageProps) {
             </div>
           </div>
         </article>
+        <section className="mx-auto w-full max-w-7xl px-4 pb-8 sm:px-6 lg:px-8">
+          <CategoryUtilityPanel categorySlug={article.categorySlug} context="article" />
+        </section>
         {contextualInternalLinks.length > 0 ? (
           <section
             aria-labelledby="contextual-internal-links-heading"

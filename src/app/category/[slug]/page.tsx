@@ -11,6 +11,7 @@ import {
 } from "@/lib/queries/article-queries";
 import { getPublicSiteSettings } from "@/lib/settings/site-settings-store";
 import { buildTopicClusters, selectPillarArticles } from "@/lib/content-intelligence";
+import { CategoryUtilityPanel } from "@/components/site/tools/category-utility-panel";
 type CategoryPageProps = {
   params: Promise<{
     slug: string;
@@ -146,6 +147,9 @@ export default async function CategoryPage({ params, searchParams }: CategoryPag
             </div>
           ) : (
             <>
+              <div className="mb-8">
+                <CategoryUtilityPanel categorySlug={category.slug} context="category" />
+              </div>
               {(pillarArticles.length > 0 || topicClusters.length > 0) && (
                 <div className="mb-12 space-y-8">
                   {pillarArticles.length > 0 ? (

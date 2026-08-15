@@ -27,6 +27,7 @@ export type PublishedArticleRecord = {
   featuredImageUrl: string | null;
   featuredImageAlt: string | null;
   readingTimeMinutes: number;
+  viewCount: number;
   isFeatured: boolean;
   publishedAt: Date | null;
   updatedAt: Date;
@@ -55,6 +56,7 @@ const publishedArticleSelection = {
   featuredImageUrl: media.url,
   featuredImageAlt: media.altText,
   readingTimeMinutes: articles.readingTimeMinutes,
+  viewCount: articles.viewCount,
   isFeatured: articles.isFeatured,
   publishedAt: articles.publishedAt,
   updatedAt: articles.updatedAt,
@@ -166,6 +168,28 @@ async function getPublishedArticlesUncached(
   }
 }
 export const getPublishedArticles = cache(getPublishedArticlesUncached);
+export async function getPopularPublishedArticles(
+  limit = 12,
+): Promise<PublishedArticleRecord[]> {
+  const safeLimit = Math.max(1, Math.min(limit, 100));
+  try {
+    return await db
+      .select(publishedArticleSelection)
+      .from(articles)
+      .leftJoin(categories, eq(articles.categoryId, categories.id))
+      .leftJoin(media, eq(articles.featuredImageId, media.id))
+      .where(eq(articles.status, "published"))
+      .orderBy(
+        desc(articles.viewCount),
+        desc(articles.isFeatured),
+        desc(articles.publishedAt),
+        desc(articles.updatedAt),
+      )
+      .limit(safeLimit);
+  } catch {
+    return [];
+  }
+}
 export async function getPublishedArticlesForCategory(
   category: string,
   limit = 24,

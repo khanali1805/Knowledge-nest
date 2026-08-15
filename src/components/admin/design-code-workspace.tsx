@@ -31,6 +31,148 @@ type DesignCodeApiResponse = {
 };
 type DesignAction = "validate" | "save" | "activate" | "rollback" | "restore" | "reset";
 type PreviewDevice = "desktop" | "tablet" | "mobile";
+type ThemePreset = {
+  name: string;
+  description: string;
+  variables: Record<string, string>;
+};
+const themePresets: ThemePreset[] = [
+  {
+    name: "Knowledge Nest Lavender",
+    description: "Soft lavender, violet accents and a clean white reading experience.",
+    variables: {
+      "--knowledge-nest-design-background": "#ffffff",
+      "--knowledge-nest-design-foreground": "#1e1b4b",
+      "--knowledge-nest-design-primary": "#5b21b6",
+      "--knowledge-nest-design-secondary": "#7c3aed",
+      "--knowledge-nest-design-accent": "#8b5cf6",
+      "--knowledge-nest-design-muted": "#f5f3ff",
+      "--knowledge-nest-design-border": "#ddd6fe",
+      "--knowledge-nest-design-heading-font": '"Inter", Arial, Helvetica, sans-serif',
+      "--knowledge-nest-design-body-font": '"Inter", Arial, Helvetica, sans-serif',
+      "--knowledge-nest-design-radius": "1.25rem",
+    },
+  },
+  {
+    name: "Modern Neutral",
+    description: "Clean slate typography with a restrained blue accent.",
+    variables: {
+      "--knowledge-nest-design-background": "#ffffff",
+      "--knowledge-nest-design-foreground": "#0f172a",
+      "--knowledge-nest-design-primary": "#0f172a",
+      "--knowledge-nest-design-secondary": "#334155",
+      "--knowledge-nest-design-accent": "#2563eb",
+      "--knowledge-nest-design-muted": "#f1f5f9",
+      "--knowledge-nest-design-border": "#cbd5e1",
+      "--knowledge-nest-design-heading-font": "Arial, Helvetica, sans-serif",
+      "--knowledge-nest-design-body-font": "Arial, Helvetica, sans-serif",
+      "--knowledge-nest-design-radius": "1rem",
+    },
+  },
+];
+const colourControls = [
+  {
+    variable: "--knowledge-nest-design-background",
+    label: "Background",
+    fallback: "#ffffff",
+  },
+  {
+    variable: "--knowledge-nest-design-foreground",
+    label: "Text",
+    fallback: "#0f172a",
+  },
+  {
+    variable: "--knowledge-nest-design-primary",
+    label: "Primary",
+    fallback: "#5b21b6",
+  },
+  {
+    variable: "--knowledge-nest-design-secondary",
+    label: "Secondary",
+    fallback: "#7c3aed",
+  },
+  {
+    variable: "--knowledge-nest-design-accent",
+    label: "Accent",
+    fallback: "#8b5cf6",
+  },
+  {
+    variable: "--knowledge-nest-design-muted",
+    label: "Muted",
+    fallback: "#f5f3ff",
+  },
+  {
+    variable: "--knowledge-nest-design-border",
+    label: "Border",
+    fallback: "#ddd6fe",
+  },
+] as const;
+const fontOptions = [
+  {
+    label: "Inter / Modern Sans",
+    value: '"Inter", Arial, Helvetica, sans-serif',
+  },
+  {
+    label: "Arial / Clean Sans",
+    value: "Arial, Helvetica, sans-serif",
+  },
+  {
+    label: "Georgia / Editorial Serif",
+    value: 'Georgia, "Times New Roman", serif',
+  },
+  {
+    label: "System UI",
+    value: 'system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif',
+  },
+] as const;
+const radiusOptions = [
+  {
+    label: "Sharp",
+    value: "0.25rem",
+  },
+  {
+    label: "Soft",
+    value: "0.75rem",
+  },
+  {
+    label: "Rounded",
+    value: "1rem",
+  },
+  {
+    label: "Lavender Soft",
+    value: "1.25rem",
+  },
+  {
+    label: "Extra Rounded",
+    value: "1.75rem",
+  },
+] as const;
+function escapeRegExp(value: string) {
+  return value.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
+}
+function readCssVariable(code: string, variableName: string, fallback = "") {
+  const pattern = new RegExp(`${escapeRegExp(variableName)}\\s*:\\s*([^;]+);`, "i");
+  const match = code.match(pattern);
+  return match?.[1]?.trim() || fallback;
+}
+function writeCssVariable(code: string, variableName: string, value: string) {
+  const pattern = new RegExp(`(${escapeRegExp(variableName)}\\s*:\\s*)([^;]+)(;)`, "i");
+  if (pattern.test(code)) {
+    return code.replace(pattern, `$1${value}$3`);
+  }
+  const rootPattern = /:root\s*\{/i;
+  if (rootPattern.test(code)) {
+    return code.replace(rootPattern, `:root {\n  ${variableName}: ${value};`);
+  }
+  return `:root {\n  ${variableName}: ${value};\n}\n\n${code}`;
+}
+function applyThemeVariables(code: string, variables: Record<string, string>) {
+  return Object.entries(variables).reduce(
+    (currentCode, [variableName, value]) =>
+      writeCssVariable(currentCode, variableName, value),
+    code,
+  );
+}
 const previewWidths: Record<PreviewDevice, string> = {
   desktop: "100%",
   tablet: "768px",
@@ -48,6 +190,10 @@ const previewTargets = [
   {
     label: "Featured Articles",
     path: "/featured",
+  },
+  {
+    label: "Popular Articles",
+    path: "/popular",
   },
   {
     label: "Search",
@@ -228,6 +374,23 @@ export function DesignCodeWorkspace({ initialStore }: DesignCodeWorkspaceProps) 
       setLoadingAction(null);
     }
   }
+  function updateThemeVariable(variableName: string, value: string) {
+    setCode((currentCode) => writeCssVariable(currentCode, variableName, value));
+    setValidation(null);
+    setMessage("");
+    setError("");
+  }
+  function applyThemePreset(preset: ThemePreset) {
+    setCode((currentCode) => applyThemeVariables(currentCode, preset.variables));
+    setValidation(null);
+    setMessage(
+      `${preset.name} loaded into the draft. Preview it before applying to the public website.`,
+    );
+    setError("");
+  }
+  function previewCurrentDraft() {
+    void previewDraft();
+  }
   return (
     <div className="space-y-6">
       <section className="border-border rounded-2xl border p-6">
@@ -262,6 +425,169 @@ export function DesignCodeWorkspace({ initialStore }: DesignCodeWorkspaceProps) 
               className="border-border mt-2 h-11 w-full rounded-xl border px-3"
             />
           </label>
+          <section className="mt-5 rounded-2xl border border-violet-100 bg-violet-50/40 p-5">
+            <div className="flex flex-wrap items-start justify-between gap-3">
+              <div>
+                <h2 className="font-black">Visual Theme Controls</h2>
+                <p className="text-muted-foreground mt-1 max-w-2xl text-xs leading-5">
+                  Build the main theme visually. Changes update the CSS draft only.
+                  Nothing becomes public until you use Apply Design.
+                </p>
+              </div>
+              <button
+                type="button"
+                onClick={previewCurrentDraft}
+                disabled={loadingAction !== null}
+                className="border-border inline-flex h-9 items-center gap-2 rounded-lg border bg-white px-3 text-xs font-bold"
+              >
+                <Eye className="h-4 w-4" />
+                Preview Draft
+              </button>
+            </div>
+            <div className="mt-5">
+              <p className="text-xs font-black tracking-[0.14em] uppercase">
+                Theme presets
+              </p>
+              <div className="mt-3 grid gap-3 sm:grid-cols-2">
+                {themePresets.map((preset) => (
+                  <button
+                    key={preset.name}
+                    type="button"
+                    onClick={() => applyThemePreset(preset)}
+                    disabled={loadingAction !== null}
+                    className="border-border bg-background rounded-xl border p-4 text-left transition hover:border-violet-300 hover:bg-violet-50"
+                  >
+                    <span className="block text-sm font-black">{preset.name}</span>
+                    <span className="text-muted-foreground mt-1 block text-xs leading-5">
+                      {preset.description}
+                    </span>
+                  </button>
+                ))}
+              </div>
+            </div>
+            <div className="mt-6">
+              <p className="text-xs font-black tracking-[0.14em] uppercase">Colours</p>
+              <div className="mt-3 grid gap-4 sm:grid-cols-2">
+                {colourControls.map((control) => {
+                  const value = readCssVariable(code, control.variable, control.fallback);
+                  return (
+                    <label
+                      key={control.variable}
+                      className="border-border bg-background rounded-xl border p-3 text-xs font-bold"
+                    >
+                      {control.label}
+                      <div className="mt-2 flex items-center gap-2">
+                        <input
+                          type="color"
+                          value={/^#[0-9a-f]{6}$/i.test(value) ? value : control.fallback}
+                          onChange={(event) =>
+                            updateThemeVariable(control.variable, event.target.value)
+                          }
+                          className="h-10 w-12 cursor-pointer rounded-lg border p-1"
+                          aria-label={`${control.label} colour`}
+                        />
+                        <input
+                          value={value}
+                          onChange={(event) =>
+                            updateThemeVariable(control.variable, event.target.value)
+                          }
+                          className="border-border h-10 min-w-0 flex-1 rounded-lg border px-3 font-mono text-xs"
+                          aria-label={`${control.label} CSS value`}
+                        />
+                      </div>
+                    </label>
+                  );
+                })}
+              </div>
+            </div>
+            <div className="mt-6 grid gap-4 sm:grid-cols-2">
+              <label className="text-xs font-bold">
+                Heading font
+                <select
+                  value={readCssVariable(
+                    code,
+                    "--knowledge-nest-design-heading-font",
+                    "Arial, Helvetica, sans-serif",
+                  )}
+                  onChange={(event) =>
+                    updateThemeVariable(
+                      "--knowledge-nest-design-heading-font",
+                      event.target.value,
+                    )
+                  }
+                  className="border-border bg-background mt-2 h-11 w-full rounded-xl border px-3 text-sm"
+                >
+                  {fontOptions.map((font) => (
+                    <option key={font.label} value={font.value}>
+                      {font.label}
+                    </option>
+                  ))}
+                </select>
+              </label>
+              <label className="text-xs font-bold">
+                Body font
+                <select
+                  value={readCssVariable(
+                    code,
+                    "--knowledge-nest-design-body-font",
+                    "Arial, Helvetica, sans-serif",
+                  )}
+                  onChange={(event) =>
+                    updateThemeVariable(
+                      "--knowledge-nest-design-body-font",
+                      event.target.value,
+                    )
+                  }
+                  className="border-border bg-background mt-2 h-11 w-full rounded-xl border px-3 text-sm"
+                >
+                  {fontOptions.map((font) => (
+                    <option key={font.label} value={font.value}>
+                      {font.label}
+                    </option>
+                  ))}
+                </select>
+              </label>
+            </div>
+            <label className="mt-4 block text-xs font-bold">
+              Corner style
+              <select
+                value={readCssVariable(code, "--knowledge-nest-design-radius", "1rem")}
+                onChange={(event) =>
+                  updateThemeVariable(
+                    "--knowledge-nest-design-radius",
+                    event.target.value,
+                  )
+                }
+                className="border-border bg-background mt-2 h-11 w-full rounded-xl border px-3 text-sm"
+              >
+                {radiusOptions.map((radius) => (
+                  <option key={radius.value} value={radius.value}>
+                    {radius.label} — {radius.value}
+                  </option>
+                ))}
+              </select>
+            </label>
+            <div className="mt-5 grid gap-3 sm:grid-cols-2">
+              <div className="border-border bg-background rounded-xl border p-4">
+                <p className="text-xs font-black uppercase">Active design</p>
+                <p className="mt-2 truncate text-sm font-bold">
+                  {store.activeRevision.name}
+                </p>
+                <p className="text-muted-foreground mt-1 text-xs">
+                  This is currently published to the website.
+                </p>
+              </div>
+              <div className="border-border bg-background rounded-xl border p-4">
+                <p className="text-xs font-black uppercase">Current draft</p>
+                <p className="mt-2 truncate text-sm font-bold">
+                  {name || "Untitled Design"}
+                </p>
+                <p className="text-muted-foreground mt-1 text-xs">
+                  Preview and validate before using Apply Design.
+                </p>
+              </div>
+            </div>
+          </section>
           <label className="mt-5 block text-sm font-bold">
             CSS design code
             <textarea

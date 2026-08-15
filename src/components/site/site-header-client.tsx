@@ -22,6 +22,10 @@ const navigationItems = [
     label: "Featured",
     href: "/featured",
   },
+  {
+    label: "Popular",
+    href: "/popular",
+  },
 ] as const;
 export function SiteHeaderClient({ layout }: SiteHeaderClientProps) {
   const pathname = usePathname();

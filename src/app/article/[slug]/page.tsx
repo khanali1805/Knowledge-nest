@@ -4,6 +4,7 @@ import Link from "next/link";
 import { notFound } from "next/navigation";
 import { Clock } from "lucide-react";
 import sanitizeHtml from "sanitize-html";
+import { ArticleViewTracker } from "@/components/site/article-view-tracker";
 import { GoogleAdSenseUnit } from "@/components/site/google-adsense-unit";
 import { SiteFooter } from "@/components/site/site-footer";
 import { ArticleCard } from "@/components/site/article-card";
@@ -219,6 +220,7 @@ export default async function ArticlePage({ params }: ArticlePageProps) {
           },
         ]}
       />
+      <ArticleViewTracker slug={article.slug} />
       <SiteHeader />
       <main>
         <article>

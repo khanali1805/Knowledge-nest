@@ -7,6 +7,7 @@ import { getGoogleAdsenseClientId, getGoogleAdsenseHomeSlot } from "@/lib/adsens
 import {
   getArticleExcerpt,
   getGlobalHomepageContent,
+  getPopularPublishedArticles,
   type PublishedArticleRecord,
 } from "@/lib/public-content-runtime";
 /* HOMEPAGE_CATEGORY_ICONS */
@@ -87,6 +88,7 @@ function HomepageArticleCard({
 }
 export async function ModernKnowledgeHomepage() {
   const { siteName, tagline, articles, categories } = await getGlobalHomepageContent();
+  const popularArticles = await getPopularPublishedArticles(6);
   const adsenseClientId = getGoogleAdsenseClientId();
   const adsenseHomeSlot = getGoogleAdsenseHomeSlot();
   const featuredArticle =
@@ -242,6 +244,40 @@ export async function ModernKnowledgeHomepage() {
                     Read complete article
                   </Link>
                 </div>
+              </div>
+            </div>
+          </section>
+        ) : null}
+        {popularArticles.length > 0 ? (
+          <section
+            className="mx-auto max-w-7xl px-4 pb-12 sm:px-6 lg:px-8"
+            aria-labelledby="popular-articles-heading"
+          >
+            <div className="rounded-3xl border border-violet-100 bg-gradient-to-br from-white via-violet-50/40 to-white px-5 py-8 shadow-sm sm:px-8 sm:py-10">
+              <div className="flex flex-wrap items-end justify-between gap-4">
+                <div>
+                  <p className="text-xs font-black tracking-[0.2em] text-violet-600 uppercase">
+                    Popular right now
+                  </p>
+                  <h2
+                    id="popular-articles-heading"
+                    className="mt-2 text-3xl font-black tracking-tight text-slate-950"
+                  >
+                    Most-read knowledge and stories
+                  </h2>
+                  <p className="mt-3 max-w-2xl leading-7 text-slate-600">
+                    Explore published articles readers are engaging with most.
+                  </p>
+                </div>
+              </div>
+              <div className="mt-8 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+                {popularArticles.map((article, index) => (
+                  <HomepageArticleCard
+                    key={article.id}
+                    article={article}
+                    priority={index < 2}
+                  />
+                ))}
               </div>
             </div>
           </section>

@@ -1,5 +1,6 @@
 import {
   getArticleExcerpt,
+  getPopularPublishedArticles,
   getPublishedArticles,
   getPublishedCategories,
   type PublishedArticleRecord,
@@ -27,5 +28,5 @@ export async function getGlobalHomepageContent(): Promise<GlobalHomepageContent>
     categories,
   };
 }
-export { getArticleExcerpt };
+export { getArticleExcerpt, getPopularPublishedArticles };
 export type { PublishedArticleRecord, PublishedCategoryRecord };

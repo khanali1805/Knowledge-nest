@@ -129,6 +129,9 @@ export async function SiteFooter() {
             <Link href="/featured" className="text-white/80 hover:text-white">
               Featured Articles
             </Link>
+            <Link href="/popular" className="text-white/80 hover:text-white">
+              Popular Articles
+            </Link>
           </nav>
         </div>
       </div>

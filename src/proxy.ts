@@ -54,6 +54,13 @@ const PUBLIC_RATE_LIMITS = new Map<
       windowMilliseconds: 60 * 1000,
     },
   ],
+  [
+    "/api/article-view",
+    {
+      limit: 30,
+      windowMilliseconds: 60 * 1000,
+    },
+  ],
 ]);
 function getSessionSecret(): Uint8Array | null {
   const secret = process.env.ADMIN_SESSION_SECRET;
@@ -411,5 +418,6 @@ export const config = {
     "/api/categories",
     "/api/blogging/overview",
     "/api/og",
+    "/api/article-view",
   ],
 };

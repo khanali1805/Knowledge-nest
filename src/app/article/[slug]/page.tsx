@@ -4,6 +4,10 @@ import Link from "next/link";
 import { notFound } from "next/navigation";
 import { Clock } from "lucide-react";
 import sanitizeHtml from "sanitize-html";
+import {
+  buildContextualInternalLinks,
+  rankRelatedContent,
+} from "@/lib/content-intelligence";
 import { ArticleViewTracker } from "@/components/site/article-view-tracker";
 import { GoogleAdSenseUnit } from "@/components/site/google-adsense-unit";
 import { SiteFooter } from "@/components/site/site-footer";
@@ -168,20 +172,14 @@ export default async function ArticlePage({ params }: ArticlePageProps) {
   const categoryArticles = article.categoryId
     ? await getPublishedArticlesByCategory(article.categoryId, 100)
     : [];
-  const currentArticleIndex = categoryArticles.findIndex(
-    (candidate) => candidate.id === article.id,
+  const relatedArticles = rankRelatedContent(article, categoryArticles, 3).map(
+    (result) => result.article,
   );
-  const relatedArticleCount = Math.min(3, Math.max(0, categoryArticles.length - 1));
-  const relatedArticles =
-    currentArticleIndex >= 0
-      ? Array.from({ length: relatedArticleCount }, (_, offset) => {
-          const relatedIndex =
-            (currentArticleIndex + offset + 1) % categoryArticles.length;
-          return categoryArticles[relatedIndex];
-        })
-      : categoryArticles
-          .filter((candidate) => candidate.id !== article.id)
-          .slice(0, relatedArticleCount);
+  const contextualInternalLinks = buildContextualInternalLinks(
+    article,
+    categoryArticles,
+    5,
+  );
   const excerpt = getArticleExcerpt(article);
   const categoryName = article.categoryName ?? "Articles";
   const categorySlug = article.categorySlug ?? createContentSlug(categoryName);
@@ -309,6 +307,35 @@ export default async function ArticlePage({ params }: ArticlePageProps) {
             </div>
           </div>
         </article>
+        {contextualInternalLinks.length > 0 ? (
+          <section
+            aria-labelledby="contextual-internal-links-heading"
+            className="mx-auto max-w-7xl px-4 pb-12 sm:px-6 lg:px-8"
+          >
+            <div className="border-border bg-muted/20 rounded-2xl border p-5 sm:p-6">
+              <p className="text-muted-foreground text-sm font-medium">
+                Continue exploring
+              </p>
+              <h2
+                id="contextual-internal-links-heading"
+                className="mt-1 text-xl font-bold tracking-tight sm:text-2xl"
+              >
+                Explore Related Topics
+              </h2>
+              <div className="mt-5 grid gap-3 sm:grid-cols-2">
+                {contextualInternalLinks.map((link) => (
+                  <a
+                    key={link.article.id}
+                    href={link.href}
+                    className="border-border bg-background hover:bg-muted/40 rounded-xl border p-4 transition-colors"
+                  >
+                    <span className="leading-6 font-medium">{link.anchorText}</span>
+                  </a>
+                ))}
+              </div>
+            </div>
+          </section>
+        ) : null}{" "}
       </main>
       <SiteFooter />
     </>

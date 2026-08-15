@@ -10,6 +10,7 @@ import {
   getPublishedCategoryBySlug,
 } from "@/lib/queries/article-queries";
 import { getPublicSiteSettings } from "@/lib/settings/site-settings-store";
+import { buildTopicClusters, selectPillarArticles } from "@/lib/content-intelligence";
 type CategoryPageProps = {
   params: Promise<{
     slug: string;
@@ -102,6 +103,8 @@ export default async function CategoryPage({ params, searchParams }: CategoryPag
         : `/category/${category.slug}`;
     redirect(canonicalPath);
   }
+  const pillarArticles = selectPillarArticles(pagination.articles, 3);
+  const topicClusters = buildTopicClusters(pagination.articles, 8);
   return (
     <>
       <BreadcrumbJsonLd
@@ -143,6 +146,68 @@ export default async function CategoryPage({ params, searchParams }: CategoryPag
             </div>
           ) : (
             <>
+              {(pillarArticles.length > 0 || topicClusters.length > 0) && (
+                <div className="mb-12 space-y-8">
+                  {pillarArticles.length > 0 ? (
+                    <section
+                      aria-labelledby="category-start-here-heading"
+                      className="border-border bg-muted/20 rounded-2xl border p-5 sm:p-6"
+                    >
+                      <div className="mb-5">
+                        <p className="text-muted-foreground text-sm font-medium">
+                          Recommended starting points
+                        </p>
+                        <h2
+                          id="category-start-here-heading"
+                          className="mt-1 text-2xl font-bold tracking-tight"
+                        >
+                          Start Here
+                        </h2>
+                        <p className="text-muted-foreground mt-2 max-w-3xl text-sm leading-6">
+                          Explore useful and established articles from this category
+                          before diving deeper.
+                        </p>
+                      </div>
+                      <div className="grid gap-6 md:grid-cols-2 xl:grid-cols-3">
+                        {pillarArticles.map((article) => (
+                          <ArticleCard key={`pillar-${article.id}`} article={article} />
+                        ))}
+                      </div>
+                    </section>
+                  ) : null}
+                  {topicClusters.length > 0 ? (
+                    <section
+                      aria-labelledby="category-topic-clusters-heading"
+                      className="border-border bg-background rounded-2xl border p-5 sm:p-6"
+                    >
+                      <div>
+                        <p className="text-muted-foreground text-sm font-medium">
+                          Discover connected ideas
+                        </p>
+                        <h2
+                          id="category-topic-clusters-heading"
+                          className="mt-1 text-xl font-bold tracking-tight sm:text-2xl"
+                        >
+                          Explore Topics
+                        </h2>
+                      </div>
+                      <div className="mt-5 flex flex-wrap gap-2">
+                        {topicClusters.map((cluster) => (
+                          <span
+                            key={cluster.key}
+                            className="border-border bg-muted/40 text-foreground inline-flex items-center gap-2 rounded-full border px-3 py-2 text-sm"
+                          >
+                            <span>{cluster.label}</span>
+                            <span className="text-muted-foreground text-xs">
+                              {cluster.articleCount}
+                            </span>
+                          </span>
+                        ))}
+                      </div>
+                    </section>
+                  ) : null}
+                </div>
+              )}{" "}
               <div className="grid gap-6 md:grid-cols-2 xl:grid-cols-3">
                 {pagination.articles.map((article) => (
                   <ArticleCard key={article.id} article={article} />

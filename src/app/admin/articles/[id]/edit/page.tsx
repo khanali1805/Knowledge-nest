@@ -1,8 +1,8 @@
-import { eq } from "drizzle-orm";
+import { asc, eq } from "drizzle-orm";
 import { notFound } from "next/navigation";
 import { ArticleEditorForm } from "@/components/admin/article-editor-form";
 import { db } from "@/db";
-import { articles } from "@/db/schema";
+import { articles, articleTags, tags } from "@/db/schema";
 export const dynamic = "force-dynamic";
 export default async function EditArticlePage({
   params,
@@ -34,6 +34,14 @@ export default async function EditArticlePage({
   if (!article) {
     notFound();
   }
+  const articleTagRows = await db
+    .select({
+      name: tags.name,
+    })
+    .from(articleTags)
+    .innerJoin(tags, eq(articleTags.tagId, tags.id))
+    .where(eq(articleTags.articleId, id))
+    .orderBy(asc(tags.name));
   return (
     <main className="mx-auto max-w-7xl px-4 py-10 sm:px-6 lg:px-8">
       <div className="mb-8">
@@ -44,7 +52,13 @@ export default async function EditArticlePage({
           Edit Article
         </h1>
       </div>
-      <ArticleEditorForm mode="edit" initialArticle={article} />
+      <ArticleEditorForm
+        mode="edit"
+        initialArticle={{
+          ...article,
+          tags: articleTagRows.map((tag) => tag.name),
+        }}
+      />
     </main>
   );
 }

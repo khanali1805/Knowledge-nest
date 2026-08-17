@@ -112,6 +112,9 @@ export async function SiteFooter() {
             <Link href="/terms-and-conditions" className="text-white/80 hover:text-white">
               Terms and Conditions
             </Link>
+            <Link href="/disclaimer" className="text-white/80 hover:text-white">
+              Disclaimer
+            </Link>
             <Link href="/search" className="text-white/80 hover:text-white">
               Search
             </Link>

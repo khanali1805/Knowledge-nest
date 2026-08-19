@@ -1,7 +1,303 @@
-"use client";
+﻿"use client";
 import { useMemo, useState } from "react";
+import {
+  GuidedUtilityShell,
+  type GuidedUtilityStep,
+} from "@/components/site/tools/guided-utility-shell";
 type CategoryUtilityWorkbenchProps = {
   categorySlug: string;
+};
+const GUIDED_UTILITY_STEPS: Record<string, readonly GuidedUtilityStep[]> = {
+  "beauty-skincare": [
+    {
+      id: "goal",
+      eyebrow: "Step 1",
+      title: "Choose your routine goal",
+      description: "Define the general skincare or beauty routine you want to organize.",
+      helper:
+        "Keep the planner focused on routine organization rather than diagnosis or medical treatment.",
+    },
+    {
+      id: "daily",
+      eyebrow: "Step 2",
+      title: "Build morning and evening",
+      description: "Arrange the steps you want in your morning and evening routines.",
+      helper: "Separate AM and PM actions so the routine stays clear and practical.",
+    },
+    {
+      id: "weekly",
+      eyebrow: "Step 3",
+      title: "Add weekly treatments",
+      description: "Place occasional routine steps into suitable days of the week.",
+      helper:
+        "Use frequency and schedule to keep occasional steps separate from everyday actions.",
+    },
+    {
+      id: "schedule",
+      eyebrow: "Step 4",
+      title: "Follow your schedule",
+      description:
+        "Review the routine, completion state, and the actions you want to follow next.",
+      helper:
+        "Persistent reminders belong to the later public-user reminder architecture.",
+    },
+  ],
+  "food-recipes": [
+    {
+      id: "meals",
+      eyebrow: "Step 1",
+      title: "Choose your meals",
+      description: "Start with the meals and recipe ideas you want to include.",
+      helper:
+        "Choose the meal direction first so the rest of the plan has a clear foundation.",
+    },
+    {
+      id: "days",
+      eyebrow: "Step 2",
+      title: "Build a multi-day plan",
+      description: "Arrange your selected meals across the days you want to organize.",
+      helper: "A day-by-day structure makes the plan easier to understand and adjust.",
+    },
+    {
+      id: "servings",
+      eyebrow: "Step 3",
+      title: "Adjust servings",
+      description: "Set the number of people so quantities can match your plan.",
+      helper: "Keep serving assumptions visible so quantities remain understandable.",
+    },
+    {
+      id: "shopping",
+      eyebrow: "Step 4",
+      title: "Prepare your shopping plan",
+      description:
+        "Turn the meal plan into an organized ingredient and shopping workflow.",
+      helper:
+        "The advanced layer can later consolidate ingredients while keeping meal context visible.",
+    },
+  ],
+  "health-fitness-wellness": [
+    {
+      id: "goal",
+      eyebrow: "Step 1",
+      title: "Choose your wellness goal",
+      description:
+        "Define what you want to organize or improve in your everyday wellness routine.",
+      helper:
+        "Keep the plan focused on general wellness organization rather than medical diagnosis.",
+    },
+    {
+      id: "schedule",
+      eyebrow: "Step 2",
+      title: "Build your schedule",
+      description: "Add activities and decide where they fit into your routine.",
+      helper: "A schedule turns general intentions into actions you can actually follow.",
+    },
+    {
+      id: "daily",
+      eyebrow: "Step 3",
+      title: "Plan daily habits",
+      description:
+        "Organize the everyday wellness habits supported by the current planner.",
+      helper:
+        "The utility remains a planning tool and should not present its output as medical advice.",
+    },
+    {
+      id: "progress",
+      eyebrow: "Step 4",
+      title: "Review progress",
+      description: "Review the plan and identify where your routine may need adjustment.",
+      helper:
+        "Device integrations and persistent tracking belong to a later dedicated architecture.",
+    },
+  ],
+  "home-dcor-organization": [
+    {
+      id: "room",
+      eyebrow: "Step 1",
+      title: "Choose your room",
+      description: "Select the room or space you want to improve and define its purpose.",
+      helper:
+        "Start with the real room goal before deciding on organization or decor changes.",
+    },
+    {
+      id: "goal",
+      eyebrow: "Step 2",
+      title: "Define the change",
+      description: "Choose what you want to improve in the selected space.",
+      helper:
+        "A clear goal keeps the plan focused on useful changes rather than random suggestions.",
+    },
+    {
+      id: "details",
+      eyebrow: "Step 3",
+      title: "Add room details",
+      description:
+        "Use the current planner inputs to describe the practical room context.",
+      helper:
+        "Room-photo and visual AI capabilities will require their own dedicated media and AI layer.",
+    },
+    {
+      id: "plan",
+      eyebrow: "Step 4",
+      title: "Build the room plan",
+      description: "Turn the room details into an organized set of practical actions.",
+      helper:
+        "Use the workspace below to calculate and organize the plan supported today.",
+    },
+  ],
+  "money-career": [
+    {
+      id: "goal",
+      eyebrow: "Step 1",
+      title: "Set your target",
+      description: "Choose the money or career target you want to work toward.",
+      helper: "A specific target gives the roadmap something measurable to organize.",
+    },
+    {
+      id: "current",
+      eyebrow: "Step 2",
+      title: "Add your current position",
+      description: "Enter the starting values supported by the current planner.",
+      helper: "A starting point helps show the gap between where you are and the target.",
+    },
+    {
+      id: "timeline",
+      eyebrow: "Step 3",
+      title: "Choose a timeline",
+      description: "Set the period in which you want to work toward the target.",
+      helper:
+        "A timeline turns a large goal into smaller and more understandable checkpoints.",
+    },
+    {
+      id: "roadmap",
+      eyebrow: "Step 4",
+      title: "Review your roadmap",
+      description: "Use the calculated result to understand the practical pace required.",
+      helper:
+        "Persistent progress tracking will be added only with a dedicated public-user storage architecture.",
+    },
+  ],
+  "relationships-family": [
+    {
+      id: "activity",
+      eyebrow: "Step 1",
+      title: "Choose the shared goal",
+      description:
+        "Define the family, relationship, or shared activity you want to organize.",
+      helper: "Give the plan a clear purpose before breaking it into individual actions.",
+    },
+    {
+      id: "tasks",
+      eyebrow: "Step 2",
+      title: "Create shared tasks",
+      description: "Break the goal into clear tasks or activities.",
+      helper: "Concrete actions are easier to follow than broad intentions.",
+    },
+    {
+      id: "checkin",
+      eyebrow: "Step 3",
+      title: "Plan check-ins",
+      description:
+        "Use the current planner to organize how the shared plan should be followed.",
+      helper:
+        "Assignments and persistent shared-user state require the later public-user architecture.",
+    },
+    {
+      id: "progress",
+      eyebrow: "Step 4",
+      title: "Review the plan",
+      description: "Review the resulting plan and keep the next shared action clear.",
+      helper:
+        "Cross-device shared progress is intentionally outside this browser-only phase.",
+    },
+  ],
+  "womens-fashion-style": [
+    {
+      id: "occasion",
+      eyebrow: "Step 1",
+      title: "Choose the occasion",
+      description:
+        "Start with where you are going and the kind of outfit you want to plan.",
+      helper: "The occasion gives the outfit planner a practical starting point.",
+    },
+    {
+      id: "conditions",
+      eyebrow: "Step 2",
+      title: "Add conditions",
+      description:
+        "Consider the season, setting, or other practical conditions supported by the planner.",
+      helper:
+        "Practical context helps keep outfit planning useful instead of purely generic.",
+    },
+    {
+      id: "style",
+      eyebrow: "Step 3",
+      title: "Define your style",
+      description:
+        "Choose the style direction and preferences you want the outfit to follow.",
+      helper: "A clear style direction makes the resulting combination more relevant.",
+    },
+    {
+      id: "outfit",
+      eyebrow: "Step 4",
+      title: "Build the outfit",
+      description:
+        "Use the existing workspace to turn those choices into an outfit plan.",
+      helper:
+        "Wardrobe persistence and image-based clothing analysis belong to later dedicated layers.",
+    },
+  ],
+};
+const GUIDED_UTILITY_META: Record<
+  string,
+  {
+    categoryName: string;
+    title: string;
+    description: string;
+  }
+> = {
+  "beauty-skincare": {
+    categoryName: "Beauty & Skincare",
+    title: "Build your routine step by step",
+    description:
+      "Move from your routine goal to a clear schedule while keeping the existing planner available as the practical workspace.",
+  },
+  "food-recipes": {
+    categoryName: "Food & Recipes",
+    title: "Build meals into a complete plan",
+    description:
+      "Choose the meal direction, organize the days and servings, then use the planner to shape the practical food workflow.",
+  },
+  "health-fitness-wellness": {
+    categoryName: "Health, Fitness & Wellness",
+    title: "Build a routine you can actually follow",
+    description:
+      "Organize your general wellness goal into a clearer sequence before using the existing planning workspace.",
+  },
+  "home-dcor-organization": {
+    categoryName: "Home Decor & Organization",
+    title: "Turn a room goal into a practical plan",
+    description:
+      "Start with the space and its purpose, define the change you want, then use the existing planner to organize the result.",
+  },
+  "money-career": {
+    categoryName: "Money & Career",
+    title: "Turn your target into a measurable roadmap",
+    description:
+      "Define the target, starting position, and timeline before using the current calculations to understand the path forward.",
+  },
+  "relationships-family": {
+    categoryName: "Relationships & Family",
+    title: "Organize shared goals and responsibilities",
+    description:
+      "Give a shared goal structure before using the current planner to organize actions and progress.",
+  },
+  "womens-fashion-style": {
+    categoryName: "Women's Fashion & Style",
+    title: "Build an outfit around your real day",
+    description:
+      "Start with the occasion and practical context, define your style direction, then use the existing outfit workspace.",
+  },
 };
 type NumberFieldProps = {
   id: string;
@@ -211,7 +507,7 @@ function FoodMealPlanner() {
         />
       </div>
       <ResultCard title="Meal planning summary">
-        <ResultRow label="Recipe scale multiplier" value={`${plan.scale.toFixed(2)}×`} />
+        <ResultRow label="Recipe scale multiplier" value={`${plan.scale.toFixed(2)}Ã—`} />
         <ResultRow
           label="Scaled example ingredient"
           value={plan.scaledIngredient.toFixed(1)}
@@ -625,22 +921,45 @@ function ResultRow({ label, value }: { label: string; value: string }) {
 export function CategoryUtilityWorkbench({
   categorySlug,
 }: CategoryUtilityWorkbenchProps) {
+  let workspace = null;
   switch (categorySlug) {
     case "beauty-skincare":
-      return <BeautyRoutineBuilder />;
+      workspace = <BeautyRoutineBuilder />;
+      break;
     case "food-recipes":
-      return <FoodMealPlanner />;
+      workspace = <FoodMealPlanner />;
+      break;
     case "health-fitness-wellness":
-      return <WellnessPlanner />;
+      workspace = <WellnessPlanner />;
+      break;
     case "home-dcor-organization":
-      return <HomeOrganizationPlanner />;
+      workspace = <HomeOrganizationPlanner />;
+      break;
     case "money-career":
-      return <MoneyCareerPlanner />;
+      workspace = <MoneyCareerPlanner />;
+      break;
     case "relationships-family":
-      return <RelationshipPlanner />;
+      workspace = <RelationshipPlanner />;
+      break;
     case "womens-fashion-style":
-      return <FashionStylePlanner />;
+      workspace = <FashionStylePlanner />;
+      break;
     default:
       return null;
   }
+  const guidedSteps = GUIDED_UTILITY_STEPS[categorySlug];
+  const guidedMeta = GUIDED_UTILITY_META[categorySlug];
+  if (!guidedSteps || !guidedMeta) {
+    return workspace;
+  }
+  return (
+    <GuidedUtilityShell
+      categoryName={guidedMeta.categoryName}
+      title={guidedMeta.title}
+      description={guidedMeta.description}
+      steps={guidedSteps}
+    >
+      {workspace}
+    </GuidedUtilityShell>
+  );
 }

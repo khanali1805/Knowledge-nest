@@ -1,4 +1,4 @@
-import { NextResponse } from "next/server";
+﻿import { NextResponse } from "next/server";
 import { saveMediaFile } from "@/lib/media-storage";
 export const runtime = "nodejs";
 export const dynamic = "force-dynamic";
@@ -31,8 +31,8 @@ export async function POST(request: Request) {
   if (uploadedFile.size <= 0) {
     return jsonError("The selected image is empty.", 400);
   }
-  if (uploadedFile.size > 3 * 1024 * 1024) {
-    return jsonError("The prepared image exceeds the production upload limit.", 413);
+  if (uploadedFile.size > 3.5 * 1024 * 1024) {
+    return jsonError("The prepared image exceeds the 3.5 MB production upload limit.", 413);
   }
   try {
     const file = await saveMediaFile(uploadedFile);
@@ -57,3 +57,4 @@ export async function POST(request: Request) {
     return jsonError(message, status);
   }
 }
+

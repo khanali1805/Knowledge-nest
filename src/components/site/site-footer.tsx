@@ -64,36 +64,6 @@ export async function SiteFooter() {
             A complete publishing platform for useful articles, knowledge, news and
             category-focused content.
           </p>
-          <div className="mt-6 flex flex-wrap gap-3">
-            <a
-              href="#"
-              aria-label="Facebook"
-              className="flex h-10 w-10 items-center justify-center rounded-full bg-white/10 text-sm font-bold hover:bg-white/20"
-            >
-              F
-            </a>
-            <a
-              href="#"
-              aria-label="Instagram"
-              className="flex h-10 w-10 items-center justify-center rounded-full bg-white/10 text-sm font-bold hover:bg-white/20"
-            >
-              I
-            </a>
-            <a
-              href="#"
-              aria-label="YouTube"
-              className="flex h-10 w-10 items-center justify-center rounded-full bg-white/10 text-sm font-bold hover:bg-white/20"
-            >
-              Y
-            </a>
-            <a
-              href="#"
-              aria-label="LinkedIn"
-              className="flex h-10 w-10 items-center justify-center rounded-full bg-white/10 text-sm font-bold hover:bg-white/20"
-            >
-              L
-            </a>
-          </div>
         </div>
         <div>
           <h2 className="text-sm font-black tracking-[0.18em] text-white/60 uppercase">
@@ -141,7 +111,7 @@ export async function SiteFooter() {
       <div className="border-t border-white/10">
         <div className="mx-auto flex max-w-7xl flex-col gap-3 px-4 py-5 text-sm text-white/60 sm:px-6 md:flex-row md:items-center md:justify-between lg:px-8">
           <p>
-            Â© {currentYear} {layout.websiteName}. All rights reserved.
+            © {currentYear} {layout.websiteName}. All rights reserved.
           </p>
           <div className="flex flex-wrap gap-4">
             <Link href="/privacy-policy" className="hover:text-white">

@@ -10,6 +10,7 @@ import {
 } from "@/lib/content-intelligence";
 import { ArticleViewTracker } from "@/components/site/article-view-tracker";
 import { GoogleAdSenseUnit } from "@/components/site/google-adsense-unit";
+import { ThirdPartyAdNetwork } from "@/components/site/third-party-ad-network";
 import { SiteFooter } from "@/components/site/site-footer";
 import { ArticleCard } from "@/components/site/article-card";
 import { SiteHeader } from "@/components/site/site-header";
@@ -283,6 +284,7 @@ export default async function ArticlePage({ params }: ArticlePageProps) {
                 />
               </div>
             ) : null}
+            <ThirdPartyAdNetwork />
             <div className="border-border mt-12 border-t pt-8">
               <div className="flex flex-wrap items-end justify-between gap-4">
                 <div>

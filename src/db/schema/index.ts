@@ -1,4 +1,4 @@
-﻿export * from "./articles";
+export * from "./articles";
 export * from "./media";
 export * from "./settings";
 export * from "./taxonomy";
@@ -7,3 +7,4 @@ export * from "./article-collaboration";
 export * from "./article-notifications";
 export * from "./notification-delivery";
 export * from "./design-code";
+export * from "./public-reminders";

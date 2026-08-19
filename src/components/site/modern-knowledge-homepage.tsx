@@ -1,6 +1,7 @@
 /* eslint-disable @next/next/no-img-element -- CMS media URLs are dynamic. */
 import Link from "next/link";
 import { GoogleAdSenseUnit } from "@/components/site/google-adsense-unit";
+import { ThirdPartyAdNetwork } from "@/components/site/third-party-ad-network";
 import { SiteFooter } from "@/components/site/site-footer";
 import { SiteHeader } from "@/components/site/site-header";
 import { getGoogleAdsenseClientId, getGoogleAdsenseHomeSlot } from "@/lib/adsense";
@@ -294,6 +295,7 @@ export async function ModernKnowledgeHomepage() {
             />
           </section>
         ) : null}
+        <ThirdPartyAdNetwork />
         <section className="mx-auto max-w-7xl px-4 pb-16 sm:px-6 lg:px-8">
           <div className="flex flex-wrap items-end justify-between gap-4">
             <div>

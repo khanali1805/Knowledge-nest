@@ -38,6 +38,7 @@ const securityHeaders = [
     : []),
 ];
 const nextConfig: NextConfig = {
+  staticPageGenerationTimeout: 180,
   poweredByHeader: false,
   compress: true,
   reactStrictMode: true,

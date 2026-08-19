@@ -2,7 +2,7 @@ import { asc, eq } from "drizzle-orm";
 import { NextResponse } from "next/server";
 import { db } from "@/db";
 import { articles, articleTags, categories, media, tags } from "@/db/schema";
-import { articleInputSchema } from "@/lib/articles/validation";
+import { articleInputSchema, articleUpdateSchema } from "@/lib/articles/validation";
 import { revalidateArticlePublishingPaths } from "@/lib/article-publication-cache";
 export const runtime = "nodejs";
 export const dynamic = "force-dynamic";
@@ -170,7 +170,7 @@ export async function PATCH(request: Request, context: RouteContext) {
       typeof requestBody.expectedUpdatedAt === "string"
         ? requestBody.expectedUpdatedAt
         : "";
-    const parsedInput = articleInputSchema.safeParse(requestBody);
+    const parsedInput = articleUpdateSchema.safeParse(requestBody);
     if (!parsedInput.success) {
       return NextResponse.json(
         {
@@ -223,11 +223,11 @@ export async function PATCH(request: Request, context: RouteContext) {
     const publishedAt =
       input.status === "published" ? (existingArticle.publishedAt ?? now) : null;
     const resolvedFeaturedImageId = await resolveArticleFeaturedImageId(
-      input.content,
+      input.content ?? "",
       input.featuredImageId,
     );
     // SEO_5B_ARTICLE_TAG_WIRING
-    const normalizedTags = normalizeArticleTags(input.tags);
+    const normalizedTags = normalizeArticleTags(input.tags ?? []);
     const updatedArticle = await db.transaction(async (transaction) => {
       const [article] = await transaction
         .update(articles)

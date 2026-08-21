@@ -1,4 +1,4 @@
-import type { Metadata, Viewport } from "next";
+﻿import type { Metadata, Viewport } from "next";
 import { headers } from "next/headers";
 import { Analytics } from "@vercel/analytics/react";
 import Script from "next/script";
@@ -108,6 +108,14 @@ export default async function RootLayout({
   return (
     <html lang={settings.language}>
       <body className="antialiased">
+        <Script
+          id="monetag-ad-script"
+          src="https://quge5.com/88/tag.min.js"
+          data-zone="271838"
+          strategy="afterInteractive"
+          async
+          data-cfasync="false"
+        />
         {adsenseClientId ? (
           <Script
             id="google-adsense-loader"
@@ -130,3 +138,4 @@ export default async function RootLayout({
     </html>
   );
 }
+
